@@ -18,10 +18,13 @@ if (process.env.NODE_ENV === "production") {
 app.post('/upload',function(req,res){
     //Initialize an empty form
     var form = new formidable.IncomingForm()
+    form.maxFileSize = Math.pow(1024,3)
     form.parse(req,function(err,fields,files){
+        if(err) throw err;
         //fields are any values that are not files that were sent with the form whose keys are the name of the input
         //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
         var oldpath = files.filetoupload.path;
+        console.log(files.thumbnail.path)
         //Create a newpath to store the file at
         var newpath = __dirname + "/" + files.filetoupload.name
 
@@ -43,8 +46,8 @@ app.post('/upload',function(req,res){
                 fs.unlink(newpath, (err) => {
                     if (err) throw err;
                     console.log('deleting' + newpath );
-                    res.write('File uploaded and moved!');
-                    res.end();
+                    //Send the URL to the games new path
+                    res.send('/game');
                 });
             })
         });
