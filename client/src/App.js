@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <iframe src='/user/Phaser-SRPG/index.html'></iframe>
-
-        <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data">
-        <input type="file" name="filetoupload" /><br />
-        <input type="submit" />
-        </form>
-      </div>
-    );
-  }
-}
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import NavTabs from "./components/NavTabs";
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import ChooseGame from "./components/pages/ChooseGame";
+import {Container} from "./components/Grid";
+const App = () => (
+  <Router>
+    <div>
+      <NavTabs />
+      <Container>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/about" component={About} />
+        <Route path="/all" component={ChooseGame} />
+      </Container>
+    </div>
+  </Router>
+);
 
 export default App;
+
