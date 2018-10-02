@@ -16,18 +16,26 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.post('/upload',function(req,res){
+    //Initialize an empty form
     var form = new formidable.IncomingForm()
     form.parse(req,function(err,fields,files){
-        console.log('parsing files')
+        //fields are any values that are not files that were sent with the form whose keys are the name of the input
+        //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
         var oldpath = files.filetoupload.path;
+        //Create a newpath to store the file at
         var newpath = __dirname + "/" + files.filetoupload.name
+
         fs.rename(oldpath, newpath, function (err) {
             console.log('renaming filepaths')
             if (err) throw err;
+
+            //Create a directory if it doesn't already exist
             var dir = "./user"
             if (!fs.existsSync(dir)){
                 fs.mkdirSync(dir);
             }
+
+            //Unzip the file to target directory
             var target = __dirname+"/client/public/user"
             extract(newpath,{dir:target},function(err){
                 console.log('extracting')
@@ -37,13 +45,11 @@ app.post('/upload',function(req,res){
                     console.log('deleting' + newpath );
                     res.write('File uploaded and moved!');
                     res.end();
-                  });
+                });
             })
         });
     })
 })
-
-// Connect to the Mongo DB
 
 // Start the API server
 app.listen(PORT, function() {
