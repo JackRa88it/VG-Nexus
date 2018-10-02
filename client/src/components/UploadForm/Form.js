@@ -6,10 +6,14 @@ import axios from "axios";
 class Form extends Component{
     postGame(event){
         event.preventDefault()
+        console.log('postgame!')
         const formData = new FormData(event.target)
+        console.log(formData)
         axios.post("/upload",formData)
-            .then(res =>
-                window.location.assign(res)
+            .then(res =>{
+                    console.log(res)
+                    window.location.assign(res.data)
+                }
             ).catch(err => console.log(err))
         return false
     }

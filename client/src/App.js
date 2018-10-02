@@ -4,6 +4,8 @@ import './App.css';
 import axios from'axios';
 import Form from './components/UploadForm/Form'
 import Game from './components/Game/Game'
+import Login from './components/Login/Login'
+import Signup from './components/Signup/Signup'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class App extends Component {
@@ -14,6 +16,9 @@ class App extends Component {
       <div className="App">
         <Route exact path="/upload" component={Form} />
         <Route exact path="/game" component={Game} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/signup' component={Signup} />
+
       </div>
       </Router>
 
