@@ -5,8 +5,7 @@ var formidable = require('formidable');
 var fs = require('fs');
 var extract = require('extract-zip')
 const PORT = process.env.PORT || 3001;
-
-
+const db = require("./models")
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -44,8 +43,12 @@ app.post('/upload',function(req,res){
 })
 
 // Connect to the Mongo DB
-
+const routes = require("./routes/api-routes.js")
+app.use(routes)
 // Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+db.sequelize.sync().then(function(){
+    app.listen(PORT, function() {
+        console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+      });
+})
+
