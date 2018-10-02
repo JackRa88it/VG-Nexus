@@ -1,0 +1,19 @@
+.wrapper{
+  border-radius: 5px;
+  padding: 1px 5px;
+  margin: 12px 4px;
+  height: 100px;
+}
+.comment{
+  margin: 14px 0px 10px 10px;
+  font-size: 0.8em;
+  line-height: 2em;
+  max-height: 80px;
+  overflow: auto;
+}
+img{
+ margin: 1px 15px;
+}
+.username{
+  font-size:0.8em;
+}
