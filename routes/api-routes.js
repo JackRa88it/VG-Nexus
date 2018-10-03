@@ -65,18 +65,26 @@ module.exports = function (app,io){
         res.send('/chat');
     });
 
+    
+
 
     app.post("/api/signup", function(req, res) {
+        console.log('something')
         db.User.create({
+            username: req.body.username,
             email: req.body.email,
-            password: req.body.password
-        }).then(function() {
-            res.send('/game');
-        }).catch(function(err) {
+            password: req.body.password,
+            bio: req.body.bio,
+            postBanner: req.body.bannerUrl
+          }).then(function(user) {
+            console.log(user);
+            res.send("/")
+          }).catch(function(err) {
             console.log(err);
             res.json(err);
-        })
-    });
+            // res.status(422).json(err.errors[0].message);
+          });
+        });
 
     // app.get('/logout', function(req,res){
     //     req.logout();
