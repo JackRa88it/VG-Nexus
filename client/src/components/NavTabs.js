@@ -35,6 +35,30 @@ const NavTabs = () => (
         Choose Game
       </Link>
    </li>
+   <li className="nav-item">
+      <Link
+        to="/upload"
+        className={
+          window.location.pathname === "/upload"
+            ? "nav-link active"
+            : "nav-link"
+        }
+      >
+        Upload
+      </Link>
+   </li>
+   <li className="nav-item">
+      <Link
+        to="/login"
+        className={
+          window.location.pathname === "/login"
+            ? "nav-link active"
+            : "nav-link"
+        }
+      >
+        Login
+      </Link>
+   </li>
   </ul>
 );
 

@@ -25,3 +25,5 @@ yarn-error.log*
 # /client/public/user
 
 /GameZips
+
+/config/config.json
