@@ -1,0 +1,123 @@
+body{
+    min-width: 908px;
+    max-width: 908px;
+    overflow: scroll;
+}
+
+*{
+    box-sizing: border-box;
+    image-rendering: pixelated;
+}
+
+.Cimage{
+    width: 100%;
+    height: 100%;
+}
+
+#container{
+    float: left;
+    background-image: url('../images/Map.png');
+    background-size: 500px 500px;
+    border: 4px solid rgba(0, 0, 0, 0.5);
+
+}
+
+.col{
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 1px rgba(0, 0, 0, 0.219) solid;
+}
+
+.col:hover{
+    /* background-color: rgba(14, 125, 189, 0.767); */
+    background-image: url('../images/Sprites/Cursor.png');
+    background-size: 100% 100%;
+
+}
+
+.row{
+    width: 500px;
+    height: 50px;
+    /* border-top: 1px black solid;
+    border-bottom: 1px black solid; */
+}
+
+
+.attacks{
+    background-color: rgba(206, 22, 38, 0.623);
+}
+
+.movement{
+    background-color: rgba(14, 125, 189, 0.767)
+}
+
+.enemyMovement{
+    background-color: rgba(206, 22, 38, 0.623)
+}
+
+.label{
+    opacity: 0;
+    background-color: rgba(245, 222, 179, 0.644);
+    z-index: 1;
+    position: absolute;
+    left: 0px;
+    top: 215px;
+    font-size: 48px;
+    font-weight: bold;
+    width: 508px;
+    text-align: center
+}
+
+.character{
+    position: relative;
+}
+
+#messagebox{
+    text-align: center;
+    font-size: 24px;
+    width: 200px;
+    height: 350px;
+    float: left;
+    background-image: url('../images/Sprites/StatBox.png');
+    background-size: 200px 350px;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.795);
+}
+
+#statbox{
+
+    text-align: center;
+    font-size: 24px;
+    width: 200px;
+    height: 350px;
+    float: left;
+    overflow: hidden;
+    background-image: url('../images/Sprites/StatBox.png');
+    background-size: 200px 350px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.795);
+    
+}
+
+#messages{
+    float:left;
+    width: 400px;
+    height: 158px;
+    overflow: hidden;
+    background-image: url('../images/Sprites/MessageBox.png');
+    background-size: 400px 158px;
+    font-size: 16px;
+    padding: 0px 32px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.795);
+
+}
+
+#instructions{
+    font-size:18px;
+}

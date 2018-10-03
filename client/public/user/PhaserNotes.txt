@@ -1,0 +1,5 @@
+tilemap properties can be found at
+
+console.log(layer.getTileAtWorldXY(cursor.x,cursor.y).layer.properties.Weight)
+group.clear(true,true) removes all members of the group
+    * use this for tiles and clearing all enemies
