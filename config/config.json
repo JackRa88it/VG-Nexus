@@ -1,8 +1,8 @@
 {
     "development": {
       "username": "root",
-      "password": "Raymond12",
-      "database": "art_collective_db",
+      "password": "7182011",
+      "database": "gaming",
       "host": "127.0.0.1",
       "port": 3306,
       "dialect": "mysql"

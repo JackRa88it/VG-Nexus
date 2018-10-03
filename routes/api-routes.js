@@ -50,30 +50,27 @@ router.post('/upload',function(req,res){
     
 })
 
-router.post("/api/login", passport.authenticate("local"), function(req, res) {
-    console.log(req.user.id)
-    // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-    // So we're sending the user back the route to the members page because the redirect will happen on the front end
-    // They won't get this or even be able to access this page if they aren't authed
-    var id = req.user.id;
-    res.send('success');
+router.post("/api/login",  function(req, res) {
+    var form = new formidable.IncomingForm()
+    form.parse(req,function(err,fields,files){
+        console.log(fields)
+        res.send('success');
+    })
   });
 
 
-router.post("/api/signup", function(req, res) {
+router.post("/api/signup",passport.authenticate("local"), function(req, res) {
     var form = new formidable.IncomingForm()
     form.parse(req,function(err,fields,files){
         console.log(fields)
         db.User.create({
-            username: fields.email,
-            email: fields.password,
-            password: req.body.password
+            email: fields.email,
+            password: fields.password
           }).then(function() {
-            res.send('successful');
+            res.send('success!');
           }).catch(function(err) {
             console.log(err);
             res.json(err);
-            // res.status(422).json(err.errors[0].message);
           });
     })
    

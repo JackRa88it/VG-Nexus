@@ -4,8 +4,8 @@ import './App.css';
 import axios from'axios';
 import Form from './components/UploadForm/Form'
 import Game from './components/Game/Game'
-import Login from './components/Login/Login'
-import Signup from './components/Signup/Signup'
+import Login from './pages/Login/Login'
+import Signup from './pages/Signup/Signup'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 class App extends Component {
