@@ -42,8 +42,8 @@ app.post('/upload',function(req,res){
     })
 })
 
-// Connect to the Mongo DB
-const routes = require("./routes/api-routes.js")
+
+const routes = require("./routes/sequelize-template-routes.js")
 app.use(routes)
 // Start the API server
 db.sequelize.sync().then(function(){
