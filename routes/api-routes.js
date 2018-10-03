@@ -50,30 +50,26 @@ router.post('/upload',function(req,res){
     
 })
 
-router.post("/api/login",  function(req, res) {
-    var form = new formidable.IncomingForm()
-    form.parse(req,function(err,fields,files){
-        console.log(fields)
-        res.send('success');
-    })
-  });
-
-
-router.post("/api/signup",passport.authenticate("local"), function(req, res) {
-    var form = new formidable.IncomingForm()
-    form.parse(req,function(err,fields,files){
-        console.log(fields)
-        db.User.create({
-            email: fields.email,
-            password: fields.password
-          }).then(function() {
-            res.send('success!');
-          }).catch(function(err) {
-            console.log(err);
-            res.json(err);
-          });
-    })
-   
+router.post("/api/login",passport.authenticate("local"),  function(req, res) {
+    res.send('/game');
 });
+
+
+router.post("/api/signup", function(req, res) {
+    db.User.create({
+        email: req.body.email,
+        password: req.body.password
+    }).then(function() {
+        res.send('/game');
+    }).catch(function(err) {
+        console.log(err);
+        res.json(err);
+    })
+});
+
+router.get('/logout', function(req,res){
+    req.logout();
+    res.redirect('/')
+})
 
 module.exports = router;

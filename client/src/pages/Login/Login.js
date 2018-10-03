@@ -7,16 +7,7 @@ class Login extends Component{
         email: '',
         password: '',
       };
-    // loginSubmit(event){
-    //     event.preventDefault()
-    //     console.log('post!')
-    //     const formData = new FormData(event.target)
-    //     axios.post("/api/login",formData)
-    //         .then(res =>
-    //             console.log(res)
-    //         ).catch(err => console.log(err))
-    //     return false
-    // }
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -26,19 +17,20 @@ class Login extends Component{
 
     handleFormSubmit = event => {
         event.preventDefault();
-        console.log(this.state)
-        if (this.state.title && this.state.author) {
+        if (this.state.password && this.state.email) {
+            console.log(this.state)
           API.login({
             email: this.state.email,
             password: this.state.password
           })
-            .then(res => console.log(res))
+            .then(res => window.location.assign(res.data))
             .catch(err => console.log(err));
         }
     };
     render(){
         return(
             <div>
+                LOG IN(slot this into a modal later)
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}

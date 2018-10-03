@@ -1,29 +1,56 @@
 import React, { Component } from 'react';
-import axios from "axios";
+import { Input, TextArea, FormBtn } from "../../components/Form";
+import API from "../../utils/API";
 
 class Signup extends Component{
-    signupSubmit(event){
-        event.preventDefault()
-        const formData = new FormData(event.target)
-        console.log(formData)
-        axios.post("/api/signup",formData)
-            .then(res =>
-                console.log(res)
-            ).catch(err => console.log(err))
-        return false
-    }
+    state = {
+        email: '',
+        password: '',
+      };
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+          [name]: value
+        });
+      };
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        if (this.state.password && this.state.email) {
+            console.log(this.state)
+          API.signup({
+            email: this.state.email,
+            password: this.state.password
+          })
+            .then(res => window.location.assign(res.data))
+            .catch(err => console.log(err));
+        }
+    };
     render(){
         return(
             <div>
-        <h2>Sign Up Form</h2>
-        <form class="signup" onSubmit={this.signupSubmit}>
-            Email: <input type="email" class="form-control" id="email-input" placeholder="Email" name='email' /> <br></br>
-            Password: <input type="password" class="form-control" id="password-input" placeholder="Password" name='password'/><br></br><br></br>
-          <button type="submit" class="btn btn-default">Sign Up</button>
-        </form>
-        <br />
-        <p>Or log in <a href="/login">here</a></p>
-      </div>
+                SIGN UP(slot this into a modal or something later)
+                <Input
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
+                    name="email"
+                    placeholder="Email"
+                />
+                <Input
+                    value={this.state.title}
+                    onChange={this.handleInputChange}
+                    name="password"
+                    placeholder="Password"
+                />
+                <br></br>
+                <br></br>
+                <FormBtn
+                    disabled={!(this.state.password && this.state.email)}
+                    onClick={this.handleFormSubmit}>
+                    Submit
+                </FormBtn>
+            </div>
         )
     }
 }
