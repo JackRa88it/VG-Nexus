@@ -3,3 +3,8 @@ iframe{
     height: 600px;
     border: none;
 }
+.simGame{
+  height: 500px;
+  border-radius: 2px;
+  box-shadow:inset 0 0 1.5em blue;
+}
