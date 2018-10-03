@@ -10,8 +10,9 @@ class Game extends Component{
                 <p>
                     Developer: User_12314
                 </p>
+                <div className="simGame bg-dark" >
                 <iframe src='/user/index.html'></iframe>
-                <div className="simGame bg-dark" />
+                </div>
                 <CommentList />
             </div>
         )
