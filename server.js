@@ -1,10 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-var formidable = require('formidable');
-var fs = require('fs');
-var extract = require('extract-zip')
 const PORT = process.env.PORT || 3001;
+var passport = require("./config/passport");
+var db = require("./models");
+var session = require("express-session");
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+
 
 
 // Define middleware here
@@ -14,38 +19,18 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.post('/upload',function(req,res){
-    var form = new formidable.IncomingForm()
-    form.parse(req,function(err,fields,files){
-        console.log('parsing files')
-        var oldpath = files.filetoupload.path;
-        var newpath = __dirname + "/" + files.filetoupload.name
-        fs.rename(oldpath, newpath, function (err) {
-            console.log('renaming filepaths')
-            if (err) throw err;
-            var dir = "./user"
-            if (!fs.existsSync(dir)){
-                fs.mkdirSync(dir);
-            }
-            var target = __dirname+"/client/public/user"
-            extract(newpath,{dir:target},function(err){
-                console.log('extracting')
-                if(err) throw err;
-                fs.unlink(newpath, (err) => {
-                    if (err) throw err;
-                    console.log('deleting' + newpath );
-                    res.write('File uploaded and moved!');
-                    res.end();
-                  });
-            })
-        });
-    })
-})
-
-// Connect to the Mongo DB
+require("./routes/api-routes.js")(app,io)
 
 // Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+// app.listen(PORT, function() {
+//   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+// });
+db.sequelize.sync().then(function() {
+    http.listen(PORT, function() {
+      console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+    });
+  });

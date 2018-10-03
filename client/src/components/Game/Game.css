@@ -1,3 +1,8 @@
+iframe{
+    width: 800px;
+    height: 600px;
+    border: none;
+}
 .simGame{
   height: 500px;
   border-radius: 2px;
