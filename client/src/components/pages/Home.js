@@ -4,7 +4,6 @@ import CommentList from "../CommentList/"
 const Home = () => (
   <div>
     <h1>Home Page</h1>
-    <iframe title='game' src='/user/index.html'></iframe>
 
     <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data">
     <input type="file" name="filetoupload" /><br />
