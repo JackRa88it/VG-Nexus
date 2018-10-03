@@ -6,6 +6,10 @@ var passport = require("./config/passport");
 var db = require("./models");
 var session = require("express-session");
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+
 
 
 // Define middleware here
@@ -19,15 +23,14 @@ app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session());
 
-var routes = require("./routes/api-routes.js");
-app.use(routes);
+require("./routes/api-routes.js")(app,io)
 
 // Start the API server
 // app.listen(PORT, function() {
 //   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 // });
 db.sequelize.sync().then(function() {
-    app.listen(PORT, function() {
+    http.listen(PORT, function() {
       console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
     });
   });

@@ -1,14 +1,23 @@
 var db = require("../models");
 var passport = require("../config/passport");
-var express = require("express");
-var router = express.Router();
 var formidable = require('formidable');
 const path = require('path')
 var fs = require('fs')
 var extract = require('extract-zip')
 
+module.exports = function (app,io){
+    io.on('connection',function(socket){
+        console.log('a user connected to /');
+        socket.on('newMessage', function(msg){
+          console.log(msg)
+          io.emit('messageBroadcast', msg);
+        });
+        socket.on('disconnect', function(){
+          console.log('user disconnected from /');
+        });
+      })
 
-router.post('/upload',function(req,res){
+    app.post('/upload',function(req,res){
         //Initialize an empty form
         var form = new formidable.IncomingForm()
         form.maxFileSize = Math.pow(1024,3)
@@ -48,28 +57,45 @@ router.post('/upload',function(req,res){
             });
         })
     
-})
-
-router.post("/api/login",passport.authenticate("local"),  function(req, res) {
-    res.send('/game');
-});
-
-
-router.post("/api/signup", function(req, res) {
-    db.User.create({
-        email: req.body.email,
-        password: req.body.password
-    }).then(function() {
-        res.send('/game');
-    }).catch(function(err) {
-        console.log(err);
-        res.json(err);
     })
-});
 
-router.get('/logout', function(req,res){
-    req.logout();
-    res.redirect('/')
-})
+    app.post("/api/login",passport.authenticate("local"),  function(req, res) {
+        res.send('/chat');
+    });
 
-module.exports = router;
+
+    app.post("/api/signup", function(req, res) {
+        db.User.create({
+            email: req.body.email,
+            password: req.body.password
+        }).then(function() {
+            res.send('/game');
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        })
+    });
+
+    // app.get('/logout', function(req,res){
+    //     req.logout();
+    //     res.send('/')
+    // })
+
+    app.get('/api/messages/', function(req,res){
+        console.log('creating chat session')
+        const chatRoom = io.of('/'+req.user.id)
+        chatRoom.on('connection',function(socket){
+            console.log('a user connected to channel ', req.user.id);
+            socket.on('newMessage', function(msg){
+                console.log(req.user.id + ': ' + msg)
+                chatRoom.emit('messageBroadcast', msg);
+                console.log('emit')
+            });
+            socket.on('disconnect', function(){
+                console.log('user disconnected from ', req.user.id);
+            });
+        })
+        console.log('sending back keys')
+        res.send(Object.keys(io.nsps))
+    })
+}

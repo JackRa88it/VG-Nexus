@@ -7,4 +7,10 @@ export default {
   signup: function(userInfo) {
     return axios.post("/api/signup",userInfo);
   },
+  joinChat: function(){
+    return axios.get("/api/messages")
+  },
+  // joinChannel: function(channel){
+  //   return axios.get('/api/channels/'+channel)
+  // }
 };
