@@ -1,11 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-var formidable = require('formidable');
-var fs = require('fs');
-var extract = require('extract-zip')
 const PORT = process.env.PORT || 3001;
-const db = require("./models")
+var passport = require("./config/passport");
+var db = require("./models");
+var session = require("express-session");
+
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+
+
+
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -13,6 +19,9 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.post('/upload',function(req,res){
     var form = new formidable.IncomingForm()
@@ -42,6 +51,7 @@ app.post('/upload',function(req,res){
     })
 })
 
+require("./routes/api-routes.js")(app,io)
 
 const routes = require("./routes/sequelize-template-routes.js")
 app.use(routes)
