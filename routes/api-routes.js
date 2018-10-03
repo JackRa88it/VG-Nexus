@@ -58,9 +58,7 @@ module.exports = function (app,io){
                     })
                 });
             })
-
-        }
-        
+        }  
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
