@@ -1,6 +1,6 @@
 {
     "development": {
-      "username": "hoff",
+      "username": "root",
       "password": "",
       "database": "project3_db",
       "host": "127.0.0.1",

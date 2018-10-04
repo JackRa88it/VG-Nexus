@@ -16,8 +16,12 @@ var io = require('socket.io')(http);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Serve up static assets (usually on heroku)
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+}
+else{
+  app.use(express.static("client/public/user"));
 }
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -53,6 +57,9 @@ app.post('/upload',function(req,res){
 
 require("./routes/api-routes.js")(app,io)
 
+app.get("/fun",function(req,res){
+  res.sendFile(__dirname+'/client/public/user/index.html')
+})
 const routes = require("./routes/sequelize-template-routes.js")
 app.use(routes)
 // Start the API server

@@ -11,9 +11,14 @@ class Game extends Component{
                 <p>
                     Developer: User_12314
                 </p>
-                <div className="simGame bg-dark" >
-                <iframe src={'/'+this.props.match.params.id + '/' + this.props.match.params.title}></iframe>
-                </div>
+                <div class='px-auto'>
+                  <iframe title="gamewindow"
+                          scrolling="no"
+                          id="gameView"
+                          height="500"
+                          src={'/'+this.props.match.params.id + '/' + this.props.match.params.title}
+                          allowFullScreen></iframe>
+                  </div>
                 <CommentList />
             </div>
         )
