@@ -9,6 +9,7 @@ class DirectMessage extends Component{
         messages: [],
         newMessage: '',
         activeChats: [],
+        joined: false
       };
     socket = null
     handleInputChange = event => {
@@ -27,38 +28,39 @@ class DirectMessage extends Component{
     };
     componentDidMount(){
         console.log('component mounted')
-        this.socket=io('http://localhost:3001')
-        this.socket.on('messageBroadcast',(message)=>{
-            this.setState({messages:this.state.messages.concat([message])})
-        })
+        // this.socket=io.connect('http://localhost:3001')
+        // this.socket.on('messageBroadcast',(message)=>{
+        //     this.setState({messages:this.state.messages.concat([message])})
+        // })
 
     }
     joinChat = () => {
         API.joinChat()
             .then((res) => {
-                this.setState({activeChats: res.data},()=>console.log(this.state))
+                this.setState({activeChats: res.data, joined: true},()=>console.log(this.state))
             })
             // .catch(err => console.log(err))
     }
 
     joinChannel = (channel) => {
         console.log(channel)
-        this.socket.disconnect()
+        if(this.socket){
+            this.socket.disconnect()
+        }
         this.socket = io('http://localhost:3001' + channel)
         this.socket.on('messageBroadcast',(message)=>{
             console.log('message received')
             this.setState({messages:this.state.messages.concat([message])})
         })
-        console.log(this.socket)
     }
 
     render(){
         return(
             <div>
-                <FormBtn
+                {this.state.joined ? null : <FormBtn
                     onClick={this.joinChat}>
                     Submit
-                </FormBtn>
+                </FormBtn>}
                 {this.state.activeChats.map(channel => (
                     <ActiveChat onClick={()=>{this.joinChannel(channel)}}>{channel}</ActiveChat>
                 ))}
@@ -75,7 +77,7 @@ class DirectMessage extends Component{
                     disabled={!(this.state.newMessage)}
                     onClick={this.handleFormSubmit}>
                     Submit
-                </FormBtn>
+                </FormBtn> 
                 
             </div>
         )

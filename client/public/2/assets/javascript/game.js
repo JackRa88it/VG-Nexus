@@ -3,9 +3,9 @@ var config = {
     width: 240,
     height: 160,
     pixelArt: true,
-    backgroundColor: '#2d2d2d',
     parent: 'gameView',
     zoom: 3,
+    backgroundColor: '#2d2d2d',
     scene: [{
         key: 'main',
         // active: true,

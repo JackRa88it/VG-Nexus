@@ -16,7 +16,7 @@ class Game extends Component{
                           scrolling="no"
                           id="gameView"
                           height="500"
-                          src={'/'+this.props.match.params.id + '/' + this.props.match.params.title}
+                          src={'/'+this.props.match.params.id}
                           allowFullScreen></iframe>
                   </div>
                 <CommentList />

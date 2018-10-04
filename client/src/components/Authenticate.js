@@ -1,13 +1,22 @@
-const fakeAuth = {
+import API from "../utils/API"
+const Authenticator = {
     isAuthenticated: false,
     authenticate(cb) {
-      this.isAuthenticated = true;
-      setTimeout(cb, 100); // fake async
+      API.authenticate()
+      .then(
+        (res)=>{this.isAuthenticated = true;if(cb){cb()}},
+        (err)=>{console.log(err)}
+      )
     },
     signout(cb) {
-      this.isAuthenticated = false;
-      setTimeout(cb, 100);
+      API.logout()
+      .then(()=>{
+        this.isAuthenticated = false;
+        if(cb){
+          cb();
+        }
+      })
     }
   };
 
-export default fakeAuth
+export default Authenticator
