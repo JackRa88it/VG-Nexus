@@ -90,6 +90,18 @@ class NavTabs extends Component{
         </Link>  
         )}
     </li>
+    <li className="nav-item">
+        <Link
+          to="/signup"
+          className={
+            window.location.pathname === "/signup"
+              ? "nav-link active"
+              : "nav-link"
+          }
+        >
+          Sign Up
+        </Link>
+    </li>
     </ul>
   )};
 }
