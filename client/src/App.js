@@ -6,11 +6,10 @@ import Signup from './pages/Signup/Signup'
 import DirectMessage from './pages/Chat/DirectMessage'
 import NavTabs from "./components/NavTabs";
 import {Container} from "./components/Grid";
-
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import ChooseGame from "./components/pages/ChooseGame";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
 class App extends Component {
