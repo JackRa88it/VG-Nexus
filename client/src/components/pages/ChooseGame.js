@@ -14,14 +14,14 @@ const ChooseGame = props => (
   <br></br>
     <div className="gameList">
       <div className="imgFill">
-      <Link to={`${props.match.url}/games/1`} 
+      <Link to={`${props.match.url}/games/1/SRPG`} 
             role="button" 
             className="btn btn-link"> 
       Game 1 </Link> 
       </div>
       
       <div className="imgFill">
-      <Link to={`${props.match.url}/games/2`} 
+      <Link to={`${props.match.url}/games/1/Snake`} 
             role="button" 
             className="btn btn-link">
       Game 2 </Link>
@@ -54,11 +54,8 @@ const ChooseGame = props => (
 
     </div>
 
-    <Route path={`${props.match.url}/games/1`} component={Game} />
-    <Route path={`${props.match.url}/games/2`} component={Game} />
-    <Route path={`${props.match.url}/games/3`} component={Game} />
-    <Route path={`${props.match.url}/games/4`} component={Game} />
-    <Route path={`${props.match.url}/games/5`} component={Game} />
+    <Route path={`${props.match.url}/games/:id/:title`} component={Game}  gamePath={'/1'}/>
+
 
 
   </div>

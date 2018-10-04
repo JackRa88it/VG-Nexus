@@ -4,6 +4,7 @@ import CommentList from "../CommentList"
 import './Game.css'
 class Game extends Component{
     render(){
+        console.log(this.props)
         return(
             <div>
                 <h1 className="text-center">Game {this.props.match.url.split("/").pop()}</h1>
@@ -15,7 +16,7 @@ class Game extends Component{
                           scrolling="no"
                           id="gameView"
                           height="500"
-                          src='/user/index.html'
+                          src={'/'+this.props.match.params.id + '/' + this.props.match.params.title}
                           allowFullScreen></iframe>
                   </div>
                 <CommentList />

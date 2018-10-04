@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+}
+
+#instructionBox{
+    
+    height: 150px;
+    width: 906px;
+    background-image: url('../images/Sprites/InstructionBox.png');
+    background-size: 906px 150px;
+}
+
+#instruction{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 22px;
+    padding: 18px;
+}
+
+#btnLeft{
+    font-size: 18px;
+    padding: 4px;
+    position: absolute;
+    left: 18px;
+    /* bottom: 18px; */
+}
+
+#btnRight{
+    font-size: 18px;
+    padding: 4px;
+    position: absolute;
+    left: 820px;
+    /* bottom: 18px; */
+}
