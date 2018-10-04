@@ -61,12 +61,27 @@ module.exports = function (app,io){
         }  
     })
 
+    app.get('/api/authenticate',function(req,res){
+        console.log('authenticating')
+        if(req.user){
+            console.log('authentication successful')
+            res.status(200).send('approved')
+        }
+        else{
+            res.status(403).send('access denied')
+        }
+    })
+
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
         console.log('logging in')
         res.send('/chat');
     });
 
-    
+    app.get("/api/logout", function(req, res) {
+        console.log('logging out')
+        req.logout();
+        res.send('/')
+      });
 
 
     app.post("/api/signup", function(req, res) {

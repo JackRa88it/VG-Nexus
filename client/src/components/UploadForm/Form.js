@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import Authenticator from '../Authenticate'
 
 // import axios from 'axios';
+
+Authenticator.authenticate()
 
 class Form extends Component{
     postGame(event){
@@ -18,6 +21,7 @@ class Form extends Component{
     }
     render(){
         return(
+            Authenticator.isAuthenticated ? (
         <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data" id='gameForm' onSubmit={this.postGame}>
         Game ZIP file:
         <input type="file" name="filetoupload" id='fileInput'/><br />
@@ -29,6 +33,8 @@ class Form extends Component{
         <input type='text' name ='description' /><br />
         <input type="submit" />
         </form>
+        ) : 
+        ('403 Forbidden')
         )
     }
 }

@@ -10,6 +10,12 @@ export default {
   joinChat: function(){
     return axios.get("/api/messages")
   },
+  authenticate: function(){
+    return axios.get('/api/authenticate')
+  },
+  logout: function(){
+    return axios.get('/api/logout')
+  }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)
   // }
