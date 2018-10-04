@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
     // **define relationships here**
     Tag.associate = function (models) {
       Tag.belongsToMany(models.Game, {
-        through: models.GameTag
+        // through: models.GameTag
+        through: "GameTags"
       })
     };
     return Tag;
