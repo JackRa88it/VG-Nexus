@@ -8,14 +8,14 @@ module.exports = function(sequelize, DataTypes) {
       description: {
         type: DataTypes.STRING,
       },
-      filepath: {
-        type: DataTypes.STRING,
-      },
-      thumbnail: {
-        type: DataTypes.STRING,
-        defaultValue: "https://i2.wp.com/www.ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png",
+      // filepath: {
+      //   type: DataTypes.STRING,
+      // },
+      // thumbnail: {
+      //   type: DataTypes.STRING,
+      //   defaultValue: "https://i2.wp.com/www.ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png",
         
-      },
+      // },
       rating: {
         type: DataTypes.INTEGER,
         defaultValue: 10,
@@ -33,6 +33,7 @@ module.exports = function(sequelize, DataTypes) {
       Game.belongsTo(models.User, {
       })
       Game.belongsToMany(models.Tag, {
+        // through: models.GameTag
         through: "GameTags"
       })
     //   Game.belongsToMany(model.User, {
