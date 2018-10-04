@@ -62,6 +62,7 @@ module.exports = function (app,io){
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
+        console.log('logging in')
         res.send('/chat');
     });
 
@@ -76,20 +77,13 @@ module.exports = function (app,io){
             password: req.body.password,
             bio: req.body.bio,
             postBanner: req.body.bannerUrl
-          }).then(function(user) {
-            console.log(user);
-            res.send("/")
-          }).catch(function(err) {
+          }).then(function() {
+            res.redirect(307, "/api/login");
+        }).catch(function(err) {
             console.log(err);
-            res.json(err);
-            // res.status(422).json(err.errors[0].message);
+            res.send(err);
           });
         });
-
-    // app.get('/logout', function(req,res){
-    //     req.logout();
-    //     res.send('/')
-    // })
 
     app.get('/api/messages/', function(req,res){
         console.log('creating chat session')
