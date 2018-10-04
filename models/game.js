@@ -33,7 +33,8 @@ module.exports = function(sequelize, DataTypes) {
       Game.belongsTo(models.User, {
       })
       Game.belongsToMany(models.Tag, {
-        through: models.GameTag
+        // through: models.GameTag
+        through: "GameTags"
       })
     //   Game.belongsToMany(model.User, {
     //     through: models.UserGame  
