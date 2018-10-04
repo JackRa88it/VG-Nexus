@@ -24,7 +24,6 @@ module.exports = function (app,io){
             var form = new formidable.IncomingForm()
             form.maxFileSize = Math.pow(1024,3)
             form.parse(req,function(err,fields,files){
-                console.log(fields)
                 if(err) throw err;
                 //fields are any values that are not files that were sent with the form whose keys are the name of the input
                 //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
@@ -45,15 +44,24 @@ module.exports = function (app,io){
                     }
 
                     //Unzip the file to target directory
-                    var target = path.join(__dirname,'../client/public/' + req.user.id + '/' + fields.title)
+                    var target = path.join(__dirname,'../client/public/' + req.user.id + '/' + fields.name)
                     extract(newpath,{dir:target},function(err){
                         console.log('extracting to ', target)
                         if(err) throw err;
                         fs.unlink(newpath, (err) => {
                             if (err) throw err;
                             console.log('deleting' + newpath );
-                            //Send the URL to the games new path
-                            res.send('/game');
+                            db.Game.create({
+                                name: fields.name,
+                                description: fields.description,
+                                UserId: req.user.id,
+                            }).then(function(game) {
+                                console.log(game);
+                                res.send('/game');
+                            }).catch(function(err) {
+                                console.log(err);
+                                // res.status(422).json(err.errors[0].message);
+                            });
                         });
                     })
                 });
@@ -62,9 +70,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/authenticate',function(req,res){
-        console.log('authenticating')
         if(req.user){
-            console.log('authentication successful')
             res.status(200).send('approved')
         }
         else{
@@ -73,19 +79,16 @@ module.exports = function (app,io){
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
-        console.log('logging in')
         res.send('/chat');
     });
 
     app.get("/api/logout", function(req, res) {
-        console.log('logging out')
         req.logout();
         res.send('/')
       });
 
 
     app.post("/api/signup", function(req, res) {
-        console.log('something')
         db.User.create({
             username: req.body.username,
             email: req.body.email,
@@ -101,20 +104,17 @@ module.exports = function (app,io){
         });
 
     app.get('/api/messages/', function(req,res){
-        console.log('creating chat session')
+        //Create a channel
         const chatRoom = io.of('/'+req.user.id)
         chatRoom.on('connection',function(socket){
             console.log('a user connected to channel ', req.user.id);
             socket.on('newMessage', function(msg){
-                console.log(req.user.id + ': ' + msg)
                 chatRoom.emit('messageBroadcast', msg);
-                console.log('emit')
             });
             socket.on('disconnect', function(){
                 console.log('user disconnected from ', req.user.id);
             });
         })
-        console.log('sending back keys')
         res.send(Object.keys(io.nsps))
     })
 }

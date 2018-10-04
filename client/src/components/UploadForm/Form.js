@@ -27,8 +27,8 @@ class Form extends Component{
         <input type="file" name="filetoupload" id='fileInput'/><br />
         Thumbnail: 
         <input type='file' name='thumbnail' id='thumbnailInput'/><br />
-        Title:
-        <input type='text' name ='title' /><br />
+        Name:
+        <input type='text' name ='name' /><br />
         Description:
         <input type='text' name ='description' /><br />
         <input type="submit" />

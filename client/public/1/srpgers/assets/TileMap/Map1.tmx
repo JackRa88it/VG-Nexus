@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="17" height="12" tilewidth="16" tileheight="16" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16" tilecount="10" columns="10">
+  <image source="Tileset.png" width="160" height="16"/>
+  <tile id="0">
+   <properties>
+    <property name="weight" type="int" value="1"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="weight" type="int" value="2"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="weight" type="int" value="3"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="weight" type="int" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="weight" type="int" value="1"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="weight" type="int" value="99"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="17" height="12">
+  <data encoding="csv">
+6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
+6,1,1,1,1,4,1,4,4,4,4,4,4,2,3,3,6,
+6,1,1,1,4,1,1,4,3,2,2,3,4,2,2,3,6,
+6,1,1,4,4,4,4,2,3,3,3,3,4,4,4,4,6,
+6,1,4,1,4,4,3,3,3,3,2,4,4,5,4,4,6,
+6,4,2,4,4,3,3,3,3,2,4,4,4,4,4,5,6,
+6,4,1,4,2,3,3,3,2,4,4,4,4,4,5,5,6,
+6,4,4,4,3,3,3,4,2,4,4,5,4,5,4,5,6,
+6,4,4,4,2,2,2,2,4,4,4,4,4,5,4,4,6,
+6,4,3,4,4,2,4,2,4,4,5,4,5,4,4,5,6,
+6,2,4,4,4,4,4,5,2,5,4,5,4,5,4,5,6,
+6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6
+</data>
+ </layer>
+</map>
