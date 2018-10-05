@@ -16,6 +16,10 @@ body {
   margin-bottom: 30px;
 }
 
+#logo {
+  height: 40px;
+}
+
 .nav-link {
   background-color: #222222;
   border-width: 0px 0px 3px 0px;
@@ -35,14 +39,14 @@ body {
   background-color: #222222;
   border-width: 0px 0px 3px 0px;
   border-color: #222222;
-  color: #e44b30;
+  color: #EE135B;
 }
 
 .nav-tabs .nav-link:hover {
   background-color: #222222;
   border-width: 0px 0px 3px 0px;
-  border-color: #e44b30;
-  color: #e44b30;
+  border-color: #EE135B;
+  color: #EE135B;
 }
 
 h1 {

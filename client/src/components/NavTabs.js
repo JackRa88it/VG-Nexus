@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
-import Authenticator from './Authenticate'
+import Authenticator from './Authenticate';
+import logo from "../assets/controller_logo_white_red.png";
 
 class NavTabs extends Component{
   state = {
@@ -22,6 +23,13 @@ class NavTabs extends Component{
     return(
       // nav-tabs nav-item
     <ul className="nav nav-tabs"> 
+      <li className="nav-item">
+      <Link
+          to="/"
+        >
+          <img src={logo} alt="logo" id="logo"/>
+        </Link>
+      </li>
       <li className="nav-item">
         <Link
           to="/"
