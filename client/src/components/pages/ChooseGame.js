@@ -5,7 +5,8 @@ import Game from "../Game";
 
 const ChooseGame = props => (
   <div>
-    <h1>Instructions</h1>
+    <h1>Titanium Snake</h1>
+    <hr></hr>
     <p>
       You can play the game in two different ways. The first way is by controlling the sprite through the the arrow keys.
       The other way is by directing the sprite with the mouse.
