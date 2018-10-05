@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+  background: #333;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+}
+
 .App {
   text-align: center;
 }
