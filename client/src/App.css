@@ -3,9 +3,48 @@
 body {
   background: #333;
   font-family: 'Open Sans', sans-serif;
-  color: #fff;
+  color: #e8e8ea;
 }
 
+.nav {
+  background: #1c1b1c;
+  border: none;
+  box-shadow: 0px 2px 10px #282828;
+  color: #e8e8ea;
+  margin-bottom: 30px;
+}
+
+.nav-link {
+  background-color: #1c1b1c;
+  border-width: 0px 0px 3px 0px;
+  border-color: #1c1b1c;
+  color: #e8e8ea;
+}
+
+.nav-tabs .nav-link {
+  background-color: #1c1b1c;
+  border-width: 0px 0px 3px 0px;
+  border-color: #1c1b1c;
+  color: #e8e8ea;
+  border-radius: 0px;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #1c1b1c;
+  border-width: 0px 0px 3px 0px;
+  border-color: #1c1b1c;
+  color: #e8e8ea;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #1c1b1c;
+  border-width: 0px 0px 3px 0px;
+  border-color: #d8622f;
+  color: #e8e8ea;
+}
+
+
+/* ========================================= */
 .App {
   text-align: center;
 }
