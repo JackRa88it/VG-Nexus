@@ -1,3 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
+body {
+  background-color: #000;
+  font-family: 'Open Sans', sans-serif;
+  color: #f6f6f7;
+}
+
+.nav {
+  background: #222222;
+  border-width: 0px 0px 1px 0px;
+  border-color: #222222;
+  color: #f6f6f7;
+  margin-bottom: 30px;
+}
+
+#logo {
+  height: 40px;
+}
+
+.nav-link {
+  background-color: #222222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #222222;
+  color: #f6f6f7;
+}
+
+.nav-tabs .nav-link {
+  background-color: #222222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #222222;
+  color: #f6f6f7;
+  border-radius: 0px;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #222222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #222222;
+  color: #EE135B;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #222222;
+  border-width: 0px 0px 3px 0px;
+  border-color: #EE135B;
+  color: #EE135B;
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
+  color: #f6f6f7;
+  /* letter-spacing: 2px; */
+}
+
+.container {
+  background-color: #131313;
+  padding: 50px;
+}
+
+
+/* ========================================= */
 .App {
   text-align: center;
 }
