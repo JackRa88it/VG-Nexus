@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import Game from "../Game";
+import Game from "../../components/Game/";
 
 
 const ChooseGame = props => (
