@@ -12,33 +12,25 @@ module.exports = function (app,io){
           console.log('user disconnected from /');
         });
       })
-
-      const gameRoom = io.of('/game/1')
-      gameRoom.on('connection', function(socket){
-        console.log('a user connected to /game/1');
-        socket.on('messagePost', function(msg, name){
-            console.log("something sent")
-          gameRoom.emit('messagePost', msg, name);
-        });
-        
-        gameRoom.on('disconnect', function(){
-          console.log('user disconnected from /game/1');
-        });
-      })
-
-      const gameRoom2 = io.of('/game/2')
-      gameRoom2.on('connection', function(socket){
-        console.log('a user connected to /game/2');
-        socket.on('messagePost', function(msg, name){
-            console.log("something sent")
-          gameRoom2.emit('messagePost', msg, name);
-        });
-        
-        gameRoom2.on('disconnect', function(){
-          console.log('user disconnected from /game/2');
-        });
-      })
-
+      console.log("wabulubadubdub")
+      db.Game.findAll({})
+        .then(function(games){
+            for (let i=0;i<games.length;i++){
+                const gameRoom = io.of('/game/' + games[i].id)
+                gameRoom.on('connection', function(socket){
+                    console.log('a user connected to /game/' + games[i].id);
+                    socket.on('messagePost', function(msg, name){
+                        console.log("something sent")
+                      gameRoom.emit('messagePost', msg, name);
+                    });
+                    
+                    gameRoom.on('disconnect', function(){
+                      console.log('user disconnected from /game/1');
+                    });
+                  })
+            }
+            
+        })
 
 
     app.post('/upload',function(req,res){

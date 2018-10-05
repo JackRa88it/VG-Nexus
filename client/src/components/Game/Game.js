@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CommentList from "../CommentList"
+import Chatroom from "../Chat/practicechat"
 
 import './Game.css'
 class Game extends Component{
@@ -19,6 +20,7 @@ class Game extends Component{
                           src={'/'+this.props.match.params.id}
                           allowFullScreen></iframe>
                   </div>
+                  <Chatroom gameId = {this.props.match.params.id}/>
                 <CommentList />
             </div>
         )

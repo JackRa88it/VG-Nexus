@@ -10,7 +10,7 @@ class Chatroom extends Component{
         newMessage: '',
     }
     socket = null
-    name = null
+    name = "Anonymous"
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -27,17 +27,26 @@ class Chatroom extends Component{
     }
 
     componentDidMount(){
-        this.socket=io.connect("http://localhost:3001" + "/game/1")
-        API.authenticate().then ((res)=> {
-        this.name = res.data;
-        console.log(this.name)})
-        
-        this.socket.on("messagePost", (msg, name)=>{
-            this.setState({messages : [...this.state.messages, name+ ":" +msg]})
-        })
-
+        this.connect(this.props.gameId);
     }
 
+
+    componentWillRecieveProps(nextProps){
+        console.log(nextProps)
+        this.connect(nextProps.gameId)
+    }
+
+    connect(gameId) {
+        this.socket = io.connect("http://localhost:3001/game/" + gameId);
+        console.log(gameId);
+        API.authenticate().then((res) => {
+            this.name = res.data;
+            console.log(this.name);
+        });
+        this.socket.on("messagePost", (msg, name) => {
+            this.setState({ messages: [...this.state.messages, name + ":" + msg] });
+        });
+    }
     render(){
         return(
             <div>
