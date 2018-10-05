@@ -16,18 +16,7 @@ module.exports = function (app,io){
       db.Game.findAll({})
         .then(function(games){
             for (let i=0;i<games.length;i++){
-                const gameRoom = io.of('/game/' + games[i].id)
-                gameRoom.on('connection', function(socket){
-                    console.log('a user connected to /game/' + games[i].id);
-                    socket.on('messagePost', function(msg, name){
-                        console.log("something sent")
-                      gameRoom.emit('messagePost', msg, name);
-                    });
-                    
-                    gameRoom.on('disconnect', function(){
-                      console.log('user disconnected from /game/1');
-                    });
-                  })
+                newGame(games[i],io);
             }
             
         })
@@ -86,6 +75,7 @@ module.exports = function (app,io){
                                 if (err) throw err;
                                 console.log('deleting' + newpath );
                                 //Redirect the user in the frontend to their game
+                                newGame(game, io);
                                 res.send('/all/games/'+game.id);  
                             });
                         })
@@ -97,15 +87,17 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            res.send(req.user.username);
+            console.log("user said it is authenticated, but user lies")
+            res.send(req.user);
         }
         else{
+            console.log('user not authenticated')
             res.status(403).send('access denied')
         }
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
-        res.send('/chat');
+        res.send('/all/games/1/');
     });
 
     app.get("/api/logout", function(req, res) {
@@ -145,3 +137,17 @@ module.exports = function (app,io){
     })
     
 }
+function newGame(game,io) {
+    const gameRoom = io.of('/game/' + game.id);
+    gameRoom.on('connection', function (socket) {
+        console.log('a user connected to /game/' + game.id);
+        socket.on('messagePost', function (msg, name, id) {
+            console.log("something sent");
+            gameRoom.emit('messagePost', msg, name, id);
+        });
+        gameRoom.on('disconnect', function () {
+            console.log('user disconnected from /game/1');
+        });
+    });
+}
+
