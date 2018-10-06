@@ -3,6 +3,7 @@ import Form from './components/UploadForm/Form'
 import Game from './components/Game/Game'
 import Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
+import LoginSignup from "./pages/LoginSignup"
 import DirectMessage from './pages/Chat/DirectMessage'
 import NavTabs from "./components/NavTabs";
 import {Container} from "./components/Grid";
@@ -25,6 +26,8 @@ class App extends Component {
           <Route path="/all" component={ChooseGame} />
           <Route exact path="/upload" component={Form} />
           <Route exact path="/game" component={Game} />
+          <Route exact path='/login_signup' component={LoginSignup} />
+
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/chat' component={DirectMessage} />

@@ -56,7 +56,8 @@ h1 {
 }
 
 .container {
-  background-color: #131313;
+  border: 1px solid rgba(248, 249, 250,0.1);
+  background-color: rgba(43, 43, 43, 0.9);
   padding: 50px;
 }
 
