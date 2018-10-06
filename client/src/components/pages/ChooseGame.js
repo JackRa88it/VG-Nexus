@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import Game from "../Game";
-
+import Game from "../../components/Game/";
 
 const ChooseGame = props => (
   <div>
@@ -20,7 +19,6 @@ const ChooseGame = props => (
             className="btn btn-link"> 
       Game 1 </Link> 
       </div>
-      
       <div className="imgFill">
       <Link to={`${props.match.url}/games/2/`} 
             role="button" 
