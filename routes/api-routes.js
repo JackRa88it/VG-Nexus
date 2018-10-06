@@ -50,8 +50,7 @@ module.exports = function (app,io){
                                 var thumbnailPath = files.thumbnail.path;
                                 //Create a newpath to store the file at
                                 var newpath = path.join(__dirname, "../" + files.filetoupload.name)
-                                console.log(game)
-                                var newThumbnailPath = path.join(__dirname, '../client/src/assets/gameThumbnails/' + game.id )
+                                var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
                                 fs.rename(thumbnailPath,newThumbnailPath, function(err) {
                                     //Rename thumbnail
                                     if(err) throw err;
@@ -115,7 +114,7 @@ module.exports = function (app,io){
             form.parse(req,function(err,fields,files){
                 if(err) throw err;
                 var oldPath = files.profilephoto.path;
-                var newPath = path.join(__dirname, '../client/src/assets/userThumbnails/' + req.user.id )
+                var newPath = path.join(__dirname, '../client/public/assets/userThumbnails/' + req.user.id )
                 fs.rename(oldPath,newPath, function(err) {
                     if(err) throw err
                 })
@@ -132,8 +131,8 @@ module.exports = function (app,io){
             postBanner: req.body.bannerUrl
           }).then(function(user) {
             var random = Math.floor(Math.random()*9) + 1
-            var userImage = path.join(__dirname, '../client/src/assets/userThumbnails/Default'+random+'.png')
-            var userImageCopy = path.join(__dirname, '../client/src/assets/userThumbnails/' + user.id)
+            var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
+            var userImageCopy = path.join(__dirname, '../client/public/assets/userThumbnails/' + user.id)
             fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
             res.redirect(307, "/api/login");
         }).catch(function(err) {

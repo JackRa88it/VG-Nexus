@@ -14,14 +14,12 @@ class TagSelect extends React.Component {
         this.state = {
             tags: [],
             suggestions: [
+                ///This suggestions list should be populated from the database
                 { id: 'Action', text: 'Action' },
                 { id: 'Arcade', text: 'Arcade' },
                 { id: 'Shooter', text: 'Shooter' },
             ]
         };
-        // this.handleDelete = this.handleDelete.bind(this);
-        // this.handleAddition = this.handleAddition.bind(this);
-        // this.handleDrag = this.handleDrag.bind(this);
     }
 
 

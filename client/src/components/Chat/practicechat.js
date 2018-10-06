@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
 import io from 'socket.io-client'
-import {ActiveChat} from "../../components/Chat"
 
 class Chatroom extends Component{
     state = {
@@ -22,7 +21,6 @@ class Chatroom extends Component{
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.newMessage) {
-            console.log(this.socket)
             this.socket.emit('messagePost', this.state.newMessage, this.name, this.id)
         }
     }
@@ -33,7 +31,6 @@ class Chatroom extends Component{
 
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps)
         this.connect(nextProps.gameId)
     }
 
@@ -42,11 +39,9 @@ class Chatroom extends Component{
             this.socket.disconnect();
         }
         this.socket = io.connect("http://localhost:3001/game/" + gameId);
-        console.log(gameId);
         API.authenticate().then((res) => {
             this.name = res.data.username;
             this.id = res.data.id
-            console.log(res.data);
         });
         this.socket.on("messagePost", (msg, name, id) => {
             this.setState({ messages: [...this.state.messages, {name: name, id: id, msg: msg}] });
@@ -57,9 +52,9 @@ class Chatroom extends Component{
             <div>
                 {this.state.messages.map(message => (
                     this.id ? 
-                    (<div><p><a href={"/user/"+message.id}>{message.name}</a>:{message.msg}</p>
+                    (<div><img src={'/assets/userThumbnails/'+message.id}></img><p><a href={"/user/"+message.id}>{message.name}</a>:{message.msg}</p>
                     </div>) :
-                    (<div><p>{message.name}:{message.msg}</p>
+                    (<div><img src='/assets/userThumbnails/Default1.png'></img><p>{message.name}:{message.msg}</p>
                     </div>)
                 ))}
                 <Input

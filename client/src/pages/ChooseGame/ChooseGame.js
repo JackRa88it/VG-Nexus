@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
 import Game from "../../components/Game/";
-import thumbnail from '../../assets/gameThumbnails/8'
 
 const ChooseGame = props => (
   <div>
@@ -15,14 +14,14 @@ const ChooseGame = props => (
   <br></br>
     <div className="gameList">
       <div className="imgFill">
+      <img src='/assets/gameThumbnails/1' alt='Logo'></img>
       <Link to={`${props.match.url}/games/1/`} 
             role="button" 
             className="btn btn-link"> 
       Game 1 </Link> 
       </div>
-      Asdf
       <div className="imgFill">
-      <img src={thumbnail} alt='Logo'></img>
+      <img src='/assets/gameThumbnails/2' alt='Logo'></img>
       <Link to={`${props.match.url}/games/2/`} 
             role="button" 
             className="btn btn-link">

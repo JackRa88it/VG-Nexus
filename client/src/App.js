@@ -9,7 +9,7 @@ import NavTabs from "./components/NavTabs";
 import {Container} from "./components/Grid";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
-import ChooseGame from "./components/pages/ChooseGame";
+import ChooseGame from "./pages/ChooseGame/ChooseGame";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
