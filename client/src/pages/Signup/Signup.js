@@ -49,6 +49,7 @@ class Signup extends Component{
                     onChange={this.handleInputChange}
                     type="password"
                     name="password"
+                    type="password"
                     placeholder="Password"
                 />
                 <Input
