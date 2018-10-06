@@ -17,10 +17,10 @@ class Game extends Component{
                           scrolling="no"
                           id="gameView"
                           height="500"
-                          src={'/'+this.props.match.params.id}
+                          src={'/games/'+this.props.match.params.id}
                           allowFullScreen></iframe>
                   </div>
-                  <Chatroom gameId = {this.props.match.params.id}/>
+                <Chatroom gameId = {this.props.match.params.id}/>
                 <CommentList />
             </div>
         )

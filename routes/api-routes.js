@@ -66,7 +66,7 @@ module.exports = function (app,io){
                                         }
                 
                                         //Unzip the file to target directory
-                                        var target = path.join(__dirname,'../client/public/' + game.id)
+                                        var target = path.join(__dirname,'../client/public/games/' + game.id)
                                         extract(newpath,{dir:target},function(err){
                                             console.log('extracting to ', target)
                                             if(err) throw err;
