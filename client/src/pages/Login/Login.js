@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
+import Signup from "../Signup"
+import {Col} from "../../components/Grid"
+import {Link} from "react-router-dom";
 
 class Login extends Component{
     state = {
@@ -30,7 +33,7 @@ class Login extends Component{
     render(){
         return(
             <div>
-                LOG IN(slot this into a modal later)
+               <h2 className="display-5 mb-4">Login</h2> 
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
@@ -41,8 +44,10 @@ class Login extends Component{
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="password"
+                    type="password"
                     placeholder="Password"
                 />
+                Don't have an account?  <Link to="/signup">Signup</Link>
                 <br></br>
                 <br></br>
                 <FormBtn
