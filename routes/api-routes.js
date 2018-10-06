@@ -91,7 +91,7 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            console.log("user said it is authenticated, but user lies")
+            console.log("user authenticated")
             res.send(req.user);
         }
         else{
@@ -109,6 +109,19 @@ module.exports = function (app,io){
         res.send('/')
       });
 
+    app.post('/api/upload/userimage',function(req,res){
+        if(req.user){
+            var form = new formidable.IncomingForm()
+            form.parse(req,function(err,fields,files){
+                if(err) throw err;
+                var oldPath = files.profilephoto.path;
+                var newPath = path.join(__dirname, '../client/src/assets/userThumbnails/' + req.user.id )
+                fs.rename(oldPath,newPath, function(err) {
+                    if(err) throw err
+                })
+            })
+        }
+    })
 
     app.post("/api/signup", function(req, res) {
         db.User.create({
@@ -117,13 +130,18 @@ module.exports = function (app,io){
             password: req.body.password,
             bio: req.body.bio,
             postBanner: req.body.bannerUrl
-          }).then(function() {
+          }).then(function(user) {
+            var random = Math.floor(Math.random()*9) + 1
+            var userImage = path.join(__dirname, '../client/src/assets/userThumbnails/Default'+random+'.png')
+            var userImageCopy = path.join(__dirname, '../client/src/assets/userThumbnails/' + user.id)
+            fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
             res.redirect(307, "/api/login");
         }).catch(function(err) {
             console.log(err);
             res.send(err);
           });
         });
+
 
     app.get('/api/messages/', function(req,res){
         //Create a channel
@@ -150,7 +168,7 @@ function newGame(game,io) {
             gameRoom.emit('messagePost', msg, name, id);
         });
         gameRoom.on('disconnect', function () {
-            console.log('user disconnected from /game/1');
+            console.log('user disconnected from /game/' + game.id);
         });
     });
 }
