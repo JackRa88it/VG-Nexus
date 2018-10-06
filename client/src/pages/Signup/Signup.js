@@ -37,8 +37,7 @@ class Signup extends Component{
     render(){
         return(
             <div>
-               <h2 className="display-5">SIGN UP</h2> 
-                <Col size="md-5" >
+               <h2 className="display-5 mb-4">SIGN UP</h2> 
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
@@ -62,6 +61,7 @@ class Signup extends Component{
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="bio"
+                    type=""
                     placeholder="Tell me about yourself"
                 />
                 <Input
@@ -77,7 +77,6 @@ class Signup extends Component{
                     onClick={this.handleFormSubmit}>
                     Submit
                 </FormBtn>
-                </Col>
             </div>
         )
     }

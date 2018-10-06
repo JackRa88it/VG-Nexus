@@ -79,16 +79,12 @@ class NavTabs extends Component{
       <ul className="nav nav-tabs ml-1">
       <li className="nav-item">
         {!this.state.authenticated ? (
-          <Link
-            to="/login"
-            className={
-              window.location.pathname === "/login"
-                ? "nav-link active"
-                : "nav-link"
-            }
-          >
-            Login
-          </Link>) : (
+          <div className='d-inline-flex'>
+          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/login_signup" className="nav-link">[test both]</Link>
+          <Link to="/signup" className="nav-link">Sign Up</Link>
+          </div>
+          ) : (
           <Link
             to="/logout"
             className={
@@ -102,18 +98,7 @@ class NavTabs extends Component{
           </Link>  
           )}
       </li>
-      <li className="nav-item">
-          <Link
-            to="/signup"
-            className={
-              window.location.pathname === "/signup"
-                ? "nav-link active"
-                : "nav-link"
-            }
-          >
-            Sign Up
-          </Link>
-      </li>
+
       </ul>
     </nav>
   )};
