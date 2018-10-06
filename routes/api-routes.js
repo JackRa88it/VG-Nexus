@@ -7,15 +7,20 @@ var extract = require('extract-zip')
 
 module.exports = function (app,io){
     io.on('connection',function(socket){
-        console.log('a user connected to /');
-        socket.on('newMessage', function(msg){
-          console.log(msg)
-          io.emit('messageBroadcast', msg);
-        });
+        console.log('a user connected to /');        
         socket.on('disconnect', function(){
           console.log('user disconnected from /');
         });
       })
+      console.log("wabulubadubdub")
+      db.Game.findAll({})
+        .then(function(games){
+            for (let i=0;i<games.length;i++){
+                newGame(games[i],io);
+            }
+            
+        })
+
 
     app.post('/upload',function(req,res){
         if(req.user){
@@ -70,6 +75,7 @@ module.exports = function (app,io){
                                 if (err) throw err;
                                 console.log('deleting' + newpath );
                                 //Redirect the user in the frontend to their game
+                                newGame(game, io);
                                 res.send('/all/games/'+game.id);  
                             });
                         })
@@ -81,15 +87,17 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            res.status(200).send('approved')
+            console.log("user said it is authenticated, but user lies")
+            res.send(req.user);
         }
         else{
+            console.log('user not authenticated')
             res.status(403).send('access denied')
         }
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
-        res.send('/chat');
+        res.send('/all/games/1/');
     });
 
     app.get("/api/logout", function(req, res) {
@@ -127,4 +135,19 @@ module.exports = function (app,io){
         })
         res.send(Object.keys(io.nsps))
     })
+    
 }
+function newGame(game,io) {
+    const gameRoom = io.of('/game/' + game.id);
+    gameRoom.on('connection', function (socket) {
+        console.log('a user connected to /game/' + game.id);
+        socket.on('messagePost', function (msg, name, id) {
+            console.log("something sent");
+            gameRoom.emit('messagePost', msg, name, id);
+        });
+        gameRoom.on('disconnect', function () {
+            console.log('user disconnected from /game/1');
+        });
+    });
+}
+

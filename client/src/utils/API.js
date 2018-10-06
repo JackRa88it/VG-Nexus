@@ -15,6 +15,9 @@ export default {
   },
   logout: function(){
     return axios.get('/api/logout')
+  },
+  chatRoom: function(){
+    return axios.get('/api/chatRoom')
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)
