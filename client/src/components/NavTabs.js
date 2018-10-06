@@ -21,14 +21,16 @@ class NavTabs extends Component{
   }
   render(){
     return(
-      // nav-tabs nav-item
     <nav className="p-0 navbar navbar-expand-lg w-100">
-      <ul className="p-1 nav nav-tabs navbar-collapse"> 
+    {/* separate elements in nav bar with margin */}
+      <ul className="nav nav-tabs"> 
         <li className="nav-item">
          <Link to="/" >
             <img src={logo} alt="logo" id="logo"/>
           </Link>
         </li>
+        </ul>
+      <ul className="nav nav-tabs navbar-collapse"> 
         <li className="nav-item">
           <Link
             to="/"
@@ -74,7 +76,7 @@ class NavTabs extends Component{
           </Link>
       </li>
       </ul>
-      <ul className="p-1 nav nav-tabs">
+      <ul className="nav nav-tabs ml-1">
       <li className="nav-item">
         {!this.state.authenticated ? (
           <Link

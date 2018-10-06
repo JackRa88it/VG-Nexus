@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Col} from "../../components/Grid/"
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
 
@@ -36,7 +37,8 @@ class Signup extends Component{
     render(){
         return(
             <div>
-                SIGN UP(slot this into a modal or something later)
+               <h2 className="display-5">SIGN UP</h2> 
+                <Col size="md-5" >
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
@@ -46,6 +48,7 @@ class Signup extends Component{
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
+                    type="password"
                     name="password"
                     placeholder="Password"
                 />
@@ -74,6 +77,7 @@ class Signup extends Component{
                     onClick={this.handleFormSubmit}>
                     Submit
                 </FormBtn>
+                </Col>
             </div>
         )
     }
