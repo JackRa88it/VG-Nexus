@@ -25,7 +25,12 @@ class NavTabs extends Component{
       <ul className="nav nav-tabs"> 
         <li className="nav-item">
          <Link to="/" >
-            <img src={logo} alt="logo" id="logo"/>
+            <img src="/assets/controller_logo_white_red_AB.png" alt="controllerLogo" id="controllerLogo"/>
+          </Link>
+        </li>
+        <li className="nav-item">
+         <Link to="/" >
+            <img src="/assets/VG-NEXUS-logo_400x120.png" alt="VGNLogo" id="VGNLogo"/>
           </Link>
         </li>
         </ul>

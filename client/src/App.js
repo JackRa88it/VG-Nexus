@@ -19,22 +19,6 @@ class App extends Component {
   render() {
     return (
       <Router>
-<<<<<<< HEAD
-        <div>
-          <NavTabs />
-          <Container>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route path="/all" component={ChooseGame} />
-            <Route exact path="/upload" component={Form} />
-            <Route exact path="/game" component={Game} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/signup' component={Signup} />
-            <Route exact path='/chat' component={DirectMessage} />
-          </Container>
-        </div>
-      </Router>
-=======
       <div>
         <NavTabs />
         <Container>
@@ -49,12 +33,11 @@ class App extends Component {
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/chat' component={DirectMessage} />
           <Route exact path="/chatRoom" component={Chatroom} />
-          <Route exact path="/chatroom2" component={Chatroom2} />
+          {/* <Route exact path="/chatroom2" component={Chatroom2} /> */}
         </Container>
       </div>
     </Router>
 
->>>>>>> 60a41b1b6471767e791b3a85bbb2c42d5e87ba84
     );
   }
 }
