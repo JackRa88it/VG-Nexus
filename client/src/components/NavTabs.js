@@ -78,7 +78,7 @@ class NavTabs extends Component{
                   : "nav-link"
               }
             >
-              <a class="dropdown-item" href="#">Play</a>
+              <a className="dropdown-item" href="#">Play</a>
           </Link> 
             </div>
           </li>
