@@ -55,18 +55,34 @@ class NavTabs extends Component{
             About
           </Link>
         </li>
-        <li className="nav-item">
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Games
+        </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <Link
+              to="/all"
+              className={
+                window.location.pathname === "/all"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              <a class="dropdown-item" href="#">Browse</a>
+          </Link>              
           <Link
-            to="/all"
-            className={
-              window.location.pathname === "/all"
-                ? "nav-link active"
-                : "nav-link"
-            }
-          >
-            Choose Game
-          </Link>
-      </li>
+              to="/all"
+              className={
+                window.location.pathname === "/all"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              <a class="dropdown-item" href="#">Play</a>
+          </Link> 
+            </div>
+          </li>
+
       <li className="nav-item">
           <Link
             to="/upload"
@@ -108,5 +124,4 @@ class NavTabs extends Component{
   )};
 }
   
-
 export default NavTabs;
