@@ -53,14 +53,16 @@ class Chatroom extends Component{
     }
     render(){
         return(
-            <div>
-                {this.state.messages.map(message => (
-                    this.id ? 
-                    (<div><img src={'/assets/userThumbnails/'+message.id}></img><p><a href={"/user/"+message.id}>{message.name}</a>:{message.msg}</p>
-                    </div>) :
-                    (<div><img src='/assets/userThumbnails/Default1.png'></img><p>{message.name}:{message.msg}</p>
-                    </div>)
-                ))}
+            <div className="chatroom">
+                <div className="messagedisplay">
+                    {this.state.messages.map(message => (
+                        this.id ? 
+                        (<div><img src={'/assets/userThumbnails/'+message.id}></img><p><a href={"/user/"+message.id}>{message.name}</a>:{message.msg}</p>
+                        </div>) :
+                        (<div><img src='/assets/userThumbnails/Default1.png'></img><p>{message.name}:{message.msg}</p>
+                        </div>)
+                    ))}
+                </div>
                 <Input
                     className = "currentmsg"
                     value={this.state.title}
