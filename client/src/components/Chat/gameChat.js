@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Input, TextArea, FormBtn } from "../Form";
 import API from "../../utils/API";
 import io from 'socket.io-client'
-import {ActiveChat} from "../../components/Chat"
+import {ActiveChat} from "."
+import './gameChat.css'
 
 class Chatroom extends Component{
     state = {
@@ -34,6 +35,7 @@ class Chatroom extends Component{
 
     componentWillReceiveProps(nextProps){
         console.log(nextProps)
+        this.setState({messages: []})
         this.connect(nextProps.gameId)
     }
 
@@ -54,24 +56,30 @@ class Chatroom extends Component{
     }
     render(){
         return(
-            <div>
-                {this.state.messages.map(message => (
-                    this.id ? 
-                    (<div><p><a href={"/user/"+message.id}>{message.name}</a>:{message.msg}</p>
-                    </div>) :
-                    (<div><p>{message.name}:{message.msg}</p>
-                    </div>)
-                ))}
+            <div className="chatroom">
+                <div className = "messagedisplay">
+                    {this.state.messages.map(message => (
+                        this.id ? 
+                        (<div><p><a href={"/user/"+message.id}>{message.name}</a>: {message.msg}</p>
+                        </div>) :
+                        (<div><p>{message.name}: {message.msg}</p>
+                        </div>)
+                    ))}
+                </div>
+                <div className = "messageandbutton">
                 <Input
+                    className = "currentmsg"
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="newMessage"
                 />
-                <FormBtn
+                <button
+                    className = "msgbutton"
                     disabled={!(this.state.newMessage)}
                     onClick={this.handleFormSubmit}>
-                    Submit
-                </FormBtn> 
+                    *
+                </button>
+                </div> 
             </div>
         )
     }

@@ -1,0 +1,44 @@
+.chatroom {
+    position:relative;
+    height: 400px;
+    width: 300px;
+    outline: solid;
+    ouline-color: red;
+}
+
+.msgbutton {
+    position: absolute;
+    height: 28px;
+    width: 33px;
+    right: 3px;
+    top: 5px;
+    float: right;
+}
+
+.currentmsg {
+    position: absolute;
+    width: 260px;
+    font-size: 16px;
+    top: 4px;
+    left: 2px;
+    float: left;
+}
+
+.messageandbutton {
+    position: relative;
+    top: 365px;
+}
+
+.messagedisplay {
+    position: absolute;
+    margin: 5px;
+    outline: dotted;
+    height: 360px;
+    width: 290px;
+    overflow: auto;
+    background-color: #222222;
+}
+
+p {
+    font-size: 12px;
+}
