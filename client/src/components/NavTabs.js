@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import Authenticator from './Authenticate';
-import VGNLogo from "../assets/VG-NEXUS-logo_400x120.png";
-import controllerLogo from "../assets/controller_logo_white_red_AB.png";
 
 class NavTabs extends Component{
   state = {
@@ -28,14 +26,14 @@ class NavTabs extends Component{
       <Link
           to="/"
         >
-          <img src={controllerLogo} alt="logo" id="controllerLogo"/>
+          <img src="/assets/controller_logo_white_red_AB.png" alt="logo" id="controllerLogo"/>
         </Link>
       </li>
       <li className="nav-item">
       <Link
           to="/"
         >
-          <img src={VGNLogo} alt="logo" id="VGNLogo"/>
+          <img src="/assets/VG-NEXUS-logo_400x120.png" alt="logo" id="VGNLogo"/>
         </Link>
       </li>
       <li className="nav-item">
