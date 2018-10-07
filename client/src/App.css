@@ -15,6 +15,13 @@ body {
   height: 45px;
 }
 
+.navbar{
+  overflow:hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 #controllerLogo {
   height: 45px;
 }
@@ -61,6 +68,7 @@ h1 {
   background-color: rgba(43, 43, 43, 0.9);
   padding: 50px;
   height: 80%;
+  margin-top: 55px;
   /* overflow: scroll; */
 }
 
