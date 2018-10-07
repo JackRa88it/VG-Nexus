@@ -1,49 +1,59 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-
 body {
   background-color: #000;
   font-family: 'Open Sans', sans-serif;
   color: #f6f6f7;
 }
 
+#root,
+#root>div {
+  max-height:100%;
+}
+
 .nav {
-  background: #222222;
+  background: #222;
   border-width: 0px 0px 1px 0px;
-  border-color: #222222;
+  border-color: #000;
   color: #f6f6f7;
   margin-bottom: 30px;
 }
 
-#logo {
+#controllerLogo {
   height: 40px;
+  margin-right: 2px;
+}
+
+#VGNLogo {
+  height: 40px;
+  margin-left: 2px;
 }
 
 .nav-link {
-  background-color: #222222;
+  background-color: #222;
   border-width: 0px 0px 3px 0px;
-  border-color: #222222;
+  border-color: #222;
   color: #f6f6f7;
 }
 
 .nav-tabs .nav-link {
-  background-color: #222222;
+  background-color: #222;
   border-width: 0px 0px 3px 0px;
-  border-color: #222222;
+  border-color: #222;
   color: #f6f6f7;
   border-radius: 0px;
 }
 
-.nav-tabs .nav-link.active {
-  background-color: #222222;
+.nav-tabs .nav-link:hover {
+  background-color: #222;
   border-width: 0px 0px 3px 0px;
-  border-color: #222222;
+  border-color: #222;
   color: #EE135B;
 }
 
-.nav-tabs .nav-link:hover {
-  background-color: #222222;
+.nav-tabs .nav-link.active {
+  background-color: #222;
   border-width: 0px 0px 3px 0px;
   border-color: #EE135B;
   color: #EE135B;
@@ -51,14 +61,18 @@ body {
 
 h1 {
   font-family: 'Roboto', sans-serif;
-  color: #f6f6f7;
-  /* letter-spacing: 2px; */
 }
 
 .container {
+<<<<<<< HEAD
+  background-color: #222;
+=======
   border: 1px solid rgba(248, 249, 250,0.1);
   background-color: rgba(43, 43, 43, 0.9);
+>>>>>>> 60a41b1b6471767e791b3a85bbb2c42d5e87ba84
   padding: 50px;
+  height: 80%;
+  overflow: scroll;
 }
 
 
