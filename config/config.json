@@ -1,7 +1,12 @@
 {
     "development": {
+<<<<<<< HEAD
       "username": "root",
       "password": "Raymond12",
+=======
+      "username": "hoff",
+      "password": "",
+>>>>>>> c5c3cc01a831e04670effc3e89423926819e239f
       "database": "project3_db",
       "host": "127.0.0.1",
       "port": 3306,
