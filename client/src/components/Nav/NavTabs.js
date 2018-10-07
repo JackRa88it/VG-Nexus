@@ -37,16 +37,6 @@ class NavTabs extends Component{
       <ul className="nav nav-tabs navbar-collapse"> 
         <li className="nav-item">
           <Link
-            to="/"
-            className={
-              window.location.pathname === "/" ? "nav-link active" : "nav-link"
-            }
-          >
-            Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link
             to="/about"
             className={
               window.location.pathname === "/about" ? "nav-link active" : "nav-link"
@@ -83,16 +73,28 @@ class NavTabs extends Component{
             </div>
           </li>
 
-      <li className="nav-item">
+        <li className="nav-item">
+            <Link
+              to="/upload"
+              className={
+                window.location.pathname === "/upload"
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Upload
+            </Link>
+        </li>
+        <li className="nav-item">
           <Link
-            to="/upload"
+            to="/community"
             className={
-              window.location.pathname === "/upload"
+              window.location.pathname === "/community"
                 ? "nav-link active"
                 : "nav-link"
             }
           >
-            Upload
+            Community
           </Link>
       </li>
       </ul>
