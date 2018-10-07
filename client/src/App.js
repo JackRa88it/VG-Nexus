@@ -17,21 +17,20 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div>
-        <NavTabs />
-        <Container>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route path="/all" component={ChooseGame} />
-          <Route exact path="/upload" component={Form} />
-          <Route exact path="/game" component={Game} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/signup' component={Signup} />
-          <Route exact path='/chat' component={DirectMessage} />
-        </Container>
-      </div>
-    </Router>
-
+        <div>
+          <NavTabs />
+          <Container>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route path="/all" component={ChooseGame} />
+            <Route exact path="/upload" component={Form} />
+            <Route exact path="/game" component={Game} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/signup' component={Signup} />
+            <Route exact path='/chat' component={DirectMessage} />
+          </Container>
+        </div>
+      </Router>
     );
   }
 }
