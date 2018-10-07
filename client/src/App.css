@@ -7,29 +7,21 @@ body {
   color: #f6f6f7;
 }
 
-#root,
-#root>div {
-  max-height:100%;
-}
-
 .nav {
   background: #222;
   border-width: 0px 0px 1px 0px;
   border-color: #000;
   color: #f6f6f7;
-  margin-bottom: 30px;
+  height: 45px;
 }
 
 #controllerLogo {
-  height: 40px;
-  margin-right: 2px;
+  height: 45px;
 }
 
 #VGNLogo {
-  height: 40px;
-  margin-left: 2px;
+  height: 45px;
 }
-
 .nav-link {
   background-color: #222;
   border-width: 0px 0px 3px 0px;
@@ -69,7 +61,7 @@ h1 {
   background-color: rgba(43, 43, 43, 0.9);
   padding: 50px;
   height: 80%;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 
