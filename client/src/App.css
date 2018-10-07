@@ -12,11 +12,11 @@ body {
   border-width: 0px 0px 1px 0px;
   border-color: #000;
   color: #f6f6f7;
-  height: 45px;
+  min-height: 45px;
 }
 
 .navbar{
-  overflow:hidden;
+  /* overflow:scroll; */
   position: fixed;
   top: 0;
   width: 100%;
