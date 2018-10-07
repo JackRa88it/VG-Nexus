@@ -20,17 +20,17 @@ class NavTabs extends Component{
   }
   render(){
     return(
-    <nav className="p-0 navbar navbar-expand-lg w-100">
+    <nav className="p-0 mb-3 navbar navbar-expand-lg w-100">
     {/* separate elements in nav bar with margin */}
       <ul className="nav nav-tabs"> 
         <li className="nav-item">
          <Link to="/" >
-            <img src="/assets/controller_logo_white_red_AB.png" alt="controllerLogo" id="controllerLogo"/>
+            <img src="/assets/controller_logo_white_red_AB.png" alt="controllerLogo" id="controllerLogo" className="ml-2" />
           </Link>
         </li>
         <li className="nav-item">
          <Link to="/" >
-            <img src="/assets/VG-NEXUS-logo_400x120.png" alt="VGNLogo" id="VGNLogo"/>
+            <img src="/assets/VG-NEXUS-logo_400x120.png" alt="VGNLogo" id="VGNLogo" className="mx-2" />
           </Link>
         </li>
         </ul>
@@ -96,7 +96,7 @@ class NavTabs extends Component{
           </Link>
       </li>
       </ul>
-      <ul className="nav nav-tabs ml-1">
+      <ul className="nav nav-tabs">
       <li className="nav-item">
         {!this.state.authenticated ? (
           <div className='d-inline-flex'>
