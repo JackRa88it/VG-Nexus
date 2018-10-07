@@ -30,12 +30,6 @@ class App extends Component {
 
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
-<<<<<<< HEAD
-=======
-          <Route exact path='/chat' component={DirectMessage} />
-          <Route exact path="/chatRoom" component={Chatroom} />
-
->>>>>>> c5c3cc01a831e04670effc3e89423926819e239f
         </Container>
       </div>
     </Router>
