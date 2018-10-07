@@ -24,4 +24,4 @@ yarn-error.log*
 /client/node_modules
 # /client/public/user
 
-
+config/config.json
