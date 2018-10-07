@@ -1,7 +1,7 @@
 .chatroom {
     position:relative;
     height: 400px;
-    width: 300px;
+    width: 200px;
     outline: solid;
     ouline-color: red;
 }
@@ -9,7 +9,7 @@
 .msgbutton {
     position: absolute;
     height: 28px;
-    width: 33px;
+    width: 25px;
     right: 3px;
     top: 5px;
     float: right;
@@ -17,7 +17,7 @@
 
 .currentmsg {
     position: absolute;
-    width: 260px;
+    width: 165px;
     font-size: 16px;
     top: 4px;
     left: 2px;
@@ -34,11 +34,21 @@
     margin: 5px;
     outline: dotted;
     height: 360px;
-    width: 290px;
+    width: 190px;
     overflow: auto;
     background-color: #222222;
+    font-size: 12px;
 }
 
 p {
     font-size: 12px;
 }
+ 
+.usericon {
+    height: 20px;
+    width: 20px;  
+}
+/* img {
+    height: 20px;
+    width: 20px;   
+} */
