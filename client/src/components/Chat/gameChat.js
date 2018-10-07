@@ -57,9 +57,9 @@ class Chatroom extends Component{
                 <div className="messagedisplay">
                     {this.state.messages.map(message => (
                         this.id ? 
-                        (<div><img src={'/assets/userThumbnails/'+message.id}></img><p><a href={"/user/"+message.id}>{message.name}</a>:{message.msg}</p>
+                        (<div><img className="usericon" src={'/assets/userThumbnails/'+message.id}></img><p><a href={"/user/"+message.id}>{message.name}</a>: {message.msg}</p>
                         </div>) :
-                        (<div><img src='/assets/userThumbnails/Default1.png'></img><p>{message.name}:{message.msg}</p>
+                        (<div><img className="usericon"src='/assets/userThumbnails/Default1.png'></img><p>{message.name}: {message.msg}</p>
                         </div>)
                     ))}
                 </div>

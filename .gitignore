@@ -21,6 +21,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #
+/config/config.json
 /client/node_modules
 # /client/public/user
 
