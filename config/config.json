@@ -1,7 +1,7 @@
 {
     "development": {
-      "username": "hoff",
-      "password": "",
+      "username": "root",
+      "password": "password",
       "database": "project3_db",
       "host": "127.0.0.1",
       "port": 3306,
