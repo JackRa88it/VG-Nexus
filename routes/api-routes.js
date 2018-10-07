@@ -142,6 +142,8 @@ module.exports = function (app,io){
         });
 
 
+
+
     app.get('/api/messages/', function(req,res){
         //Create a channel
         const chatRoom = io.of('/'+req.user.id)

@@ -4,7 +4,6 @@ import Game from './components/Game/Game'
 import Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
 import LoginSignup from "./pages/LoginSignup"
-import DirectMessage from './pages/Chat/DirectMessage'
 import NavTabs from "./components/NavTabs";
 import {Container} from "./components/Grid";
 import Home from "./components/pages/Home";
@@ -30,7 +29,6 @@ class App extends Component {
 
           <Route exact path='/login' component={Login} />
           <Route exact path='/signup' component={Signup} />
-          <Route exact path='/chat' component={DirectMessage} />
         </Container>
       </div>
     </Router>

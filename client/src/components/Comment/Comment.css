@@ -1,19 +1,83 @@
 .wrapper{
-  border-radius: 5px;
-  padding: 1px 5px;
-  margin: 12px 4px;
-  height: 100px;
-}
-.comment{
-  margin: 14px 0px 10px 10px;
-  font-size: 0.8em;
-  line-height: 2em;
-  max-height: 80px;
+  /* border-radius: 5px; */
+  padding: 6px 5px;
+  margin: 0px 4px;
+  /* height: 100px; */
   overflow: auto;
 }
-img{
- margin: 1px 15px;
+
+.pattern0{
+  background-color: rgb(17, 17, 17);
 }
+
+.pattern1{
+  background-color: rgb(26, 26, 26);
+}
+
+.comment{
+  float: left;
+  padding: 10px 0px;
+  width: calc(100% - 308px);
+  margin-right: 50px;
+  font-size: 14px;
+  overflow: auto;
+}
+.userThumbnail{
+  float: left;
+  margin-right: 6px;
+}
+.userThumbnail > img{
+ height: 60px;
+ width: 60px;
+ margin: 0px 4px;
+}
+.commentInfo{
+  margin-right:60px;
+  float: left;
+  padding-top: 10px;
+}
+
 .username{
-  font-size:0.8em;
+  font-size:14px;
+  text-align: left;
+  color: white;
+  text-decoration: underline;
+}
+
+.date{
+  font-size: 12px;
+  text-align: left;
+}
+
+.userThumbnailWrapper{
+  padding-right: 0px;
+}
+
+.score{
+  padding-top: 10px;
+  float: left;
+  width: 35px;
+  text-align: center;
+}
+
+.upvote{
+  float: left;
+  width: 17px;
+}
+
+.upvote:hover{
+  color: rgb(45, 141, 45);
+  box-shadow: 0px 0px 5px green;
+  cursor: pointer;
+}
+
+.downvote{
+  float: right;
+  width: 17px;
+}
+
+.downvote:hover{
+  color: rgb(124, 14, 14);
+  box-shadow: 0px 0px 5px red;
+  cursor: pointer;
 }
