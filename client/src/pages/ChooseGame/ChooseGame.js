@@ -29,6 +29,7 @@ const ChooseGame = props => (
       </div>
       
       <div className="imgFill">
+      <img src='/assets/gameThumbnails/3' alt='Logo'></img>
       <Link to={`${props.match.url}/games/3`} 
             role="button" 
             className="btn btn-link">
@@ -37,6 +38,7 @@ const ChooseGame = props => (
       
       
       <div className="imgFill">
+      <img src='/assets/gameThumbnails/4' alt='Logo'></img>
       <Link to={`${props.match.url}/games/4`} 
             role="button" 
             className="btn btn-link">
@@ -45,6 +47,7 @@ const ChooseGame = props => (
       </div>    
       
       <div className="imgFill">
+      <img src='/assets/gameThumbnails/5' alt='Logo'></img>
       <Link to={`${props.match.url}/games/5`} 
             role="button" 
             className="btn btn-link">
