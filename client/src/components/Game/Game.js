@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CommentList from "../CommentList"
-import Chatroom from "../Chat/practicechat"
+import Chatroom from "../Chat/gameChat"
 
 import './Game.css'
 class Game extends Component{

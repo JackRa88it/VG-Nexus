@@ -12,7 +12,6 @@ module.exports = function (app,io){
           console.log('user disconnected from /');
         });
       })
-      console.log("wabulubadubdub")
       db.Game.findAll({})
         .then(function(games){
             for (let i=0;i<games.length;i++){
@@ -28,6 +27,7 @@ module.exports = function (app,io){
             var form = new formidable.IncomingForm()
             form.maxFileSize = Math.pow(1024,3)
             form.parse(req,function(err,fields,files){
+                //fields are any values that are not files that were sent with the form whose keys are the name of the input
                 db.Game.create({
                     name: fields.name,
                     description: fields.description,
@@ -44,42 +44,45 @@ module.exports = function (app,io){
                             //With a tag ID associate the two inside the join table
                             game.addTag(found.id)
                             .then(function(){
-                                
+                                if(err) throw err;
+                                //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
+                                var oldpath = files.filetoupload.path;
+                                var thumbnailPath = files.thumbnail.path;
+                                //Create a newpath to store the file at
+                                var newpath = path.join(__dirname, "../" + files.filetoupload.name)
+                                var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
+                                fs.rename(thumbnailPath,newThumbnailPath, function(err) {
+                                    //Rename thumbnail
+                                    if(err) throw err;
+                                    fs.rename(oldpath, newpath, function (err) {
+                                        console.log('renaming filepaths')
+                                        if (err) throw err;
+                                        
+                                        //Create a directory if it doesn't already exist
+                                        var dir = "./client/public/games/" + game.id
+                                        if (!fs.existsSync(dir)){
+                                            console.log('path does not exist \n creating newpath')
+                                            fs.mkdirSync(dir);
+                                        }
+                
+                                        //Unzip the file to target directory
+                                        var target = path.join(__dirname,'../client/public/' + game.id)
+                                        extract(newpath,{dir:target},function(err){
+                                            console.log('extracting to ', target)
+                                            if(err) throw err;
+                                            fs.unlink(newpath, (err) => {
+                                                if (err) throw err;
+                                                console.log('deleting' + newpath );
+                                                //Redirect the user in the frontend to their game
+                                                newGame(game, io);
+                                                res.send('/all/games/'+game.id);  
+                                            });
+                                        })
+                                    });
+                                }) 
                             }).catch(function(err){console.log(err)});
                         }).catch(function(err){console.log(err)});
-                    })
-                    if(err) throw err;
-                    //fields are any values that are not files that were sent with the form whose keys are the name of the input
-                    //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
-                    var oldpath = files.filetoupload.path;
-                    //Create a newpath to store the file at
-                    var newpath = __dirname + "/" + files.filetoupload.name
-
-                    fs.rename(oldpath, newpath, function (err) {
-                        console.log('renaming filepaths')
-                        if (err) throw err;
-
-                        //Create a directory if it doesn't already exist
-                        var dir = "./client/public/" + game.id
-                        if (!fs.existsSync(dir)){
-                            console.log('path does not exist \n creating newpath')
-                            fs.mkdirSync(dir);
-                        }
-
-                        //Unzip the file to target directory
-                        var target = path.join(__dirname,'../client/public/' + game.id)
-                        extract(newpath,{dir:target},function(err){
-                            console.log('extracting to ', target)
-                            if(err) throw err;
-                            fs.unlink(newpath, (err) => {
-                                if (err) throw err;
-                                console.log('deleting' + newpath );
-                                //Redirect the user in the frontend to their game
-                                newGame(game, io);
-                                res.send('/all/games/'+game.id);  
-                            });
-                        })
-                    });
+                    })  
                 }).catch(function(err){console.log(err)})
             })
         }  
@@ -87,7 +90,7 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            console.log("user said it is authenticated, but user lies")
+            console.log("user authenticated")
             res.send(req.user);
         }
         else{
@@ -105,6 +108,19 @@ module.exports = function (app,io){
         res.send('/')
       });
 
+    app.post('/api/upload/userimage',function(req,res){
+        if(req.user){
+            var form = new formidable.IncomingForm()
+            form.parse(req,function(err,fields,files){
+                if(err) throw err;
+                var oldPath = files.profilephoto.path;
+                var newPath = path.join(__dirname, '../client/public/assets/userThumbnails/' + req.user.id )
+                fs.rename(oldPath,newPath, function(err) {
+                    if(err) throw err
+                })
+            })
+        }
+    })
 
     app.post("/api/signup", function(req, res) {
         db.User.create({
@@ -113,13 +129,18 @@ module.exports = function (app,io){
             password: req.body.password,
             bio: req.body.bio,
             postBanner: req.body.bannerUrl
-          }).then(function() {
+          }).then(function(user) {
+            var random = Math.floor(Math.random()*9) + 1
+            var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
+            var userImageCopy = path.join(__dirname, '../client/public/assets/userThumbnails/' + user.id)
+            fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
             res.redirect(307, "/api/login");
         }).catch(function(err) {
             console.log(err);
             res.send(err);
           });
         });
+
 
     app.get('/api/messages/', function(req,res){
         //Create a channel
@@ -146,7 +167,7 @@ function newGame(game,io) {
             gameRoom.emit('messagePost', msg, name, id);
         });
         gameRoom.on('disconnect', function () {
-            console.log('user disconnected from /game/1');
+            console.log('user disconnected from /game/' + game.id);
         });
     });
 }

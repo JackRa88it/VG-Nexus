@@ -7,10 +7,10 @@ import LoginSignup from "./pages/LoginSignup"
 import DirectMessage from './pages/Chat/DirectMessage'
 import NavTabs from "./components/NavTabs";
 import {Container} from "./components/Grid";
-import Chatroom from "./components/Chat/practicechat"
+import Chatroom from "./components/Chat/gameChat"
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
-import ChooseGame from "./components/pages/ChooseGame";
+import ChooseGame from "./pages/ChooseGame/ChooseGame";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
@@ -33,7 +33,7 @@ class App extends Component {
           <Route exact path='/signup' component={Signup} />
           <Route exact path='/chat' component={DirectMessage} />
           <Route exact path="/chatRoom" component={Chatroom} />
-          {/* <Route exact path="/chatroom2" component={Chatroom2} /> */}
+
         </Container>
       </div>
     </Router>
