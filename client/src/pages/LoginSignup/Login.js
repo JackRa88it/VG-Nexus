@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import {Col} from "../../components/Grid/"
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
 
-class Signup extends Component{
+class Login extends Component{
     state = {
         email: '',
         password: '',
-        username: '',
-        bio: '',
-        postBanner: '',
       };
 
     handleInputChange = event => {
@@ -21,14 +17,11 @@ class Signup extends Component{
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if (this.state.password && this.state.email && this.state.username) {
+        if (this.state.password && this.state.email) {
             console.log(this.state)
-          API.signup({
+          API.login({
             email: this.state.email,
-            password: this.state.password,
-            username: this.state.username,
-            bio: this.state.bio,
-            postBanner: this.state.postBanner
+            password: this.state.password
           })
             .then(res => window.location.assign(res.data))
             .catch(err => console.log(err));
@@ -37,7 +30,7 @@ class Signup extends Component{
     render(){
         return(
             <div>
-               <h2 className="display-5 mb-4">SIGN UP</h2> 
+               <h2 className="display-5 mb-4">Login</h2> 
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
@@ -47,34 +40,14 @@ class Signup extends Component{
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
-                    type="password"
                     name="password"
                     type="password"
                     placeholder="Password"
                 />
-                <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="username"
-                    placeholder="Username"
-                />
-                <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="bio"
-                    type=""
-                    placeholder="Tell me about yourself"
-                />
-                <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="postBanner"
-                    placeholder="Your Banner text!"
-                />                                
                 <br></br>
                 <br></br>
                 <FormBtn
-                    disabled={!(this.state.password && this.state.email && this.state.username)}
+                    disabled={!(this.state.password && this.state.email)}
                     onClick={this.handleFormSubmit}>
                     Submit
                 </FormBtn>
@@ -82,5 +55,4 @@ class Signup extends Component{
         )
     }
 }
-
-export default Signup;
+export default Login;

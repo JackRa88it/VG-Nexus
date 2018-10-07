@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import Authenticator from '../Authenticate'
-import TagSelect from './TagSelect'
+import Authenticator from '../../utils/Authenticator';
+import TagSelect from '../../components/Form/TagSelect';
+// importing {bracketed} exports from Authenticator and TagSelect not working
 
 // import axios from 'axios';
 
