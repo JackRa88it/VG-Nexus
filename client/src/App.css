@@ -64,7 +64,12 @@ h1 {
 }
 
 .container {
+<<<<<<< HEAD
   background-color: #222;
+=======
+  border: 1px solid rgba(248, 249, 250,0.1);
+  background-color: rgba(43, 43, 43, 0.9);
+>>>>>>> 60a41b1b6471767e791b3a85bbb2c42d5e87ba84
   padding: 50px;
   height: 80%;
   overflow: scroll;

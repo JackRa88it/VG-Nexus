@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Col} from "../../components/Grid/"
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
 
@@ -36,7 +37,7 @@ class Signup extends Component{
     render(){
         return(
             <div>
-                SIGN UP(slot this into a modal or something later)
+               <h2 className="display-5 mb-4">SIGN UP</h2> 
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
@@ -46,7 +47,9 @@ class Signup extends Component{
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
+                    type="password"
                     name="password"
+                    type="password"
                     placeholder="Password"
                 />
                 <Input
@@ -59,6 +62,7 @@ class Signup extends Component{
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="bio"
+                    type=""
                     placeholder="Tell me about yourself"
                 />
                 <Input
