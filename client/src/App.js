@@ -6,9 +6,8 @@ import Signup from './pages/Signup/Signup'
 import LoginSignup from "./pages/LoginSignup"
 import NavTabs from "./components/NavTabs";
 import {Container} from "./components/Grid";
-import Chatroom from "./components/Chat/gameChat"
-import Home from "./components/pages/Home";
-import About from "./components/pages/About";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
 import ChooseGame from "./pages/ChooseGame/ChooseGame";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
