@@ -63,18 +63,20 @@ class Chatroom extends Component{
                         </div>)
                     ))}
                 </div>
-                <Input
-                    className = "currentmsg"
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="newMessage"
-                />
-                <button
-                    className = "msgbutton"
-                    disabled={!(this.state.newMessage)}
-                    onClick={this.handleFormSubmit}>
-                    *
-                </button>
+                <div className = "messageandbutton">
+                    <Input
+                        className = "currentmsg"
+                        value={this.state.title}
+                        onChange={this.handleInputChange}
+                        name="newMessage"
+                    />
+                    <button
+                        className = "msgbutton"
+                        disabled={!(this.state.newMessage)}
+                        onClick={this.handleFormSubmit}>
+                        *
+                    </button>
+                </div>
                 </div> 
         )
     }
