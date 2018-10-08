@@ -22,8 +22,11 @@ export default {
   postGameComment: function(gameId,text){
     return axios.post('/api/game/comments/' + gameId,{text: text})
   },
-  getGameComments: function(gameId){
-    return axios.get('api/game/comments/' + gameId)
+  getGameData: function(gameId){
+    return axios.get('/api/game/' + gameId)
+  },
+  votePost: function(postId, bool){
+    return axios.post('/api/post/vote/' + postId, {vote: bool})
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)

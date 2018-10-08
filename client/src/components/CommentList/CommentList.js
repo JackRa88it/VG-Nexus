@@ -1,9 +1,8 @@
 import React from "react";
 import "./CommentList.css";
-// import {Col,Row} from "../Grid"
-import Comment from "../Comment"
-import {FormBtn} from '../Form'
-import API from '../../utils/API'
+import API from '../../utils/API';
+import Comment from "../Comment";
+import {FormBtn, TextArea} from '../Form';
 
 // const comments = [{name: 'Vincent', text: 'This game is totally rad! I could play it forever. You should make more of this. ' , userId: 1, score: 5},
 // {name: 'Hoff', text: 'I died on the first level.' , userId: 2, score: 10},
@@ -13,40 +12,40 @@ import API from '../../utils/API'
 // {name: 'Dinh', text: 'Overhyped.' , userId: 2, score: -24}]
 
 class CommentList extends React.Component{
-  state = {
-    comments: []
-  };
-  onClickHandler(){
-    API.postGameComment(1,'asdf')
-      .then(function(){window.location.reload()})
-      .catch(function(err){console.log(err)})
-  }
- 
-  componentDidMount(){
-    API.getGameComments(1)
-    .then((res) => {
-      console.log(res.data.Posts)
-      this.setState({comments: res.data.Posts})
-    })
-  }
-  render(){
-    return (
-        <div className="skinny">
-          <h3>Comments</h3>
-          {/* <div className="border"> */}
-                  <div className="form-group">
-                    <textarea className="form-control" rows="4" />
-                    <FormBtn onClick={this.onClickHandler}>Submit</FormBtn>
-                  </div>
-                  {this.state.comments.map((comment,i) => {
-                    return(<Comment name={comment.name} userId={comment.userId} pattern={i%2} score={comment.score}>{comment.text}</Comment>)
-                  })}
+    state = {
+      newComment: ''
+    }
+
+    postComment(gameId, text){
+      //Requires user to be logged in. Text area should be grayed out when not signed in.
+      API.postGameComment(gameId,text)
+        .then(function(){window.location.reload()})
+        .catch(function(err){console.log(err)})
+    }
+
+    handleInputChange = event => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
+    };
+
+    render(){
+      return (
+          <div className="skinny">
+            <h3>Comments</h3>
+              <div className="form-group">
+                <TextArea className="form-control" rows="4" onChange={this.handleInputChange} name="newComment"/>
+                <FormBtn onClick={()=>{this.postComment(this.props.gameId,this.state.newComment)}}>Submit</FormBtn>
+              </div>
+              {this.props.comments.map((comment,i) => {
+                return(<Comment username={comment.User.username} userId={comment.User.id} pattern={i%2} score={comment.score} createdAt={comment.createdAt} postId={comment.id}>{comment.text}</Comment>)
+              })}
 
 
-          {/* </div> */}
-          
-        </div>
-  )}
+            
+          </div>
+      )}
 }
 
 export default CommentList;

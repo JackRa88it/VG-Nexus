@@ -100,7 +100,7 @@ module.exports = function (app,io){
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
-        res.send('/all/games/1/');
+        res.send('/');
     });
 
     app.get("/api/logout", function(req, res) {
@@ -143,11 +143,12 @@ module.exports = function (app,io){
 
 
     app.post('/api/game/comments/:id', function(req,res){
+        //Create a comment and associate it with gameId :id
         if(req.user){
             db.Post.create({
                 text: req.body.text,
                 UserId: req.user.id,
-                GameId: req.params.id
+                GameId: req.params.id,
             }).then((post) => {
                 res.send('200')
             }).catch(function(err){
@@ -157,12 +158,47 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/game/comments/:id', function(req,res){
+    app.get('/api/post/vote/:id',function(req,res){
+        //This route returns the number of upvotes and downvotes on a post
+        db.Vote.count({
+            where:{
+                PostId: req.params.id,
+            },
+            group: ['vote.upDown'],
+        }).then((result) => {
+            //Data games back as {0: {count: n},1: {count: m}}
+            res.json(result)
+        }).catch((err) => {
+            res.json(err)
+            console.log(err)
+        })
+    })
+
+    app.post('/api/post/vote/:id',function(req,res){
+        console.log('user is voting!')
+        if(req.user){
+            db.Vote.create({
+                upDown: req.body.vote,
+                UserId: req.user.id,
+                PostId: req.params.id
+            }).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.get('/api/game/:id', function(req,res){
         db.Game.findOne({
             where:{
                 id: req.params.id
             },
-            include: [db.Post],
+            include: [{
+                model: db.Post,
+                include: db.User},
+                db.User],
         }).then((game) => {
             res.json(game)
         }).catch(function(err) {
