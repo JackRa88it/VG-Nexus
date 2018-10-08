@@ -209,6 +209,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/game/:id/post/', function(req,res){
+        console.log('finding post')
         db.Post.findAll({
             where:{
                 GameId: req.params.id
@@ -216,7 +217,7 @@ module.exports = function (app,io){
             order:[
                 ['createdAt','DESC']
             ],
-            // include: [db.User],
+            include: [db.User],
         }).then((post) => {
             res.json(post)
         }).catch(function(err) {
