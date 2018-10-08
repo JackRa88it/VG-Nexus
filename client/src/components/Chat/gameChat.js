@@ -22,6 +22,7 @@ class Chatroom extends Component{
 
     handleFormSubmit = event => {
         event.preventDefault();
+        console.log("test")
         if (this.state.newMessage) {
             this.socket.emit('messagePost', this.state.newMessage, this.name, this.id)
         }

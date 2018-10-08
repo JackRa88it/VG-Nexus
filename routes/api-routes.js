@@ -162,6 +162,7 @@ module.exports = function (app,io){
 }
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
+    console.log(gameRoom);
     gameRoom.on('connection', function (socket) {
         console.log('a user connected to /game/' + game.id);
         socket.on('messagePost', function (msg, name, id) {
