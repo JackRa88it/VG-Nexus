@@ -9,6 +9,7 @@ class Chatroom extends Component{
     state = {
         messages: [],
         newMessage: '',
+        location: 'chatroom'
     }
     socket = null
     name = "Anonymous"
@@ -26,6 +27,7 @@ class Chatroom extends Component{
         if (this.state.newMessage) {
             this.socket.emit('messagePost', this.state.newMessage, this.name, this.id)
         }
+        this.setState({newMessage: ''})
     }
 
     componentDidMount(){
@@ -55,27 +57,33 @@ class Chatroom extends Component{
     render(){
         return(
             <div className="chatroom">
+                <div className="gametabs">
+                    <p className="tab-location">Game</p>
+                    <p className="fas fa-star"></p>
+                    <p className="details-tab">Details</p>
+                    <p className="chatroom-tab">Chat</p>
+                </div>
                 <div className="messagedisplay">
-                    {this.state.messages.map(message => (
+                    {this.state.messages.map((message, i) => (
                         this.id ? 
-                        (<div><img className="usericon" src={'/assets/userThumbnails/'+message.id}></img><p><a href={"/user/"+message.id}>{message.name}</a>: {message.msg}</p>
+                        (<div><p className={"chatroom-message"+ (i%2)}><a href={"/user/"+message.id}>{message.name}</a>: {message.msg}</p>
                         </div>) :
-                        (<div><img className="usericon"src='/assets/userThumbnails/Default1.png'></img><p>{message.name}: {message.msg}</p>
+                        (<div><p className={"chatroom-message"+ (i%2)}>{message.name}: {message.msg}</p>
                         </div>)
                     ))}
                 </div>
                 <div className = "messageandbutton">
                     <Input
                         className = "currentmsg"
-                        value={this.state.title}
+                        value={this.state.newMessage}
                         onChange={this.handleInputChange}
                         name="newMessage"
                     />
                     <button
                         className = "msgbutton"
                         disabled={!(this.state.newMessage)}
-                        onClick={this.handleFormSubmit}>
-                        *
+                        onClick={this.handleFormSubmit}> 
+                        <i className="fab fa-telegram-plane"></i>
                     </button>
                 </div>
                 </div> 
