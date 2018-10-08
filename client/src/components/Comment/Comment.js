@@ -13,7 +13,6 @@ class Comment extends Component{
   }
 
   vote(bool){
-    console.log('voting!')
     API.votePost(this.props.postId,bool)
     .then((res)=>{
       if(res.data[0]){
@@ -36,7 +35,7 @@ class Comment extends Component{
         </div>
         <div className='commentInfo'>
           <Link to={'/user/' + this.props.userId} ><div className='username'>{this.props.username}</div></Link>
-          <div className = 'date'>{moment(this.props.createdAt).format('MMM DD HH:ss')}</div>
+          <div className = 'date'>{moment(this.props.createdAt).format('MMM DD HH:mm')}</div>
         </div>
         <div className="comment">
           {this.props.children}
