@@ -18,6 +18,19 @@ export default {
   },
   chatRoom: function(){
     return axios.get('/api/chatRoom')
+  },
+  postGameComment: function(gameId,text){
+    return axios.post('/api/game/' + gameId + '/post/',{text: text})
+  },
+  getGameComments: function(gameId){
+    console.log('getting game comments!')
+    return axios.get('/api/game/'+ gameId+'/post/' )
+  },
+  getGameData: function(gameId){
+    return axios.get('/api/game/' + gameId)
+  },
+  votePost: function(postId, bool){
+    return axios.post('/api/post/'+postId+'/vote/', {vote: bool})
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)
