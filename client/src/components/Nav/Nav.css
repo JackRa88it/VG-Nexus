@@ -81,7 +81,11 @@
   border-color: #222;
   color: #f6f6f7;
 }
-
+input[type='image']{
+  max-height:18px;
+  padding:0px;
+  margin:0px;
+}
 .nav-tabs .nav-link {
   border-radius: 0px;
 }
@@ -107,6 +111,7 @@
 .dropdown:hover{
   background-color:none;
 }
+
 
 .dropdown-menu-right{
   right: 0; 
