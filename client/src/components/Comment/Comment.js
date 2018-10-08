@@ -16,7 +16,12 @@ class Comment extends Component{
     console.log('voting!')
     API.votePost(this.props.postId,bool)
     .then((res)=>{
-      this.setState({upvotes: res.data.upvotes, downvotes: res.data.downvotes})
+      if(res.data[0]){
+        this.setState({upvotes: res.data[0].count, downvotes: res.data[1].count})
+      }
+      // else{
+      //   this.setState({upvotes: res.data[0].count, downvotes
+      // }
     })
     .catch((err) =>{
       console.log(err)

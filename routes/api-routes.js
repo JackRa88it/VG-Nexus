@@ -150,6 +150,7 @@ module.exports = function (app,io){
                 UserId: req.user.id,
                 GameId: req.params.id,
             }).then((post) => {
+                console.log(post)
                 res.send('200')
             }).catch(function(err){
                 console.log(err);
@@ -201,6 +202,21 @@ module.exports = function (app,io){
                 db.User],
         }).then((game) => {
             res.json(game)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.get('/api/game/:id/posts/', function(req,res){
+        console.log('finding posts')
+        db.Post.findAll({
+            where:{
+                GameId: req.params.id
+            },
+            include: [db.User],
+        }).then((post) => {
+            res.json(post)
         }).catch(function(err) {
             console.log(err);
             res.json(err);

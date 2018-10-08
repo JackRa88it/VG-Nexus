@@ -13,16 +13,28 @@ import {FormBtn, TextArea} from '../Form';
 
 class CommentList extends React.Component{
     state = {
+      comments: [],
       newComment: ''
     }
-
-    postComment(gameId, text){
+    componentDidMount(){
+      console.log('comments mounting!')
+      this.getComments()
+    }
+    postComment = (gameId, text) => {
       //Requires user to be logged in. Text area should be grayed out when not signed in.
       API.postGameComment(gameId,text)
-        .then(function(){window.location.reload()})
-        .catch(function(err){console.log(err)})
+        .then((res) => {this.getComments()})
+        .catch((err) => {console.log(err)})
     }
-
+    getComments = () => {
+      API.getGameComments(this.props.gameId)
+        .then((res)=>{
+          console.log(res.data)
+          this.setState({comments: res.data})
+        }).catch((err)=>{
+          console.log(err)
+        })
+    }
     handleInputChange = event => {
       const { name, value } = event.target;
       this.setState({
@@ -38,7 +50,7 @@ class CommentList extends React.Component{
                 <TextArea className="form-control" rows="4" onChange={this.handleInputChange} name="newComment"/>
                 <FormBtn onClick={()=>{this.postComment(this.props.gameId,this.state.newComment)}}>Submit</FormBtn>
               </div>
-              {this.props.comments.map((comment,i) => {
+              {this.state.comments.map((comment,i) => {
                 return(<Comment username={comment.User.username} userId={comment.User.id} pattern={i%2} score={comment.score} createdAt={comment.createdAt} postId={comment.id}>{comment.text}</Comment>)
               })}
 
