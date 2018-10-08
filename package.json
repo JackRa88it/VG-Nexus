@@ -6,7 +6,7 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
-    "start:dev": "concurrently \"node server.js\" \"npm run client\"",
+    "start:dev": "concurrently \"nodemon server.js\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install",
@@ -29,6 +29,7 @@
     "extract-zip": "^1.6.7",
     "formidable": "^1.2.1",
     "if-env": "^1.0.4",
+    "moment": "^2.22.2",
     "mysql2": "^1.6.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
