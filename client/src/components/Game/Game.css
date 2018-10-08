@@ -1,8 +1,8 @@
 iframe{
-    border: none;
-    margin: 0px auto;
-    width: 100% !important;
-    padding-left: 18%;
+  border: none;
+  margin: 0px auto;
+  width: 75% !important;
+  float: left;
 }
 .simGame{
   border-radius: 2px;
