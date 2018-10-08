@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import Authenticator from '../../utils/Authenticator';
+import "./Nav.css";
 
 class NavTabs extends Component{
   state = {

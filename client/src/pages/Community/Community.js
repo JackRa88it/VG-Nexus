@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Input, TextArea, FormBtn } from "../../components/Form";
-import API from "../../utils/API";
+// import { Input, TextArea, FormBtn } from "../../components/Form";
+// import API from "../../utils/API";
+import "./Community.css";
+import ForumsList from "../../components/Forums";
 
-class Community extends Component{
+class Community extends React.Component{
   state = {
-    email: '',
-    password: '',
+    dummyState: ''
   };
 
   // handleInputChange = event => {
@@ -31,28 +32,8 @@ class Community extends Component{
   render(){
     return(
       <div>
-          <h2 className="display-5 mb-4">Login</h2> 
-          <Input
-              value={this.state.title}
-              // onChange={this.handleInputChange}
-              name="email"
-              placeholder="Email"
-          />
-          <Input
-              value={this.state.title}
-              // onChange={this.handleInputChange}
-              name="password"
-              type="password"
-              placeholder="Password"
-          />
-          <br></br>
-          <br></br>
-          <FormBtn
-              disabled={!(this.state.password && this.state.email)}
-              // onClick={this.handleFormSubmit}
-          >
-              Submit
-          </FormBtn>
+          <a href="/community"><h1>FORUMS</h1></a>
+          <ForumsList />
       </div>
     )
   };
