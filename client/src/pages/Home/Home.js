@@ -1,6 +1,6 @@
 import React from "react";
 // import {Col, Container, Row} from "../Grid/";
-import CommentList from "./CommentList"
+import CommentList from "../../components/CommentList"
 const Home = () => (
   <div>
     <h1>Home Page</h1>

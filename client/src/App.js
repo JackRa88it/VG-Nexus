@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import Form from './components/UploadForm/Form'
-import Game from './components/Game/Game'
-import Login from './pages/Login/Login'
-import Signup from './pages/Signup/Signup'
-import LoginSignup from "./pages/LoginSignup"
-import NavTabs from "./components/NavTabs";
+import Form from './pages/UploadForm';
+import Game from './components/Game/Game';
+import LoginSignup from "./pages/LoginSignup";
+import NavTabs from "./components/Nav";
 import {Container} from "./components/Grid";
-import Chatroom from "./components/Chat/gameChat"
-import Home from "./components/pages/Home";
-import About from "./components/pages/About";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
 import ChooseGame from "./pages/ChooseGame/ChooseGame";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -27,9 +24,6 @@ class App extends Component {
           <Route exact path="/upload" component={Form} />
           <Route exact path="/game" component={Game} />
           <Route exact path='/login_signup' component={LoginSignup} />
-
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/signup' component={Signup} />
         </Container>
       </div>
     </Router>

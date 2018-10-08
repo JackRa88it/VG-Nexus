@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Container } from "../../components/Grid"
-import Login from "../Login";
-import Signup from "../Signup";
+import Login from "./Login";
+import Signup from "./Signup";
 import API from "../../utils/API";
 
 class Login_Signup extends Component
