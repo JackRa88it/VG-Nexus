@@ -31,9 +31,7 @@ app.use(passport.session());
 
 require("./routes/api-routes.js")(app,io)
 
-// app.get("/fun",function(req,res){
-//   res.sendFile(__dirname+'/client/public/user/index.html')
-// })
+
 const routes = require("./routes/sequelize-template-routes.js")
 app.use(routes)
 // Start the API server
