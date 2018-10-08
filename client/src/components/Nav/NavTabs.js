@@ -21,7 +21,6 @@ class NavTabs extends Component{
   render(){
     return(
     <nav className="p-0 mb-3 navbar navbar-expand-lg w-100">
-    {/* separate elements in nav bar with margin */}
       <ul className="nav nav-tabs"> 
         <li className="nav-item">
          <Link to="/" >
@@ -35,16 +34,7 @@ class NavTabs extends Component{
         </li>
         </ul>
       <ul className="nav nav-tabs navbar-collapse"> 
-        <li className="nav-item">
-          <Link
-            to="/"
-            className={
-              window.location.pathname === "/" ? "nav-link active" : "nav-link"
-            }
-          >
-            Home
-          </Link>
-        </li>
+       
         <li className="nav-item">
           <Link
             to="/about"
@@ -55,11 +45,11 @@ class NavTabs extends Component{
             About
           </Link>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li className="nav-item dropdown">
+            <button className="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Games
-        </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        </button>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <Link
               to="/all"
               className={
@@ -68,17 +58,14 @@ class NavTabs extends Component{
                   : "nav-link"
               }
             >
-              <a class="dropdown-item" href="#">Browse</a>
+              <div className="dropdown-item" href="#">Browse</div>
           </Link>              
-          <Link
-              to="/all"
-              className={
+          <Link to="/all" className={
                 window.location.pathname === "/all"
                   ? "nav-link active"
                   : "nav-link"
-              }
-            >
-              <a className="dropdown-item" href="#">Play</a>
+              }                                                                                                                                                        >
+              <div className="dropdown-item" href="#">Play</div>
           </Link> 
             </div>
           </li>
@@ -100,9 +87,7 @@ class NavTabs extends Component{
       <li className="nav-item">
         {!this.state.authenticated ? (
           <div className='d-inline-flex'>
-          <Link to="/login" className="nav-link">Login</Link>
-          <Link to="/login_signup" className="nav-link">[test both]</Link>
-          <Link to="/signup" className="nav-link">Sign Up</Link>
+          <Link to="/login_signup" className="nav-link">Login/Signup</Link>
           </div>
           ) : (
           <Link
@@ -112,8 +97,7 @@ class NavTabs extends Component{
                 ? "nav-link active"
                 : "nav-link"
             }
-            onClick = {this.logoutHandler}
-          >
+            onClick = {this.logoutHandler}>
             Logout
           </Link>  
           )}
