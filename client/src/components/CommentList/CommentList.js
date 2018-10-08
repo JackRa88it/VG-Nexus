@@ -17,7 +17,6 @@ class CommentList extends React.Component{
     return (
         <div className="skinny">
           <h3>Comments</h3>
-          {/* <div className="border"> */}
                   <div className="form-group">
                     <textarea className="form-control" rows="4" />
                     <FormBtn>Submit</FormBtn>
@@ -26,8 +25,6 @@ class CommentList extends React.Component{
                     return(<Comment name={comment.name} userId={comment.userId} pattern={i%2} score={comment.score}>{comment.text}</Comment>)
                   })}
 
-
-          {/* </div> */}
           
         </div>
   )}
