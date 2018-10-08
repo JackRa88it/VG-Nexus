@@ -142,7 +142,7 @@ module.exports = function (app,io){
     });
 
 
-    app.post('/api/game/comments/:id', function(req,res){
+    app.post('/api/game/:id/post/', function(req,res){
         //Create a comment and associate it with gameId :id
         if(req.user){
             db.Post.create({
@@ -159,7 +159,8 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/post/vote/:id',function(req,res){
+    app.get('/api/post/:id/vote/',function(req,res){
+        //This should probably be done as an include from the posts
         //This route returns the number of upvotes and downvotes on a post
         db.Vote.count({
             where:{
@@ -175,8 +176,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.post('/api/post/vote/:id',function(req,res){
-        console.log('user is voting!')
+    app.post('/api/post/:id/vote/',function(req,res){
         if(req.user){
             db.Vote.create({
                 upDown: req.body.vote,
@@ -208,12 +208,14 @@ module.exports = function (app,io){
         });
     })
 
-    app.get('/api/game/:id/posts/', function(req,res){
-        console.log('finding posts')
+    app.get('/api/game/:id/post/', function(req,res){
         db.Post.findAll({
             where:{
                 GameId: req.params.id
             },
+            order:[
+                ['id','DESC']
+            ],
             include: [db.User],
         }).then((post) => {
             res.json(post)
