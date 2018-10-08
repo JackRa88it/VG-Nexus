@@ -12,7 +12,6 @@ import {FormBtn, TextArea} from '../Form';
 // {name: 'Dinh', text: 'Overhyped.' , userId: 2, score: -24}]
 
 class CommentList extends React.Component{
-<<<<<<< HEAD
     state = {
       comments: [],
       newComment: ''
@@ -59,24 +58,6 @@ class CommentList extends React.Component{
             
           </div>
       )}
-=======
- 
-  render(){
-    return (
-        <div className="skinny">
-          <h3>Comments</h3>
-                  <div className="form-group">
-                    <textarea className="form-control" rows="4" />
-                    <FormBtn>Submit</FormBtn>
-                  </div>
-                  {comments.map((comment,i) => {
-                    return(<Comment name={comment.name} userId={comment.userId} pattern={i%2} score={comment.score}>{comment.text}</Comment>)
-                  })}
-
-          
-        </div>
-  )}
->>>>>>> 328b1c60b7d12c5fac4e0fc4fd61fa9f82c779a2
 }
 
 export default CommentList;
