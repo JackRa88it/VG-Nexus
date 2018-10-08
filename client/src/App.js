@@ -4,7 +4,7 @@ import Game from './components/Game/Game';
 import LoginSignup from "./pages/LoginSignup";
 import NavTabs from "./components/Nav";
 import {Container} from "./components/Grid";
-import Home from "./pages/Home/Home";
+// import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import ChooseGame from "./pages/ChooseGame/ChooseGame";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -18,7 +18,7 @@ class App extends Component {
       <div>
         <NavTabs />
         <Container>
-          <Route exact path="/" component={Home} />
+          {/* <Route exact path="/" component={Home} /> */}
           <Route exact path="/about" component={About} />
           <Route path="/all" component={ChooseGame} />
           <Route exact path="/upload" component={Form} />
