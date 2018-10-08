@@ -100,11 +100,7 @@ class NavTabs extends Component{
       <li className="nav-item">
         {!this.state.authenticated ? (
           <div className='d-inline-flex'>
-<<<<<<< HEAD
           <Link to="/login_signup" className="nav-link">Sign In</Link>
-=======
-          <Link to="/login_signup" className="nav-link">Login/Signup</Link>
->>>>>>> 54b92ccf6b3a441d4fba6bc6012fb19eb22df359
           </div>
           ) : (
             // else
