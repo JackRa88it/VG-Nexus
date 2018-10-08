@@ -18,9 +18,9 @@ const Comment = (props) => (
       {props.children}
     </div>
     <div className="score">
-      <div>({props.score})</div>
+      <div>{props.score}</div>
       <div>
-        <div className ='upvote'>+</div><div className = 'downvote'>-</div>
+        <div className ='upvote'>+</div><div className = 'downvote'>&minus;</div>
       </div>
     </div>
   </div>

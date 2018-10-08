@@ -17,13 +17,18 @@ class CommentList extends React.Component{
     return (
         <div className="skinny">
           <h3>Comments</h3>
-                  <div className="form-group">
-                    <textarea className="form-control" rows="4" />
-                    <FormBtn>Submit</FormBtn>
-                  </div>
-                  {comments.map((comment,i) => {
-                    return(<Comment name={comment.name} userId={comment.userId} pattern={i%2} score={comment.score}>{comment.text}</Comment>)
-                  })}
+          <div className="form-group my-3">
+            <textarea className="form-control" rows="4" />
+            <FormBtn>Submit</FormBtn>
+          </div>
+          {
+            comments.map((comment,i) => {
+            return(
+            <Comment key={comment.id} name={comment.name} userId={comment.userId} pattern={i%2} score={comment.score}>
+              {comment.text}
+            </Comment>)
+          })
+        }
 
           
         </div>

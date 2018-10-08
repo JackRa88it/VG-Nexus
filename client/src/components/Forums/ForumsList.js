@@ -22,7 +22,7 @@ class ForumsList extends React.Component{
                     <FormBtn>Submit</FormBtn>
                   </div>
                   {comments.map((comment,i) => {
-                    return(<Comment name={comment.name} userId={comment.userId} pattern={i%2} score={comment.score}>{comment.text}</Comment>)
+                    return(<Comment name={comment.name} userId={comment.userId} key={comment.id} pattern={i%2} score={comment.score}>{comment.text}</Comment>)
                   })}
 
 
