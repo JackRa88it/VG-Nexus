@@ -159,19 +159,21 @@ module.exports = function (app,io){
     })
 
     app.get('/api/post/vote/:id',function(req,res){
-        //This route returns the number of upvotes and downvotes on a post
-        db.Vote.count({
-            where:{
-                PostId: req.params.id,
-            },
-            group: ['vote.upDown'],
-        }).then((result) => {
-            //Data games back as {0: {count: n},1: {count: m}}
-            res.json(result)
-        }).catch((err) => {
-            res.json(err)
-            console.log(err)
-        })
+        if(req.user){
+            //This route returns the number of upvotes and downvotes on a post
+            db.Vote.count({
+                where:{
+                    PostId: req.params.id,
+                },
+                group: ['vote.upDown'],
+            }).then((result) => {
+                //Data games back as {0: {count: n},1: {count: m}}
+                res.json(result)
+            }).catch((err) => {
+                res.json(err)
+                console.log(err)
+            })
+        }
     })
 
     app.post('/api/post/vote/:id',function(req,res){
