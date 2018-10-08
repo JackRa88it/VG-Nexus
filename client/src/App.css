@@ -7,7 +7,6 @@ body {
   color: #f6f6f7;
 }
 
-<<<<<<< HEAD
 #controllerLogo,
 #VGNLogo {
   height: 45px;
@@ -20,10 +19,6 @@ body {
 }
 
 .navbar{
-<<<<<<< HEAD
-  /* overflow:hidden; */
-=======
->>>>>>> 54b92ccf6b3a441d4fba6bc6012fb19eb22df359
   position: fixed;
   top: 0;
   width: 100%;
@@ -63,8 +58,6 @@ body {
 
 }
 
-=======
->>>>>>> 328b1c60b7d12c5fac4e0fc4fd61fa9f82c779a2
 h1 {
   font-family: 'Roboto', sans-serif;
 }
