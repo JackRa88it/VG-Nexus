@@ -16,7 +16,6 @@ body {
 }
 
 .navbar{
-  /* overflow:scroll; */
   position: fixed;
   top: 0;
   width: 100%;
@@ -67,11 +66,9 @@ h1 {
   padding: 50px;
   height: 80%;
   margin-top: 55px;
-  /* overflow: scroll; */
 }
 
 
-/* ========================================= */
 .App {
   text-align: center;
 }
