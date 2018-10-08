@@ -7,12 +7,16 @@ body {
   color: #f6f6f7;
 }
 
+
+
 h1 {
   font-family: 'Roboto', sans-serif;
 }
 
 .container {
   background-color: #222;
+  border: 1px solid rgba(248, 249, 250,0.1);
+  background-color: rgba(43, 43, 43, 0.9);
   padding: 50px;
   height: 80%;
   margin-top: 75px;
