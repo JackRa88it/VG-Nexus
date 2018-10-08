@@ -5,7 +5,7 @@ USE project3_db;
 -- ("bootlicker", "bootsntoots@test.com", "heel", "ugly picture", "A boot maker", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ("tacobell", "causesacidreflux@darknet.net", "hacked", "picture of burrito", "forgotten bio", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- INSERT INTO Games (name, description, filepath, thumbnail, UserId, createdAt, updatedAt) VALUES
+-- INSERT INTO Games (name, description, UserId, createdAt, updatedAt) VALUES
 -- ("Sonic", 'Gotto go fast', "zoomquickpathhere", "pic of sonic", 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ('Pokemon', 'Catch em all', "pokeballinmaheart", "pic of pokeball", 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ('Runescape', 'hd new age game', "runescape.come", "pic of picaxe", 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
