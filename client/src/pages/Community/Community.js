@@ -2,11 +2,27 @@ import React, { Component } from 'react';
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import API from "../../utils/API";
 import "./Community.css";
-import ForumsList from "../../components/Forums";
+import ForumTable from "../../components/Forums";
 
 class Community extends React.Component{
   state = {
-    dummyState: ''
+    forums: [
+      {
+        id: 1,
+        title: "General",
+        description: "The place to discuss anything and everything about this site"
+      },
+      {
+        id: 2,
+        title: "Games",
+        description: "For discussing specific games"
+      },
+      {
+        id: 3,
+        title: "Technical Issues",
+        description: "If it's broken, let's fix it: game help, site bugs and feedback"
+      }
+    ]
   };
 
   // handleInputChange = event => {
@@ -33,7 +49,7 @@ class Community extends React.Component{
     return(
       <div>
           <a href="/community"><h1>FORUMS</h1></a>
-          <ForumsList />
+          <ForumTable forums={this.state.forums}/>
       </div>
     )
   };

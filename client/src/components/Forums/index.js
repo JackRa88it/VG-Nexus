@@ -1,1 +1,1 @@
-export { default } from "./ForumsList";
+export { default } from "./ForumTable";
