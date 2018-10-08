@@ -46,9 +46,9 @@ class NavTabs extends Component{
           </Link>
         </li>
         <li className="nav-item dropdown">
-            <button className="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button className="nav-link special" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Games
-        </button>
+            </button>
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
             <Link
               to="/all"
