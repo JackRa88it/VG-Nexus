@@ -1,4 +1,5 @@
-import API from "../utils/API"
+import API from "./API"
+
 const Authenticator = {
     isAuthenticated: false,
     authenticate(cb) {
@@ -19,4 +20,4 @@ const Authenticator = {
     }
   };
 
-export default Authenticator
+export default Authenticator;
