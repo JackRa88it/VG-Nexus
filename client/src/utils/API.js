@@ -18,6 +18,12 @@ export default {
   },
   chatRoom: function(){
     return axios.get('/api/chatRoom')
+  },
+  postGameComment: function(gameId,text){
+    return axios.post('/api/game/comments/' + gameId,{text: text})
+  },
+  getGameComments: function(gameId){
+    return axios.get('api/game/comments/' + gameId)
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)

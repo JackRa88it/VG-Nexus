@@ -3,16 +3,32 @@ import "./CommentList.css";
 // import {Col,Row} from "../Grid"
 import Comment from "../Comment"
 import {FormBtn} from '../Form'
+import API from '../../utils/API'
 
-const comments = [{name: 'Vincent', text: 'This game is totally rad! I could play it forever. You should make more of this. ' , userId: 1, score: 5},
-{name: 'Hoff', text: 'I died on the first level.' , userId: 2, score: 10},
-{name: 'Vincent', text: 'This is just like Dark Souls.' , userId: 1, score: 7},
-{name: 'Aaron', text: 'Game of the century.', userId: 4, score: 20},
-{name: 'Jack', text: "There are some things that only videogames can do. For me, Flood's predecessor Fill was emblematic of all of them. Where most games do their best to be something else – to tell a story like a novel, to impress with cinematic techniques like a film – Fill is pure game, a complete and darkly fascinating vision that makes no concessions to the modern conception of how games should be. Instead, it was an exploration of how games could be; how bleak, how twisted, how focused and – most famously – how challenging. Most developers take pains to protect you from failure. FROM Software turns it into an artform.", userId: 3, score: 150},
-{name: 'Dinh', text: 'Overhyped.' , userId: 2, score: -24}]
+// const comments = [{name: 'Vincent', text: 'This game is totally rad! I could play it forever. You should make more of this. ' , userId: 1, score: 5},
+// {name: 'Hoff', text: 'I died on the first level.' , userId: 2, score: 10},
+// {name: 'Vincent', text: 'This is just like Dark Souls.' , userId: 1, score: 7},
+// {name: 'Aaron', text: 'Game of the century.', userId: 4, score: 20},
+// {name: 'Jack', text: "There are some things that only videogames can do. For me, Flood's predecessor Fill was emblematic of all of them. Where most games do their best to be something else – to tell a story like a novel, to impress with cinematic techniques like a film – Fill is pure game, a complete and darkly fascinating vision that makes no concessions to the modern conception of how games should be. Instead, it was an exploration of how games could be; how bleak, how twisted, how focused and – most famously – how challenging. Most developers take pains to protect you from failure. FROM Software turns it into an artform.", userId: 3, score: 150},
+// {name: 'Dinh', text: 'Overhyped.' , userId: 2, score: -24}]
 
 class CommentList extends React.Component{
+  state = {
+    comments: []
+  };
+  onClickHandler(){
+    API.postGameComment(1,'asdf')
+      .then(function(){window.location.reload()})
+      .catch(function(err){console.log(err)})
+  }
  
+  componentDidMount(){
+    API.getGameComments(1)
+    .then((res) => {
+      console.log(res.data.Posts)
+      this.setState({comments: res.data.Posts})
+    })
+  }
   render(){
     return (
         <div className="skinny">
@@ -20,9 +36,9 @@ class CommentList extends React.Component{
           {/* <div className="border"> */}
                   <div className="form-group">
                     <textarea className="form-control" rows="4" />
-                    <FormBtn>Submit</FormBtn>
+                    <FormBtn onClick={this.onClickHandler}>Submit</FormBtn>
                   </div>
-                  {comments.map((comment,i) => {
+                  {this.state.comments.map((comment,i) => {
                     return(<Comment name={comment.name} userId={comment.userId} pattern={i%2} score={comment.score}>{comment.text}</Comment>)
                   })}
 

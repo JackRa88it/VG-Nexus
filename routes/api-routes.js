@@ -16,9 +16,9 @@ module.exports = function (app,io){
         .then(function(games){
             for (let i=0;i<games.length;i++){
                 newGame(games[i],io);
-            }
-            
+            }  
         })
+    
 
 
     app.post('/upload',function(req,res){
@@ -106,7 +106,7 @@ module.exports = function (app,io){
     app.get("/api/logout", function(req, res) {
         req.logout();
         res.send('/')
-      });
+    });
 
     app.post('/api/upload/userimage',function(req,res){
         if(req.user){
@@ -138,11 +138,38 @@ module.exports = function (app,io){
         }).catch(function(err) {
             console.log(err);
             res.send(err);
-          });
         });
+    });
 
 
+    app.post('/api/game/comments/:id', function(req,res){
+        if(req.user){
+            db.Post.create({
+                text: req.body.text,
+                UserId: req.user.id,
+                GameId: req.params.id
+            }).then((post) => {
+                res.send('200')
+            }).catch(function(err){
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
 
+    app.get('/api/game/comments/:id', function(req,res){
+        db.Game.findOne({
+            where:{
+                id: req.params.id
+            },
+            include: [db.Post],
+        }).then((game) => {
+            res.json(game)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+    })
 
     app.get('/api/messages/', function(req,res){
         //Create a channel
@@ -158,8 +185,8 @@ module.exports = function (app,io){
         })
         res.send(Object.keys(io.nsps))
     })
-    
 }
+
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
     gameRoom.on('connection', function (socket) {
@@ -173,4 +200,6 @@ function newGame(game,io) {
         });
     });
 }
+
+
 
