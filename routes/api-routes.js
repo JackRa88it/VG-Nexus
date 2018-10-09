@@ -161,25 +161,31 @@ module.exports = function (app,io){
 
     app.get('/api/post/:id/vote/',function(req,res){
         //This route returns the number of upvotes and downvotes on a post
-        db.Vote.count({
-            where:{
-                PostId: req.params.id,
-            },
-            group: ['vote.upDown'],
+        db.sequelize.query("SELECT upDown,count(upDown) as counts FROM votes WHERE PostId = "+req.params.id+" group by upDown", { type: db.sequelize.QueryTypes.SELECT
+        // db.Vote.findAll({
+        //     where:{
+        //         PostId: req.params.id,
+        //     },
+        //     attributes: ['vote.upDown',[db.sequelize.fn('COUNT', db.sequelize.col('vote.upDown')),'counts']],
+        //     group: ['vote.upDown'],
         }).then((voteCounts) => {
-            //Data comes back as {0: {count: n},1: {count: m}}
-            // req.user.id = 1
-            voteCounts = {votes: voteCounts, voted: false}
+            //Data comes back as [{upDown: 0, counts: n} {upDown: 1, counts: 1}]
+            voteCounts = {votes: voteCounts}
             if(req.user){
                 //If the user is logged in find if they have previously voted on this comment or not
-                db.Vote.count({
+                db.Vote.findOne({
                     where:{
                         UserId: req.user.id,
                         PostId: req.params.id
                     },
                 }).then((found) => {
-                    if(found!=0){
-                        voteCounts.voted = true
+                    if(found){
+                        if(found.upDown){
+                            voteCounts.upVoted = true
+                        }
+                        else{
+                            voteCounts.downVoted = true
+                        }
                     }
                     res.json(voteCounts)
                 }).catch((err) => {

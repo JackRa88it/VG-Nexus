@@ -7,9 +7,10 @@ var moment = require('moment')
 
 class Comment extends Component{
   state = {
-    upvotes: 0,
-    downvotes: 0,
-    voted: false,
+    upVotes: 0,
+    downVotes: 0,
+    upVoted: false,
+    downVoted: false,
   }
 
   vote(bool){
@@ -28,13 +29,30 @@ class Comment extends Component{
     API.getVote(this.props.postId)
     .then((res)=>{
       console.log(res.data,'asdfasdfasdf')
-      this.setState({voted: res.data.voted})
-      if(res.data.votes[0]){
-        this.setState({downvotes: res.data.votes[0].count})
+      if(res.data.downVoted){
+        this.setState({downVoted: true})
       }
-      if(res.data.votes[1]){
-        this.setState({upvotes: res.data.votes[1].count})
+      else{
+        this.setState({downVoted: false})
       }
+      if(res.data.upVoted){
+        this.setState({upVoted: true})
+      }
+      else{
+        this.setState({upVoted: false})
+      }
+      var upVotes = 0
+      var downVotes = 0
+      res.data.votes.forEach(element => {
+        console.log(element)
+        if(element.upDown === 0){
+          downVotes = element.counts
+        }
+        else if(element.upDown === 1){
+          upVotes = element.counts
+        }
+        this.setState({upVotes: upVotes,downVotes: downVotes})
+      });
     })
   }
 
@@ -56,9 +74,10 @@ class Comment extends Component{
           {this.props.children}
         </div>
         <div className="score">
-          <div>({this.state.upvotes - this.state.downvotes})</div>
+          <div>({this.state.upVotes - this.state.downVotes})</div>
           <div>
-            <div className ={'upvote ' + (this.state.voted ? 'upvoted' : '')} onClick={(this.state.voted ? ()=>{} : ()=>{this.vote(true)})}>+</div><div className = {'downvote ' + (this.state.voted ? 'downvoted' : '')} onClick={(this.state.voted ? ()=>{} : ()=>{this.vote(true)})}>-</div>
+            <div className ={'upvote ' + (this.state.upVoted ? 'upvoted' : '')} onClick={(this.state.upVoted ? ()=>{} : ()=>{this.vote(true)})}>+</div>
+            <div className = {'downvote ' + (this.state.downVoted ? 'downvoted' : '')} onClick={(this.state.downVoted ? ()=>{} : ()=>{this.vote(false)})}>-</div>
           </div>
         </div>
       </div>

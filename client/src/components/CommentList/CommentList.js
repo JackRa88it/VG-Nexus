@@ -18,7 +18,10 @@ class CommentList extends React.Component{
     }
     componentDidMount(){
       console.log('comments mounting!')
-      this.getComments()
+      this.getComments(this.props.gameId)
+    }
+    componentWillReceiveProps(nextProps){
+      this.getComments(nextProps.gameId)
     }
     postComment = (gameId, text) => {
       //Requires user to be logged in. Text area should be grayed out when not signed in.
@@ -26,8 +29,8 @@ class CommentList extends React.Component{
         .then((res) => {this.getComments()})
         .catch((err) => {console.log(err)})
     }
-    getComments = () => {
-      API.getGameComments(this.props.gameId)
+    getComments = (gameId) => {
+      API.getGameComments(gameId)
         .then((res)=>{
           this.setState({comments: res.data})
         }).catch((err)=>{
