@@ -17,6 +17,7 @@ INSERT INTO tags (name,  createdAt, updatedAt) VALUES
 ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO Forums (title, description, createdAt, updatedAt) VALUES
+<<<<<<< HEAD
 ("General", "The place to discuss anything and everything about this site", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Games", "For discussing specific games", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Technical issues", "If it's broken, let's fix it: game help, site bugs and feedback", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -34,6 +35,20 @@ INSERT INTO Posts (text, ThreadId, UserId, createdAt, updatedAt) VALUES
 ("Man, I'm sorry, I honestly can't think of any announcements at this point. We'll see...", 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("bump", 1, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("dude, don't bump announcement threads.", 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+=======
+("Games", "the main forum, a place for discussing games", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+("Help", "the place to ask and answer specific issues with games or our site", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+("Random", "if it is not about games or the website, it goes here", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO Threads (title, pinned, ForumId, UserId, createdAt, updatedAt) VALUES
+("Posting rules (Sticky)", true, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+("My first game thread", false, 1, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO Posts (text, UserId, ThreadId, GameId, createdAt, updatedAt) VALUES
+("this is the rules post for this forum", 1, 1, null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+("post for my game, blah blah blah.", 2, 2, null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+("test comment on a game", 1, null, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+>>>>>>> 4c005011f6617150007e57334bd4258fd2f78638
 
 ("I made a game! blah blah blah blah blah...", 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("nice", 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

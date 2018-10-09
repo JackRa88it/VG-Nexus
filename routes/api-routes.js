@@ -16,9 +16,9 @@ module.exports = function (app,io){
         .then(function(games){
             for (let i=0;i<games.length;i++){
                 newGame(games[i],io);
-            }
-            
+            }  
         })
+    
 
 
     app.post('/upload',function(req,res){
@@ -100,13 +100,13 @@ module.exports = function (app,io){
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
-        res.send('/all/games/1/');
+        res.send('/');
     });
 
     app.get("/api/logout", function(req, res) {
         req.logout();
         res.send('/')
-      });
+    });
 
     app.post('/api/upload/userimage',function(req,res){
         if(req.user){
@@ -138,11 +138,92 @@ module.exports = function (app,io){
         }).catch(function(err) {
             console.log(err);
             res.send(err);
-          });
         });
+    });
 
 
+    app.post('/api/game/:id/post/', function(req,res){
+        //Create a comment and associate it with gameId :id
+        if(req.user){
+            db.Post.create({
+                text: req.body.text,
+                UserId: req.user.id,
+                GameId: req.params.id,
+            }).then((post) => {
+                console.log(post)
+                res.send('200')
+            }).catch(function(err){
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
 
+    app.get('/api/post/:id/vote/',function(req,res){
+        //This should probably be done as an include from the posts
+        //This route returns the number of upvotes and downvotes on a post
+        db.Vote.count({
+            where:{
+                PostId: req.params.id,
+            },
+            group: ['vote.upDown'],
+        }).then((result) => {
+            //Data games back as {0: {count: n},1: {count: m}}
+            res.json(result)
+        }).catch((err) => {
+            res.json(err)
+            console.log(err)
+        })
+    })
+
+    app.post('/api/post/:id/vote/',function(req,res){
+        if(req.user){
+            db.Vote.create({
+                upDown: req.body.vote,
+                UserId: req.user.id,
+                PostId: req.params.id
+            }).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.get('/api/game/:id', function(req,res){
+        db.Game.findOne({
+            where:{
+                id: req.params.id
+            },
+            include: [{
+                model: db.Post,
+                include: db.User},
+                db.User],
+        }).then((game) => {
+            res.json(game)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.get('/api/game/:id/post/', function(req,res){
+        db.Post.findAll({
+            where:{
+                GameId: req.params.id
+            },
+            order:[
+                ['id','DESC']
+            ],
+            include: [db.User],
+        }).then((post) => {
+            res.json(post)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+    })
 
     app.get('/api/messages/', function(req,res){
         //Create a channel
@@ -158,10 +239,11 @@ module.exports = function (app,io){
         })
         res.send(Object.keys(io.nsps))
     })
-    
 }
+
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
+    console.log(gameRoom);
     gameRoom.on('connection', function (socket) {
         console.log('a user connected to /game/' + game.id);
         socket.on('messagePost', function (msg, name, id) {
@@ -173,4 +255,6 @@ function newGame(game,io) {
         });
     });
 }
+
+
 

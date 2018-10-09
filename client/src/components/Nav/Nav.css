@@ -61,6 +61,7 @@
   border-color: #000;
   color: #f6f6f7;
   min-height: 44px;
+  z-index: 10;
 }
 
 .navbar{
@@ -105,4 +106,9 @@
 
 .dropdown:hover{
   background-color:none;
+}
+
+.dropdown-menu-right{
+  right: 0; 
+  left: auto;
 }
