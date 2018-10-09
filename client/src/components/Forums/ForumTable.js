@@ -11,12 +11,12 @@ class ForumTable extends React.Component{
           <tr>
             <th>Forum</th>
             <th>Threads</th>
-            <th>Recent</th>
+            <th>Most Recent</th>
           </tr>
         </thead>
         <tbody>
           {this.props.forums.map(forum => {
-            return(<ForumRow forum={forum} />)
+            return(<ForumRow forum={forum} handleRowClick={this.props.handleRowClick}/>)
           })}
         </tbody>
       </table>

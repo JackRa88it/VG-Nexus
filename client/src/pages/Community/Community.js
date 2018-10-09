@@ -3,10 +3,13 @@ import React, { Component } from 'react';
 import API from "../../utils/API";
 import "./Community.css";
 import ForumTable from "../../components/Forums";
+import ThreadTable from "../../components/Threads";
 
 class Community extends React.Component{
   state = {
-    forums: []
+    forums: [],
+    page: 'forumList',
+    forumId: ''
   };
 
   componentDidMount(){
@@ -14,39 +17,41 @@ class Community extends React.Component{
     .then((res) => {
       if(res.data){
         this.setState({
-            forums: res.data
-          })
+          forums: res.data
+        })
       }
     })
-}
+  }
 
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
+  handleRowClick = event => {
+    if (event.target.getAttribute("class") === "forumTitle") {
+      this.setState({
+        page: "forum",
+        forumId: event.target.getAttribute("data-id")
+      })
+    }
+  };
 
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   if (this.state.password && this.state.email) {
-  //       console.log(this.state)
-  //     API.login({
-  //       email: this.state.email,
-  //       password: this.state.password
-  //     })
-  //       .then(res => window.location.assign(res.data))
-  //       .catch(err => console.log(err));
-  //   }
-  // };
+
+
+
 
   render(){
-    return(
-      <div>
-          <a href="/community"><h1>FORUMS</h1></a>
-          <ForumTable forums={this.state.forums}/>
-      </div>
-    )
+    if (this.state.page === 'forumList') {
+      return(
+        <div>
+            <a href="/community"><h1>FORUMS</h1></a>
+            <ForumTable forums={this.state.forums} handleRowClick={this.handleRowClick}/>
+        </div>
+      )
+    } else if (this.state.page === 'forum') {
+      return(
+        <div>
+            <a href="/community"><h1>FORUMS > THREADS</h1></a>
+            <ThreadTable forumId={this.state.forumId}/>
+        </div>
+      )
+    }
   };
 };
 

@@ -34,6 +34,9 @@ export default {
   },
   getForumList: function() {
     return axios.get("/api/forumList")
+  },
+  getThreadList: function(forumId) {
+    return axios.get("/api/threadList/" + forumId)
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)

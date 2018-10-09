@@ -253,6 +253,22 @@ module.exports = function (app,io){
             res.json(err);
         });
     })
+
+    app.get('/api/threadList/:id', function(req,res) {
+        forumId = req.params.id;
+        db.Thread.findAll({
+            where: {forumId: forumId},
+            include: [{
+                model: db.Post
+            }]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
 }
 
 function newGame(game,io) {
