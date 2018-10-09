@@ -6,7 +6,7 @@ class ForumTable extends React.Component{
  
   render(){
     return (
-      <table>
+      <table className="forumTable">
         <tr>
           <th>Forum</th>
           <th>Threads</th>
