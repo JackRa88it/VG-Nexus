@@ -5,20 +5,25 @@ body {
   background-color: #000;
   font-family: 'Open Sans', sans-serif;
   color: #f6f6f7;
+  width:100%;
+  height:100%;
 }
 
-
+body,
+#root{
+  max-height: 645px;
+}
 
 h1 {
   font-family: 'Roboto', sans-serif;
 }
-
+.bg-standard{
+  background: rgba(43, 43, 43, 0.9);
+}
 .container {
-  background-color: #222;
   border: 1px solid rgba(248, 249, 250,0.1);
   background-color: rgba(43, 43, 43, 0.9);
   padding: 50px;
-  height: 80%;
   margin-top: 75px;
 }
 
@@ -28,7 +33,6 @@ h1 {
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  /* height: 80px; */
   height:100%;
 }
 

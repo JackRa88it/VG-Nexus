@@ -111,7 +111,7 @@ class NavTabs extends Component {
                 <div className = "nav-item dropdown">
                   <div className="nav-link special dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {/* Img here  */}
-                    <input type="image" src={this.state.user?this.state.user.avatar:"https://via.placeholder.com/350x150"} />
+                    <input type="image" src={"/assets/userThumbnails/" + this.state.user.id} />
                   </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
