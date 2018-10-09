@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
   Vote.associate = function (models) {
     Vote.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        allowNull: false,
+        unique: true
       }
     });
     Vote.belongsTo(models.Game, {

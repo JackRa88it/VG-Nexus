@@ -29,8 +29,14 @@ export default {
   getGameData: function(gameId){
     return axios.get('/api/game/' + gameId)
   },
-  votePost: function(postId, bool){
+  postVote: function(postId, bool){
     return axios.post('/api/post/'+postId+'/vote/', {vote: bool})
+  },
+  getVote: function(postId){
+    return axios.get('/api/post/'+postId+'/vote/')
+  },
+  getForumList: function() {
+    return axios.get("/api/forumList")
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)

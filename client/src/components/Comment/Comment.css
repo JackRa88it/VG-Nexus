@@ -65,6 +65,10 @@
   width: 17px;
 }
 
+.upvoted{
+  color: rgb(45, 141, 45);
+}
+
 .upvote:hover{
   color: rgb(45, 141, 45);
   box-shadow: 0px 0px 5px green;
@@ -74,6 +78,10 @@
 .downvote{
   float: right;
   width: 17px;
+}
+
+.downvoted{
+  color: rgb(124, 14, 14);
 }
 
 .downvote:hover{

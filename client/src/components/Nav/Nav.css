@@ -128,3 +128,7 @@ i{
   right: 0; 
   left: auto;
 }
+
+.dropdown-item{
+  font-size: 14px;
+}
