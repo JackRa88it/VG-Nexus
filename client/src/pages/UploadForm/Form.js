@@ -16,6 +16,7 @@ class Form extends Component{
     }
     postGame = (event) => {
         event.preventDefault()
+        console.log('posting game!')
         const formData = new FormData(event.target)
         formData.append('tags',JSON.stringify(this.state.tags))
         axios.post("/upload",formData)

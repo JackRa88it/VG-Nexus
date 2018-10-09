@@ -16,9 +16,9 @@ module.exports = function (app,io){
         .then(function(games){
             for (let i=0;i<games.length;i++){
                 newGame(games[i],io);
-            }
-            
+            }  
         })
+    
 
 
     app.post('/upload',function(req,res){
@@ -90,7 +90,7 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            console.log("user authenticated")
+            // console.log("user authenticated")
             res.send(req.user);
         }
         else{
@@ -100,13 +100,13 @@ module.exports = function (app,io){
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
-        res.send('/all/games/1/');
+        res.send('/');
     });
 
     app.get("/api/logout", function(req, res) {
         req.logout();
         res.send('/')
-      });
+    });
 
     app.post('/api/upload/userimage',function(req,res){
         if(req.user){
@@ -138,11 +138,121 @@ module.exports = function (app,io){
         }).catch(function(err) {
             console.log(err);
             res.send(err);
-          });
         });
+    });
 
 
+    app.post('/api/game/:id/post/', function(req,res){
+        //Create a comment and associate it with gameId :id
+        if(req.user){
+            db.Post.create({
+                text: req.body.text,
+                UserId: req.user.id,
+                GameId: req.params.id,
+            }).then((post) => {
+                console.log(post)
+                res.send('200')
+            }).catch(function(err){
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
 
+    app.get('/api/post/:id/vote/',function(req,res){
+        //This route returns the number of upvotes and downvotes on a post
+        db.sequelize.query("SELECT upDown,count(upDown) as counts FROM votes WHERE PostId = "+req.params.id+" group by upDown", { type: db.sequelize.QueryTypes.SELECT
+        // db.Vote.findAll({
+        //     where:{
+        //         PostId: req.params.id,
+        //     },
+        //     attributes: ['vote.upDown',[db.sequelize.fn('COUNT', db.sequelize.col('vote.upDown')),'counts']],
+        //     group: ['vote.upDown'],
+        }).then((voteCounts) => {
+            //Data comes back as [{upDown: 0, counts: n} {upDown: 1, counts: 1}]
+            voteCounts = {votes: voteCounts}
+            if(req.user){
+                //If the user is logged in find if they have previously voted on this comment or not
+                db.Vote.findOne({
+                    where:{
+                        UserId: req.user.id,
+                        PostId: req.params.id
+                    },
+                }).then((found) => {
+                    if(found){
+                        if(found.upDown){
+                            voteCounts.upVoted = true
+                        }
+                        else{
+                            voteCounts.downVoted = true
+                        }
+                    }
+                    res.json(voteCounts)
+                }).catch((err) => {
+                    res.json(err)
+                    console.log(err)
+                })      
+            }
+            else{
+                res.json(voteCounts)
+            }
+        }).catch((err) => {
+            res.json(err)
+            console.log(err)
+        })
+    })
+
+    app.post('/api/post/:id/vote/',function(req,res){
+        //Post a vote to the database
+        if(req.user){
+            db.Vote.upsert({
+                upDown: req.body.vote,
+                UserId: req.user.id,
+                PostId: req.params.id
+            }).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.get('/api/game/:id', function(req,res){
+        //Grab game data with :id
+        db.Game.findOne({
+            where:{
+                id: req.params.id
+            },
+            include: [{
+                model: db.Post,
+                include: db.User},
+                db.User],
+        }).then((game) => {
+            res.json(game)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.get('/api/game/:id/post/', function(req,res){
+        // Grab all posts from game :id
+        db.Post.findAll({
+            where:{
+                GameId: req.params.id
+            },
+            order:[
+                ['createdAt','DESC']
+            ],
+            include: [db.User],
+        }).then((post) => {
+            res.json(post)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+    })
 
     app.get('/api/messages/', function(req,res){
         //Create a channel
@@ -158,11 +268,24 @@ module.exports = function (app,io){
         })
         res.send(Object.keys(io.nsps))
     })
-    
+
+    app.get('/api/forumList', function(req,res) {
+        db.Forum.findAll({
+            include: [{
+                model: db.Thread
+            }]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
 }
+
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
-    console.log(gameRoom);
     gameRoom.on('connection', function (socket) {
         console.log('a user connected to /game/' + game.id);
         socket.on('messagePost', function (msg, name, id) {
@@ -174,4 +297,6 @@ function newGame(game,io) {
         });
     });
 }
+
+
 

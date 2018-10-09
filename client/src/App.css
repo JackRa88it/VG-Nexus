@@ -7,56 +7,7 @@ body {
   color: #f6f6f7;
 }
 
-.nav {
-  background: #222;
-  border-width: 0px 0px 1px 0px;
-  border-color: #000;
-  color: #f6f6f7;
-  min-height: 45px;
-}
 
-.navbar{
-  /* overflow:scroll; */
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-#controllerLogo {
-  height: 45px;
-}
-
-#VGNLogo {
-  height: 45px;
-}
-.nav-link {
-  background-color: #222;
-  border-width: 0px 0px 3px 0px;
-  border-color: #222;
-  color: #f6f6f7;
-}
-
-.nav-tabs .nav-link {
-  background-color: #222;
-  border-width: 0px 0px 3px 0px;
-  border-color: #222;
-  color: #f6f6f7;
-  border-radius: 0px;
-}
-
-.nav-tabs .nav-link:hover {
-  background-color: #222;
-  border-width: 0px 0px 3px 0px;
-  border-color: #222;
-  color: #EE135B;
-}
-
-.nav-tabs .nav-link.active {
-  background-color: #222;
-  border-width: 0px 0px 3px 0px;
-  border-color: #EE135B;
-  color: #EE135B;
-}
 
 h1 {
   font-family: 'Roboto', sans-serif;
@@ -64,21 +15,21 @@ h1 {
 
 .container {
   background-color: #222;
+  border: 1px solid rgba(248, 249, 250,0.1);
+  background-color: rgba(43, 43, 43, 0.9);
   padding: 50px;
   height: 80%;
-  margin-top: 55px;
-  /* overflow: scroll; */
+  margin-top: 75px;
 }
 
-
-/* ========================================= */
 .App {
   text-align: center;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  /* height: 80px; */
+  height:100%;
 }
 
 .App-header {
