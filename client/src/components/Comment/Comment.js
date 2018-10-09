@@ -42,7 +42,7 @@ class Comment extends Component{
           {this.props.children}
         </div>
         <div className="score">
-          <div>({this.props.score})</div>
+          <div>{this.props.score===undefined?0:this.props.score}</div>
           <div>
             <div className ='upvote' onClick={()=>{this.vote(true)}}>+</div><div className = 'downvote' onClick={()=>{this.vote(false)}}>-</div>
           </div>
