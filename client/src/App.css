@@ -11,9 +11,12 @@ body {
 
 body,
 #root{
-  max-height: 645px;
+  max-height: 643px;
 }
-
+.git{
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
 h1 {
   font-family: 'Roboto', sans-serif;
 }
@@ -29,6 +32,9 @@ h1 {
 
 .App {
   text-align: center;
+}
+.chatroom{
+  z-index:1;
 }
 
 .App-logo {

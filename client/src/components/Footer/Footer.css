@@ -6,5 +6,12 @@
   bottom: 0;
   color: white;
   text-align: center;
+  line-height: 12px;
+}
+.developers{
+  margin: 5px 10px;
+  font-size: 0.9em;
+  padding: 5px;
+  flex:none;
 }
 

@@ -8,35 +8,50 @@ class Footer extends Component {
       return (
       <div className="container-fluid footer bg-standard">
             {/* Float to the right */}
-            <div className="tiny mb-1 float-right ml-3 ">
-              <Link to="https://bootcamp.berkeley.edu/coding/">
-                 <small>Copyright 2018 &copy;</small>
-              </Link>
-              </div>
-            <div class="conainter m-1">
-                <div className="text-center mt-2 mb-1">
-                  <small className="float-left text-white">Group 3 - UCB Extension Bootcamp </small>
+            
+                 
+                <div className="my-1 mx-auto developers">
+                    <div className="float-left">
+                        <a href="https://bootcamp.berkeley.edu/coding/">
+                          <small>UC Berkeley Extension</small>
+                        </a>
+                      </div>
+                    <div className="text-center">
+                      <a href="https://github.com/AaronGoldsmith" className="git">
+                        <small>Aaron</small>
+                      </a>
+                      &nbsp;&bull;&nbsp;	
 
-                    <a href="https://github.com/AaronGoldsmith" className="text-light">
-                      <small>Aaron</small></a>
-                    &nbsp;&bull;&nbsp;	
+                      <a href="https://github.com/vnguye51" className="git">
+                      <small>Vincent</small>
+                      </a>
+                      &nbsp;&bull;&nbsp;	
 
-                    <a href="https://github.com/vnguye51" className="text-light">
-                    <small>Vincent</small></a>
-                    &nbsp;&bull;&nbsp;	
+                      <a href="https://github.com/JackRa88it" className="git">
+                      <small>Jack</small>
+                      </a>
+                      &nbsp;&bull;&nbsp;
 
-                    <a href="https://github.com/JackRa88it" className="text-light">
-                    <small>Jack</small></a>
-                    &nbsp;&bull;&nbsp;
+                      <a href="https://github.com/haffedali" className="git">
+                      <small>Haffed</small>
+                      </a>
+                      &nbsp;&bull;&nbsp;	
+                      
+                      <a href="https://github.com/DinhDo2312" className="git">
+                         <small>Dinh</small>
+                      </a>
 
-                    <a href="https://github.com/haffedali" className="text-light">
-                    <small>Haffed</small></a>
-                    &nbsp;&bull;&nbsp;	
+                      <div className="float-right">
+                        <a href="https://bootcamp.berkeley.edu/coding/">
+                          <small>Coding Bootcamp 2018</small>
+                        </a>
+                      </div>
+                    </div>
+                  
                     
-                    <a href="https://github.com/DinhDo2312" className="text-light">
-                    <small>Dinh</small></a>
                 </div>
-            </div>
+               
+                
           </div>
       )
   };
