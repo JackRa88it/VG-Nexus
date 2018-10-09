@@ -255,7 +255,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/threadList/:id', function(req,res) {
-        forumId = req.params.id;
+        var forumId = req.params.id;
         db.Thread.findAll({
             where: {forumId: forumId},
             include: [{

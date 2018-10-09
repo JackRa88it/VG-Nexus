@@ -2,7 +2,16 @@ a {
   color: #f6f6f7;
 }
 
-a:hover {
+.forumTree {
+  display: flex;
+}
+
+.forumTreeLink {
+  margin: 0px 10px;
+}
+
+.forumTreeLink:hover {
   color: #EE135B;
   text-decoration: none;
+  cursor: pointer;
 }
