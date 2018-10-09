@@ -29,7 +29,6 @@ class CommentList extends React.Component{
     getComments = () => {
       API.getGameComments(this.props.gameId)
         .then((res)=>{
-          console.log(res.data)
           this.setState({comments: res.data})
         }).catch((err)=>{
           console.log(err)
