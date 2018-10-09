@@ -268,6 +268,20 @@ module.exports = function (app,io){
         })
         res.send(Object.keys(io.nsps))
     })
+
+    app.get('/api/forumList', function(req,res) {
+        db.Forum.findAll({
+            include: [{
+                model: db.Thread
+            }]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
 }
 
 function newGame(game,io) {

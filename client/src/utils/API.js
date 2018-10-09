@@ -34,6 +34,9 @@ export default {
   },
   getVote: function(postId){
     return axios.get('/api/post/'+postId+'/vote/')
+  },
+  getForumList: function() {
+    return axios.get("/api/forumList")
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)

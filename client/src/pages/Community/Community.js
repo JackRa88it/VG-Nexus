@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 // import { Input, TextArea, FormBtn } from "../../components/Form";
-// import API from "../../utils/API";
+import API from "../../utils/API";
 import "./Community.css";
-import ForumsList from "../../components/Forums";
+import ForumTable from "../../components/Forums";
 
 class Community extends React.Component{
   state = {
-    dummyState: ''
+    forums: []
   };
+
+  componentDidMount(){
+    API.getForumList()
+    .then((res) => {
+      if(res.data){
+        this.setState({
+            forums: res.data
+          })
+      }
+    })
+}
 
   // handleInputChange = event => {
   //   const { name, value } = event.target;
@@ -33,7 +44,7 @@ class Community extends React.Component{
     return(
       <div>
           <a href="/community"><h1>FORUMS</h1></a>
-          <ForumsList />
+          <ForumTable forums={this.state.forums}/>
       </div>
     )
   };
