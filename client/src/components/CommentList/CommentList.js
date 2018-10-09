@@ -26,10 +26,11 @@ class CommentList extends React.Component{
     postComment = (gameId, text) => {
       //Requires user to be logged in. Text area should be grayed out when not signed in.
       API.postGameComment(gameId,text)
-        .then((res) => {this.getComments()})
+        .then((res) => {this.getComments(gameId)})
         .catch((err) => {console.log(err)})
     }
     getComments = (gameId) => {
+      console.log(gameId)
       API.getGameComments(gameId)
         .then((res)=>{
           this.setState({comments: res.data})
