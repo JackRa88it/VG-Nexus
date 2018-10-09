@@ -1,12 +1,12 @@
 import React from "react";
-import "./Forums.css";
-import ForumRow from "./ForumRow";
+import "./Threads.css";
+import ThreadRow from "./ThreadRow";
 
-class ForumTable extends React.Component{
+class ThreadTable extends React.Component{
  
   render(){
     return (
-      <table className="forumTable">
+      <table className="threadTable">
         <thead>
           <tr>
             <th>Forum</th>
@@ -16,7 +16,7 @@ class ForumTable extends React.Component{
         </thead>
         <tbody>
           {this.props.forums.map(forum => {
-            return(<ForumRow forum={forum} />)
+            return(<ThreadRow forum={forum} />)
           })}
         </tbody>
       </table>
@@ -24,4 +24,4 @@ class ForumTable extends React.Component{
   }
 }
 
-export default ForumTable;
+export default ThreadTable;

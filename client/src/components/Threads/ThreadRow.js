@@ -1,7 +1,7 @@
 import React from "react";
-import "./Forums.css";
+import "./Threads.css";
 
-const ForumRow = (props) => (
+const ThreadRow = (props) => (
   <tr>
     <td>{props.forum.title}</td>
     <td>{props.forum.Threads.length}</td>
@@ -9,4 +9,4 @@ const ForumRow = (props) => (
   </tr>
 )
 
-export default ForumRow;
+export default ThreadRow;
