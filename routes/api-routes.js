@@ -90,7 +90,7 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            console.log("user authenticated")
+            // console.log("user authenticated")
             res.send(req.user);
         }
         else{

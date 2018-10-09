@@ -5,7 +5,9 @@ import "./Nav.css";
 
 class NavTabs extends Component {
   state = {
-    authenticated: false
+    authenticated: false,
+    username: "Anonymous",
+    user: undefined
   }
   logoutHandler = (event) => {
     event.preventDefault()
@@ -16,7 +18,9 @@ class NavTabs extends Component {
 
   componentDidMount() {
     Authenticator.authenticate(() => {
-      this.setState({ authenticated: true })
+      this.setState({ authenticated: true,
+         username:  Authenticator.username,
+         user: Authenticator.user})
     })
   }
   render() {
@@ -105,24 +109,34 @@ class NavTabs extends Component {
               </div>
             ) : (
                 <div className = "nav-item dropdown">
-                  <button className="nav-link special dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Img here
-                  </button>
+                  <div className="nav-link special dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {/* Img here  */}
+                    <input type="image" src={this.state.user?this.state.user.avatar:"https://via.placeholder.com/350x150"} />
+                  </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
-                  <div className="dropdown-item" href="#">You're signed in as Name</div>
+                  <div className="dropdown-item" href="#">{this.state.username}</div>
                   <div className="dropdown-divider"></div>
                   <div className="dropdown-item" href="#">Your Profile</div>
                   <div className="dropdown-divider"></div>
                   <div className="dropdown-item" href="#">Edit Profile</div>
                   <div className="dropdown-divider"></div>
-                  <div className="dropdown-item" href="#">Help</div>
-                  <div className="dropdown-item" href="#">Settings</div>
+                  <div className="dropdown-item" href="#">
+                    Help
+                    <i class="far fa-question-circle"></i>
+                  </div>
+                  <div className="dropdown-item" href="#">
+                  Settings
+                  <i class="fas fa-wrench"></i>
+                  </div>
                   {/* Log out button */}
                     <Link
                       to="/logout"
                       onClick={this.logoutHandler}>
-                      <div className="dropdown-item" href="#">Logout</div>
+                      <div className="dropdown-item" href="#">
+                       Logout
+                       <i class="fas fa-sign-out-alt"></i>
+                      </div>
                     </Link>
                     </div>
                   </div>
