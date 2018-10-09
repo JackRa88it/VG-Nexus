@@ -112,7 +112,18 @@ input[type='image']{
   background-color:none;
 }
 
-
+i{
+  font-size: 0.7em;
+  vertical-align: middle;
+  padding-bottom: 2px;
+  float:right;
+  margin:8px 0px;
+  color: rgb(93, 93, 97);
+}
+.dropdown-item:hover > i{
+  color:black;
+  text-shadow: 0px 0px 5px rgb(242, 247, 201);
+}
 .dropdown-menu-right{
   right: 0; 
   left: auto;

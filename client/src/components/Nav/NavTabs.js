@@ -121,13 +121,22 @@ class NavTabs extends Component {
                   <div className="dropdown-divider"></div>
                   <div className="dropdown-item" href="#">Edit Profile</div>
                   <div className="dropdown-divider"></div>
-                  <div className="dropdown-item" href="#">Help</div>
-                  <div className="dropdown-item" href="#">Settings</div>
+                  <div className="dropdown-item" href="#">
+                    Help
+                    <i class="far fa-question-circle"></i>
+                  </div>
+                  <div className="dropdown-item" href="#">
+                  Settings
+                  <i class="fas fa-wrench"></i>
+                  </div>
                   {/* Log out button */}
                     <Link
                       to="/logout"
                       onClick={this.logoutHandler}>
-                      <div className="dropdown-item" href="#">Logout</div>
+                      <div className="dropdown-item" href="#">
+                       Logout
+                       <i class="fas fa-sign-out-alt"></i>
+                      </div>
                     </Link>
                     </div>
                   </div>

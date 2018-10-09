@@ -4,6 +4,7 @@ import Game from './components/Game/Game';
 import LoginSignup from "./pages/LoginSignup";
 import NavTabs from "./components/Nav";
 import {Container} from "./components/Grid";
+// import Footer from "./components/Footer"
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import ChooseGame from "./pages/ChooseGame/ChooseGame";
@@ -28,6 +29,7 @@ class App extends Component {
           <Route exact path='/login_signup' component={LoginSignup} />
           <Route exact path='/community' component={Community} />
         </Container>
+        {/* <Footer /> */}
       </div>
     </Router>
 
