@@ -22,7 +22,7 @@ class NavTabs extends Component {
   render() {
     return (
       <nav className="p-0 mb-3 navbar navbar-expand-lg w-100">
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs ">
           <li className="nav-item">
             <Link to="/" >
               <img src="/assets/controller_logo_white_red_AB.png" alt="controllerLogo" id="controllerLogo" className="ml-2" />
