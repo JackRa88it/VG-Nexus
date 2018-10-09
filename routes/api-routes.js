@@ -142,7 +142,7 @@ module.exports = function (app,io){
     });
 
 
-    app.post('/api/game/comments/:id', function(req,res){
+    app.post('/api/game/:id/post/', function(req,res){
         //Create a comment and associate it with gameId :id
         if(req.user){
             db.Post.create({
@@ -150,6 +150,7 @@ module.exports = function (app,io){
                 UserId: req.user.id,
                 GameId: req.params.id,
             }).then((post) => {
+                console.log(post)
                 res.send('200')
             }).catch(function(err){
                 console.log(err);
@@ -158,6 +159,7 @@ module.exports = function (app,io){
         }
     })
 
+<<<<<<< HEAD
     app.get('/api/post/vote/:id',function(req,res){
         if(req.user){
             //This route returns the number of upvotes and downvotes on a post
@@ -174,10 +176,26 @@ module.exports = function (app,io){
                 console.log(err)
             })
         }
+=======
+    app.get('/api/post/:id/vote/',function(req,res){
+        //This should probably be done as an include from the posts
+        //This route returns the number of upvotes and downvotes on a post
+        db.Vote.count({
+            where:{
+                PostId: req.params.id,
+            },
+            group: ['vote.upDown'],
+        }).then((result) => {
+            //Data games back as {0: {count: n},1: {count: m}}
+            res.json(result)
+        }).catch((err) => {
+            res.json(err)
+            console.log(err)
+        })
+>>>>>>> f3bd4f37766bb7246da8a06493684e2443b49848
     })
 
-    app.post('/api/post/vote/:id',function(req,res){
-        console.log('user is voting!')
+    app.post('/api/post/:id/vote/',function(req,res){
         if(req.user){
             db.Vote.create({
                 upDown: req.body.vote,
@@ -203,6 +221,24 @@ module.exports = function (app,io){
                 db.User],
         }).then((game) => {
             res.json(game)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.get('/api/game/:id/post/', function(req,res){
+        console.log('finding post')
+        db.Post.findAll({
+            where:{
+                GameId: req.params.id
+            },
+            order:[
+                ['createdAt','DESC']
+            ],
+            include: [db.User],
+        }).then((post) => {
+            res.json(post)
         }).catch(function(err) {
             console.log(err);
             res.json(err);

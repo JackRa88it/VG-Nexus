@@ -13,10 +13,14 @@ class Comment extends Component{
   }
 
   vote(bool){
-    console.log('voting!')
     API.votePost(this.props.postId,bool)
     .then((res)=>{
-      this.setState({upvotes: res.data.upvotes, downvotes: res.data.downvotes})
+      if(res.data[0]){
+        this.setState({upvotes: res.data[0].count, downvotes: res.data[1].count})
+      }
+      // else{
+      //   this.setState({upvotes: res.data[0].count, downvotes
+      // }
     })
     .catch((err) =>{
       console.log(err)
@@ -31,7 +35,7 @@ class Comment extends Component{
         </div>
         <div className='commentInfo'>
           <Link to={'/user/' + this.props.userId} ><div className='username'>{this.props.username}</div></Link>
-          <div className = 'date'>{moment(this.props.createdAt).format('MMM DD HH:ss')}</div>
+          <div className = 'date'>{moment(this.props.createdAt).format('MMM DD HH:mm')}</div>
         </div>
         <div className="comment">
           {this.props.children}

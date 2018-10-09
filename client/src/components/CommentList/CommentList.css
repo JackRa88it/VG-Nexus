@@ -11,6 +11,10 @@
   width:70%;
   margin: 50px auto;
 }
+textarea{
+  resize: none;
+  outline:none;
+}
 .imgFill{
   height: 100px;
   width: 100px;
