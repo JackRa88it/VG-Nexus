@@ -14,7 +14,6 @@ class Comment extends Component{
   }
 
   vote(bool){
-    console.log('voting!')
     API.postVote(this.props.postId,bool)
     .then((res)=>{
       this.getVotes()
@@ -24,11 +23,10 @@ class Comment extends Component{
     })
   }
 
-  getVotes(){
-    console.log('getting votes')
+  getVotes(){ 
+    console.log('get votes',this.props.postId)
     API.getVote(this.props.postId)
     .then((res)=>{
-      console.log(res.data,'asdfasdfasdf')
       if(res.data.downVoted){
         this.setState({downVoted: true})
       }
@@ -44,7 +42,6 @@ class Comment extends Component{
       var upVotes = 0
       var downVotes = 0
       res.data.votes.forEach(element => {
-        console.log(element)
         if(element.upDown === 0){
           downVotes = element.counts
         }
@@ -55,11 +52,10 @@ class Comment extends Component{
       });
     })
   }
-
+  
   componentDidMount(){
     this.getVotes()
   }
-
   render(){
     return(
       <div className={"wrapper pattern"+ this.props.pattern} >

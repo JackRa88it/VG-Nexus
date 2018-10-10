@@ -162,12 +162,6 @@ module.exports = function (app,io){
     app.get('/api/post/:id/vote/',function(req,res){
         //This route returns the number of upvotes and downvotes on a post
         db.sequelize.query("SELECT upDown,count(upDown) as counts FROM votes WHERE PostId = "+req.params.id+" group by upDown", { type: db.sequelize.QueryTypes.SELECT
-        // db.Vote.findAll({
-        //     where:{
-        //         PostId: req.params.id,
-        //     },
-        //     attributes: ['vote.upDown',[db.sequelize.fn('COUNT', db.sequelize.col('vote.upDown')),'counts']],
-        //     group: ['vote.upDown'],
         }).then((voteCounts) => {
             //Data comes back as [{upDown: 0, counts: n} {upDown: 1, counts: 1}]
             voteCounts = {votes: voteCounts}

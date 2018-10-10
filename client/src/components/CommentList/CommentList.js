@@ -17,7 +17,6 @@ class CommentList extends React.Component{
       newComment: ''
     }
     componentDidMount(){
-      console.log('comments mounting!')
       this.getComments(this.props.gameId)
     }
     componentWillReceiveProps(nextProps){
@@ -30,7 +29,6 @@ class CommentList extends React.Component{
         .catch((err) => {console.log(err)})
     }
     getComments = (gameId) => {
-      console.log(gameId)
       API.getGameComments(gameId)
         .then((res)=>{
           this.setState({comments: res.data})
@@ -38,6 +36,7 @@ class CommentList extends React.Component{
           console.log(err)
         })
     }
+    
     handleInputChange = event => {
       const { name, value } = event.target;
       this.setState({
@@ -56,9 +55,6 @@ class CommentList extends React.Component{
               {this.state.comments.map((comment,i) => {
                 return(<Comment username={comment.User.username} userId={comment.User.id} pattern={i%2} score={comment.score} createdAt={comment.createdAt} postId={comment.id}>{comment.text}</Comment>)
               })}
-
-
-            
           </div>
       )}
 }
