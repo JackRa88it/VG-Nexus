@@ -5,6 +5,7 @@ import "./Community.css";
 import ForumTable from "../../components/Forums";
 import ThreadTable from "../../components/Threads";
 import PostTable from "../../components/Posts";
+import CommunityForm from "../../components/CommunityForm";
 
 class Community extends React.Component{
   state = {
@@ -13,7 +14,8 @@ class Community extends React.Component{
     forumId: '',
     forumName: '',
     threadId: '',
-    threadName: ''
+    threadName: '',
+    formType: ''
   };
 
   componentDidMount(){
@@ -60,6 +62,14 @@ class Community extends React.Component{
         threadName: ''
       })
     }
+  }
+
+  newPostButton = event => {
+    //validate user here, either set page to form or "must be logged in"
+    this.setState({
+      page: "form",
+      formType: "newPost"
+    })
   }
 
 
@@ -119,8 +129,42 @@ class Community extends React.Component{
                 {this.state.forumName}
               </p>
             </div>
-            <h1>{this.state.threadName}</h1>
+            <div>
+              <h1>{this.state.threadName}</h1>
+              <button 
+                id="newPostButton"
+                onClick={this.newPostButton}
+              >
+                + post in thread
+              </button>
+            </div>
             <PostTable threadId={this.state.threadId}/>
+        </div>
+      )
+    } else if (this.state.page === 'form') {
+      return(
+        <div>
+            <div className="forumTree">
+              <p 
+                className="forumTreeLink"
+                data-id="forum"
+                onClick={this.handleForumTreeClick}
+              >
+                Forums
+              </p>
+              <p>></p>
+              <p
+                className="forumTreeLink"
+                data-id={this.state.forumId}
+                onClick={this.handleForumTreeClick}
+              >
+                {this.state.forumName}
+              </p>
+            </div>
+            <div>
+              <h1>{this.state.threadName}</h1>
+            </div>
+            <CommunityForm formType={this.state.formType} threadId={this.state.threadId}/>
         </div>
       )
     }

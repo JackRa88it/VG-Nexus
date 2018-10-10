@@ -43,6 +43,9 @@ export default {
   },
   getPostList: function(threadId) {
     return axios.get("/api/postList/" + threadId)
+  },
+  submitNewPost: function(newPost) {
+    return axios.post('/api/community/newPost/', {newPost: newPost})
   }
   // joinChannel: function(channel){
   //   return axios.get('/api/channels/'+channel)

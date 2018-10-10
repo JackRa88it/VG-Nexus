@@ -270,6 +270,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/forumList', function(req,res) {
+        // get list of forums for community main page
         db.Forum.findAll({
             include: [{
                 model: db.Thread
@@ -285,6 +286,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/threadList/:id', function(req,res) {
+        //get list of threads to populate forum page
         var forumId = req.params.id;
         db.Thread.findAll({
             where: {ForumId: forumId},
@@ -302,6 +304,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/postList/:id', function(req,res) {
+        //get list of posts to populate thread page
         var threadId = req.params.id;
         db.Post.findAll({
             where: {ThreadId: threadId},
@@ -316,6 +319,22 @@ module.exports = function (app,io){
             console.log(err);
             res.json(err);
         });
+    })
+
+    app.post('/api/community/newPost', function(req,res){
+        //submit new post in thread to the database
+        if(1){
+            db.Post.create({
+                text: req.body.newPost.text,
+                UserId: req.body.newPost.userId,
+                ThreadId: req.body.newPost.threadId
+            }).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
     })
 }
 

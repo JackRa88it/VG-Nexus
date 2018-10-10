@@ -15,3 +15,7 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+
+#newPostButton {
+  float: right;
+}
