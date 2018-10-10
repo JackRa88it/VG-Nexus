@@ -53,7 +53,7 @@ module.exports = function (app,io){
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
                                 fs.rename(thumbnailPath,newThumbnailPath, function(err) {
                                     //Rename thumbnail
-                                    if(err) throw err;
+                                    // if(err) throw err;
                                     fs.rename(oldpath, newpath, function (err) {
                                         console.log('renaming filepaths')
                                         if (err) throw err;
@@ -141,6 +141,48 @@ module.exports = function (app,io){
         });
     });
 
+    app.get('/api/tags/games/all', (req,res)=>{
+        db.Tag.findAll({
+            include:[{
+                model:db.Game,
+                // limit: 3
+            }]
+        }).then((tags)=>{
+            res.json(tags)
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
+    app.get('/api/games/newest', function(req,res){
+        db.Game.findAll({
+            limit: 6,
+            order:[
+                ['createdAt','DESC']
+            ],
+            include:[db.Vote,db.Tag]
+        }).then((games) => {
+            res.json(games)
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
+
+    app.get('/api/games/best', function(req,res){
+        db.Game.findAll({
+            limit: 6,
+            order:[
+                ['rating','DESC']
+            ],
+            include:[db.Vote,db.Tag]
+        }).then((games) => {
+            res.json(games)
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
 
     app.post('/api/game/:id/post/', function(req,res){
         //Create a comment and associate it with gameId :id
