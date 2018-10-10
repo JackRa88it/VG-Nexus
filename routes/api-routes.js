@@ -239,13 +239,33 @@ module.exports = function (app,io){
             order:[
                 ['createdAt','DESC']
             ],
-            include: [db.User],
-        }).then((post) => {
-            res.json(post)
+            include: [db.User, db.Vote],
+        }).then((posts) => {
+            posts.forEach((post) => {
+                post.dataValues.score = 0
+                post.dataValues.upVoted = false
+                post.dataValues.downVoted = false
+                post.dataValues.Votes.forEach((vote) => {
+                    if(vote.upDown){
+                        post.dataValues.score++
+                        if(req.user && req.user.id==vote.UserId){
+                            post.dataValues.upVoted = true
+                        }
+                    }
+                    else{
+                        post.dataValues.score--
+                        if(req.user && req.user.id==vote.UserId){
+                            post.dataValues.downVoted = true
+                        }
+                    }
+                })
+            })
+            res.json(posts)
         }).catch(function(err) {
             console.log(err);
             res.json(err);
         });
+        
     })
 
     app.get('/api/messages/', function(req,res){
@@ -294,3 +314,8 @@ function newGame(game,io) {
 
 
 
+async function asyncForEach(array, callback) {
+  for (let index = 0; index < array.length; index++) {
+    await callback(array[index], index, array)
+  }
+}

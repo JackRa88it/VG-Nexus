@@ -23,7 +23,6 @@ export default {
     return axios.post('/api/game/' + gameId + '/post/',{text: text})
   },
   getGameComments: function(gameId){
-    console.log('getting game comments!')
     return axios.get('/api/game/'+ gameId+'/post/' )
   },
   getGameData: function(gameId){
