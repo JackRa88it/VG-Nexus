@@ -1,0 +1,117 @@
+.homerow{
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(82, 28, 28);
+    overflow: auto;
+    margin: 10px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#featured{
+    background-color: rgb(63, 63, 63);
+    height: 200px;
+    width: 100%;
+}
+#best{
+    background-color: rgb(63, 63, 63);
+    width: 49%;
+    /* width: 300px; */
+    float: left;
+    /* margin: 3px 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 20px;
+
+}
+
+.bestBox{
+    height: 200px;
+    width: 200px;
+
+}
+
+.bestBox > img{
+    height: 100%;
+    width: 100%;
+}
+
+
+#new{
+    background-color: rgb(63, 63, 63);
+    width: 100%;
+    /* width: 300px; */
+    float: left;
+    /* margin: 3px 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 20px;
+
+}
+.newestBox{
+    height: 200px;
+    width: 200px;
+
+}
+
+.newestBox > img{
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+#favorites{
+    background-color: rgb(63, 63, 63);
+    width: 49%;
+    /* width: 300px; */
+    float: left;
+    /* height: 100%; */
+    /* margin: 3px 0px; */
+
+}
+
+#tags{
+    background-color: rgb(63, 63, 63);
+    width: 100%;
+    /* width: 300px; */
+    float: left;
+    /* height: 200px; */
+    /* margin: 3px 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+.tagBox{
+    width: calc(50% - 10px);
+    background-color: rgb(27, 25, 36);
+    margin: 5px;
+    padding-bottom: 20px;
+    /* height: 200px; */
+}
+
+.tagGameBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.tagGame{
+    height: 200px;
+    width: 200px;
+}
+
+.tagGame > img{
+    height: 100%;
+    width: 100%;
+}
+
+.categoryHeader{
+    width: 100%
+}

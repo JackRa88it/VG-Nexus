@@ -1,25 +1,112 @@
-import React from "react";
-// import {Col, Container, Row} from "../Grid/";
-import CommentList from "../../components/CommentList"
-const Home = () => (
-  <div>
-    <h1>Home Page</h1>
+import './Home.css'
+import React from 'react'
+import API from '../../utils/API'
+class Home extends React.Component{
+  state = {
+    best: [],
+    featured: [],
+    tags: [],
+    newest: [],
+  }
+  getBest(){
+    API.getBest()
+    .then((res)=>{
+      console.log(res.data)
+      this.setState({best:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  getNewest(){
+    API.getNewest()
+    .then((res)=>{
+      this.setState({newest:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  getTagsandGames(){
+    API.getTagsandGames()
+    .then((res)=>{
+      console.log(res.data)
+      this.setState({tags: res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  componentDidMount(){
+    this.getBest()
+    this.getNewest()
+    this.getTagsandGames()
+  }
+  render(){
+    return(
 
-    <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data">
-    <input type="file" name="filetoupload" /><br />
-    <input type="submit" />
-    </form>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque velit, lobortis ut magna
-      varius, blandit rhoncus sem. Morbi lacinia nisi ac dui fermentum, sed luctus urna tincidunt.
-      Etiam ut feugiat ex. Cras non risus mi. Curabitur mattis rutrum ipsum, ut aliquet urna
-      imperdiet ac. Sed nec nulla aliquam, bibendum odio eget, vestibulum tortor. Cras rutrum ligula
-      in tincidunt commodo. Morbi sit amet mollis orci, in tristique ex. Donec nec ornare elit.
-      Donec blandit est sed risus feugiat porttitor. Vestibulum molestie hendrerit massa non
-      consequat. Vestibulum vitae lorem tortor. In elementum ultricies tempus. Interdum et malesuada
-      fames ac ante ipsum primis in faucibus.
-    </p>
-  </div>
-);
+      <div>
+          <div className='homerow'>
+            <div className='categoryHeader'>Featured</div>
+            <div id='featured'></div>
+          </div>
+
+          <div className='homerow'>
+            <div id='best'>
+              <div className='categoryHeader'>Top Rated Games</div>
+              {this.state.best.map((game)=>{
+                return(
+                  <div className='bestBox'>
+                    <img src={'/assets/gameThumbnails/' + game.id}></img>
+                  </div>
+                )
+              })}
+            </div>
+            <div id='favorites'>
+              <div className='categoryHeader'>Your favorites</div>
+            </div>
+          </div>
+          <div className='homerow'>
+            <div id='new'>
+              <div className='categoryHeader'>Newest Games</div>
+              {this.state.best.map((game)=>{
+                return(
+                  <div className='newestBox'>
+                    <img src={'/assets/gameThumbnails/' + game.id}></img>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className='homerow'>
+            <div id='tags'>
+              <div className='categoryHeader'>Games by tags</div>
+              {this.state.tags.map((tag)=>{
+                return(
+                  <div className = 'tagBox'>
+                    <div>{tag.name}</div>
+                    <div className = 'tagGameBox'>
+                      {tag.Games.map((game)=>{
+                        return(
+                          <div className = 'tagGame'>
+                            <img src={'/assets/gameThumbnails/' + game.id}></img>
+                          </div>
+                        )
+                      })}
+                    </div>
+
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+
+
+      </div>
+    )
+  }
+}
+
 
 export default Home;

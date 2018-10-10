@@ -36,8 +36,14 @@ export default {
   },
   getForumList: function() {
     return axios.get("/api/forumList")
+  },
+  getBest: function(){
+    return axios.get('/api/games/best')
+  },
+  getNewest: function(){
+    return axios.get('/api/games/newest')
+  },
+  getTagsandGames: function(){
+    return axios.get('/api/tags/games/all')
   }
-  // joinChannel: function(channel){
-  //   return axios.get('/api/channels/'+channel)
-  // }
 };
