@@ -44,7 +44,7 @@ module.exports = function (app,io){
                             //With a tag ID associate the two inside the join table
                             game.addTag(found.id)
                             .then(function(){
-                                if(err) throw err;
+                                if(err) console.log(err);
                                 //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
                                 var oldpath = files.filetoupload.path;
                                 var thumbnailPath = files.thumbnail.path;
@@ -75,15 +75,20 @@ module.exports = function (app,io){
                                                 console.log('deleting' + newpath );
                                                 //Redirect the user in the frontend to their game
                                                 newGame(game, io);
-                                                res.send('/all/games/'+game.id);  
+                                                if(res.headersSent){
+                                                    console.log('headers already sent')
+                                                }
+                                                else{
+                                                    return res.send('/all/games/'+game.id);  
+                                                }
                                             });
                                         })
                                     });
                                 }) 
-                            }).catch(function(err){console.log(err)});
-                        }).catch(function(err){console.log(err)});
+                            })
+                        })
                     })  
-                }).catch(function(err){console.log(err)})
+                })
             })
         }  
     })
