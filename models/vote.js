@@ -4,14 +4,21 @@ module.exports = function(sequelize, DataTypes) {
     upDown: {
       type: DataTypes.BOOLEAN,
     },
-  });
+  },{
+    indexes:[
+      {
+        unique: true,
+        fields: ['UserId','PostId']
+      }
+    ]
+  }
+  );
 
   // **define relationships here**
   Vote.associate = function (models) {
     Vote.belongsTo(models.User, {
       foreignKey: {
         allowNull: false,
-        unique: true
       }
     });
     Vote.belongsTo(models.Game, {
@@ -21,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     });
     Vote.belongsTo(models.Post, {
       foreignKey: {
-        allowNull: true
+        allowNull: true,
       }
     });
   };

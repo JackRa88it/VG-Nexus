@@ -23,7 +23,6 @@ export default {
     return axios.post('/api/game/' + gameId + '/post/',{text: text})
   },
   getGameComments: function(gameId){
-    console.log('getting game comments!')
     return axios.get('/api/game/'+ gameId+'/post/' )
   },
   getGameData: function(gameId){
@@ -46,8 +45,17 @@ export default {
   },
   submitNewPost: function(newPost) {
     return axios.post('/api/community/newPost/', {newPost: newPost})
+  },
+  getBest: function(){
+    return axios.get('/api/games/best')
+  },
+  getNewest: function(){
+    return axios.get('/api/games/newest')
+  },
+  getTagsandGames: function(){
+    return axios.get('/api/tags/games/all')
+  },
+  getRandom: function(){
+    return axios.get('/api/games/random')
   }
-  // joinChannel: function(channel){
-  //   return axios.get('/api/channels/'+channel)
-  // }
 };

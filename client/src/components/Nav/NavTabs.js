@@ -108,7 +108,7 @@ class NavTabs extends Component {
                 <Link to="/login_signup" className="nav-link">Sign In</Link>
               </div>
             ) : (
-                <div className = "nav-item dropdown">
+                <div className = "nav-item dropdown dropdownMenu">
                   <div className="nav-link special dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {/* Img here  */}
                     <input type="image" src={"/assets/userThumbnails/" + this.state.user.id} />

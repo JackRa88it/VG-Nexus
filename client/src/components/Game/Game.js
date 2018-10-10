@@ -43,7 +43,7 @@ class Game extends Component{
                             scrolling="no"
                             id="gameView"
                             height="500"
-                            width="100%"
+                            width="680"
                             src={'/games/'+this.props.match.params.id}
                             allowFullScreen></iframe>
                     

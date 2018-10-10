@@ -44,7 +44,7 @@ module.exports = function (app,io){
                             //With a tag ID associate the two inside the join table
                             game.addTag(found.id)
                             .then(function(){
-                                if(err) throw err;
+                                if(err) console.log(err);
                                 //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
                                 var oldpath = files.filetoupload.path;
                                 var thumbnailPath = files.thumbnail.path;
@@ -53,10 +53,10 @@ module.exports = function (app,io){
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
                                 fs.rename(thumbnailPath,newThumbnailPath, function(err) {
                                     //Rename thumbnail
-                                    if(err) throw err;
+                                    // if(err) throw err;
                                     fs.rename(oldpath, newpath, function (err) {
                                         console.log('renaming filepaths')
-                                        if (err) throw err;
+                                        if (err) console.log(err);
                                         
                                         //Create a directory if it doesn't already exist
                                         var dir = "./client/public/games/" + game.id
@@ -69,21 +69,26 @@ module.exports = function (app,io){
                                         var target = path.join(__dirname,'../client/public/games/' + game.id)
                                         extract(newpath,{dir:target},function(err){
                                             console.log('extracting to ', target)
-                                            if(err) throw err;
+                                            if(err) console.log(err);
                                             fs.unlink(newpath, (err) => {
-                                                if (err) throw err;
+                                                if (err) console.log(err);
                                                 console.log('deleting' + newpath );
                                                 //Redirect the user in the frontend to their game
                                                 newGame(game, io);
-                                                res.send('/all/games/'+game.id);  
+                                                if(res.headersSent){
+                                                    console.log('headers already sent')
+                                                }
+                                                else{
+                                                    return res.send('/all/games/'+game.id);  
+                                                }
                                             });
                                         })
                                     });
                                 }) 
-                            }).catch(function(err){console.log(err)});
-                        }).catch(function(err){console.log(err)});
+                            })
+                        })
                     })  
-                }).catch(function(err){console.log(err)})
+                })
             })
         }  
     })
@@ -141,6 +146,48 @@ module.exports = function (app,io){
         });
     });
 
+    app.get('/api/tags/games/all', (req,res)=>{
+        db.Tag.findAll({
+            include:[{
+                model:db.Game,
+                // limit: 3
+            }]
+        }).then((tags)=>{
+            res.json(tags)
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
+    app.get('/api/games/newest', function(req,res){
+        db.Game.findAll({
+            limit: 6,
+            order:[
+                ['createdAt','DESC']
+            ],
+            include:[db.Vote,db.Tag]
+        }).then((games) => {
+            res.json(games)
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
+
+    app.get('/api/games/best', function(req,res){
+        db.Game.findAll({
+            limit: 6,
+            order:[
+                ['rating','DESC']
+            ],
+            include:[db.Vote,db.Tag, db.User]
+        }).then((games) => {
+            res.json(games)
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
 
     app.post('/api/game/:id/post/', function(req,res){
         //Create a comment and associate it with gameId :id
@@ -162,12 +209,6 @@ module.exports = function (app,io){
     app.get('/api/post/:id/vote/',function(req,res){
         //This route returns the number of upvotes and downvotes on a post
         db.sequelize.query("SELECT upDown,count(upDown) as counts FROM votes WHERE PostId = "+req.params.id+" group by upDown", { type: db.sequelize.QueryTypes.SELECT
-        // db.Vote.findAll({
-        //     where:{
-        //         PostId: req.params.id,
-        //     },
-        //     attributes: ['vote.upDown',[db.sequelize.fn('COUNT', db.sequelize.col('vote.upDown')),'counts']],
-        //     group: ['vote.upDown'],
         }).then((voteCounts) => {
             //Data comes back as [{upDown: 0, counts: n} {upDown: 1, counts: 1}]
             voteCounts = {votes: voteCounts}
@@ -218,6 +259,17 @@ module.exports = function (app,io){
         }
     })
 
+
+    app.get('/api/games/random', function(req,res){
+        db.Game.findAll({
+            order: [ [ db.sequelize.fn('RAND') ] ],
+            limit: 4
+        }).then((games) =>{
+            res.json(games)
+        })
+    })
+
+
     app.get('/api/game/:id', function(req,res){
         //Grab game data with :id
         db.Game.findOne({
@@ -236,6 +288,7 @@ module.exports = function (app,io){
         });
     })
 
+
     app.get('/api/game/:id/post/', function(req,res){
         // Grab all posts from game :id
         db.Post.findAll({
@@ -245,13 +298,33 @@ module.exports = function (app,io){
             order:[
                 ['createdAt','DESC']
             ],
-            include: [db.User],
-        }).then((post) => {
-            res.json(post)
+            include: [db.User, db.Vote],
+        }).then((posts) => {
+            posts.forEach((post) => {
+                post.dataValues.score = 0
+                post.dataValues.upVoted = false
+                post.dataValues.downVoted = false
+                post.dataValues.Votes.forEach((vote) => {
+                    if(vote.upDown){
+                        post.dataValues.score++
+                        if(req.user && req.user.id==vote.UserId){
+                            post.dataValues.upVoted = true
+                        }
+                    }
+                    else{
+                        post.dataValues.score--
+                        if(req.user && req.user.id==vote.UserId){
+                            post.dataValues.downVoted = true
+                        }
+                    }
+                })
+            })
+            res.json(posts)
         }).catch(function(err) {
             console.log(err);
             res.json(err);
         });
+        
     })
 
     app.get('/api/messages/', function(req,res){
@@ -351,6 +424,4 @@ function newGame(game,io) {
         });
     });
 }
-
-
 

@@ -86,14 +86,19 @@ input[type='image']{
   max-height:18px;
   padding:0px;
   margin:0px;
+  outline: none;
 }
 .nav-tabs .nav-link {
   border-radius: 0px;
 }
+#navbarDropdown2{
+  background: #222222;
+  padding: 0px;
 
-.special:hover{
-  background:color #fff !important;
 }
+#navbarDropdown{
+  background: #222222;
+} 
 /* Ajust font color when hovering */
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link.active {
@@ -108,17 +113,18 @@ input[type='image']{
   background-color: #222;
 
 }
-
+.dropdownMenu{
+  margin:0 15px;
+}
 .dropdown:hover{
   background-color:none;
 }
 
 i{
-  font-size: 0.7em;
-  vertical-align: middle;
-  padding-bottom: 2px;
+  /* font-size: 0.7em; */
+  vertical-align: super;
+  padding: 2px 0px;
   float:right;
-  /* margin:8px 0px; */
   color: rgb(93, 93, 97);
 }
 .dropdown-item:hover > i{
