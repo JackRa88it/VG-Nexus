@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
+import Authenticator from "../../utils/Authenticator";
 import "./Community.css";
 import ForumTable from "../../components/Forums";
 import ThreadTable from "../../components/Threads";
@@ -15,10 +16,17 @@ class Community extends React.Component{
     forumName: '',
     threadId: '',
     threadName: '',
-    formType: ''
+    formType: '',
+    currentUser: undefined,
+    authenticated: false
   };
 
   componentDidMount(){
+    Authenticator.authenticate(() => {
+      this.setState({
+        authenticated: true,
+        currentUser: Authenticator.user})
+    })
     API.getForumList()
     .then((res) => {
       if(res.data){
@@ -65,11 +73,11 @@ class Community extends React.Component{
   }
 
   newPostButton = event => {
-    //validate user here, either set page to form or "must be logged in"
-    this.setState({
-      page: "form",
-      formType: "newPost"
-    })
+    console.log(this.state);
+    // this.setState({
+    //   page: "form",
+    //   formType: "newPost"
+    // })
   }
 
 
