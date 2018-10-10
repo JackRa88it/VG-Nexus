@@ -73,11 +73,25 @@ class Community extends React.Component{
   }
 
   newPostButton = event => {
-    console.log(this.state);
-    // this.setState({
-    //   page: "form",
-    //   formType: "newPost"
-    // })
+    if (this.state.authenticated) {
+      this.setState({
+        page: "form",
+        formType: "newPost"
+      })
+    }
+  }
+
+  submitNewPost = newPost => {
+    API.submitNewPost(newPost)
+    .then(res => {
+      this.setState({
+        page: "thread",
+        threadId: newPost.threadId
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
 
@@ -172,7 +186,7 @@ class Community extends React.Component{
             <div>
               <h1>{this.state.threadName}</h1>
             </div>
-            <CommunityForm formType={this.state.formType} threadId={this.state.threadId}/>
+            <CommunityForm formType={this.state.formType} threadId={this.state.threadId} currentUser={this.state.currentUser} submitNewPost={this.submitNewPost}/>
         </div>
       )
     }

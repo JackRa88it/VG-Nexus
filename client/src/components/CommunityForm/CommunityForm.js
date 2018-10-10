@@ -25,10 +25,10 @@ class CommunityForm extends React.Component {
     event.preventDefault();
     if (this.state.text) {
       let newPost = {};
-      newPost.userId = 1;
+      newPost.userId = this.props.currentUser.id;
       newPost.threadId = this.props.threadId;
       newPost.text = this.state.text;
-      API.submitNewPost(newPost);
+      this.props.submitNewPost(newPost);
     } else {
       this.setState({
         text: "Enter text..."
