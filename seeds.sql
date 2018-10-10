@@ -5,10 +5,10 @@ INSERT INTO Users (username, email, password, postBanner, bio, createdAt, update
 ("bootlicker", "bootsntoots@test.com", "heel", "ugly picture", "A boot maker", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("tacobell", "causesacidreflux@darknet.net", "hacked", "picture of burrito", "forgotten bio", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO Games (name, description, UserId, createdAt, updatedAt) VALUES
-("Sonic", 'Gotto go fast', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Pokemon', 'Catch em all', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Runescape', 'hd new age game', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- INSERT INTO Games (name, description, UserId, createdAt, updatedAt) VALUES
+-- ("Sonic", 'Gotto go fast', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Pokemon', 'Catch em all', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Runescape', 'hd new age game', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO Tags (name,  createdAt, updatedAt) VALUES
 ("Action", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
