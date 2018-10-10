@@ -37,16 +37,21 @@ class Game extends Component{
                 <p>
                     Developer: User_12314
                 </p>
-                <div className='px-auto'>
-                  <iframe title="gamewindow"
-                          scrolling="no"
-                          id="gameView"
-                          height="500"
-                          src={'/games/'+this.props.match.params.id}
-                          allowFullScreen></iframe>
-                  </div>
-                <Chatroom gameId = {this.props.match.params.id} />
-                <CommentList gameId = {this.props.match.params.id}/>
+                <div className="w-100">
+                    <div className='d-inline-flex w-100 ml-5'>
+                        <iframe title="gamewindow"
+                            scrolling="no"
+                            id="gameView"
+                            height="500"
+                            width="680"
+                            src={'/games/'+this.props.match.params.id}
+                            allowFullScreen></iframe>
+                    
+                        <Chatroom gameId = {this.props.match.params.id} />
+                    </div>
+                    <CommentList gameId = {this.props.match.params.id}/>
+                </div>
+                
             </div>
         )
     }

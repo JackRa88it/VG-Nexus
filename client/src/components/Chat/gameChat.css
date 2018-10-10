@@ -1,73 +1,85 @@
 .chatroom {
-    margin: 8px;
-    position:relative;
-    height: 480px;
-    width: 230px;
+    position:absolute;
+    height: 470px;
+    min-width: 15%;
+    right: 12%;
+    margin-top:10px;
     outline: solid;
     outline-color: #EE135B;
     float: right;
 }
-
-.msgbutton {
-    position: absolute;
-    height: 38px;
-    width: 40px;
-    right: 0px;
-    float: right;
-    bottom: 1.9px;
-
+.chatroom.minimized,
+.chatroom.minimized .fab
+{
+    font-size:0.1em;
+    min-width:0px;
+    height:0px;
 }
-
+.msgbutton {
+    max-height: 38px;
+    float:right;
+    width: 20px;
+    right: 0px;
+    bottom: 1.9px;
+}
+.chatroom#msg{
+    justify-content: end;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 .currentmsg {
     position: absolute;
-    width: 82.4%;
-    height: 99%;
-    font-size: 16px;
-    bottom: 2px;
-    left: 0.3px;
-    float: left;
+    padding-right:40px;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
 }
 
 .messageandbutton {
-    position: relative;
-    top: 89%;
+    position: absolute;
+    bottom: 0px;
     width: 100%;
     height: 8%;
-    text-size: 16px;
+    font-size: 16px;
 }
+.messagedisplay a{
+    font-weight: 400;
+}
+.messagedisplay a:hover{
+    color: rgba(238, 19, 91,0.8);
+    font-weight: 100;
 
+}
 .messagedisplay {
     position: absolute;
     outline: dotted;
-    height: 86.5%;
+    height: 85%;
     width: 99%;
     overflow: auto;
-    background-color: #222222;
+    background-color: rgb(17,17,17);
     font-size: 12px;
     left: 1px;
-    top: 25px;
+    top: 30px;
 }
 
 .chatroom-message {
     font-size: 12px;
+    margin: 3px 0px;
+    border-bottom: 1px dashed #fff;
 }
 .chatroom-message0 {
     background-color: rgb(17, 17, 17);
-    margin-bottom: 3px;
 } 
 .chatroom-message1 {
     background-color: rgb(26, 26, 26);
-    margin-bottom: 3px;
 }
 .usericon {
     height: 20px;
     width: 20px;  
 }
 .fa-telegram-plane {
-    font-size: 36px;
+    font-size: 24px;
     position: relative;
-    right: 4px;
-    bottom: 2px;
+    top:5px;
 }
 .gametabs {
     float: left;
@@ -79,6 +91,7 @@
 .fa-star {
     float: right;
     margin: 5px;
+    padding: 2px;
 }
 
 .chatroom-tab {
