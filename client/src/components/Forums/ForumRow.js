@@ -6,6 +6,7 @@ const ForumRow = (props) => (
     <td 
     className="forumTitle"
     data-id={props.forum.id}
+    data-name={props.forum.title}
     onClick={props.handleRowClick}>
       {props.forum.title}
     </td>

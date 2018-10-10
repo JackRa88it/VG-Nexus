@@ -160,16 +160,42 @@ module.exports = function (app,io){
     })
 
     app.get('/api/post/:id/vote/',function(req,res){
-        //This should probably be done as an include from the posts
         //This route returns the number of upvotes and downvotes on a post
-        db.Vote.count({
-            where:{
-                PostId: req.params.id,
-            },
-            group: ['vote.upDown'],
-        }).then((result) => {
-            //Data games back as {0: {count: n},1: {count: m}}
-            res.json(result)
+        db.sequelize.query("SELECT upDown,count(upDown) as counts FROM votes WHERE PostId = "+req.params.id+" group by upDown", { type: db.sequelize.QueryTypes.SELECT
+        // db.Vote.findAll({
+        //     where:{
+        //         PostId: req.params.id,
+        //     },
+        //     attributes: ['vote.upDown',[db.sequelize.fn('COUNT', db.sequelize.col('vote.upDown')),'counts']],
+        //     group: ['vote.upDown'],
+        }).then((voteCounts) => {
+            //Data comes back as [{upDown: 0, counts: n} {upDown: 1, counts: 1}]
+            voteCounts = {votes: voteCounts}
+            if(req.user){
+                //If the user is logged in find if they have previously voted on this comment or not
+                db.Vote.findOne({
+                    where:{
+                        UserId: req.user.id,
+                        PostId: req.params.id
+                    },
+                }).then((found) => {
+                    if(found){
+                        if(found.upDown){
+                            voteCounts.upVoted = true
+                        }
+                        else{
+                            voteCounts.downVoted = true
+                        }
+                    }
+                    res.json(voteCounts)
+                }).catch((err) => {
+                    res.json(err)
+                    console.log(err)
+                })      
+            }
+            else{
+                res.json(voteCounts)
+            }
         }).catch((err) => {
             res.json(err)
             console.log(err)
@@ -177,8 +203,9 @@ module.exports = function (app,io){
     })
 
     app.post('/api/post/:id/vote/',function(req,res){
+        //Post a vote to the database
         if(req.user){
-            db.Vote.create({
+            db.Vote.upsert({
                 upDown: req.body.vote,
                 UserId: req.user.id,
                 PostId: req.params.id
@@ -192,6 +219,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/game/:id', function(req,res){
+        //Grab game data with :id
         db.Game.findOne({
             where:{
                 id: req.params.id
@@ -209,12 +237,13 @@ module.exports = function (app,io){
     })
 
     app.get('/api/game/:id/post/', function(req,res){
+        // Grab all posts from game :id
         db.Post.findAll({
             where:{
                 GameId: req.params.id
             },
             order:[
-                ['id','DESC']
+                ['createdAt','DESC']
             ],
             include: [db.User],
         }).then((post) => {
@@ -244,7 +273,8 @@ module.exports = function (app,io){
         db.Forum.findAll({
             include: [{
                 model: db.Thread
-            }]
+            }],
+            order: [db.sequelize.col('id')]
         })
         .then(data => {
             res.json(data)
@@ -257,10 +287,28 @@ module.exports = function (app,io){
     app.get('/api/threadList/:id', function(req,res) {
         var forumId = req.params.id;
         db.Thread.findAll({
-            where: {forumId: forumId},
+            where: {ForumId: forumId},
             include: [{
                 model: db.Post
-            }]
+            }],
+            order: [db.sequelize.col('id')]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.get('/api/postList/:id', function(req,res) {
+        var threadId = req.params.id;
+        db.Post.findAll({
+            where: {ThreadId: threadId},
+            include: [{
+                model: db.User
+            }],
+            order: [db.sequelize.col('id')]
         })
         .then(data => {
             res.json(data)
@@ -273,7 +321,6 @@ module.exports = function (app,io){
 
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
-    console.log(gameRoom);
     gameRoom.on('connection', function (socket) {
         console.log('a user connected to /game/' + game.id);
         socket.on('messagePost', function (msg, name, id) {

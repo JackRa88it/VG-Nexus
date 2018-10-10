@@ -20,4 +20,5 @@ tr:nth-child(even) {
 
 .forumTitle:hover {
   color: #EE135B;
+  cursor: pointer;
 }

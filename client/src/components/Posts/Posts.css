@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+
+th {
+  padding: 10px;
+}
+
+td {
+ padding: 20px;
+}
+
+thead tr {
+  border: 1px solid grey;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(49, 49, 49, 0.9);
+}

@@ -26,7 +26,7 @@ class NavTabs extends Component {
   render() {
     return (
       <nav className="p-0 mb-3 navbar navbar-expand-lg w-100">
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs ">
           <li className="nav-item">
             <Link to="/" >
               <img src="/assets/controller_logo_white_red_AB.png" alt="controllerLogo" id="controllerLogo" className="ml-2" />
@@ -111,15 +111,24 @@ class NavTabs extends Component {
                 <div className = "nav-item dropdown">
                   <div className="nav-link special dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {/* Img here  */}
-                    <input type="image" src={this.state.user?this.state.user.avatar:"https://via.placeholder.com/350x150"} />
+                    <input type="image" src={"/assets/userThumbnails/" + this.state.user.id} />
                   </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
+                  {/* your name should take you to your public profile */}
                   <div className="dropdown-item" href="#">{this.state.username}</div>
                   <div className="dropdown-divider"></div>
-                  <div className="dropdown-item" href="#">Your Profile</div>
+                  {/* takes you to public profile, like how clicking on your name takes you there too */}
+                  {/* it's there because it's more explicit than clicking on your name */}
+                  <div className="dropdown-item" href="#">View Profile</div>
                   <div className="dropdown-divider"></div>
-                  <div className="dropdown-item" href="#">Edit Profile</div>
+                  {/* Your ... is where you can edit your stuff. Each one takes you to the same page. */}
+                  {/* If you click "Your Games," you go to that tab on that page */}
+                  <div className="dropdown-item" href="#">Your Games</div>
+                  {/* If you click "Your Profile," you go to that tab on that page */}
+                  <div className="dropdown-item" href="#">Your Profile</div>
+                  {/* If you click "Your Profile," you go to that tab on that page */}
+                  <div className="dropdown-item" href="#">Your Posts</div>
                   <div className="dropdown-divider"></div>
                   <div className="dropdown-item" href="#">
                     Help

@@ -23,12 +23,20 @@ class Chatroom extends Component{
 
     handleFormSubmit = event => {
         event.preventDefault();
-        console.log("test")
         if (this.state.newMessage) {
             this.socket.emit('messagePost', this.state.newMessage, this.name, this.id)
         }
         this.setState({newMessage: ''})
     }
+
+    handleTabClick = event => {
+        console.log("tab clicked")
+        const {name, value} = event.target
+        this.setState({
+            [name]: value
+        })
+    }
+
 
     componentDidMount(){
         this.connect(this.props.gameId);
@@ -55,13 +63,26 @@ class Chatroom extends Component{
         });
     }
     render(){
+      if(this.state.location === "chatroom"){
         return(
             <div className="chatroom">
                 <div className="gametabs">
-                    <p className="tab-location">Game</p>
-                    <p className="fas fa-star"></p>
-                    <p className="details-tab">Details</p>
-                    <p className="chatroom-tab">Chat</p>
+                    <button className="tab-location">Game</button>
+                    <button className="fas fa-star"></button>
+                    <button
+                     className="details-tab"
+                     name="location"
+                     value="details"
+                     onClick={this.handleTabClick}>
+                     Details
+                    </button>
+                    <button
+                    name="location"
+                    value="chatroom" 
+                    className="chatroom-tab"
+                    onClick={this.handleTabClick}>
+                    Chat
+                    </button>
                 </div>
                 <div className="messagedisplay">
                     {this.state.messages.map((message, i) => (
@@ -87,7 +108,38 @@ class Chatroom extends Component{
                     </button>
                 </div>
                 </div> 
-        )
+            )
+        }
+        else if(this.state.location === "details"){
+            return(
+                <div className="chatroom">
+                    <div className="gametabs">
+                        <button className="tab-location">Game</button>
+                        <button className="fas fa-star"></button>
+                        <button
+                         className="details-tab"
+                         name="location"
+                         value="details"
+                         onClick={this.handleTabClick}>
+                         Details
+                        </button>
+                        <button
+                        name="location"
+                        value="chatroom" 
+                        className="chatroom-tab"
+                        onClick={this.handleTabClick}>
+                        Chat
+                        </button>
+                    </div>
+                    <div className="messagedisplay">
+                    {this.props.gameDescript}
+                    {this.props.gameName}
+                    {this.props.createdAt}
+                    </div>
+                    </div> 
+                )
+        }
     }
+    
 }
 export default Chatroom;

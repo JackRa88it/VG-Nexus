@@ -17,3 +17,8 @@ thead tr {
 tr:nth-child(even) {
   background-color: rgba(49, 49, 49, 0.9);
 }
+
+.threadTitle:hover {
+  color: #EE135B;
+  cursor: pointer;
+}

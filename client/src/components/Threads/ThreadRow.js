@@ -3,7 +3,13 @@ import "./Threads.css";
 
 const ThreadRow = (props) => (
   <tr>
-    <td>{props.thread.title}</td>
+    <td 
+    className="threadTitle"
+    data-id={props.thread.id}
+    data-name={props.thread.title}
+    onClick={props.handleRowClick}>
+      {props.thread.title}
+    </td>
     <td>{props.thread.Posts.length}</td>
     <td>{props.thread.Posts[0].text}</td>
   </tr>
