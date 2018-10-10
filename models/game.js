@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
       // filepath: {
       //   type: DataTypes.STRING,

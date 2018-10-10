@@ -18,6 +18,7 @@ class TagSelect extends React.Component {
                 { id: 'Action', text: 'Action' },
                 { id: 'Arcade', text: 'Arcade' },
                 { id: 'Shooter', text: 'Shooter' },
+                { id: 'Role Playing', text: 'Role Playing'}
             ]
         };
     }

@@ -1,25 +1,167 @@
-import React from "react";
-// import {Col, Container, Row} from "../Grid/";
-import CommentList from "../../components/CommentList"
-const Home = () => (
-  <div>
-    <h1>Home Page</h1>
+import './Home.css'
+import React from 'react'
+import API from '../../utils/API'
+import Authenticator from '../../utils/Authenticator';
 
-    <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data">
-    <input type="file" name="filetoupload" /><br />
-    <input type="submit" />
-    </form>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque velit, lobortis ut magna
-      varius, blandit rhoncus sem. Morbi lacinia nisi ac dui fermentum, sed luctus urna tincidunt.
-      Etiam ut feugiat ex. Cras non risus mi. Curabitur mattis rutrum ipsum, ut aliquet urna
-      imperdiet ac. Sed nec nulla aliquam, bibendum odio eget, vestibulum tortor. Cras rutrum ligula
-      in tincidunt commodo. Morbi sit amet mollis orci, in tristique ex. Donec nec ornare elit.
-      Donec blandit est sed risus feugiat porttitor. Vestibulum molestie hendrerit massa non
-      consequat. Vestibulum vitae lorem tortor. In elementum ultricies tempus. Interdum et malesuada
-      fames ac ante ipsum primis in faucibus.
-    </p>
-  </div>
-);
+class Home extends React.Component{
+  state = {
+    best: [],
+    featured: [],
+    tags: [],
+    newest: [],
+    random: [],
+    authenticated: false
+  }
+  getFavorites(){
+    // API.getBest()
+    // .then((res)=>{
+    //   console.log(res.data)
+    //   this.setState({best:res.data})
+    // })
+    // .catch((err)=>{
+    //   console.log(err)
+    // })
+  }
+  getRandom(){
+    API.getRandom()
+    .then((res)=>{
+      console.log(res.data)
+      this.setState({random:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  getBest(){
+    API.getBest()
+    .then((res)=>{
+      this.setState({best:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  getNewest(){
+    API.getNewest()
+    .then((res)=>{
+      this.setState({newest:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  getTagsandGames(){
+    API.getTagsandGames()
+    .then((res)=>{
+      console.log(res.data)
+      this.setState({tags: res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+  componentDidMount = () => {
+
+    this.getBest()
+    this.getNewest()
+    this.getTagsandGames()
+    this.getFavorites()
+    this.getRandom()
+    Authenticator.authenticate(() => {
+      this.setState({ authenticated: true})
+    })
+  }
+
+  render(){
+    return(
+
+      <div>
+          <div className='homerow'>
+            <div className='categoryHeader'>Featured</div>
+            <div id='featured'></div>
+          </div>
+          
+          <div className='homerow'>
+            <div id='new'>
+              <div className='categoryHeader'>Newest Games</div>
+              {this.state.best.map((game)=>{
+                return(
+                  <div className='newestBox'>
+                    <img src={'/assets/gameThumbnails/' + game.id}></img>
+                  </div>
+                )
+              })}
+            </div>
+            {(this.state.authenticated ?
+              <div id='favorites'>
+                <div className='categoryHeader'>Your favorites</div>
+              </div> : 
+              <div id='random'>
+                <div className='categoryHeader'>Random</div>
+                {this.state.best.map((game)=>{
+                  return(
+                    <div className='randomBox'>
+                      <img src={'/assets/gameThumbnails/' + game.id}></img>
+                    </div>
+                  )
+                })}
+              </div>)}
+            
+          </div>
+          <div className='homerow'>
+            <div id='best'>
+                <div className='categoryHeader'>Top Rated Games</div>
+                {this.state.best.map((game)=>{
+                  return(
+                    <div className='bestBox'>
+                      <div className='bestCard'>
+                        <img src={'/assets/gameThumbnails/' + game.id}></img>
+                        <div className='bestCardTitle'>{game.name}</div>
+                        <div className='bestCardTags'>
+                          {game.Tags.map((tag)=>{
+                            return(
+                              <div>{tag.name}</div>
+                            )})
+                          }
+                        </div>
+                        <div className='bestCardRating'>{game.rating.toFixed(3)} ({game.Votes.length} Votes)</div>
+                      </div>
+                      <div className='bestInfo'>
+                          <div className='bestDescription'>{game.description}</div>
+                          <div className='bestAuthor'>{game.User.username}</div>
+                      </div>
+                    </div>
+                  )
+                })}
+            </div>
+          </div>
+          <div className='homerow'>
+            <div id='tags'>
+              <div className='categoryHeader'>Games by tags</div>
+              {this.state.tags.map((tag)=>{
+                return(
+                  <div className = 'tagBox'>
+                    <div>{tag.name}</div>
+                    <div className = 'tagGameBox'>
+                      {tag.Games.map((game)=>{
+                        return(
+                          <div className = 'tagGame'>
+                            <img src={'/assets/gameThumbnails/' + game.id}></img>
+                            <div className = 'tagGameTitle'>{game.name}</div>
+                            <div className = 'tagGameRating'>{game.rating.toFixed(2)}</div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+      </div>
+    )
+  }
+}
+
 
 export default Home;
