@@ -45,5 +45,8 @@ export default {
   },
   getTagsandGames: function(){
     return axios.get('/api/tags/games/all')
+  },
+  getRandom: function(){
+    return axios.get('/api/games/random')
   }
 };

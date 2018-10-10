@@ -56,7 +56,7 @@ module.exports = function (app,io){
                                     // if(err) throw err;
                                     fs.rename(oldpath, newpath, function (err) {
                                         console.log('renaming filepaths')
-                                        if (err) throw err;
+                                        if (err) console.log(err);
                                         
                                         //Create a directory if it doesn't already exist
                                         var dir = "./client/public/games/" + game.id
@@ -69,9 +69,9 @@ module.exports = function (app,io){
                                         var target = path.join(__dirname,'../client/public/games/' + game.id)
                                         extract(newpath,{dir:target},function(err){
                                             console.log('extracting to ', target)
-                                            if(err) throw err;
+                                            if(err) console.log(err);
                                             fs.unlink(newpath, (err) => {
-                                                if (err) throw err;
+                                                if (err) console.log(err);
                                                 console.log('deleting' + newpath );
                                                 //Redirect the user in the frontend to their game
                                                 newGame(game, io);
@@ -175,7 +175,7 @@ module.exports = function (app,io){
             order:[
                 ['rating','DESC']
             ],
-            include:[db.Vote,db.Tag]
+            include:[db.Vote,db.Tag, db.User]
         }).then((games) => {
             res.json(games)
         }).catch(function(err){
@@ -254,6 +254,17 @@ module.exports = function (app,io){
         }
     })
 
+
+    app.get('/api/games/random', function(req,res){
+        db.Game.findAll({
+            order: [ [ db.sequelize.fn('RAND') ] ],
+            limit: 4
+        }).then((games) =>{
+            res.json(games)
+        })
+    })
+
+
     app.get('/api/game/:id', function(req,res){
         //Grab game data with :id
         db.Game.findOne({
@@ -271,6 +282,7 @@ module.exports = function (app,io){
             res.json(err);
         });
     })
+
 
     app.get('/api/game/:id/post/', function(req,res){
         // Grab all posts from game :id
@@ -354,10 +366,3 @@ function newGame(game,io) {
     });
 }
 
-
-
-async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array)
-  }
-}

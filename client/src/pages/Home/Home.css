@@ -11,10 +11,115 @@
 
 #featured{
     background-color: rgb(63, 63, 63);
-    height: 200px;
+    height: 300px;
     width: 100%;
 }
 #best{
+    background-color: rgb(63, 63, 63);
+    width: 100%;
+    /* width: 300px; */
+    float: left;
+    /* margin: 3px 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 20px;
+    padding-top: 5px;
+
+}
+
+.bestBox{
+    height: 360px;
+    width: 49%;
+    max-width: 480px;
+    padding: 5px 5px;
+    margin: 4px 2px;
+    background-color: rgb(27, 25, 36)
+}
+
+.bestCard{
+    position: relative;
+    float: left;
+    background-color: rgb(55, 84, 112);
+    width: 188px;
+    height: 100%;
+}
+
+.bestCard > img{
+    height: 160px;
+    width: 180px;
+    margin: 4px;
+    border: solid white 2px;
+}
+
+.bestCardTitle{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bolder;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 14px;
+    /* border-bottom: white solid 2px; */
+}
+
+.bestCardTags{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.bestCardTags > div{
+    height: 24px;
+    margin: 2px 2px;
+    padding: 0px 4px;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: rgb(27, 25, 36);
+}
+
+.bestCardRating{
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+}
+
+.bestInfo{
+    padding: 20px;
+    width: calc(100% - 188px);
+    height: 100%;
+    float: left;
+    background-color: rgb(39, 52, 63);
+}
+
+.bestDescription{
+    border-bottom: 2px solid whitesmoke;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 94%;
+}
+
+
+.bestAuthor{
+    float: right;
+}
+
+.randomBox > img{
+    height: 100%;
+    width: 100%;
+}
+
+.randomBox{
+    height: 120px;
+    width: 120px;
+    padding-top: 5px;
+
+}
+
+#random{
     background-color: rgb(63, 63, 63);
     width: 49%;
     /* width: 300px; */
@@ -27,21 +132,9 @@
 
 }
 
-.bestBox{
-    height: 200px;
-    width: 200px;
-
-}
-
-.bestBox > img{
-    height: 100%;
-    width: 100%;
-}
-
-
 #new{
     background-color: rgb(63, 63, 63);
-    width: 100%;
+    width: 49%;
     /* width: 300px; */
     float: left;
     /* margin: 3px 0px; */
@@ -52,8 +145,9 @@
 
 }
 .newestBox{
-    height: 200px;
-    width: 200px;
+    height: 120px;
+    width: 120px;
+    padding-top: 5px;
 
 }
 
@@ -72,7 +166,9 @@
     float: left;
     /* height: 100%; */
     /* margin: 3px 0px; */
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 #tags{
@@ -93,7 +189,7 @@
     background-color: rgb(27, 25, 36);
     margin: 5px;
     padding-bottom: 20px;
-    /* height: 200px; */
+    min-width: 180px;
 }
 
 .tagGameBox{
@@ -103,13 +199,47 @@
 }
 
 .tagGame{
-    height: 200px;
-    width: 200px;
+    width: calc(50% - 8px);
+    min-width: 160px;
+    padding: 5px;
+    background-color: rgb(55, 84, 112);
+    margin: 2px 4px;
 }
 
+
+
 .tagGame > img{
-    height: 100%;
-    width: 100%;
+    float: left;
+    height: 30px;
+    width: 30px;
+}
+
+.tagGameTitle{
+    line-height: 30px;
+    float: left;
+    padding: 0px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 110px;
+    white-space: nowrap; 
+    max-height: 30px;
+}
+
+.tagGameRating{
+    float:right;
+    line-height: 30px;
+}
+
+@media(max-width: 1020px){
+    .tagGame{
+        width: 100%;
+    }
+}
+
+@media(max-width: 600px){
+    .tagBox{
+        width: 100%
+    }
 }
 
 .categoryHeader{

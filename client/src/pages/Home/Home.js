@@ -1,17 +1,40 @@
 import './Home.css'
 import React from 'react'
 import API from '../../utils/API'
+import Authenticator from '../../utils/Authenticator';
+
 class Home extends React.Component{
   state = {
     best: [],
     featured: [],
     tags: [],
     newest: [],
+    random: [],
+    authenticated: false
+  }
+  getFavorites(){
+    // API.getBest()
+    // .then((res)=>{
+    //   console.log(res.data)
+    //   this.setState({best:res.data})
+    // })
+    // .catch((err)=>{
+    //   console.log(err)
+    // })
+  }
+  getRandom(){
+    API.getRandom()
+    .then((res)=>{
+      console.log(res.data)
+      this.setState({random:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   }
   getBest(){
     API.getBest()
     .then((res)=>{
-      console.log(res.data)
       this.setState({best:res.data})
     })
     .catch((err)=>{
@@ -37,11 +60,18 @@ class Home extends React.Component{
       console.log(err)
     })
   }
-  componentDidMount(){
+  componentDidMount = () => {
+
     this.getBest()
     this.getNewest()
     this.getTagsandGames()
+    this.getFavorites()
+    this.getRandom()
+    Authenticator.authenticate(() => {
+      this.setState({ authenticated: true})
+    })
   }
+
   render(){
     return(
 
@@ -50,22 +80,7 @@ class Home extends React.Component{
             <div className='categoryHeader'>Featured</div>
             <div id='featured'></div>
           </div>
-
-          <div className='homerow'>
-            <div id='best'>
-              <div className='categoryHeader'>Top Rated Games</div>
-              {this.state.best.map((game)=>{
-                return(
-                  <div className='bestBox'>
-                    <img src={'/assets/gameThumbnails/' + game.id}></img>
-                  </div>
-                )
-              })}
-            </div>
-            <div id='favorites'>
-              <div className='categoryHeader'>Your favorites</div>
-            </div>
-          </div>
+          
           <div className='homerow'>
             <div id='new'>
               <div className='categoryHeader'>Newest Games</div>
@@ -76,6 +91,48 @@ class Home extends React.Component{
                   </div>
                 )
               })}
+            </div>
+            {(this.state.authenticated ?
+              <div id='favorites'>
+                <div className='categoryHeader'>Your favorites</div>
+              </div> : 
+              <div id='random'>
+                <div className='categoryHeader'>Random</div>
+                {this.state.best.map((game)=>{
+                  return(
+                    <div className='randomBox'>
+                      <img src={'/assets/gameThumbnails/' + game.id}></img>
+                    </div>
+                  )
+                })}
+              </div>)}
+            
+          </div>
+          <div className='homerow'>
+            <div id='best'>
+                <div className='categoryHeader'>Top Rated Games</div>
+                {this.state.best.map((game)=>{
+                  return(
+                    <div className='bestBox'>
+                      <div className='bestCard'>
+                        <img src={'/assets/gameThumbnails/' + game.id}></img>
+                        <div className='bestCardTitle'>{game.name}</div>
+                        <div className='bestCardTags'>
+                          {game.Tags.map((tag)=>{
+                            return(
+                              <div>{tag.name}</div>
+                            )})
+                          }
+                        </div>
+                        <div className='bestCardRating'>{game.rating.toFixed(3)} ({game.Votes.length} Votes)</div>
+                      </div>
+                      <div className='bestInfo'>
+                          <div className='bestDescription'>{game.description}</div>
+                          <div className='bestAuthor'>{game.User.username}</div>
+                      </div>
+                    </div>
+                  )
+                })}
             </div>
           </div>
           <div className='homerow'>
@@ -90,19 +147,17 @@ class Home extends React.Component{
                         return(
                           <div className = 'tagGame'>
                             <img src={'/assets/gameThumbnails/' + game.id}></img>
+                            <div className = 'tagGameTitle'>{game.name}</div>
+                            <div className = 'tagGameRating'>{game.rating.toFixed(2)}</div>
                           </div>
                         )
                       })}
                     </div>
-
                   </div>
                 )
               })}
             </div>
           </div>
-
-
-
       </div>
     )
   }
