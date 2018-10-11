@@ -1,0 +1,115 @@
+.chatroom {
+    position:absolute;
+    height: 470px;
+    min-width: 15%;
+    right: 12%;
+    margin-top:10px;
+    outline: solid;
+    outline-color: #EE135B;
+    float: right;
+}
+.chatroom.minimized,
+.chatroom.minimized .fab
+{
+    font-size:0.1em;
+    min-width:0px;
+    height:0px;
+}
+.msgbutton {
+    max-height: 38px;
+    float:right;
+    width: 20px;
+    right: 0px;
+    bottom: 1.9px;
+}
+.chatroom#msg{
+    justify-content: end;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.currentmsg {
+    position: absolute;
+    padding-right:40px;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+}
+
+.messageandbutton {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 8%;
+    font-size: 16px;
+}
+.messagedisplay a{
+    font-weight: 400;
+}
+.messagedisplay a:hover{
+    color: rgba(238, 19, 91,0.8);
+    font-weight: 100;
+
+}
+.messagedisplay {
+    position: absolute;
+    outline: dotted;
+    height: 85%;
+    width: 99%;
+    overflow: auto;
+    background-color: rgb(17,17,17);
+    font-size: 12px;
+    left: 1px;
+    top: 30px;
+}
+
+.chatroom-message {
+    font-size: 12px;
+    margin: 3px 0px;
+    border-bottom: 1px dashed #fff;
+}
+.chatroom-message0 {
+    background-color: rgb(17, 17, 17);
+} 
+.chatroom-message1 {
+    background-color: rgb(26, 26, 26);
+}
+.usericon {
+    height: 20px;
+    width: 20px;  
+}
+.fa-telegram-plane {
+    font-size: 24px;
+    position: relative;
+    top:5px;
+}
+.gametabs {
+    float: left;
+    height: 43px;
+    width: 100%;
+    background-color:  rgb(26, 26, 26);
+    font-size: 12px;
+}
+.fa-star {
+    float: right;
+    margin: 5px;
+    padding: 2px;
+}
+
+.chatroom-tab {
+    float: right;
+    outline: solid;
+    margin: 5px;
+}
+.details-tab {
+    float: right;
+    outline: solid;
+    margin: 5px;
+}
+.tab-location {
+    float: left;
+    margin: 5px;
+    outline: solid;
+}
+/* img {
+    height: 20px;
+    width: 20px;   
+} */
