@@ -16,7 +16,13 @@ class ForumTable extends React.Component{
         </thead>
         <tbody>
           {this.props.forums.map(forum => {
-            return(<ForumRow forum={forum} handleRowClick={this.props.handleRowClick}/>)
+            return(
+              <ForumRow 
+                key={forum.id}
+                forum={forum} 
+                handleRowClick={this.props.handleRowClick}
+              />
+            )
           })}
         </tbody>
       </table>

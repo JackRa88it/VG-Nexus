@@ -9,6 +9,8 @@ import PostTable from "../../components/Posts";
 import CommunityForm from "../../components/CommunityForm";
 
 class Community extends React.Component{
+  // state renders the forums, threads, or posts based on state.page
+  // it hangs on to the id's for forum, thread, and post for navigation and form entry
   state = {
     forums: [],
     page: 'forumList',
@@ -17,16 +19,11 @@ class Community extends React.Component{
     threadId: '',
     threadName: '',
     formType: '',
-    currentUser: undefined,
-    authenticated: false
+    postId: '',
+    postText: ''
   };
 
   componentDidMount(){
-    Authenticator.authenticate(() => {
-      this.setState({
-        authenticated: true,
-        currentUser: Authenticator.user})
-    })
     API.getForumList()
     .then((res) => {
       if(res.data){
@@ -73,10 +70,12 @@ class Community extends React.Component{
   }
 
   newPostButton = event => {
-    if (this.state.authenticated) {
+    if (Authenticator.isAuthenticated) {
       this.setState({
         page: "form",
-        formType: "newPost"
+        formType: "newPost",
+        postId: '',
+        postText: ''
       })
     }
   }
@@ -92,6 +91,17 @@ class Community extends React.Component{
     .catch(err => {
       console.log(err)
     })
+  }
+
+  editPostButton = event => {
+    if (Authenticator.isAuthenticated) {
+      this.setState({
+        page: "form",
+        formType: "editPost",
+        postId: event.target.getAttribute("data-postid"),
+        postText: event.target.getAttribute("data-posttext")
+      })
+    }
   }
 
 
@@ -160,7 +170,7 @@ class Community extends React.Component{
                 + post in thread
               </button>
             </div>
-            <PostTable threadId={this.state.threadId}/>
+            <PostTable threadId={this.state.threadId} editPostButton={this.editPostButton}/>
         </div>
       )
     } else if (this.state.page === 'form') {
@@ -186,7 +196,13 @@ class Community extends React.Component{
             <div>
               <h1>{this.state.threadName}</h1>
             </div>
-            <CommunityForm formType={this.state.formType} threadId={this.state.threadId} currentUser={this.state.currentUser} submitNewPost={this.submitNewPost}/>
+            <CommunityForm 
+              formType={this.state.formType} 
+              threadId={this.state.threadId} 
+              submitNewPost={this.submitNewPost}
+              postId={this.state.postId}
+              postText={this.state.postText}
+            />
         </div>
       )
     }

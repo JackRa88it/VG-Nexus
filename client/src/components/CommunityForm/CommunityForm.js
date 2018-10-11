@@ -13,6 +13,12 @@ class CommunityForm extends React.Component {
     text: ""
   };
 
+  componentDidMount() {
+    this.setState({
+      text: this.props.postText
+    })
+  }
+
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
@@ -24,11 +30,15 @@ class CommunityForm extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.text) {
-      let newPost = {};
-      newPost.userId = this.props.currentUser.id;
-      newPost.threadId = this.props.threadId;
-      newPost.text = this.state.text;
-      this.props.submitNewPost(newPost);
+      if (this.props.formType === 'newPost') {
+        let newPost = {};
+        newPost.userId = this.props.currentUser.id;
+        newPost.threadId = this.props.threadId;
+        newPost.text = this.state.text;
+        this.props.submitNewPost(newPost);
+      } else if (this.props.formType === 'editPost') {
+        // edit existing post
+      }
     } else {
       this.setState({
         text: "Enter text..."
@@ -37,21 +47,19 @@ class CommunityForm extends React.Component {
   };
 
   render() {
-    if (this.props.formType === 'newPost') {
-      return (
-        <div>
-          <form className="form">
-            <input
-              value={this.state.text}
-              name="text"
-              onChange={this.handleInputChange}
-              type="text"
-            />
-            <button onClick={this.handleFormSubmit}>Submit</button>
-          </form>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <form className="form">
+          <input
+            value={this.state.text}
+            name="text"
+            onChange={this.handleInputChange}
+            type="text"
+          />
+          <button onClick={this.handleFormSubmit}>Submit</button>
+        </form>
+      </div>
+    );
   }
 }
 

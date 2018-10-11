@@ -34,7 +34,13 @@ class ThreadTable extends React.Component{
         </thead>
         <tbody>
           {this.state.threads.map(thread => {
-            return(<ThreadRow thread={thread} handleRowClick={this.props.handleRowClick}/>)
+            return(
+              <ThreadRow 
+                key={thread.id}
+                thread={thread} 
+                handleRowClick={this.props.handleRowClick}
+              />
+            )
           })}
         </tbody>
       </table>
