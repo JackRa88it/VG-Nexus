@@ -42,18 +42,18 @@ class Form extends Component{
         this.setState(({ tags: tags }));
         cb(tags)
     }
-
     render(){
         return(
             Authenticator.isAuthenticated ? (
                 <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data" id='gameForm' onSubmit={this.postGame}>
-                <div>Deploying a Game</div>
+                <h1 id='uploadTitle'>Deploying a Game</h1>
+                <br /><br />
                 At VG Nexus we ensure that deployment is fast and simple. Any game that can run as a single HTML document can be uploaded to our website.
-                <br></br>
-                We will guide you one step at a time.
-                <br></br>
+                <br /><br />
+                <h2>Prerequisites</h2>
+                <br /><br />
                 1. Make sure the file you want to render is called index.html
-                <br></br>
+                <br /><br />
                 2. If you are uploading a game made in the Phaser framework append the following code block anywhere after your "game" object is defined:
 
                 <pre>
@@ -85,6 +85,8 @@ class Form extends Component{
     resize()
                     `}
                 </pre>
+
+                3. That's it! Now you just need to fill out the fields.
                 Game ZIP file:
                 <input type="file" name="filetoupload" id='fileInput'/><br />
                 <br></br>

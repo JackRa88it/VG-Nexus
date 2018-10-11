@@ -2,6 +2,7 @@ import './Home.css'
 import React from 'react'
 import API from '../../utils/API'
 import Authenticator from '../../utils/Authenticator';
+import GameContainer from '../../components/GameContainer/'
 
 class Home extends React.Component{
   state = {
@@ -82,38 +83,11 @@ class Home extends React.Component{
           </div>
           
           <div className='homerow'>
-            <div id='new'>
-              <div className='categoryHeader'>Newest Games</div>
-              {this.state.newest.map((game)=>{
-                return(
-                  <div className='newestBox'>
-                    <img src={'/assets/gameThumbnails/' + game.id}></img>
-                  </div>
-                )
-              })}
-            </div>
+            <GameContainer games={this.state.newest} header={'Newest Games'} />
             {(this.state.authenticated ?
-              <div id='favorites'>
-                <div className='categoryHeader'>Your favorites</div>
-                {this.state.favorites.map((vote)=>{
-                  return(
-                    <div className='randomBox'>
-                      <img src={'/assets/gameThumbnails/' + vote.Game.id}></img>
-                    </div>
-                  )
-                })}
-              </div> : 
-              <div id='random'>
-                <div className='categoryHeader'>Random</div>
-                {this.state.random.map((game)=>{
-                  return(
-                    <div className='randomBox'>
-                      <img src={'/assets/gameThumbnails/' + game.id}></img>
-                    </div>
-                  )
-                })}
-              </div>)}
-            
+              <GameContainer games={this.state.favorites} header={'Your favorites'} /> : 
+              <GameContainer games={this.state.random} header={'Random'} />
+            )}
           </div>
           <div className='homerow'>
             <div id='best'>
