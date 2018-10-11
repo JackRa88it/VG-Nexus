@@ -1,13 +1,6 @@
 import React from "react";
 import "./CommunityForm.css";
-import API from "../../utils/API";
 import Authenticator from "../../utils/Authenticator";
-
-// 1) set up to add a post to a thread <-- IP
-// 2) add edit post
-// 3) add create thread
-// 4) add navigate to this form from Community page
-// 5) validate user at appropriate points
 
 class CommunityForm extends React.Component {
   state = {
@@ -15,9 +8,21 @@ class CommunityForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({
-      text: this.props.postText
-    })
+    if (this.props.formType === 'newPost' || this.props.formType === 'newThread' ) {
+      this.setState({
+        text: ''
+      })
+    }
+    else if (this.props.formType === 'editPost') {
+      this.setState({
+        text: this.props.postText
+      })
+    }
+    else if (this.props.formType === 'editThread') {
+      this.setState({
+        // text: 'NOT CODED YET'
+      })
+    }
   }
 
   handleInputChange = event => {
@@ -37,14 +42,23 @@ class CommunityForm extends React.Component {
         newPost.threadId = this.props.threadId;
         newPost.text = this.state.text;
         this.props.submitNewPost(newPost);
-      } else if (this.props.formType === 'editPost') {
+      } 
+      else if (this.props.formType === 'editPost') {
         let editedPost = {};
         editedPost.id = this.props.postId;
         editedPost.text = this.state.text;
         editedPost.threadId = this.props.threadId;
         this.props.submitEditedPost(editedPost);
       }
-    } else {
+      else if (this.props.formType === 'newThread') {
+        let newThread = {};
+        newThread.userId = Authenticator.user.id;
+        newThread.forumId = this.props.forumId;
+        newThread.title = this.state.text;
+        this.props.submitNewThread(newThread);
+      }
+    } 
+    else {
       this.setState({
         text: "Enter text..."
       })
