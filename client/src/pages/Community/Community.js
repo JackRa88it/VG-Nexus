@@ -52,16 +52,10 @@ class Community extends React.Component{
     }
   };
 
-  //navigation to user profile when clicking on username
-  handleUsernameClick = event => {
-    if (event.target.getAttribute("class") === "username") {
-      //route to userpage
-      console.log('testing123gimmegimmesomecreamcheese')
-    }
-  }
 
   // "forum tree" is what I call the nav links near top of community page (i.e. "Forums > General")
   handleForumTreeClick = event => {
+    console.log('waddup bitch')
     const linkId = event.target.getAttribute("data-id");
     if (linkId === "forum") {
       this.setState({

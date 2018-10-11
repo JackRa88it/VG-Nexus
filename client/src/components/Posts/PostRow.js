@@ -1,13 +1,14 @@
 import React from "react";
 import "./Posts.css";
 import Authenticator from "../../utils/Authenticator";
+import ForumAvatar from "./ForumAvatar"
 
 const PostRow = (props) => {
   const authenticated = Authenticator.isAuthenticated;
   if(authenticated) {
     return(
       <tr>
-        <td className='username' onClick={props.handleUsernameClick}>{props.post.User.username}</td>
+        <ForumAvatar user={props.post.user}/>
         <td>{props.post.text}</td>
         <td>{props.post.User.id === Authenticator.user.id ?
           <button 
