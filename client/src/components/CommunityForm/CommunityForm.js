@@ -40,7 +40,7 @@ class CommunityForm extends React.Component {
       } else if (this.props.formType === 'editPost') {
         let editedPost = {};
         editedPost.id = this.props.postId;
-        editedPost.text = this.props.postText;
+        editedPost.text = this.state.text;
         editedPost.threadId = this.props.threadId;
         this.props.submitEditedPost(editedPost);
       }
