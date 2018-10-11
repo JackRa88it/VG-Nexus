@@ -40,16 +40,7 @@ class NavTabs extends Component {
         </ul>
         <ul className="nav nav-tabs navbar-collapse">
 
-          <li className="nav-item">
-            <Link
-              to="/about"
-              className={
-                window.location.pathname === "/about" ? "nav-link active" : "nav-link"
-              }
-            >
-              About
-          </Link>
-          </li>
+         
           <li className="nav-item dropdown">
             <button className="nav-link special" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Games
@@ -126,7 +117,7 @@ class NavTabs extends Component {
                   {/* If you click "Your Games," you go to that tab on that page */}
                   <div className="dropdown-item" href="#">Your Games</div>
                   {/* If you click "Your Profile," you go to that tab on that page */}
-                  <div className="dropdown-item" href="#">Your Profile</div>
+                  <Link className="dropdown-item" to="/profile">Your Profile</Link>
                   {/* If you click "Your Profile," you go to that tab on that page */}
                   <div className="dropdown-item" href="#">Your Posts</div>
                   <div className="dropdown-divider"></div>

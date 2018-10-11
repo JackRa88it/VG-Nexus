@@ -1,17 +1,38 @@
 
 .footer
 {
+  border-top: 1px solid rgba(255,255,255,0.2);
   position:fixed;
   left: 0;
   bottom: 0;
-  color: white;
+  min-width: 1000px;
+  color: rgba(255,255,255,0.2);
   text-align: center;
   line-height: 12px;
 }
 .developers{
   margin: 5px 10px;
   font-size: 0.9em;
-  padding: 5px;
-  flex:none;
 }
-
+.footer a{
+  font-size: 0.65em;
+}
+.devTeam{
+  position: absolute;
+  width:100%;
+  user-select: none;
+  top:5px;
+  font-size: 1.15em;
+}
+.devTeam a{
+  padding: 0px 20px;
+}
+#left{
+  z-index:20;
+}
+.footer#middle a{
+  font-size: 0.5em;
+}
+.wrapper{
+  padding-top: 5px;
+}
