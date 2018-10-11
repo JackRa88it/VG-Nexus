@@ -133,7 +133,7 @@ module.exports = function (app,io){
             email: req.body.email,
             password: req.body.password,
             bio: req.body.bio,
-            postBanner: req.body.bannerUrl
+            postBanner: req.body.postBanner
           }).then(function(user) {
             var random = Math.floor(Math.random()*9) + 1
             var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
@@ -439,7 +439,7 @@ module.exports = function (app,io){
     })
 
     app.post('/api/community/newForumPost', function(req,res){
-        //submit new post in thread to the database
+        //create new forum post in the database
         if(req.user){
             db.Post.create({
                 text: req.body.newPost.text,
@@ -455,13 +455,29 @@ module.exports = function (app,io){
     })
 
     app.put('/api/community/editForumPost', function(req,res){
-        //submit new post in thread to the database
+        //update forum post in the database
         if(req.user){
             db.Post.update(
                 {text: req.body.editedPost.text},
                 {where: {id: req.body.editedPost.id}}
             ).then((post) => {
                 res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.post('/api/community/newForumThread', function(req,res){
+        //create new forum thread in the database
+        if(req.user){
+            db.Thread.create({
+                title: req.body.newThread.title,
+                UserId: req.body.newThread.userId,
+                ForumId: req.body.newThread.forumId
+            }).then((thread) => {
+                res.send(thread)
             }).catch((err) => {
                 console.log(err);
                 res.json(err)

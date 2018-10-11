@@ -11,7 +11,7 @@ const ThreadRow = (props) => (
       {props.thread.title}
     </td>
     <td>{props.thread.Posts.length}</td>
-    <td>{props.thread.Posts[0].text}</td>
+    <td>{props.thread.Posts.length ? props.thread.Posts[0].text : "(no posts)"}</td>
   </tr>
 )
 

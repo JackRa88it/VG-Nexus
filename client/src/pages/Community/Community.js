@@ -36,13 +36,15 @@ class Community extends React.Component{
 
   // navigation action when clicking on forum rows or thread rows
   handleRowClick = event => {
+    console.log('waddup bitch')
     if (event.target.getAttribute("class") === "forumTitle") {
       this.setState({
         page: "forum",
         forumId: event.target.getAttribute("data-id"),
         forumName: event.target.getAttribute("data-name")
       });
-    } else if (event.target.getAttribute("class") === "threadTitle") {
+    } 
+    else if (event.target.getAttribute("class") === "threadTitle") {
       this.setState({
         page: "thread",
         threadId: event.target.getAttribute("data-id"),
@@ -50,6 +52,7 @@ class Community extends React.Component{
       });
     }
   };
+
 
   // "forum tree" is what I call the nav links near top of community page (i.e. "Forums > General")
   handleForumTreeClick = event => {
@@ -60,7 +63,8 @@ class Community extends React.Component{
         forumId: '',
         forumName: '',
       })
-    } else {
+    } 
+    else {
       this.setState({
         page: "forum",
         forumId: linkId,
@@ -69,6 +73,39 @@ class Community extends React.Component{
         threadName: ''
       })
     }
+  }
+
+    //navigation to user profile when clicking on username
+    handleUsernameClick = event => {
+        if (event.target.getAttribute("class") === "username") {
+        //route to userpage
+        console.log('testing123gimmegimmesomecreamcheese')
+        }
+    }
+
+  // navigates to community form for new thread
+  newThreadButton = event => {
+    if (Authenticator.isAuthenticated) {
+      this.setState({
+        page: "form",
+        formType: "newThread"
+      })
+    }
+  }
+
+  // submit button in the new thread form
+  submitNewThread = newThread => {
+    API.newForumThread(newThread)
+    .then(res => {
+      console.log(res)
+      this.setState({
+        page: "forum",
+        forumId: newThread.forumId
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   // navigates to community form for new post
@@ -144,7 +181,8 @@ class Community extends React.Component{
           <ForumTable forums={this.state.forums} handleRowClick={this.handleRowClick}/>
         </div>
       )
-    } else if (this.state.page === 'forum') {
+    } 
+    else if (this.state.page === 'forum') {
       return(
         <div>
             <div className="forumTree">
@@ -157,11 +195,20 @@ class Community extends React.Component{
               </p>
               <p>></p>
             </div>
-            <h1>{this.state.forumName}</h1>
+            <div>
+              <h1>{this.state.forumName}</h1>
+              <button 
+                id="newThreadButton"
+                onClick={this.newThreadButton}
+              >
+                + new thread
+              </button>
+            </div>
             <ThreadTable forumId={this.state.forumId} handleRowClick={this.handleRowClick}/>
         </div>
       )
-    } else if (this.state.page === 'thread') {
+    } 
+    else if (this.state.page === 'thread') {
       return(
         <div>
             <div className="forumTree">
@@ -180,20 +227,22 @@ class Community extends React.Component{
               >
                 {this.state.forumName}
               </p>
+              <p>></p>
             </div>
             <div>
-              <h1>{this.state.threadName}</h1>
+              <h1 className="threadName">{this.state.threadName}</h1>
               <button 
                 id="newPostButton"
                 onClick={this.newPostButton}
               >
-                + post in thread
+                + new post
               </button>
             </div>
-            <PostTable threadId={this.state.threadId} editPostButton={this.editPostButton}/>
+            <PostTable threadId={this.state.threadId} editPostButton={this.editPostButton} handleUsernameClick={this.handleUsernameClick}/>
         </div>
       )
-    } else if (this.state.page === 'form') {
+    } 
+    else if (this.state.page === 'form') {
       return(
         <div>
             <div className="forumTree">
@@ -221,8 +270,10 @@ class Community extends React.Component{
               threadId={this.state.threadId} 
               submitNewPost={this.submitNewPost}
               submitEditedPost={this.submitEditedPost}
+              submitNewThread={this.submitNewThread}
               postId={this.state.postId}
               postText={this.state.postText}
+              forumId={this.state.forumId}
             />
         </div>
       )
