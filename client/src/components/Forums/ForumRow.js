@@ -2,8 +2,14 @@ import React from "react";
 import "./Forums.css";
 
 const ForumRow = (props) => (
-  <tr>
-    <td>{props.forum.title}</td>
+  <tr className="forumRow">
+    <td 
+    className="forumTitle"
+    data-id={props.forum.id}
+    data-name={props.forum.title}
+    onClick={props.handleRowClick}>
+      {props.forum.title}
+    </td>
     <td>{props.forum.Threads.length}</td>
     <td>{props.forum.Threads[0].title}</td>
   </tr>
