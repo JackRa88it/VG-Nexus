@@ -13,14 +13,14 @@ class Game extends Component{
         createdAt: '',
         username: '',
         upVoted: false,
-        downVoted: false
+        downVoted: false,
+        score: 0
     };
      
     voteGameHandler = (gameId,bool) => {
-        console.log('vote!')
         API.postGameVote(gameId,bool)
         .then((res)=>{
-          this.getGame(this.props.gameId)
+          this.getGame(gameId)
         })
         .catch((err) =>{
           console.log(err)
@@ -31,16 +31,8 @@ class Game extends Component{
         API.getGameData(id)
         .then((res) => {
             if(res.data){
-                var newState = {
-                    description: res.data.description,
-                    name: res.data.name,
-                    createdAt: res.data.createdAt,
-                    updatedAt: res.data.updatedAt,
-                    username: res.data.User.username,
-                    userId: res.data.User.id,
-                }
-                if(res.data.Votes)
-                this.setState(newState)
+                console.log(res.data)
+                this.setState(res.data)
             }
         })
     }
@@ -51,9 +43,13 @@ class Game extends Component{
     render(){
         return(
             <div>
-                <h1 className="text-center">{this.state.name}</h1>
-                <div className ={'gameUpvote ' + (this.state.upVoted ? 'gameUpvoted' : '')} onClick={(this.upVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,true)})}>+</div>
-            <div className = {'gameDownvote ' + (this.state.downVoted ? 'gameDownvoted' : '')} onClick={(this.state.downVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,false)})}>-</div>
+
+                <div>
+                    <h1 className="text-center">{this.state.name}</h1>
+                    <div>({this.state.score})</div>
+                    <div className ={'gameUpvote ' + (this.state.upVoted ? 'gameUpvoted' : '')} onClick={(this.upVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,true)})}>+</div>
+                    <div className = {'gameDownvote ' + (this.state.downVoted ? 'gameDownvoted' : '')} onClick={(this.state.downVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,false)})}>-</div>
+                </div>
                 <div className="w-100">
                     <div className='d-inline-flex w-100 ml-5'>
                         <iframe title="gamewindow"

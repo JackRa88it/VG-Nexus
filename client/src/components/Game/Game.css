@@ -6,6 +6,11 @@ iframe{
   border-radius: 2px;
   box-shadow:inset 0 0 1.5em blue;
 }
+.gameUpvote{
+  float: left;
+  width: 17px;
+}
+
 .gameUpvoted{
   color: rgb(45, 141, 45);
 }
@@ -17,7 +22,7 @@ iframe{
 }
 
 .gameDownvote{
-  float: right;
+  float: left;
   width: 17px;
 }
 

@@ -302,11 +302,28 @@ module.exports = function (app,io){
             where:{
                 id: req.params.id
             },
-            // include: [{
-            //     model: db.Post,
-            //     include: db.User},
-            //     db.User,db.Vote],
+            include: [{
+                model: db.Post,
+                include: db.User},
+                db.User,db.Vote],
         }).then((game) => {
+            game.dataValues.score = 0
+            game.dataValues.upVoted = false
+            game.dataValues.downVoted = false
+            game.dataValues.Votes.forEach((vote) => {
+                if(vote.dataValues.upDown){
+                    game.dataValues.score++
+                    if(req.user && req.user.id==vote.dataValues.UserId){
+                        game.dataValues.upVoted = true
+                    }
+                }
+                else{
+                    game.dataValues.score--
+                    if(req.user && req.user.id==vote.dataValues.UserId){
+                        game.dataValues.downVoted = true
+                    }
+                }
+            })
             res.json(game)
         }).catch(function(err) {
             console.log(err);
