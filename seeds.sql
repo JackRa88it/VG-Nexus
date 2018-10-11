@@ -5,24 +5,16 @@ INSERT INTO Users (username, email, password, postBanner, bio, createdAt, update
 ("bootlicker", "bootsntoots@test.com", "heel", "ugly picture", "A boot maker", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("tacobell", "causesacidreflux@darknet.net", "hacked", "picture of burrito", "forgotten bio", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO Games (name, description, UserId, createdAt, updatedAt) VALUES
-("Sonic", 'Gotto go fast', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Pokemon', 'Catch em all', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('Runescape', 'hd new age game', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- INSERT INTO Games (name, description, UserId, createdAt, updatedAt) VALUES
+-- ("Sonic", 'Gotto go fast', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Pokemon', 'Catch em all', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ('Runescape', 'hd new age game', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-<<<<<<< HEAD
--- INSERT INTO tags (name,  createdAt, updatedAt) VALUES
--- ("Action", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-=======
 INSERT INTO Tags (name,  createdAt, updatedAt) VALUES
 ("Action", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
->>>>>>> b94c0611d68ac05ab52fb8d533b1fa4e325143bb
 
 INSERT INTO Forums (title, description, createdAt, updatedAt) VALUES
 ("General", "The place to discuss anything and everything about this site", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -52,14 +44,11 @@ INSERT INTO Posts (text, ThreadId, UserId, createdAt, updatedAt) VALUES
 ("where", 4, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("taco bell", 4, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("lol", 4, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-<<<<<<< HEAD
 ("gotta go fast boys", 4, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("STOP TALKING ABOUT SONIC. NO ONE GETS IT", 4, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("so like, does anyone actually read these posts?", 4, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("don't break the fourth wall guys.", 4, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 
-=======
->>>>>>> b94c0611d68ac05ab52fb8d533b1fa4e325143bb
 ("Rule #1: don't talk aobut VG Nexus. Rule #2: a cheeseburger a day keeps the doctor away. Rule #3: guess I'll just die then?", 5, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("absolute shitpost", 5, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("nice", 5, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

@@ -29,11 +29,17 @@ class PostTable extends React.Component{
           <tr>
             <th>User</th>
             <th>Post</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>
           {this.state.posts.map(post => {
-            return(<PostRow post={post}/>)
+            return(
+              <PostRow 
+                key={post.id}
+                post={post} 
+                editPostButton={this.props.editPostButton}/>
+            )
           })}
         </tbody>
       </table>

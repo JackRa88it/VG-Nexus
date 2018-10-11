@@ -1,6 +1,7 @@
 import React from "react";
 import "./CommunityForm.css";
 import API from "../../utils/API";
+import Authenticator from "../../utils/Authenticator";
 
 // 1) set up to add a post to a thread <-- IP
 // 2) add edit post
@@ -13,6 +14,12 @@ class CommunityForm extends React.Component {
     text: ""
   };
 
+  componentDidMount() {
+    this.setState({
+      text: this.props.postText
+    })
+  }
+
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
@@ -24,11 +31,19 @@ class CommunityForm extends React.Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.text) {
-      let newPost = {};
-      newPost.userId = 1;
-      newPost.threadId = this.props.threadId;
-      newPost.text = this.state.text;
-      API.submitNewPost(newPost);
+      if (this.props.formType === 'newPost') {
+        let newPost = {};
+        newPost.userId = Authenticator.user.id;
+        newPost.threadId = this.props.threadId;
+        newPost.text = this.state.text;
+        this.props.submitNewPost(newPost);
+      } else if (this.props.formType === 'editPost') {
+        let editedPost = {};
+        editedPost.id = this.props.postId;
+        editedPost.text = this.props.postText;
+        editedPost.threadId = this.props.threadId;
+        this.props.submitEditedPost(editedPost);
+      }
     } else {
       this.setState({
         text: "Enter text..."
@@ -37,21 +52,19 @@ class CommunityForm extends React.Component {
   };
 
   render() {
-    if (this.props.formType === 'newPost') {
-      return (
-        <div>
-          <form className="form">
-            <input
-              value={this.state.text}
-              name="text"
-              onChange={this.handleInputChange}
-              type="text"
-            />
-            <button onClick={this.handleFormSubmit}>Submit</button>
-          </form>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <form className="form">
+          <input
+            value={this.state.text}
+            name="text"
+            onChange={this.handleInputChange}
+            type="text"
+          />
+          <button onClick={this.handleFormSubmit}>Submit</button>
+        </form>
+      </div>
+    );
   }
 }
 
