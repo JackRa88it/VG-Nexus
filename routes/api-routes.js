@@ -133,7 +133,7 @@ module.exports = function (app,io){
             email: req.body.email,
             password: req.body.password,
             bio: req.body.bio,
-            postBanner: req.body.bannerUrl
+            postBanner: req.body.postBanner
           }).then(function(user) {
             var random = Math.floor(Math.random()*9) + 1
             var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
