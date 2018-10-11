@@ -34,8 +34,26 @@ export default {
   getVote: function(postId){
     return axios.get('/api/post/'+postId+'/vote/')
   },
+  postGameVote: function(gameId, bool){
+    return axios.post('/api/game/'+gameId+'/vote/',{vote: bool})
+  },
   getForumList: function() {
     return axios.get("/api/forumList")
+  },
+  getThreadList: function(forumId) {
+    return axios.get("/api/threadList/" + forumId)
+  },
+  getPostList: function(threadId) {
+    return axios.get("/api/postList/" + threadId)
+  },
+  newForumPost: function(newPost) {
+    return axios.post('/api/community/newForumPost/', {newPost: newPost})
+  },
+  editForumPost: function(editedPost) {
+    return axios.put('/api/community/editForumPost/', {editedPost: editedPost})
+  },
+  newForumThread: function(newThread) {
+    return axios.post('/api/community/newForumThread/', {newThread: newThread})
   },
   getBest: function(){
     return axios.get('/api/games/best')
@@ -48,5 +66,8 @@ export default {
   },
   getRandom: function(){
     return axios.get('/api/games/random')
+  },
+  getFavorites: function(){
+    return axios.get('/api/games/favorites')
   }
 };

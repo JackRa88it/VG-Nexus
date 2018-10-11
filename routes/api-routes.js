@@ -133,7 +133,7 @@ module.exports = function (app,io){
             email: req.body.email,
             password: req.body.password,
             bio: req.body.bio,
-            postBanner: req.body.bannerUrl
+            postBanner: req.body.postBanner
           }).then(function(user) {
             var random = Math.floor(Math.random()*9) + 1
             var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
@@ -161,7 +161,7 @@ module.exports = function (app,io){
     })
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({
-            limit: 6,
+            limit: 8,
             order:[
                 ['createdAt','DESC']
             ],
@@ -176,7 +176,7 @@ module.exports = function (app,io){
 
     app.get('/api/games/best', function(req,res){
         db.Game.findAll({
-            limit: 6,
+            limit: 4,
             order:[
                 ['rating','DESC']
             ],
@@ -263,12 +263,39 @@ module.exports = function (app,io){
     app.get('/api/games/random', function(req,res){
         db.Game.findAll({
             order: [ [ db.sequelize.fn('RAND') ] ],
-            limit: 4
+            limit: 8
         }).then((games) =>{
             res.json(games)
         })
     })
 
+    app.get('/api/games/favorites', function(req,res){
+        db.Vote.findAll({
+            where: {
+                UserId: req.user.id,
+                upDown: true,
+                GameId: {$not: null}
+            },
+            include: [db.Game]
+        }).then((votes) => {
+            res.json(votes)
+        })
+    })
+
+    app.post('/api/game/:id/vote', function(req,res){
+        if(req.user){
+            db.Vote.upsert({
+                upDown: req.body.vote,
+                UserId: req.user.id,
+                GameId: req.params.id
+            }).then((post) => {
+                res.status(200).send('success')
+            }).catch((err) => {
+                console.log(err)
+                res.json(err)
+            })
+        }
+    })
 
     app.get('/api/game/:id', function(req,res){
         //Grab game data with :id
@@ -279,8 +306,25 @@ module.exports = function (app,io){
             include: [{
                 model: db.Post,
                 include: db.User},
-                db.User],
+                db.User,db.Vote],
         }).then((game) => {
+            game.dataValues.score = 0
+            game.dataValues.upVoted = false
+            game.dataValues.downVoted = false
+            game.dataValues.Votes.forEach((vote) => {
+                if(vote.dataValues.upDown){
+                    game.dataValues.score++
+                    if(req.user && req.user.id==vote.dataValues.UserId){
+                        game.dataValues.upVoted = true
+                    }
+                }
+                else{
+                    game.dataValues.score--
+                    if(req.user && req.user.id==vote.dataValues.UserId){
+                        game.dataValues.downVoted = true
+                    }
+                }
+            })
             res.json(game)
         }).catch(function(err) {
             console.log(err);
@@ -343,10 +387,12 @@ module.exports = function (app,io){
     })
 
     app.get('/api/forumList', function(req,res) {
+        // get list of forums for community main page
         db.Forum.findAll({
             include: [{
                 model: db.Thread
-            }]
+            }],
+            order: [db.sequelize.col('id')]
         })
         .then(data => {
             res.json(data)
@@ -354,6 +400,89 @@ module.exports = function (app,io){
             console.log(err);
             res.json(err);
         });
+    })
+
+    app.get('/api/threadList/:id', function(req,res) {
+        //get list of threads to populate forum page
+        var forumId = req.params.id;
+        db.Thread.findAll({
+            where: {ForumId: forumId},
+            include: [{
+                model: db.Post
+            }],
+            order: [db.sequelize.col('id')]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.get('/api/postList/:id', function(req,res) {
+        //get list of posts to populate thread page
+        var threadId = req.params.id;
+        db.Post.findAll({
+            where: {ThreadId: threadId},
+            include: [{
+                model: db.User
+            }],
+            order: [db.sequelize.col('id')]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.post('/api/community/newForumPost', function(req,res){
+        //create new forum post in the database
+        if(req.user){
+            db.Post.create({
+                text: req.body.newPost.text,
+                UserId: req.body.newPost.userId,
+                ThreadId: req.body.newPost.threadId
+            }).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.put('/api/community/editForumPost', function(req,res){
+        //update forum post in the database
+        if(req.user){
+            db.Post.update(
+                {text: req.body.editedPost.text},
+                {where: {id: req.body.editedPost.id}}
+            ).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.post('/api/community/newForumThread', function(req,res){
+        //create new forum thread in the database
+        if(req.user){
+            db.Thread.create({
+                title: req.body.newThread.title,
+                UserId: req.body.newThread.userId,
+                ForumId: req.body.newThread.forumId
+            }).then((thread) => {
+                res.send(thread)
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
     })
 }
 

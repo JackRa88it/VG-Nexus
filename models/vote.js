@@ -9,6 +9,10 @@ module.exports = function(sequelize, DataTypes) {
       {
         unique: true,
         fields: ['UserId','PostId']
+      },
+      {
+        unique: true,
+        fields: ['UserId', 'GameId']
       }
     ]
   }

@@ -1,0 +1,48 @@
+.postTable {
+  width: 100%;
+}
+
+.postTable td {
+  vertical-align: top;
+  padding: 10px 0px;
+}
+
+.placeholderUserComponent {
+  width: 100px;
+  height: 150px;
+  border: 1px solid grey;
+  text-align: center;
+}
+
+.threadName {
+  float: left;
+}
+
+.postContent .postHeader {
+  background: #171717;
+  font-size: 0.9em;
+}
+
+.postBody {
+  padding: 10px 0px;
+}
+
+.postText {
+  float: left;
+}
+
+.postEditButton {
+  float: right;
+  vertical-align: top;
+}
+
+.postContent hr {
+  background-color: grey;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: grey;
+}

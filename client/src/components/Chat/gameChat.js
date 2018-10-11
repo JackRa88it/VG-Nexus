@@ -25,7 +25,6 @@ class Chatroom extends Component{
     };
 
     handleKeyDown = (event) => {
-        console.log(event.key)
         switch (event.key) {
             case "Enter":
                 this.handleFormSubmit()
@@ -45,7 +44,6 @@ class Chatroom extends Component{
     }
 
     handleTabClick = event => {
-        console.log("tab clicked")
         const {name, value} = event.target
         this.setState({
             [name]: value
@@ -59,7 +57,6 @@ class Chatroom extends Component{
 
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps)
         this.setState({messages: []})
         this.connect(nextProps.gameId)
     }
@@ -102,7 +99,6 @@ class Chatroom extends Component{
                 </div>
                 <div className="messagedisplay">
                     {this.state.messages.map((message, i) => (
-                        this.id ? 
                         (<div>
                             <p className={"px-3 my-1 py-1 chatroom-message"+ (i%2)}>
                             <div className="border-bottom mb-1">
@@ -111,10 +107,7 @@ class Chatroom extends Component{
                             </div>
                             <span id='msg'>{message.msg.substring(0,250)}</span>
                             </p>
-                        </div>) : <span></span>
-                        /* SHOULD THIS BE DELETED? */
-                        // (<div className="mx-3 py-1"><p className={"chatroom-message"+ (i%2)}>{message.name}: {message.msg}</p>
-                        // </div>)
+                        </div>) 
                     ))}
                 </div>
                 <div className = "messageandbutton">

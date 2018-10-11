@@ -1,0 +1,32 @@
+.avatarImage {
+    height: 120px;
+    width: 140px;
+    outline: solid;
+    outline-color: aliceblue
+}
+
+.avatarContainer {
+    height: 220px;
+    width: 140px;
+    outline: solid;
+    outline-color: aliceblue;
+    background-color: grey;
+}
+
+.username {
+    margin: 5px;
+
+}
+
+.userScore {
+    position: relative;
+    top: 10px;
+    margin: 5px;
+}
+
+.createdAt {
+    position: relative;
+    top: 15px;
+    margin: 5px;
+    margin-bottom: 3px;
+}
