@@ -37,9 +37,9 @@ class Footer extends Component {
             </a>
         </div>
        
-        <div className="d-flex w-100 pt-1 justify-content-end">
+        <div id="right" className="d-flex py-2 justify-content-end">
             <a href="https://bootcamp.berkeley.edu/coding/">
-              UC Berkeley Extension <br />
+              UC Berkeley Extension - 
               Coding Bootcamp 2018
             </a>
           </div>
