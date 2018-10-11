@@ -9,7 +9,7 @@ const ForumRow = (props) => (
     className="forumTitle"
     data-id={props.forum.id}
     data-name={props.forum.title}
-    onClick={this.handleRowClick}>
+    onClick={props.handleRowClick}>
       {props.forum.title}
     </td>
     <td>{props.forum.Threads.length}</td>

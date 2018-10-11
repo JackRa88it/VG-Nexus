@@ -8,7 +8,7 @@ const PostRow = (props) => {
   if(authenticated) {
     return(
       <tr>
-        <ForumAvatar user={props.post.user}/>
+        <td><ForumAvatar user={props.post} /></td>
         <td>{props.post.text}</td>
         <td>{props.post.User.id === Authenticator.user.id ?
           <button 
@@ -26,7 +26,7 @@ const PostRow = (props) => {
   } else {
     return(
       <tr>
-        <td>{props.post.User.username}</td>
+        <td><ForumAvatar user={props.post} handleUsernameClick={props.handleUsernameClick} /></td>
         <td>{props.post.text}</td>
         <td></td>
       </tr>
