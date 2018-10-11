@@ -1,19 +1,48 @@
-table {
+.postTable {
   width: 100%;
 }
 
-th {
-  padding: 10px;
+.postTable td {
+  vertical-align: top;
+  padding: 10px 0px;
 }
 
-td {
- padding: 20px;
-}
-
-thead tr {
+.placeholderUserComponent {
+  width: 100px;
+  height: 150px;
   border: 1px solid grey;
+  text-align: center;
 }
 
-tr:nth-child(even) {
-  background-color: rgba(49, 49, 49, 0.9);
+.threadName {
+  float: left;
+}
+
+.postContent .postHeader {
+  background: #171717;
+  font-size: 0.9em;
+}
+
+.postBody {
+  padding: 10px 0px;
+}
+
+.postText {
+  float: left;
+}
+
+.postEditButton {
+  float: right;
+  vertical-align: top;
+}
+
+.postContent hr {
+  background-color: grey;
+}
+
+.editButton {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: grey;
 }
