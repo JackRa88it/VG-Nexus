@@ -7,7 +7,7 @@ const PostRow = (props) => {
   if(authenticated) {
     return(
       <tr>
-        <td>{props.post.User.username}</td>
+        <td className='username' onClick={props.handleUsernameClick}>{props.post.User.username}</td>
         <td>{props.post.text}</td>
         <td>{props.post.User.id === Authenticator.user.id ?
           <button 
