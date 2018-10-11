@@ -2,7 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
+// $(document).on("scroll", function() {
+//   if($(document).height() - $(document).scrollTop() - $(window).height() < 1){
+//     document.getElementsByClassName('.footer')[0].css('display','block')
+//   }
+//   else{
+//     document.getElementsByClassName('.footer')[0].css('display','block')
+//   }
+//   console.log('scroll')
+// })
+
 class Footer extends Component {
+
   render() {
     return (
       <div className="container-fluid footer bg-standard">
