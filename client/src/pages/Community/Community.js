@@ -188,12 +188,12 @@ class Community extends React.Component{
             <div>
               <h1>{this.state.forumName}</h1>
               <button 
-                  id="newThreadButton"
-                  onClick={this.newThreadButton}
-                >
-                  + new thread
-                </button>
-              </div>
+                id="newThreadButton"
+                onClick={this.newThreadButton}
+              >
+                + new thread
+              </button>
+            </div>
             <ThreadTable forumId={this.state.forumId} handleRowClick={this.handleRowClick}/>
         </div>
       )
@@ -217,9 +217,10 @@ class Community extends React.Component{
               >
                 {this.state.forumName}
               </p>
+              <p>></p>
             </div>
             <div>
-              <h1>{this.state.threadName}</h1>
+              <h1 className="threadName">{this.state.threadName}</h1>
               <button 
                 id="newPostButton"
                 onClick={this.newPostButton}
