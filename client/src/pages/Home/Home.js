@@ -10,22 +10,22 @@ class Home extends React.Component{
     tags: [],
     newest: [],
     random: [],
+    favorites: [],
     authenticated: false
   }
   getFavorites(){
-    // API.getBest()
-    // .then((res)=>{
-    //   console.log(res.data)
-    //   this.setState({best:res.data})
-    // })
-    // .catch((err)=>{
-    //   console.log(err)
-    // })
+    API.getFavorites()
+    .then((res)=>{
+      console.log(res.data)
+      this.setState({favorites:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   }
   getRandom(){
     API.getRandom()
     .then((res)=>{
-      console.log(res.data)
       this.setState({random:res.data})
     })
     .catch((err)=>{
@@ -95,6 +95,13 @@ class Home extends React.Component{
             {(this.state.authenticated ?
               <div id='favorites'>
                 <div className='categoryHeader'>Your favorites</div>
+                {this.state.favorites.map((vote)=>{
+                  return(
+                    <div className='randomBox'>
+                      <img src={'/assets/gameThumbnails/' + vote.Game.id}></img>
+                    </div>
+                  )
+                })}
               </div> : 
               <div id='random'>
                 <div className='categoryHeader'>Random</div>

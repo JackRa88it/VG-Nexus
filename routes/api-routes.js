@@ -274,6 +274,7 @@ module.exports = function (app,io){
             where: {
                 UserId: req.user.id,
                 upDown: true,
+                GameId: {$not: null}
             },
             include: [db.Game]
         }).then((votes) => {

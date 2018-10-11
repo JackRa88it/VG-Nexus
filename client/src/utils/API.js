@@ -53,6 +53,6 @@ export default {
     return axios.get('/api/games/random')
   },
   getFavorites: function(){
-    return axios.get('/api/games/favorite')
+    return axios.get('/api/games/favorites')
   }
 };
