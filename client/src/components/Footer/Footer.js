@@ -1,59 +1,63 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./Footer.css"
+import "./Footer.css";
+
+// $(document).on("scroll", function() {
+//   if($(document).height() - $(document).scrollTop() - $(window).height() < 1){
+//     document.getElementsByClassName('.footer')[0].css('display','block')
+//   }
+//   else{
+//     document.getElementsByClassName('.footer')[0].css('display','block')
+//   }
+//   console.log('scroll')
+// })
 
 class Footer extends Component {
 
-  render(){
-      return (
+  render() {
+    return (
       <div className="container-fluid footer bg-standard">
-            {/* Float to the right */}
+      <div className="d-flex w-100 flex-row">
+        <div id="left" className='d-inline-flex w-25 py-2'>
+              <Link to="/about">
+                How to use
+              </Link>
             
-                 
-                <div className="my-1 mx-auto developers">
-                    <div className="float-left">
-                        <a href="https://bootcamp.berkeley.edu/coding/">
-                          <small>UC Berkeley Extension</small>
-                        </a>
-                      </div>
-                    <div className="text-center">
-                      <a href="https://github.com/AaronGoldsmith" className="git">
-                        <small>Aaron</small>
-                      </a>
-                      &nbsp;&bull;&nbsp;	
-
-                      <a href="https://github.com/vnguye51" className="git">
-                      <small>Vincent</small>
-                      </a>
-                      &nbsp;&bull;&nbsp;	
-
-                      <a href="https://github.com/JackRa88it" className="git">
-                      <small>Jack</small>
-                      </a>
-                      &nbsp;&bull;&nbsp;
-
-                      <a href="https://github.com/haffedali" className="git">
-                      <small>Haffed</small>
-                      </a>
-                      &nbsp;&bull;&nbsp;	
-                      
-                      <a href="https://github.com/DinhDo2312" className="git">
-                         <small>Dinh</small>
-                      </a>
-
-                      <div className="float-right">
-                        <a href="https://bootcamp.berkeley.edu/coding/">
-                          <small>Coding Bootcamp 2018</small>
-                        </a>
-                      </div>
-                    </div>
-                  
-                    
-                </div>
-               
-                
+              <a className="px-4" href="https://github.com/JackRa88it/VG-Nexus/blob/master/LICENSE" target="_blank">Copyright &nbsp;&copy;&nbsp; 2018 </a>
+              <a href="https://github.com/JackRa88it/VG-Nexus/blob/master/CODE_OF_CONDUCT.md" target="_blank">Code of Conduct</a>
+        </div>
+        <div className="devTeam" id="middle">
+            <a href="https://github.com/AaronGoldsmith" className="git">
+              Aaron
+            </a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://github.com/vnguye51" className="git">
+              Vincent
+            </a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://github.com/JackRa88it" className="git">
+              Jack
+            </a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://github.com/haffedali" className="git">
+              Haffed
+            </a>
+            &nbsp;&bull;&nbsp;
+            <a href="https://github.com/DinhDo2312" className="git">
+              Dinh
+            </a>
+        </div>
+       
+        <div id="right" className="d-flex py-2 justify-content-end">
+            <a href="https://bootcamp.berkeley.edu/coding/">
+              UC Berkeley Extension - 
+              Coding Bootcamp 2018
+            </a>
           </div>
-      )
-  };
+      </div>
+      </div>
+
+    );
+  }
 }
 export default Footer;
