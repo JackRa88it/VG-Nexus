@@ -1,0 +1,28 @@
+.gameBox{
+    height: 120px;
+    width: 120px;
+    padding-top: 5px;
+
+}
+
+.gameBox > img{
+    height: 100%;
+    width: 100%;
+}
+
+.categoryHeader{
+    width: 100%
+}
+
+.gamesContainer{
+    background-color: rgb(63, 63, 63);
+    width: 49%;
+    /* width: 300px; */
+    float: left;
+    /* margin: 3px 0px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 20px;
+
+}
