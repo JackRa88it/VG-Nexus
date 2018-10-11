@@ -1,6 +1,7 @@
 import React from "react";
 import "./CommunityForm.css";
 import API from "../../utils/API";
+import Authenticator from "../../utils/Authenticator";
 
 // 1) set up to add a post to a thread <-- IP
 // 2) add edit post
@@ -32,12 +33,16 @@ class CommunityForm extends React.Component {
     if (this.state.text) {
       if (this.props.formType === 'newPost') {
         let newPost = {};
-        newPost.userId = this.props.currentUser.id;
+        newPost.userId = Authenticator.user.id;
         newPost.threadId = this.props.threadId;
         newPost.text = this.state.text;
         this.props.submitNewPost(newPost);
       } else if (this.props.formType === 'editPost') {
-        // edit existing post
+        let editedPost = {};
+        editedPost.id = this.props.postId;
+        editedPost.text = this.props.postText;
+        editedPost.threadId = this.props.threadId;
+        this.props.submitEditedPost(editedPost);
       }
     } else {
       this.setState({

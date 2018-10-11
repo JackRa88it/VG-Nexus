@@ -9,7 +9,7 @@ const PostRow = (props) => {
       <tr>
         <td>{props.post.User.username}</td>
         <td>{props.post.text}</td>
-        <td>{props.post.User.id === props.currentUser.id ?
+        <td>{props.post.User.id === Authenticator.user.id ?
           <button 
             id="editButton" 
             data-postid={props.post.id} 

@@ -34,6 +34,7 @@ class Community extends React.Component{
     })
   }
 
+  // navigation action when clicking on forum rows or thread rows
   handleRowClick = event => {
     if (event.target.getAttribute("class") === "forumTitle") {
       this.setState({
@@ -50,6 +51,7 @@ class Community extends React.Component{
     }
   };
 
+  // "forum tree" is what I call the nav links near top of community page (i.e. "Forums > General")
   handleForumTreeClick = event => {
     const linkId = event.target.getAttribute("data-id");
     if (linkId === "forum") {
@@ -69,6 +71,7 @@ class Community extends React.Component{
     }
   }
 
+  // navigates to community form for new post
   newPostButton = event => {
     if (Authenticator.isAuthenticated) {
       this.setState({
@@ -80,8 +83,9 @@ class Community extends React.Component{
     }
   }
 
+  // submit button in the new post form
   submitNewPost = newPost => {
-    API.submitNewPost(newPost)
+    API.newForumPost(newPost)
     .then(res => {
       this.setState({
         page: "thread",
@@ -93,6 +97,7 @@ class Community extends React.Component{
     })
   }
 
+  // navigates to community form for editing a post
   editPostButton = event => {
     if (Authenticator.isAuthenticated) {
       this.setState({
@@ -104,8 +109,23 @@ class Community extends React.Component{
     }
   }
 
+  // submit button in the edit post form
+  submitEditedPost = editedPost => {
+    API.editForumPost(editedPost)
+    .then(res => {
+      this.setState({
+        page: "thread",
+        threadId: editedPost.threadId
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
 
+  // this render includes 4 possible pages:
+  // forums list, threads list, thread posts, or the form (create/edit posts/threads)
   render(){
     if (this.state.page === 'forumList') {
       return(
@@ -200,6 +220,7 @@ class Community extends React.Component{
               formType={this.state.formType} 
               threadId={this.state.threadId} 
               submitNewPost={this.submitNewPost}
+              submitEditedPost={this.submitEditedPost}
               postId={this.state.postId}
               postText={this.state.postText}
             />

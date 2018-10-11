@@ -43,8 +43,11 @@ export default {
   getPostList: function(threadId) {
     return axios.get("/api/postList/" + threadId)
   },
-  submitNewPost: function(newPost) {
-    return axios.post('/api/community/newPost/', {newPost: newPost})
+  newForumPost: function(newPost) {
+    return axios.post('/api/community/newForumPost/', {newPost: newPost})
+  },
+  editForumPost: function(editedPost) {
+    return axios.put('/api/community/editForumPost/', {editedPost: editedPost})
   },
   getBest: function(){
     return axios.get('/api/games/best')

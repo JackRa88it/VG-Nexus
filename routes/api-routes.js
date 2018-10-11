@@ -394,14 +394,29 @@ module.exports = function (app,io){
         });
     })
 
-    app.post('/api/community/newPost', function(req,res){
+    app.post('/api/community/newForumPost', function(req,res){
         //submit new post in thread to the database
-        if(1){
+        if(req.user){
             db.Post.create({
                 text: req.body.newPost.text,
                 UserId: req.body.newPost.userId,
                 ThreadId: req.body.newPost.threadId
             }).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.put('/api/community/editForumPost', function(req,res){
+        //submit new post in thread to the database
+        if(req.user){
+            db.Post.update(
+                {text: req.body.editedPost.text},
+                {where: {id: req.body.editedPost.id}}
+            ).then((post) => {
                 res.send('200')
             }).catch((err) => {
                 console.log(err);
