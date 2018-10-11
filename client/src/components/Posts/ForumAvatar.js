@@ -4,9 +4,6 @@ var moment = require("moment");
 
 
 const ForumAvatar = (props) => {
-  console.log(props.user)
-  console.log(props.user.User.username)
-  //navigation to user profile when clicking on username
 
   return(
   <div className="avatarContainer">
