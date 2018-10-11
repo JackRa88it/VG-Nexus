@@ -1,8 +1,8 @@
 import React from "react";
 import "./Posts.css";
 import Authenticator from "../../utils/Authenticator";
+import ForumAvatar from "./ForumAvatar";
 var moment =require("moment");
-
 
 const PostRow = (props) => {
   const authenticated = Authenticator.isAuthenticated;
@@ -10,9 +10,7 @@ const PostRow = (props) => {
     return(
       <tr>
         <td>
-          <div className="placeholderUserComponent">
-            {props.post.User.username}
-          </div>
+          <ForumAvatar user={props.post} />
         </td>
         <td>
           <div className="postContent">
@@ -47,11 +45,7 @@ const PostRow = (props) => {
   } else {
     return(
       <tr>
-        <td>
-          <div className="placeholderUserComponent">
-            {props.post.User.username}
-          </div>
-        </td>
+        <td><ForumAvatar user={props.post} handleUsernameClick={props.handleUsernameClick} /></td>
         <td>{props.post.text}</td>
         <td></td>
       </tr>

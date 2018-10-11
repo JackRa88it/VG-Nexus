@@ -36,6 +36,7 @@ class Community extends React.Component{
 
   // navigation action when clicking on forum rows or thread rows
   handleRowClick = event => {
+    console.log('waddup bitch')
     if (event.target.getAttribute("class") === "forumTitle") {
       this.setState({
         page: "forum",
@@ -51,6 +52,7 @@ class Community extends React.Component{
       });
     }
   };
+
 
   // "forum tree" is what I call the nav links near top of community page (i.e. "Forums > General")
   handleForumTreeClick = event => {
@@ -72,6 +74,14 @@ class Community extends React.Component{
       })
     }
   }
+
+    //navigation to user profile when clicking on username
+    handleUsernameClick = event => {
+        if (event.target.getAttribute("class") === "username") {
+        //route to userpage
+        console.log('testing123gimmegimmesomecreamcheese')
+        }
+    }
 
   // navigates to community form for new thread
   newThreadButton = event => {
@@ -228,7 +238,7 @@ class Community extends React.Component{
                 + new post
               </button>
             </div>
-            <PostTable threadId={this.state.threadId} editPostButton={this.editPostButton}/>
+            <PostTable threadId={this.state.threadId} editPostButton={this.editPostButton} handleUsernameClick={this.handleUsernameClick}/>
         </div>
       )
     } 

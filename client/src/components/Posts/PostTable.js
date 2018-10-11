@@ -31,7 +31,9 @@ class PostTable extends React.Component{
               <PostRow 
                 key={post.id}
                 post={post} 
-                editPostButton={this.props.editPostButton}/>
+                editPostButton={this.props.editPostButton}
+                handleUsernameClick={this.props.handleUsernameClick}
+                />
             )
           })}
         </tbody>
