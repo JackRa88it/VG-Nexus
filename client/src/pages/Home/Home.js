@@ -84,7 +84,7 @@ class Home extends React.Component{
           <div className='homerow'>
             <div id='new'>
               <div className='categoryHeader'>Newest Games</div>
-              {this.state.best.map((game)=>{
+              {this.state.newest.map((game)=>{
                 return(
                   <div className='newestBox'>
                     <img src={'/assets/gameThumbnails/' + game.id}></img>
@@ -98,7 +98,7 @@ class Home extends React.Component{
               </div> : 
               <div id='random'>
                 <div className='categoryHeader'>Random</div>
-                {this.state.best.map((game)=>{
+                {this.state.random.map((game)=>{
                   return(
                     <div className='randomBox'>
                       <img src={'/assets/gameThumbnails/' + game.id}></img>

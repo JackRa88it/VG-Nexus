@@ -161,7 +161,7 @@ module.exports = function (app,io){
     })
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({
-            limit: 6,
+            limit: 8,
             order:[
                 ['createdAt','DESC']
             ],
@@ -176,7 +176,7 @@ module.exports = function (app,io){
 
     app.get('/api/games/best', function(req,res){
         db.Game.findAll({
-            limit: 6,
+            limit: 4,
             order:[
                 ['rating','DESC']
             ],
@@ -263,12 +263,38 @@ module.exports = function (app,io){
     app.get('/api/games/random', function(req,res){
         db.Game.findAll({
             order: [ [ db.sequelize.fn('RAND') ] ],
-            limit: 4
+            limit: 8
         }).then((games) =>{
             res.json(games)
         })
     })
 
+    app.get('/api/games/favorites', function(req,res){
+        db.Vote.findAll({
+            where: {
+                UserId: req.user.id,
+                upDown: true,
+            },
+            include: [db.Game]
+        }).then((votes) => {
+            res.json(votes)
+        })
+    })
+
+    app.post('/api/game/:id/vote', function(req,res){
+        if(req.user){
+            db.Vote.upsert({
+                upDown: req.body.vote,
+                UserId: req.user.id,
+                GameId: req.params.id
+            }).then((post) => {
+                res.status(200).send('success')
+            }).catch((err) => {
+                console.log(err)
+                res.json(err)
+            })
+        }
+    })
 
     app.get('/api/game/:id', function(req,res){
         //Grab game data with :id
@@ -276,10 +302,10 @@ module.exports = function (app,io){
             where:{
                 id: req.params.id
             },
-            include: [{
-                model: db.Post,
-                include: db.User},
-                db.User],
+            // include: [{
+            //     model: db.Post,
+            //     include: db.User},
+            //     db.User,db.Vote],
         }).then((game) => {
             res.json(game)
         }).catch(function(err) {

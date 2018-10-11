@@ -12,7 +12,8 @@ class NavTabs extends Component {
   logoutHandler = (event) => {
     event.preventDefault()
     Authenticator.signout(() => {
-      this.setState({ authenticated: false })
+      // this.setState({ authenticated: false })
+      window.location.assign('/')
     })
   }
 
