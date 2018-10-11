@@ -48,5 +48,14 @@ export default {
   },
   getRandom: function(){
     return axios.get('/api/games/random')
+  },
+  getThreadList: function(forumId) {
+    return axios.get("/api/threadList/" + forumId)
+  },
+  getPostList: function(threadId) {
+    return axios.get("/api/postList/" + threadId)
+  },
+  submitNewPost: function(newPost) {
+    return axios.post('/api/community/newPost/', {newPost: newPost})
   }
 };
