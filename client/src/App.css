@@ -9,13 +9,10 @@ body {
   height:100%;
 }
 
-body,
-#root{
-  max-height: 643px;
-}
+
 .git{
   padding: 10px;
-  font-family: 'Open Sans', sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
 }
 h1 {
   font-family: 'Roboto', sans-serif;
@@ -27,7 +24,7 @@ h1 {
   border: 1px solid rgba(248, 249, 250,0.1);
   background-color: rgba(43, 43, 43, 0.9);
   padding: 50px;
-  margin-top: 75px;
+  margin: 75px auto;
 }
 
 .App {

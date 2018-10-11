@@ -161,7 +161,7 @@ module.exports = function (app,io){
     })
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({
-            limit: 6,
+            limit: 8,
             order:[
                 ['createdAt','DESC']
             ],
@@ -176,7 +176,7 @@ module.exports = function (app,io){
 
     app.get('/api/games/best', function(req,res){
         db.Game.findAll({
-            limit: 6,
+            limit: 4,
             order:[
                 ['rating','DESC']
             ],
@@ -263,12 +263,39 @@ module.exports = function (app,io){
     app.get('/api/games/random', function(req,res){
         db.Game.findAll({
             order: [ [ db.sequelize.fn('RAND') ] ],
-            limit: 4
+            limit: 8
         }).then((games) =>{
             res.json(games)
         })
     })
 
+    app.get('/api/games/favorites', function(req,res){
+        db.Vote.findAll({
+            where: {
+                UserId: req.user.id,
+                upDown: true,
+                GameId: {$not: null}
+            },
+            include: [db.Game]
+        }).then((votes) => {
+            res.json(votes)
+        })
+    })
+
+    app.post('/api/game/:id/vote', function(req,res){
+        if(req.user){
+            db.Vote.upsert({
+                upDown: req.body.vote,
+                UserId: req.user.id,
+                GameId: req.params.id
+            }).then((post) => {
+                res.status(200).send('success')
+            }).catch((err) => {
+                console.log(err)
+                res.json(err)
+            })
+        }
+    })
 
     app.get('/api/game/:id', function(req,res){
         //Grab game data with :id
@@ -279,8 +306,25 @@ module.exports = function (app,io){
             include: [{
                 model: db.Post,
                 include: db.User},
-                db.User],
+                db.User,db.Vote],
         }).then((game) => {
+            game.dataValues.score = 0
+            game.dataValues.upVoted = false
+            game.dataValues.downVoted = false
+            game.dataValues.Votes.forEach((vote) => {
+                if(vote.dataValues.upDown){
+                    game.dataValues.score++
+                    if(req.user && req.user.id==vote.dataValues.UserId){
+                        game.dataValues.upVoted = true
+                    }
+                }
+                else{
+                    game.dataValues.score--
+                    if(req.user && req.user.id==vote.dataValues.UserId){
+                        game.dataValues.downVoted = true
+                    }
+                }
+            })
             res.json(game)
         }).catch(function(err) {
             console.log(err);
