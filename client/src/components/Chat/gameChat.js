@@ -24,8 +24,19 @@ class Chatroom extends Component{
         });
     };
 
+    handleKeyDown = (event) => {
+        console.log(event.key)
+        switch (event.key) {
+            case "Enter":
+                this.handleFormSubmit()
+                break;
+            default: 
+                break;
+        }
+    }
+    
+
     handleFormSubmit = event => {
-        event.preventDefault();
         if (this.state.newMessage) {
             const now = moment().format('h:mm:ssa')
             this.socket.emit('messagePost', this.state.newMessage, this.name, this.id, String(now))
@@ -111,6 +122,7 @@ class Chatroom extends Component{
                         className = "currentmsg"
                         value={this.state.newMessage.substring(0,250)}
                         onChange={this.handleInputChange}
+                        onKeyPress={this.handleKeyDown}
                         name="newMessage"
                     />
                     <button
