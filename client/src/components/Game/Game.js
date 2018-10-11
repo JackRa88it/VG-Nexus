@@ -12,31 +12,44 @@ class Game extends Component{
         name: '',
         createdAt: '',
         username: '',
-
+        upVoted: false,
+        downVoted: false,
+        score: 0
     };
      
-    componentDidMount(){
-        API.getGameData(this.props.match.params.id)
+    voteGameHandler = (gameId,bool) => {
+        API.postGameVote(gameId,bool)
+        .then((res)=>{
+          this.getGame(gameId)
+        })
+        .catch((err) =>{
+          console.log(err)
+        })
+    }
+
+    getGame = (id) =>{
+        API.getGameData(id)
         .then((res) => {
             if(res.data){
-                this.setState({
-                    description: res.data.description,
-                    name: res.data.name,
-                    createdAt: res.data.createdAt,
-                    updatedAt: res.data.updatedAt,
-                    username: res.data.User.username,
-                    userId: res.data.User.id})
+                console.log(res.data)
+                this.setState(res.data)
             }
         })
+    }
+    componentDidMount(){
+        this.getGame(this.props.match.params.id)
     }
     
     render(){
         return(
             <div>
-                <h1 className="text-center">Game {this.props.match.url.split("/").pop()}</h1>
-                <p>
-                    Developer: User_12314
-                </p>
+
+                <div>
+                    <h1 className="text-center">{this.state.name}</h1>
+                    <div>({this.state.score})</div>
+                    <div className ={'gameUpvote ' + (this.state.upVoted ? 'gameUpvoted' : '')} onClick={(this.upVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,true)})}>+</div>
+                    <div className = {'gameDownvote ' + (this.state.downVoted ? 'gameDownvoted' : '')} onClick={(this.state.downVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,false)})}>-</div>
+                </div>
                 <div className="w-100">
                     <div className='d-inline-flex w-100 ml-5'>
                         <iframe title="gamewindow"

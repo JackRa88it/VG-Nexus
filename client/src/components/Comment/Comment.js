@@ -14,7 +14,7 @@ class Comment extends Component{
         </div>
         <div className='commentInfo'>
           <Link to={'/user/' + this.props.userId} ><div className='username'>{this.props.username}</div></Link>
-          <div className = 'date'>{moment(this.props.createdAt).format('MMM DD HH:mm')}</div>
+          <div className = 'date'>{moment(this.props.createdAt).format('MMM DD hh:mm a')}</div>
         </div>
         <div className="comment">
           {this.props.children}
