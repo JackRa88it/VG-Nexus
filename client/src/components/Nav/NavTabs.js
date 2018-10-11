@@ -117,7 +117,7 @@ class NavTabs extends Component {
                   {/* If you click "Your Games," you go to that tab on that page */}
                   <div className="dropdown-item" href="#">Your Games</div>
                   {/* If you click "Your Profile," you go to that tab on that page */}
-                  <Link className="dropdown-item" to="/profile">Your Profile</Link>
+                  <div className="dropdown-item"><a  href="/profile" >Your Profile</a></div>
                   {/* If you click "Your Profile," you go to that tab on that page */}
                   <div className="dropdown-item" href="#">Your Posts</div>
                   <div className="dropdown-divider"></div>

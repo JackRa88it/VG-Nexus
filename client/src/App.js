@@ -8,7 +8,7 @@ import Footer from "./components/Footer"
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import ChooseGame from "./pages/ChooseGame/ChooseGame";
-import Profile from "./pages/Profile/";
+import Profile from "./pages/Profile";
 
 import Community from "./pages/Community/Community";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -29,7 +29,7 @@ class App extends Component {
           <Route exact path="/game" component={Game} />
           <Route exact path='/login_signup' component={LoginSignup} />
           <Route exact path='/community' component={Community} />
-          <Route path="/profile" component={Profile} />
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/about" component={About} />
 
 
