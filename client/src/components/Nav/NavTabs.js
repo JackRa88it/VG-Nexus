@@ -107,7 +107,6 @@ class NavTabs extends Component {
                     <input type="image" src={"/assets/userThumbnails/" + this.state.user.id} />
                   </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-<<<<<<< HEAD
                     {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
                     {/* your name should take you to your public profile */}
                     <div className="dropdown-item" href="#">{this.state.username}</div>
@@ -160,44 +159,12 @@ class NavTabs extends Component {
                   <i class="fas fa-wrench"></i>
                     </div>
                     {/* Log out button */}
-=======
-                  {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
-                  {/* your name should take you to your public profile */}
-                  <div className="dropdown-item" href="#">{this.state.username}</div>
-                  <div className="dropdown-divider"></div>
-                  {/* takes you to public profile, like how clicking on your name takes you there too */}
-                  {/* it's there because it's more explicit than clicking on your name */}
-                  <div className="dropdown-item" href="#">View Profile</div>
-                  <div className="dropdown-divider"></div>
-                  {/* Your ... is where you can edit your stuff. Each one takes you to the same page. */}
-                  {/* If you click "Your Games," you go to that tab on that page */}
-                  <div className="dropdown-item" href="#">Your Games</div>
-                  {/* If you click "Your Profile," you go to that tab on that page */}
-                  <Link className="dropdown-item" to="/profile">Your Profile</Link>
-                  {/* If you click "Your Profile," you go to that tab on that page */}
-                  <div className="dropdown-item" href="#">Your Posts</div>
-                  <div className="dropdown-divider"></div>
-                  <div className="dropdown-item" href="#">
-                    Help
-                    <i className="far fa-question-circle"></i>
-                  </div>
-                  <div className="dropdown-item" href="#">
-                  Settings
-                  <i className="fas fa-wrench"></i>
-                  </div>
-                  {/* Log out button */}
->>>>>>> b3ffacc2e809b95fbd64f0b4f11c3cafef8b5539
                     <Link
                       to="/logout"
                       onClick={this.logoutHandler}>
                       <div className="dropdown-item" href="#">
-<<<<<<< HEAD
-                        Logout
-                       <i class="fas fa-sign-out-alt"></i>
-=======
                        Logout
                        <i className="fas fa-sign-out-alt"></i>
->>>>>>> b3ffacc2e809b95fbd64f0b4f11c3cafef8b5539
                       </div>
                     </Link>
                   </div>

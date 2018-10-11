@@ -1,22 +1,49 @@
-import React from "react";
+import React from 'react';
+// import tabs
+import Tabs from "../../components/UserNexus/Tabs"
+// import editprofile
+// import EditProfile from "../../components/UserNexus/EditProfile"
+// import editgames
+// import EditGame from "../../components/UserNexus/EditGame"
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Row, Col, Container } from "../../components/Grid"
 import API from "../../utils/API";
+
 // Refer to this image for what edit profile looks like: https://i.imgur.com/iaBGqD1.jpg
-const UserNexus = () => (
-  <div>
+class UserNexus extends React.Component {
+  state = {
+    location: "Profile"
+  }
+  handleTabClick = event => {
+    console.log("============")
+    console.log("Tab Clicked")
+    console.log("============")
+    const { name, value } = event.target
+    this.setState({
+      [name]: value
+    })
+    console.log(this.state.location);
+  }
+  render() {
+    if (this.state.location === "Profile") {
+      return (
+        <div>
+          <Tabs handleTabClick = {this.handleTabClick} state = {this.state}/>
+          <h1>Profile</h1>
+        </div>
+      )
+    }
+    if (this.state.location === "Game") {
+      return (
+        <div>
+          <Tabs onClick = {this.handleTabClick} state = {this.state}/>
+          <h1>Game</h1>
+        </div>
+      )
+    }
+  }
+}
 
-  </div>
-);
-
-// not worked on yet
-const UserNexusGames = () => (
-  <p>placeholder</p>
-)
-// not worked on yet
-const UserNexusPosts = () => (
-  <p>placeholder</p>
-)
 
 export default UserNexus;
 // export default UserNexusGames;
