@@ -126,7 +126,7 @@ class NavTabs extends Component {
                     <div className="dropdown-divider"></div>
                     <div className="dropdown-item" href="#">
                       Help
-                    <i class="far fa-question-circle"></i>
+                    <i className="far fa-question-circle"></i>
                     </div>
                     <div className="dropdown-item" href="#">
                       Settings
