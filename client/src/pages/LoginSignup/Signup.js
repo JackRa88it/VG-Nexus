@@ -21,7 +21,7 @@ class Signup extends Component{
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.password && this.state.email && this.state.username) {
-            console.log(this.state)
+            // console.log(this.state)
           API.signup({
             email: this.state.email,
             password: this.state.password,
@@ -61,13 +61,14 @@ class Signup extends Component{
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="bio"
-                    type=""
+                    type="text"
                     placeholder="Tell me about yourself"
                 />
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="postBanner"
+                    type="text"
                     placeholder="Your Banner text!"
                 />                                
                 <br></br>

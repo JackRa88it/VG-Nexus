@@ -23,8 +23,8 @@ class Footer extends Component {
                 How to use
               </Link>
             
-              <a className="px-4" href="https://github.com/JackRa88it/VG-Nexus/blob/master/LICENSE" target="_blank">Copyright &nbsp;&copy;&nbsp; 2018 </a>
-              <a href="https://github.com/JackRa88it/VG-Nexus/blob/master/CODE_OF_CONDUCT.md" target="_blank">Code of Conduct</a>
+              <a className="px-4" href="https://github.com/JackRa88it/VG-Nexus/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">Copyright &nbsp;&copy;&nbsp; 2018 </a>
+              <a href="https://github.com/JackRa88it/VG-Nexus/blob/master/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer">Code of Conduct</a>
         </div>
         <div className="devTeam" id="middle">
             <a href="https://github.com/AaronGoldsmith" className="git">
