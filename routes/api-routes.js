@@ -95,13 +95,21 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            // console.log("user authenticated")
+            console.log("user authenticated")
             res.send(req.user);
+
         }
         else{
             console.log('user not authenticated')
             res.status(403).send('access denied')
         }
+    })
+
+    app.get('/api/getUser', function(req,res){
+        db.User.findOne(req.body.userId)
+        .then(user => {
+            res.send(user.dataValues);
+        })
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
