@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./Comment.css";
-import API from '../../utils/API';
 import { Link } from "react-router-dom";
 
 var moment = require('moment')
@@ -14,7 +13,7 @@ class Comment extends Component{
         </div>
         <div className='commentInfo'>
           <Link to={'/user/' + this.props.userId} ><div className='username'>{this.props.username}</div></Link>
-          <div className = 'date'>{moment(this.props.createdAt).format('MMM DD hh:mm a')}</div>
+          <div className = 'date'>{moment(this.props.createdAt).format('YYYY MMM DD hh:mm a')}</div>
         </div>
         <div className="comment">
           {this.props.children}

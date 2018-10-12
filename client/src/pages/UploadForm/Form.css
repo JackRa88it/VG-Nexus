@@ -1,8 +1,14 @@
 pre{
     color: wheat;
+    user-select: all;
 }
 
+
+#uploadThumbnail{
+    max-height: 160px;
+}
 /* #uploadTitle{
     font-size: 24px;
     font-weight: bold;
 } */
+
