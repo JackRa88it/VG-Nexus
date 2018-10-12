@@ -16,6 +16,7 @@ class Game extends Component{
         upVoted: false,
         downVoted: false,
         score: 0,
+        favorite: false,
         randomGames: []
     };
     getRandom(){
@@ -70,7 +71,7 @@ class Game extends Component{
                             src={'/games/'+this.props.match.params.id}
                             allowFullScreen></iframe>
                     
-                        <Chatroom gameId = {this.props.match.params.id} />
+                        <Chatroom gameId = {this.props.match.params.id} gameInfo={this.state} />
                     </div>
                     <div class = 'gameRow'>
                         <div class='commentCol'>

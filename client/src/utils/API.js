@@ -31,6 +31,9 @@ export default {
   getGameData: function(gameId){
     return axios.get('/api/game/' + gameId)
   },
+  favoriteGame: function(gameId){
+    return axios.get('/api/game/'+gameId+'/addFavorite')
+  },
   postVote: function(postId, bool){
     return axios.post('/api/post/'+postId+'/vote/', {vote: bool})
   },
