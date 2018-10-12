@@ -56,24 +56,23 @@ module.exports = function (app,io){
                                     //Rename thumbnail
                                     // if(err) throw err;
                                     fs.rename(oldpath, newpath, function (err) {
-                                        console.log('renaming filepaths')
                                         if (err) console.log(err);
                                         
                                         //Create a directory if it doesn't already exist
                                         var dir = "./client/public/games/" + game.id
                                         if (!fs.existsSync(dir)){
-                                            console.log('path does not exist \n creating newpath')
+                                            // console.log('path does not exist \n creating newpath')
                                             fs.mkdirSync(dir);
                                         }
                 
                                         //Unzip the file to target directory
                                         var target = path.join(__dirname,'../client/public/games/' + game.id)
                                         extract(newpath,{dir:target},function(err){
-                                            console.log('extracting to ', target)
+                                            // console.log('extracting to ', target)
                                             if(err) console.log(err);
                                             fs.unlink(newpath, (err) => {
                                                 if (err) console.log(err);
-                                                console.log('deleting' + newpath );
+                                                // console.log('deleting' + newpath );
                                                 //Redirect the user in the frontend to their game
                                                 newGame(game, io);
                                                 if(res.headersSent){
