@@ -1,1 +1,1 @@
-export * from "./ActiveChat"
+export * from "./Tabs"

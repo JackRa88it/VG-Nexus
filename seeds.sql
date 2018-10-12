@@ -16,12 +16,15 @@ INSERT INTO Tags (name,  createdAt, updatedAt) VALUES
 ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+<<<<<<< HEAD
 
 INSERT INTO tags (name,  createdAt, updatedAt) VALUES
 ("Action", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+=======
+>>>>>>> 08a26d129ec89f99e7750568d6bc7984a52cb5ac
 
 
 INSERT INTO Forums (title, description, createdAt, updatedAt) VALUES
@@ -31,12 +34,12 @@ INSERT INTO Forums (title, description, createdAt, updatedAt) VALUES
 ("Free for all", "The place for off-topic threads", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Forum rules/FAQ", "Beginners, look here", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO Threads (title, pinned, ForumId, UserId, createdAt, updatedAt) VALUES
-("Website Announcements", true, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-("My first game thread", false, 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-("This site is breaking my computer", false, 3, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-("Jokes megathread", true, 4, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-("Posting rules (Sticky)", true, 5, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+-- INSERT INTO Threads (title, pinned, ForumId, UserId, createdAt, updatedAt) VALUES
+-- ("Website Announcements", true, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ("My first game thread", false, 2, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ("This site is breaking my computer", false, 3, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ("Jokes megathread", true, 4, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+-- ("Posting rules (Sticky)", true, 5, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO Posts (text, ThreadId, UserId, createdAt, updatedAt) VALUES
 ("Man, I'm sorry, I honestly can't think of any announcements at this point. We'll see...", 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
