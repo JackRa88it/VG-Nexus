@@ -12,8 +12,7 @@ class NavTabs extends Component {
   logoutHandler = (event) => {
     event.preventDefault()
     Authenticator.signout(() => {
-      // this.setState({ authenticated: false })
-      window.location.assign('/')
+      this.setState({ authenticated: false })
     })
   }
 
@@ -108,6 +107,32 @@ class NavTabs extends Component {
                     <input type="image" src={"/assets/userThumbnails/" + this.state.user.id} />
                   </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
+                    {/* your name should take you to your public profile */}
+                    <div className="dropdown-item" href="#">{this.state.username}</div>
+                    <div className="dropdown-divider"></div>
+                    {/* takes you to public profile, like how clicking on your name takes you there too */}
+                    {/* it's there because it's more explicit than clicking on your name */}
+                    <Link className="dropdown-item" to="/profile">View Profile</Link>
+                    <div className="dropdown-divider"></div>
+                    {/* Your ... is where you can edit your stuff. Each one takes you to the same page. */}
+                    {/* Your Games */}
+                    <Link className="dropdown-item" to="/UserNexus">Your Games</Link>
+                    {/* Your Profile */}
+                    <Link className="dropdown-item" to="/UserNexus">Your Profile</Link>
+                    {/* Your Posts */}
+                    {/* If you click "Your Posts," you go to that tab on that page */}
+                    <Link className="dropdown-item" to="/UserNexus">Your Posts</Link>
+                    <div className="dropdown-divider"></div>
+                    <div className="dropdown-item" href="#">
+                      Help
+                    <i class="far fa-question-circle"></i>
+                    </div>
+                    <div className="dropdown-item" href="#">
+                      Settings
+                  <i class="fas fa-wrench"></i>
+                    </div>
+                    {/* Log out button */}
                     <Link
                       to="/logout"
                       onClick={this.logoutHandler}>
