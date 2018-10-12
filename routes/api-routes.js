@@ -51,11 +51,13 @@ module.exports = function (app,io){
                                 //Create a newpath to store the file at
                                 var newpath = path.join(__dirname, "../" + files.filetoupload.name)
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
-                                fs.copyFile(thumbnailPath,newThumbnailPath, function(err) {
+                                console.log('i am about to copy your image \n\n\n\n\n')
+                                fs.copyFileSync(thumbnailPath,newThumbnailPath, function(err) {
+                                    console.log('i copied your image\n\n')
                                     if(err) console.log(err);
                                     //Rename thumbnail
                                     // if(err) throw err;
-                                    fs.copyFile(oldpath, newpath, function (err) {
+                                    fs.copyFileSync(oldpath, newpath, function (err) {
                                         if (err) console.log(err);
                                         
                                         //Create a directory if it doesn't already exist
@@ -68,6 +70,7 @@ module.exports = function (app,io){
                                         //Unzip the file to target directory
                                         var target = path.join(__dirname,'../client/public/games/' + game.id)
                                         extract(newpath,{dir:target},function(err){
+                                            console
                                             // console.log('extracting to ', target)
                                             if(err) console.log(err);
                                             fs.unlink(oldpath, (err) => {
