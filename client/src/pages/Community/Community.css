@@ -6,8 +6,8 @@ a {
   display: flex;
 }
 
-.forumTreeLink {
-  margin: 0px 10px;
+.forumTree p {
+  margin-right: 10px;
 }
 
 .forumTreeLink:hover {
@@ -16,6 +16,16 @@ a {
   cursor: pointer;
 }
 
-#newPostButton {
+#threadName,
+#forumName {
+  float: left;
+}
+
+#newPostButton,
+#newThreadButton {
   float: right;
+  background-image: linear-gradient(#EE135B, #e91e40);
+  border: none;
+  color: #f6f6f7;
+  font-weight: bold;
 }

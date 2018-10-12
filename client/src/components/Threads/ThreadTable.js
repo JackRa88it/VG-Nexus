@@ -28,8 +28,8 @@ class ThreadTable extends React.Component{
         <thead>
           <tr>
             <th>Thread</th>
-            <th>Posts</th>
-            <th>Most Recent</th>
+            <th>Replies</th>
+            <th>Last Post</th>
           </tr>
         </thead>
         <tbody>

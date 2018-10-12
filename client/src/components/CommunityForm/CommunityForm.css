@@ -1,0 +1,14 @@
+.communityForm textarea {
+  background-color: rgba(49, 49, 49, 0.9);
+  color: #f6f6f7;
+  width: 100%;
+  height: 10em;
+}
+
+.communityForm button {
+  /* margin: 10px; */
+  background-image: linear-gradient(#EE135B, #e91e40);
+  border: none;
+  color: #f6f6f7;
+  font-weight: bold;
+}

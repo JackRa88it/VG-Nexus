@@ -9,8 +9,8 @@ const ForumAvatar = (props) => {
   <div className="avatarContainer">
     <img className="avatarImage" src={props.user.User.avatar}/> 
     <div className="username" onClick={props.handleUsernameClick}>{props.user.User.username}</div>
-    <div className="userScore">{props.user.User.score}</div>
-    <div className="createdAt">{moment(props.user.User.createdAt).format('DD/MM/YYYY')}</div>
+    <div className="userScore">{'score: ' + props.user.User.score}</div>
+    <div className="createdAt">{'Joined: ' + moment(props.user.User.createdAt).format('MMM YYYY')}</div>
   </div>
   )
 }
