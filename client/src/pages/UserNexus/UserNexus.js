@@ -14,11 +14,15 @@ class UserNexus extends React.Component {
   state = {
     location: "Profile"
   }
-  handleTabClick = event => {
+  handleTabClick = (event) => {
+    console.log(event)
     console.log("============")
     console.log("Tab Clicked")
     console.log("============")
-    const { name, value } = event.target
+    const name = (event.target.getAttribute("name"))
+    const value = (event.target.getAttribute("value"))
+    console.log(name)
+    console.log(value)
     this.setState({
       [name]: value
     })
@@ -28,7 +32,7 @@ class UserNexus extends React.Component {
     if (this.state.location === "Profile") {
       return (
         <div>
-          <Tabs handleTabClick = {this.handleTabClick} state = {this.state}/>
+          <Tabs handleTabClick = {this.handleTabClick} />
           <h1>Profile</h1>
         </div>
       )
@@ -36,8 +40,16 @@ class UserNexus extends React.Component {
     if (this.state.location === "Game") {
       return (
         <div>
-          <Tabs onClick = {this.handleTabClick} state = {this.state}/>
+          <Tabs handleTabClick = {this.handleTabClick}/>
           <h1>Game</h1>
+        </div>
+      )
+    }
+    if(this.state.location==="Posts"){
+      return(
+        <div>
+          <Tabs handleTabClick = {this.handleTabClick}/>
+          <h1>Posts</h1>
         </div>
       )
     }
