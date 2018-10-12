@@ -12,8 +12,7 @@ const Authenticator = {
                 this.user = res.data;
                 console.log(res)
                 if(cb){cb()}},
-        (err)=>{console.log(err)}
-      )
+      ).catch((err)=> {console.log(err)})
     },
     signout(cb) {
       API.logout()

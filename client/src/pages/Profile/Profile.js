@@ -40,7 +40,7 @@ class Profile extends Component {
                   <Col size="md-4">
                     <img src={`/assets/userThumbnails/${this.state.user.id}`} alt='user image' />
                     <h2>{this.state.username}</h2>
-                    <h3>{this.state.user.postBanner}</h3>
+                    <div className='display-5'>{this.state.user.postBanner}</div>
                   </Col>
                   <Col size="md-4">
                   <p className="float-right px-4">About<br />
