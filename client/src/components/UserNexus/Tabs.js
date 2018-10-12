@@ -21,7 +21,7 @@ class Tabs extends Component {
                                         : "nav-link"
                                 }
                                 name = "location"
-                                value = "Profile"
+                                value = "Edit Profile"
                                 onClick={this.props.handleTabClick}
                             >
                                 Customize Profile
