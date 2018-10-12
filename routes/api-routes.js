@@ -52,40 +52,35 @@ module.exports = function (app,io){
                                 var newpath = path.join(__dirname, "../" + files.filetoupload.name)
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
                                 console.log('i am about to copy your image \n\n\n\n\n')
-                                fs.copyFileSync(thumbnailPath,newThumbnailPath, function(err) {
-                                    console.log('i copied your image\n\n')
-                                    if(err) console.log(err);
-                                    //Rename thumbnail
-                                    // if(err) throw err;
-                                    fs.copyFileSync(oldpath, newpath, function (err) {
-                                        if (err) console.log(err);
-                                        
-                                        //Create a directory if it doesn't already exist
-                                        var dir = "./client/public/games/" + game.id
-                                        if (!fs.existsSync(dir)){
-                                            // console.log('path does not exist \n creating newpath')
-                                            fs.mkdirSync(dir);
-                                        }
+                                fs.copyFileSync(thumbnailPath,newThumbnailPath)
+                                console.log('i copied your image\n\n')
+                                //Rename thumbnail
+                                // if(err) throw err;
+                                fs.copyFileSync(oldpath, newpath) 
+                                 //Create a directory if it doesn't already exist
+                                var dir = "./client/public/games/" + game.id
+                                if (!fs.existsSync(dir)){
+                                    // console.log('path does not exist \n creating newpath')
+                                    fs.mkdirSync(dir);
+                                }
                 
                                         //Unzip the file to target directory
-                                        var target = path.join(__dirname,'../client/public/games/' + game.id)
-                                        extract(newpath,{dir:target},function(err){
-                                            console
-                                            // console.log('extracting to ', target)
-                                            if(err) console.log(err);
-                                            fs.unlink(oldpath, (err) => {
-                                                if (err) console.log(err);
-                                                // console.log('deleting' + newpath );
-                                                //Redirect the user in the frontend to their game
-                                                newGame(game, io);
-                                                if(res.headersSent){
-                                                    console.log('headers already sent')
-                                                }
-                                                else{
-                                                    return res.send('/all/games/'+game.id);  
-                                                }
-                                            });
-                                        })
+                                var target = path.join(__dirname,'../client/public/games/' + game.id)
+                                extract(newpath,{dir:target},function(err){
+                                    console
+                                    // console.log('extracting to ', target)
+                                    if(err) console.log(err);
+                                    fs.unlink(oldpath, (err) => {
+                                        if (err) console.log(err);
+                                        // console.log('deleting' + newpath );
+                                        //Redirect the user in the frontend to their game
+                                        newGame(game, io);
+                                        if(res.headersSent){
+                                            console.log('headers already sent')
+                                        }
+                                        else{
+                                            return res.send('/all/games/'+game.id);  
+                                        }
                                     });
                                 }) 
                             })
