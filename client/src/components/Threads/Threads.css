@@ -7,7 +7,7 @@
 }
 
 .threadTable td {
- padding: 20px;
+ padding: 10px 20px;
 }
 
 .threadTable thead tr {
@@ -45,7 +45,6 @@
 
 .tdLastPost .postTime {
   color: grey;
-  /* font-size: 12px; */
 }
 
 .threadTitle:hover {

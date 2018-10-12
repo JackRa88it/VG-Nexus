@@ -6,8 +6,8 @@ a {
   display: flex;
 }
 
-.forumTreeLink {
-  margin: 0px 10px;
+.forumTree p {
+  margin-right: 10px;
 }
 
 .forumTreeLink:hover {

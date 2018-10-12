@@ -18,11 +18,6 @@ class CommunityForm extends React.Component {
         text: this.props.postText
       })
     }
-    else if (this.props.formType === 'editThread') {
-      this.setState({
-        // text: 'NOT CODED YET'
-      })
-    }
   }
 
   handleInputChange = event => {
@@ -68,6 +63,7 @@ class CommunityForm extends React.Component {
   render() {
     return (
       <div className="communityForm">
+        <h4>{this.props.formType === 'newThread' ? "Thread Title:" : "Post Text:"}</h4>
         <textarea
           value={this.state.text}
           name="text"
