@@ -297,16 +297,17 @@ module.exports = function (app,io){
         }
     })
 
+
     app.get('/api/game/:id', function(req,res){
         //Grab game data with :id
         db.Game.findOne({
             where:{
                 id: req.params.id
             },
-            include: [{
-                model: db.Post,
+            include: [{model: db.Post,
                 include: db.User},
                 db.User,db.Vote],
+            // include: [{model: db.User}],
         }).then((game) => {
             game.dataValues.score = 0
             game.dataValues.upVoted = false
@@ -330,6 +331,16 @@ module.exports = function (app,io){
             console.log(err);
             res.json(err);
         });
+    })
+
+    app.post('/api/game/:id/addFavorite', function(req,res){
+        db.User.findOne({
+            where: {id: req.user.id},
+            include: [{model: db.Game}]
+        }).then(function(user){
+            user.addGame(req.params.id)
+            res.json(user)
+        })
     })
 
 
@@ -370,6 +381,8 @@ module.exports = function (app,io){
         });
         
     })
+
+
 
     app.get('/api/messages/', function(req,res){
         //Create a channel
@@ -484,6 +497,8 @@ module.exports = function (app,io){
             })
         }
     })
+
+
 }
 
 function newGame(game,io) {

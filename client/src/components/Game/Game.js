@@ -14,7 +14,8 @@ class Game extends Component{
         username: '',
         upVoted: false,
         downVoted: false,
-        score: 0
+        score: 0,
+        favorite: false,
     };
      
     voteGameHandler = (gameId,bool) => {
@@ -60,7 +61,7 @@ class Game extends Component{
                             src={'/games/'+this.props.match.params.id}
                             allowFullScreen></iframe>
                     
-                        <Chatroom gameId = {this.props.match.params.id} />
+                        <Chatroom gameId = {this.props.match.params.id} gameInfo={this.state} />
                     </div>
                     <CommentList gameId = {this.props.match.params.id}/>
                 </div>
