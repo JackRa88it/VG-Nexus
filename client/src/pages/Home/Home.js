@@ -1,8 +1,11 @@
-import './Home.css'
 import React from 'react'
 import API from '../../utils/API'
 import Authenticator from '../../utils/Authenticator';
 import GameContainer from '../../components/GameContainer/'
+import { Link } from "react-router-dom";
+
+import './Home.css'
+
 
 class Home extends React.Component{
   state = {
@@ -83,11 +86,15 @@ class Home extends React.Component{
           </div>
           
           <div className='homerow'>
-            <GameContainer games={this.state.newest} header={'Newest Games'} />
-            {(this.state.authenticated ?
-              <GameContainer games={this.state.favorites} header={'Your favorites'} /> : 
-              <GameContainer games={this.state.random} header={'Random'} />
-            )}
+            <div className='halfWidth'>
+              <GameContainer games={this.state.newest} header={'Newest Games'} />
+            </div>
+            <div className='halfWidth'>
+              {(this.state.authenticated ?
+                <GameContainer games={this.state.favorites} header={'Your favorites'}/> : 
+                <GameContainer games={this.state.random} header={'Random'} />
+              )}
+            </div>
           </div>
           <div className='homerow'>
             <div id='best'>
@@ -96,8 +103,10 @@ class Home extends React.Component{
                   return(
                     <div className='bestBox'>
                       <div className='bestCard'>
-                        <img src={'/assets/gameThumbnails/' + game.id}></img>
-                        <div className='bestCardTitle'>{game.name}</div>
+                        <Link to={"/all/games/" + game.id}>
+                          <img className='bestThumbnail' src={'/assets/gameThumbnails/' + game.id}></img>
+                        </Link>
+                        <div className='bestCardTitle'><Link to={"/all/games/" + game.id}>{game.name}</Link></div>
                         <div className='bestCardTags'>
                           {game.Tags.map((tag)=>{
                             return(
@@ -126,11 +135,15 @@ class Home extends React.Component{
                     <div className = 'tagGameBox'>
                       {tag.Games.map((game)=>{
                         return(
-                          <div className = 'tagGame'>
-                            <img src={'/assets/gameThumbnails/' + game.id}></img>
-                            <div className = 'tagGameTitle'>{game.name}</div>
-                            <div className = 'tagGameRating'>{game.rating.toFixed(2)}</div>
-                          </div>
+                          
+                            <div className = 'tagGame'>
+                            <Link to={"/all/games/" + game.id}>
+                              <img class='tagThumbnail' src={'/assets/gameThumbnails/' + game.id}></img>
+                              <div className = 'tagGameTitle'>{game.name}</div>
+                            </Link>
+                              <div className = 'tagGameRating'>{game.rating.toFixed(2)}</div>
+                            </div>
+                          
                         )
                       })}
                     </div>
