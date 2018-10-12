@@ -15,8 +15,15 @@ class Profile extends Component {
   }
   componentDidMount() {
     Authenticator.authenticate(() => {
-      API.getUser(Authenticator.user.id)
+      let userId = this.props.match.params.id;
+      console.log("!!!!!!!");
+      console.log(userId);
+      console.log("!!!!!!!");
+
+      API.getUser(userId)
       .then(user =>{
+        console.log(user);
+        console.log(user.data);
         this.setState({
           user: user.data,
           username: user.data.username

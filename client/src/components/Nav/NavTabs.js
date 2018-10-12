@@ -15,7 +15,7 @@ class NavTabs extends Component {
   }
 
   componentDidMount() {
-    Authenticator.authenticate((res) => {
+    Authenticator.authenticate(() => {
       API.getUser(Authenticator.user.id)
       .then(user =>{
         this.setState({
@@ -117,7 +117,7 @@ class NavTabs extends Component {
                     <div className="dropdown-divider"></div>
                     {/* takes you to public profile, like how clicking on your name takes you there too */}
                     {/* it's there because it's more explicit than clicking on your name */}
-                    <Link className="dropdown-item" to="/profile">View Profile</Link>
+                    <Link className="dropdown-item" to={`/profile/${Authenticator.user.id}`}>View Profile</Link>
                     <div className="dropdown-divider"></div>
                     {/* Your ... is where you can edit your stuff. Each one takes you to the same page. */}
                     {/* Your Games */}
