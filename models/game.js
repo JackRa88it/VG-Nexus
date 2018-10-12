@@ -37,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
         through: "GameTags"
       })
       Game.belongsToMany(models.User, {
-        through: "UserGames"   
+        as: "Favorites", through: "UserGames"   
       })
     };
   

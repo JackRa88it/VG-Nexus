@@ -333,12 +333,11 @@ module.exports = function (app,io){
         });
     })
 
-    app.post('/api/game/:id/addFavorite', function(req,res){
+    app.get('/api/game/:id/addFavorite', function(req,res){
         db.User.findOne({
             where: {id: req.user.id},
-            include: [{model: db.Game}]
         }).then(function(user){
-            user.addGame(req.params.id)
+            user.addFavorite(req.params.id)
             res.json(user)
         })
     })
