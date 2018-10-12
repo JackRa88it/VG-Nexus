@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CommentList from "../CommentList"
+import GameContainer from '../GameContainer'
 import Chatroom from "../Chat/gameChat"
 import API from '../../utils/API'
 
@@ -14,9 +15,18 @@ class Game extends Component{
         username: '',
         upVoted: false,
         downVoted: false,
-        score: 0
+        score: 0,
+        randomGames: []
     };
-     
+    getRandom(){
+        API.getRandom()
+        .then((res)=>{
+          this.setState({randomGames:res.data})
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+      }
     voteGameHandler = (gameId,bool) => {
         API.postGameVote(gameId,bool)
         .then((res)=>{
@@ -38,12 +48,12 @@ class Game extends Component{
     }
     componentDidMount(){
         this.getGame(this.props.match.params.id)
+        this.getRandom()
     }
     
     render(){
         return(
             <div>
-
                 <div>
                     <h1 className="text-center">{this.state.name}</h1>
                     <div>({this.state.score})</div>
@@ -62,9 +72,16 @@ class Game extends Component{
                     
                         <Chatroom gameId = {this.props.match.params.id} />
                     </div>
-                    <CommentList gameId = {this.props.match.params.id}/>
+                    <div class = 'gameRow'>
+                        <div class='commentCol'>
+                            <CommentList gameId = {this.props.match.params.id}/>
+                        </div>
+                        <div class='suggestedCol'>
+                            <h3>Suggested Games</h3>
+                            <GameContainer games = {this.state.randomGames}/>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
         )
     }

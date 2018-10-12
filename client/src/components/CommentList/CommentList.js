@@ -48,7 +48,7 @@ class CommentList extends React.Component{
 
     render(){
       return (
-          <div className="skinny">
+          <div>
             <h3>Comments</h3>
               <div className="form-group">
                 <TextArea className="form-control" rows="4" onChange={this.handleInputChange} name="newComment"/>

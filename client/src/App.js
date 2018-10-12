@@ -1,3 +1,5 @@
+// import "./App.css";
+
 import React, { Component } from 'react';
 import Form from './pages/UploadForm';
 import Game from './components/Game/Game';

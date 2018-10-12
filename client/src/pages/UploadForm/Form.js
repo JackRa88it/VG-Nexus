@@ -1,9 +1,10 @@
+import './Form.css'
+
 import React, { Component } from 'react';
 import axios from "axios";
 import Authenticator from '../../utils/Authenticator';
 import TagSelect from '../../components/Form/TagSelect';
 import ImageUpload from './ImageUpload';
-import './Form.css'
 // importing {bracketed} exports from Authenticator and TagSelect not working
 
 // import axios from 'axios';

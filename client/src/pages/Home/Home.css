@@ -1,12 +1,22 @@
+.container{
+  border: none;
+  background-color: rgba(43, 43, 43, 0);
+}
+
 .homerow{
     width: 100%;
     padding: 10px;
-    background-color: rgb(82, 28, 28);
+    background-color: rgba(187, 17, 74, 0.796);
     overflow: auto;
     margin: 10px 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+.halfWidth{
+    width: 49%;
+    float: left;
 }
 
 #featured{
@@ -45,7 +55,7 @@
     height: 100%;
 }
 
-.bestCard > img{
+.bestThumbnail{
     height: 160px;
     width: 180px;
     margin: 4px;
@@ -181,7 +191,7 @@
 
 
 
-.tagGame > img{
+.tagThumbnail{
     float: left;
     height: 30px;
     width: 30px;
