@@ -48,6 +48,7 @@ module.exports = function (app,io){
                                 //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
                                 var oldpath = files.filetoupload.path;
                                 var thumbnailPath = files.thumbnail.path;
+                                console.log(thumbnailPath,'\n',newThumbnailPath)
                                 //Create a newpath to store the file at
                                 var newpath = path.join(__dirname, "../" + files.filetoupload.name)
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
