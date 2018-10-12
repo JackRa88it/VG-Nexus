@@ -46,7 +46,7 @@ class UserNexus extends React.Component {
       API.editUser(editedUser)
       .then(res => {
         console.log(res)
-        window.location.assign("/profile")
+        window.location.assign("/profile/"+Authenticator.user.id)
       })
       .catch(err => {
         console.log(err)

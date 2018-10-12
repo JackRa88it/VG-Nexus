@@ -9,9 +9,6 @@ import ImageUpload from './ImageUpload';
 
 // import axios from 'axios';
 
-Authenticator.authenticate()
-
-
 
 class Form extends Component{
     state = {

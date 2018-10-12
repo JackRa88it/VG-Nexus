@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
-
+import Authenticator from "../../utils/Authenticator"
 class Login extends Component{
     state = {
         email: '',
@@ -23,7 +23,12 @@ class Login extends Component{
             email: this.state.email,
             password: this.state.password
           })
-            .then(res => window.location.assign(res.data))
+            .then(res => {
+                Authenticator.authenticate(() => {
+                    window.location.assign(res.data)
+                })
+               
+            })
             .catch(err => console.log(err));
         }
     };

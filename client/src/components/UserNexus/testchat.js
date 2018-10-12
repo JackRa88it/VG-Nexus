@@ -26,17 +26,17 @@ class Chatroom extends Component{
         }
     }
 
-    componentDidMount(){
-        this.socket=io.connect("http://localhost:3001" + "/game/2")
-        API.authenticate().then ((res)=> {
-        this.name = res.data;
-        console.log(this.name)})
+    // componentDidMount(){
+    //     this.socket=io.connect("http://localhost:3001" + "/game/2")
+    //     API.authenticate().then ((res)=> {
+    //     this.name = res.data;
+    //     console.log(this.name)})
         
-        this.socket.on("messagePost", (msg, name)=>{
-            this.setState({messages : [...this.state.messages, name+ ":" +msg]})
-        })
+    //     this.socket.on("messagePost", (msg, name)=>{
+    //         this.setState({messages : [...this.state.messages, name+ ":" +msg]})
+    //     })
 
-    }
+    // }
 
     render(){
         return(
