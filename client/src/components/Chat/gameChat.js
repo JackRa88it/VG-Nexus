@@ -51,6 +51,13 @@ class Chatroom extends Component{
         })
     }
 
+    handleFavoriteClick = () => {
+        console.log(this.props.gameId)
+        API.favoriteGame(this.props.gameId).then((res) =>{
+            console.log('worked, now check')
+        })
+    }
+
 
     componentDidMount(){
         this.connect(this.props.gameId);
@@ -85,8 +92,9 @@ class Chatroom extends Component{
         return(
             <div className="chatroom">
                 <div className="gametabs">
-                    <button className="tab-location">Game</button>
-                    <button className="fas fa-star"></button>
+                    <button className="fas fa-star"
+                    onClick={this.handleFavoriteClick}>
+                    </button>
                     <button
                      className="details-tab"
                      name="location"
@@ -137,7 +145,6 @@ class Chatroom extends Component{
             return(
                 <div className="chatroom">
                     <div className="gametabs">
-                        <button className="tab-location">Game</button>
                         <button className="fas fa-star"></button>
                         <button
                          className="details-tab"
@@ -154,10 +161,14 @@ class Chatroom extends Component{
                         Chat
                         </button>
                     </div>
-                    <div className="messagedisplay">
-                    {this.props.gameDescript}
-                    {this.props.gameName}
-                    {this.props.createdAt}
+                    <div className="detail-display">
+                        <div className="game-details">
+                            <p className="detail">Title: {this.props.gameInfo.name}</p>
+                            <p className="detail">About: {this.props.gameInfo.description}</p>
+                            <p className="detail">Created at: {moment(this.props.gameInfo.createdAt).format('MM/DD/YYYY')}</p>
+                            <p className="detail">Created by: {this.props.gameInfo.username}</p>
+                            <p className="detail">Score: {this.props.gameInfo.score}</p>
+                        </div>
                     </div>
                     </div> 
                 )
