@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
+import {Row, Container} from "../../components/Grid"
 import Authenticator from '../../utils/Authenticator';
 import "./Profile.css";
 
 class Profile extends Component {
   state = {
     username: '',
-    user: undefined
+    user: {}
   }
   componentDidMount() {
     Authenticator.authenticate(() => {
@@ -19,7 +20,13 @@ class Profile extends Component {
   render(){ 
     return (
       <div>
-          <h1>{this.state.username}</h1>
+          <Row>
+            <h1>{this.state.username}</h1>
+            <p>{this.state.user.bio}</p>
+          </Row>
+          <Row>
+            <h3>{this.state.user.postBanner}</h3>
+          </Row>          
       </div>
     )
   }
