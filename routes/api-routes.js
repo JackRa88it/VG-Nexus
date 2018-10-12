@@ -52,6 +52,7 @@ module.exports = function (app,io){
                                 var newpath = path.join(__dirname, "../" + files.filetoupload.name)
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
                                 fs.rename(thumbnailPath,newThumbnailPath, function(err) {
+                                    if(err) console.log(err);
                                     //Rename thumbnail
                                     // if(err) throw err;
                                     fs.rename(oldpath, newpath, function (err) {
@@ -121,7 +122,7 @@ module.exports = function (app,io){
                 var oldPath = files.profilephoto.path;
                 var newPath = path.join(__dirname, '../client/public/assets/userThumbnails/' + req.user.id )
                 fs.rename(oldPath,newPath, function(err) {
-                    if(err) throw err
+                    if(err) console.log(err)
                 })
             })
         }
