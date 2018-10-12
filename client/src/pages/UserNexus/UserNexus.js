@@ -16,7 +16,8 @@ class UserNexus extends React.Component {
     location: "Edit Profile",
     Username: "",
     Banner: "",
-    Bio: ""
+    Bio: "",
+    Avatar: ""
   };
 
   handleTabClick = (event) => {
@@ -41,6 +42,7 @@ class UserNexus extends React.Component {
       editedUser.Username = this.state.Username
       editedUser.Banner = this.state.Banner
       editedUser.Bio = this.state.Bio
+      editedUser.Avatar = this.state.Avatar
       API.editUser(editedUser)
       .then(res => {
         console.log(res)
@@ -87,17 +89,20 @@ class UserNexus extends React.Component {
                     placeholder="Current User Bio Text here"
                     onChange = {this.handleInputChange}
                   />
-
+                  {/* Upload URL doesn't work. It saves to the database,  */}
+                  {/* but Vincent has the render for avatar profile as a local file */}
+                  {/* In other words, the avatar field in the database is obsolete */}
+                  {/* and if you want to change avatar image, you have to store an image */}
+                  {/* in the right directory */}
+                  {/* In other words, it's not suppose to work :) */}
+                  <Input
+                    name="Avatar"
+                    placeholder="Current Avatar URL here"
+                    onChange = {this.handleInputChange}
+                  />
                   <FormBtn onClick ={this.handleSubmitEditProfile}>
                     Submit
                   </FormBtn>
-                  <h2 className="display-5 mb-4">Uploading Images</h2>
-                  <FormBtn>
-                    Upload avatar image
-                  </FormBtn>
-                  <FormBtn>
-                    Upload banner image
-              </FormBtn>
                 </div>
               </div>
             </Col>
@@ -125,6 +130,11 @@ class UserNexus extends React.Component {
           <Tabs handleTabClick={this.handleTabClick} />
           <h1>Posts</h1>
         </div>
+      )
+    }
+    else{
+      return(
+        <h1>Error</h1>
       )
     }
   };

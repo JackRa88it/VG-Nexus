@@ -492,11 +492,13 @@ module.exports = function (app,io){
             console.log(req.body.editedUser.Username)
             console.log(req.body.editedUser.Bio)
             console.log(req.body.editedUser.Banner)
+            console.log(req.body.editedUser.Avatar)
             db.User.update(
                 {
                     username: req.body.editedUser.Username,
                     bio: req.body.editedUser.Bio,
-                    postBanner: req.body.editedUser.Banner
+                    postBanner: req.body.editedUser.Banner,
+                    avatar: req.body.editedUser.Avatar,
                 },
                 {where: {id: req.body.editedUser.id}}
             ).then((user) => {
