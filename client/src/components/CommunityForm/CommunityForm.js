@@ -67,16 +67,13 @@ class CommunityForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form className="form">
-          <input
-            value={this.state.text}
-            name="text"
-            onChange={this.handleInputChange}
-            type="text"
-          />
-          <button onClick={this.handleFormSubmit}>Submit</button>
-        </form>
+      <div className="communityForm">
+        <textarea
+          value={this.state.text}
+          name="text"
+          onChange={this.handleInputChange}
+        />
+        <button onClick={this.handleFormSubmit}>Submit</button>
       </div>
     );
   }

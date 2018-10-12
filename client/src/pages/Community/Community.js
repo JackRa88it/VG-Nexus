@@ -36,7 +36,6 @@ class Community extends React.Component{
 
   // navigation action when clicking on forum rows or thread rows
   handleRowClick = event => {
-    console.log('waddup bitch')
     if (event.target.getAttribute("class") === "forumTitle") {
       this.setState({
         page: "forum",
@@ -196,7 +195,7 @@ class Community extends React.Component{
               <p>></p>
             </div>
             <div>
-              <h1>{this.state.forumName}</h1>
+              <h1 id="forumName">{this.state.forumName}</h1>
               <button 
                 id="newThreadButton"
                 onClick={this.newThreadButton}
@@ -230,7 +229,7 @@ class Community extends React.Component{
               <p>></p>
             </div>
             <div>
-              <h1 className="threadName">{this.state.threadName}</h1>
+              <h1 id="threadName">{this.state.threadName}</h1>
               <button 
                 id="newPostButton"
                 onClick={this.newPostButton}

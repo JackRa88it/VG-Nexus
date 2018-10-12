@@ -363,9 +363,9 @@ module.exports = function (app,io){
         var forumId = req.params.id;
         db.Thread.findAll({
             where: {ForumId: forumId},
-            include: [{
-                model: db.Post
-            }],
+            include: [
+                {model: db.User}, 
+                {model: db.Post, include: [{model: db.User}]}],
             order: [db.sequelize.col('id')]
         })
         .then(data => {

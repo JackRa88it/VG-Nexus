@@ -1,32 +1,35 @@
-.avatarImage {
+.avatarContainer .avatarImage {
     height: 120px;
     width: 140px;
     outline: solid;
-    outline-color: aliceblue
+    outline-color: #171717
 }
 
 .avatarContainer {
     height: 220px;
     width: 140px;
     outline: solid;
-    outline-color: aliceblue;
-    background-color: grey;
+    outline-color: #171717;
+    background-color: #171717;
 }
 
-.username {
+.avatarContainer .username {
     margin: 5px;
-
+    font-weight: bold;
+    text-decoration: none;
 }
 
-.userScore {
+.avatarContainer .userScore {
     position: relative;
     top: 10px;
     margin: 5px;
+    font-size: 12px;
 }
 
-.createdAt {
+.avatarContainer .createdAt {
     position: relative;
     top: 15px;
     margin: 5px;
     margin-bottom: 3px;
+    font-size: 12px;
 }
