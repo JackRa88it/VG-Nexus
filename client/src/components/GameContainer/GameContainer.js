@@ -5,7 +5,7 @@ import './GameContainer.css'
 class GameContainer extends React.Component{
     render(){
         return(
-            <div class='gamesContainer'>
+            <div className='gamesContainer'>
                 <div className='categoryHeader'>{this.props.header}</div>
                 {this.props.games.map((game)=>{
                 return(
