@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import API from "../../utils/API"
 import Authenticator from '../../utils/Authenticator';
 import "./Nav.css";
 
 class NavTabs extends Component {
   state = {
-    authenticated: false,
     username: "Anonymous",
     user: undefined
   }
   logoutHandler = (event) => {
     event.preventDefault()
-    Authenticator.signout(() => {
-      this.setState({ authenticated: false })
-    })
+    Authenticator.signout()
   }
 
   componentDidMount() {
-    Authenticator.authenticate(() => {
-      this.setState({
-        authenticated: true,
-        username: Authenticator.username,
-        user: Authenticator.user
+    Authenticator.authenticate((res) => {
+      API.getUser(Authenticator.user.id)
+      .then(user =>{
+        this.setState({
+          user: user.data,
+          username: user.data.username
+        })
       })
+      .catch(err => {
+        console.log(err)
+      })
+      
     })
   }
   render() {
@@ -96,7 +100,7 @@ class NavTabs extends Component {
         {/* user */}
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            {!this.state.authenticated ? (
+            {!Authenticator.isAuthenticated ? (
               <div className='d-inline-flex'>
                 <Link to="/login_signup" className="nav-link">Sign In</Link>
               </div>
