@@ -15,6 +15,7 @@ class Profile extends Component {
   }
   componentDidMount() {
     Authenticator.authenticate(() => {
+      console.log("authenticator ran")
       this.setState({ authenticated: true,
          user: Authenticator.user,
         })
