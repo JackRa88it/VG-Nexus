@@ -51,11 +51,11 @@ module.exports = function (app,io){
                                 //Create a newpath to store the file at
                                 var newpath = path.join(__dirname, "../" + files.filetoupload.name)
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
-                                fs.rename(thumbnailPath,newThumbnailPath, function(err) {
+                                fs.copyFile(thumbnailPath,newThumbnailPath, function(err) {
                                     if(err) console.log(err);
                                     //Rename thumbnail
                                     // if(err) throw err;
-                                    fs.rename(oldpath, newpath, function (err) {
+                                    fs.copyFile(oldpath, newpath, function (err) {
                                         if (err) console.log(err);
                                         
                                         //Create a directory if it doesn't already exist
@@ -70,7 +70,7 @@ module.exports = function (app,io){
                                         extract(newpath,{dir:target},function(err){
                                             // console.log('extracting to ', target)
                                             if(err) console.log(err);
-                                            fs.unlink(newpath, (err) => {
+                                            fs.unlink(oldpath, (err) => {
                                                 if (err) console.log(err);
                                                 // console.log('deleting' + newpath );
                                                 //Redirect the user in the frontend to their game
