@@ -25,18 +25,16 @@ class PostTable extends React.Component{
   render(){
     return (
       <table className="postTable">
-        <tbody>
-          {this.state.posts.map(post => {
-            return(
-              <PostRow 
-                key={post.id}
-                post={post} 
-                editPostButton={this.props.editPostButton}
-                handleUsernameClick={this.props.handleUsernameClick}
-                />
-            )
-          })}
-        </tbody>
+        {this.state.posts.map(post => {
+          return(
+            <PostRow 
+              key={post.id}
+              post={post} 
+              editPostButton={this.props.editPostButton}
+              handleUsernameClick={this.props.handleUsernameClick}
+            />
+          )
+        })}
       </table>
     )
   }

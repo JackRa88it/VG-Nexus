@@ -95,13 +95,21 @@ module.exports = function (app,io){
 
     app.get('/api/authenticate',function(req,res){
         if(req.user){
-            // console.log("user authenticated")
+            console.log("user authenticated")
             res.send(req.user);
+
         }
         else{
             console.log('user not authenticated')
             res.status(403).send('access denied')
         }
+    })
+
+    app.get('/api/getUser', function(req,res){
+        db.User.findOne(req.body.userId)
+        .then(user => {
+            res.send(user.dataValues);
+        })
     })
 
     app.post("/api/login",passport.authenticate("local"),  function(req, res) {
@@ -133,7 +141,7 @@ module.exports = function (app,io){
             email: req.body.email,
             password: req.body.password,
             bio: req.body.bio,
-            postBanner: req.body.bannerUrl
+            postBanner: req.body.postBanner
           }).then(function(user) {
             var random = Math.floor(Math.random()*9) + 1
             var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
@@ -419,9 +427,9 @@ module.exports = function (app,io){
         var forumId = req.params.id;
         db.Thread.findAll({
             where: {ForumId: forumId},
-            include: [{
-                model: db.Post
-            }],
+            include: [
+                {model: db.User}, 
+                {model: db.Post, include: [{model: db.User}]}],
             order: [db.sequelize.col('id')]
         })
         .then(data => {
@@ -481,6 +489,7 @@ module.exports = function (app,io){
         }
     })
 
+    
     app.post('/api/community/newForumThread', function(req,res){
         //create new forum thread in the database
         if(req.user){
@@ -496,9 +505,30 @@ module.exports = function (app,io){
             })
         }
     })
-
-
+    app.put('/api/editProfile', function(req,res){
+        console.log(req.body.editedUser)
+        if(req.user){
+            console.log(req.body.editedUser.id)
+            console.log(req.body.editedUser.Username)
+            console.log(req.body.editedUser.Bio)
+            console.log(req.body.editedUser.Banner)
+            db.User.update(
+                {
+                    username: req.body.editedUser.Username,
+                    bio: req.body.editedUser.Bio,
+                    postBanner: req.body.editedUser.Banner
+                },
+                {where: {id: req.body.editedUser.id}}
+            ).then((user) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
 }
+
 
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);

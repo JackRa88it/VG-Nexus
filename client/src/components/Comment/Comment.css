@@ -17,7 +17,7 @@
 .comment{
   float: left;
   padding: 10px 0px;
-  width: calc(100% - 308px);
+  width: calc(100% - 360px);
   margin-right: 50px;
   font-size: 14px;
   overflow: auto;

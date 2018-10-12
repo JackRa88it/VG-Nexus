@@ -1,5 +1,6 @@
 .postTable {
   width: 100%;
+  margin-top: 20px;
 }
 
 .postTable td {
@@ -7,37 +8,50 @@
   padding: 10px 0px;
 }
 
-.placeholderUserComponent {
-  width: 100px;
-  height: 150px;
-  border: 1px solid grey;
-  text-align: center;
+.tdForumAvatar {
+  width: 140px;
 }
 
-.threadName {
-  float: left;
+.postContent {
+  padding-left: 20px;
 }
 
 .postContent .postHeader {
   background: #171717;
   font-size: 0.9em;
+  color: rgb(180, 180, 180);
+  padding-left: 10px;
+  outline: solid;
+  outline-color: #171717;
 }
 
 .postBody {
-  padding: 10px 0px;
+  padding: 10px 0px 10px 10px;
+  overflow: auto;
 }
 
 .postText {
   float: left;
+  width: 95%;
+  color: #f6f6f7;
+  white-space: pre-wrap;
 }
 
 .postEditButton {
   float: right;
+  width: 5%;
   vertical-align: top;
 }
 
+.postBanner {
+  color: rgb(180, 180, 180);
+  padding-left: 10px; 
+  white-space: pre-wrap;
+}
+
 .postContent hr {
-  background-color: grey;
+  background-color: rgb(87, 87, 87);
+  padding-left: 10px;
 }
 
 .editButton {

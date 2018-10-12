@@ -3,15 +3,15 @@
 
 body {
   background-color: #000;
+  color:white;
   font-family: 'Open Sans', sans-serif;
-  color: #f6f6f7;
   width:100%;
   height:100%;
 }
-
-
 .git{
   padding: 10px;
+  color: #f6f6f7;
+
   /* font-family: 'Open Sans', sans-serif; */
 }
 h1 {
@@ -21,8 +21,8 @@ h1 {
   background: rgba(43, 43, 43, 0.9);
 }
 .container {
-  border: 1px solid rgba(248, 249, 250,0.1);
-  background-color: rgba(43, 43, 43, 0.9);
+  /* border: 1px solid rgba(248, 249, 250,0.1);
+  background-color: rgba(43, 43, 43, 0.9); */
   padding: 50px;
   margin: 75px auto;
 }
@@ -32,6 +32,12 @@ h1 {
 }
 .chatroom{
   z-index:1;
+}
+.dropdown{
+  margin:0px;
+}
+.dropdown-item a{
+  color: #212529 !important;
 }
 
 .App-logo {
@@ -57,4 +63,9 @@ h1 {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.container{
+  border: 1px solid rgba(248, 249, 250,0.1);
+  background-color: rgba(43, 43, 43, 0.9);
 }

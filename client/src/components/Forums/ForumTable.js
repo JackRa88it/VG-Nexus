@@ -11,7 +11,7 @@ class ForumTable extends React.Component{
           <tr>
             <th>Forum</th>
             <th>Threads</th>
-            <th>Most Recent</th>
+            <th>Recent Activity</th>
           </tr>
         </thead>
         <tbody>

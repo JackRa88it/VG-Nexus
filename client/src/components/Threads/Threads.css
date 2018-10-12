@@ -3,11 +3,11 @@
 }
 
 .threadTable th {
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .threadTable td {
- padding: 20px;
+ padding: 10px 20px;
 }
 
 .threadTable thead tr {
@@ -16,6 +16,35 @@
 
 .threadTable tr:nth-child(even) {
   background-color: rgba(49, 49, 49, 0.9);
+}
+
+.tdThreadTitle {
+  width: 75%;
+}
+
+.tdReplies {
+  width: 10%;
+}
+
+.tdLastPost {
+  width: 15%;
+}
+
+.tdThreadTitle .threadTitle {
+  margin: 0px;
+}
+
+.tdThreadTitle .threadAuthor {
+  margin: 0px;
+  color: grey;
+}
+
+.tdLastPost p {
+  margin: 0px;
+}
+
+.tdLastPost .postTime {
+  color: grey;
 }
 
 .threadTitle:hover {
