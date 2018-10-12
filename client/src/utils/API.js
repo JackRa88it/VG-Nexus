@@ -40,6 +40,21 @@ export default {
   getForumList: function() {
     return axios.get("/api/forumList")
   },
+  getThreadList: function(forumId) {
+    return axios.get("/api/threadList/" + forumId)
+  },
+  getPostList: function(threadId) {
+    return axios.get("/api/postList/" + threadId)
+  },
+  newForumPost: function(newPost) {
+    return axios.post('/api/community/newForumPost/', {newPost: newPost})
+  },
+  editForumPost: function(editedPost) {
+    return axios.put('/api/community/editForumPost/', {editedPost: editedPost})
+  },
+  newForumThread: function(newThread) {
+    return axios.post('/api/community/newForumThread/', {newThread: newThread})
+  },
   getBest: function(){
     return axios.get('/api/games/best')
   },

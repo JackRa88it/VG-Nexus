@@ -1,23 +1,24 @@
-table {
+.threadTable {
   width: 100%;
 }
 
-th {
+.threadTable th {
   padding: 10px;
 }
 
-td {
+.threadTable td {
  padding: 20px;
 }
 
-thead tr {
+.threadTable thead tr {
   border: 1px solid grey;
 }
 
-tr:nth-child(even) {
+.threadTable tr:nth-child(even) {
   background-color: rgba(49, 49, 49, 0.9);
 }
 
-tr:hover {
+.threadTitle:hover {
   color: #EE135B;
+  cursor: pointer;
 }

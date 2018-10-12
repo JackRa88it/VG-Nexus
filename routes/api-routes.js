@@ -133,7 +133,7 @@ module.exports = function (app,io){
             email: req.body.email,
             password: req.body.password,
             bio: req.body.bio,
-            postBanner: req.body.bannerUrl
+            postBanner: req.body.postBanner
           }).then(function(user) {
             var random = Math.floor(Math.random()*9) + 1
             var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
@@ -387,10 +387,12 @@ module.exports = function (app,io){
     })
 
     app.get('/api/forumList', function(req,res) {
+        // get list of forums for community main page
         db.Forum.findAll({
             include: [{
                 model: db.Thread
-            }]
+            }],
+            order: [db.sequelize.col('id')]
         })
         .then(data => {
             res.json(data)
@@ -398,6 +400,89 @@ module.exports = function (app,io){
             console.log(err);
             res.json(err);
         });
+    })
+
+    app.get('/api/threadList/:id', function(req,res) {
+        //get list of threads to populate forum page
+        var forumId = req.params.id;
+        db.Thread.findAll({
+            where: {ForumId: forumId},
+            include: [{
+                model: db.Post
+            }],
+            order: [db.sequelize.col('id')]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.get('/api/postList/:id', function(req,res) {
+        //get list of posts to populate thread page
+        var threadId = req.params.id;
+        db.Post.findAll({
+            where: {ThreadId: threadId},
+            include: [{
+                model: db.User
+            }],
+            order: [db.sequelize.col('id')]
+        })
+        .then(data => {
+            res.json(data)
+        }).catch(err => {
+            console.log(err);
+            res.json(err);
+        });
+    })
+
+    app.post('/api/community/newForumPost', function(req,res){
+        //create new forum post in the database
+        if(req.user){
+            db.Post.create({
+                text: req.body.newPost.text,
+                UserId: req.body.newPost.userId,
+                ThreadId: req.body.newPost.threadId
+            }).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.put('/api/community/editForumPost', function(req,res){
+        //update forum post in the database
+        if(req.user){
+            db.Post.update(
+                {text: req.body.editedPost.text},
+                {where: {id: req.body.editedPost.id}}
+            ).then((post) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
+
+    app.post('/api/community/newForumThread', function(req,res){
+        //create new forum thread in the database
+        if(req.user){
+            db.Thread.create({
+                title: req.body.newThread.title,
+                UserId: req.body.newThread.userId,
+                ForumId: req.body.newThread.forumId
+            }).then((thread) => {
+                res.send(thread)
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
     })
 }
 

@@ -1,23 +1,24 @@
-table {
+.forumTable {
   width: 100%;
 }
 
-th {
+.forumTable th {
   padding: 10px;
 }
 
-td {
+.forumTable td {
  padding: 20px;
 }
 
-thead tr {
+.forumTable thead tr {
   border: 1px solid grey;
 }
 
-tr:nth-child(even) {
+.forumTable tr:nth-child(even) {
   background-color: rgba(49, 49, 49, 0.9);
 }
 
-tr:hover {
+.forumTitle:hover {
   color: #EE135B;
+  cursor: pointer;
 }
