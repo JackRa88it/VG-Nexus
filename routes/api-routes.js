@@ -171,6 +171,23 @@ module.exports = function (app,io){
             res.json(err)
         })
     })
+
+    app.get('/api/user/favorites', (req,res)=>{
+        db.User.findOne({
+            where: {id: req.user.id},
+        }).then((user)=>{
+            user.getFavorites()
+            .then(function(fav){
+                res.json(fav)
+            })
+            // res.json(user)
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
+
+
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({
             limit: 8,
@@ -282,13 +299,10 @@ module.exports = function (app,io){
     })
 
     app.get('/api/games/favorites', function(req,res){
-        db.Vote.findAll({
+        db.User.findOne({
             where: {
-                UserId: req.user.id,
-                upDown: true,
-                GameId: {$not: null}
-            },
-            include: [db.Game]
+                UserId: req.user.id},
+                include: [db.Game]
         }).then((votes) => {
             res.json(votes)
         })
