@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from "../Form";
-import API from "../../utils/API";
+import API from "../../utils/API"
+import Authenticator from "../../utils/Authenticator";
 import io from 'socket.io-client'
 import {ActiveChat} from "."
 import './gameChat.css'
@@ -73,10 +74,14 @@ class Chatroom extends Component{
             this.socket.disconnect();
         }
         this.socket = io.connect("http://localhost:3001/game/" + gameId);
-        API.authenticate().then((res) => {
-            this.name = res.data.username;
-            this.id = res.data.id
-        });
+        if(Authenticator.isAuthenticated){
+            API.getUser(Authenticator.user.id)
+            .then((res) => {
+                    this.name = res.data.username;
+                    this.id = res.data.id
+                });
+        }
+    
         this.socket.on("messagePost", (msg, name, id) => {
             const _now = moment().format('hh:mm:ssa')
             this.setState({ messages: [...this.state.messages, {name: name, id: id, msg: msg, now:_now}] });
