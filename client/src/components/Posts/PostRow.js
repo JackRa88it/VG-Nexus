@@ -9,8 +9,11 @@ const PostRow = (props) => {
   if(authenticated) {
     return(
       <tr>
-        <td>
-          <ForumAvatar user={props.post} />
+        <td className="tdForumAvatar">
+          <ForumAvatar 
+            user={props.post}
+            handleUsernameClick={props.handleUsernameClick}
+          />
         </td>
         <td>
           <div className="postContent">
@@ -45,9 +48,29 @@ const PostRow = (props) => {
   } else {
     return(
       <tr>
-        <td><ForumAvatar user={props.post} handleUsernameClick={props.handleUsernameClick} /></td>
-        <td>{props.post.text}</td>
-        <td></td>
+        <td className="tdForumAvatar">
+          <ForumAvatar 
+            user={props.post}
+            handleUsernameClick={props.handleUsernameClick}
+          />
+        </td>
+        <td>
+          <div className="postContent">
+            <div className="postHeader">
+              {moment(props.post.createdAt).format("lll")}
+            </div>
+            <div className="postBody">
+              <div className="postText">
+                {props.post.text}
+              </div>
+              <div className="postEditButton"></div>
+            </div>
+            <hr />
+            <div className="postBanner">
+              {props.post.User.postBanner}
+            </div>
+          </div>
+        </td>
       </tr>
     )
   }
