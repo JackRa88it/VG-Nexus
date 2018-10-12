@@ -10,7 +10,7 @@ class GameContainer extends React.Component{
                 {this.props.games.map((game)=>{
                 return(
                     <div className='gameBox'>
-                    <img src={'../../public/assets/gameThumbnails/' + game.id} />
+                    <img src={'/assets/gameThumbnails/' + game.id} />
                     </div>
                 )
                 })}
