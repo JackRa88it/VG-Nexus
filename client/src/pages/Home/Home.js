@@ -15,7 +15,6 @@ class Home extends React.Component{
     newest: [],
     random: [],
     favorites: [],
-    authenticated: false
   }
   getFavorites(){
     API.getFavorites()
@@ -71,9 +70,6 @@ class Home extends React.Component{
     this.getTagsandGames()
     this.getFavorites()
     this.getRandom()
-    Authenticator.authenticate(() => {
-      this.setState({ authenticated: true})
-    })
   }
 
   render(){
@@ -90,7 +86,7 @@ class Home extends React.Component{
               <GameContainer games={this.state.newest} header={'Newest Games'} />
             </div>
             <div className='halfWidth'>
-              {(this.state.authenticated ?
+              {(Authenticator.isAuthenticated ?
                 <GameContainer games={this.state.favorites} header={'Your favorites'}/> : 
                 <GameContainer games={this.state.random} header={'Random'} />
               )}

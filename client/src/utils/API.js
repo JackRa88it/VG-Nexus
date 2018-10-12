@@ -14,7 +14,7 @@ export default {
     return axios.get('/api/authenticate')
   },
   getUser: function(userId){
-    return axios.get('/api/getUser', {userId: userId})
+    return axios.get('/api/getUser/'+userId )
   },
   logout: function(){
     return axios.get('/api/logout')
@@ -30,6 +30,9 @@ export default {
   },
   getGameData: function(gameId){
     return axios.get('/api/game/' + gameId)
+  },
+  favoriteGame: function(gameId){
+    return axios.get('/api/game/'+gameId+'/addFavorite')
   },
   postVote: function(postId, bool){
     return axios.post('/api/post/'+postId+'/vote/', {vote: bool})
