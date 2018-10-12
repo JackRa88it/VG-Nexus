@@ -315,7 +315,6 @@ module.exports = function (app,io){
             include: [{model: db.Post,
                 include: db.User},
                 db.User,db.Vote],
-            // include: [{model: db.User}],
         }).then((game) => {
             game.dataValues.score = 0
             game.dataValues.upVoted = false
