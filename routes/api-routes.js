@@ -495,7 +495,7 @@ module.exports = function (app,io){
             console.log(req.body.editedUser.Avatar)
             db.User.update(
                 {
-                    username: req.body.editedUser.Username,
+                    username: req.body.editedUser.Ussername,
                     bio: req.body.editedUser.Bio,
                     postBanner: req.body.editedUser.Banner,
                     avatar: req.body.editedUser.Avatar,
