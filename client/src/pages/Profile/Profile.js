@@ -47,9 +47,11 @@ class Profile extends Component {
                       {this.state.user.bio}
                     </p>
                   </Col>
-                  <div className="ml-aut">
-                    <GameContainer games={this.state.random} header={'Your Uploads'} className="fullWidth" />
-                  </div>
+              </Row>
+              <Row>
+                <div className="ml-auto">
+                 <GameContainer games={this.state.random} header={'Your Uploads'} className="fullWidth" />
+                </div>
               </Row>
 
               </div>:

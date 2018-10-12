@@ -16,6 +16,7 @@
 
 .gamesContainer{
     background-color: rgb(63, 63, 63);
+    min-height: 100%;
     /* width: 49%; */
     /* width: 300px; */
     /* float: left; */
