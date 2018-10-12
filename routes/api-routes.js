@@ -105,9 +105,13 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/getUser', function(req,res){
-        db.User.findOne(req.body.userId)
+    app.get('/api/getUser/:id', function(req,res){
+        let userId= req.params.id
+        db.User.findOne({
+            where: {id: userId}
+        })
         .then(user => {
+            console.log(user.dataValues)
             res.send(user.dataValues);
         })
     })
