@@ -34,6 +34,7 @@
   float: left;
   width: 95%;
   color: #f6f6f7;
+  white-space: pre-wrap;
 }
 
 .postEditButton {
@@ -45,6 +46,7 @@
 .postBanner {
   color: rgb(180, 180, 180);
   padding-left: 10px; 
+  white-space: pre-wrap;
 }
 
 .postContent hr {
