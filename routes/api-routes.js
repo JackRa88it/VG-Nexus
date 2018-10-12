@@ -469,6 +469,7 @@ module.exports = function (app,io){
         }
     })
 
+    
     app.post('/api/community/newForumThread', function(req,res){
         //create new forum thread in the database
         if(req.user){
@@ -484,7 +485,30 @@ module.exports = function (app,io){
             })
         }
     })
+    app.put('/api/editProfile', function(req,res){
+        console.log(req.body.editedUser)
+        if(req.user){
+            console.log(req.body.editedUser.id)
+            console.log(req.body.editedUser.Username)
+            console.log(req.body.editedUser.Bio)
+            console.log(req.body.editedUser.Banner)
+            db.User.update(
+                {
+                    username: req.body.editedUser.Username,
+                    bio: req.body.editedUser.Bio,
+                    postBanner: req.body.editedUser.Banner
+                },
+                {where: {id: req.body.editedUser.id}}
+            ).then((user) => {
+                res.send('200')
+            }).catch((err) => {
+                console.log(err);
+                res.json(err)
+            })
+        }
+    })
 }
+
 
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
