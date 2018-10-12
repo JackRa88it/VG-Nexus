@@ -8,7 +8,6 @@ const Authenticator = {
       .then(
         (res)=>{this.isAuthenticated = true;
                 this.user = res.data;
-                console.log(res)
                 if(cb){cb()}},
       ).catch((err)=> {console.log(err)})
     },

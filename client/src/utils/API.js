@@ -13,6 +13,9 @@ export default {
   authenticate: function(){
     return axios.get('/api/authenticate')
   },
+  getUser: function(userId){
+    return axios.get('/api/getUser', {userId: userId})
+  },
   logout: function(){
     return axios.get('/api/logout')
   },

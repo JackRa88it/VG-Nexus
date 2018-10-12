@@ -10,15 +10,23 @@ var moment = require('moment')
 class Profile extends Component {
   state = {
     user: {},
-    authenticated: false,
+    username: "",
     random: []
   }
   componentDidMount() {
     Authenticator.authenticate(() => {
-      console.log("authenticator ran")
-      this.setState({ authenticated: true,
-         user: Authenticator.user,
+      API.getUser(Authenticator.user.id)
+      .then(user =>{
+        this.setState({
+          user: user.data,
+          username: user.data.username
         })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      
+     
     })
     this.getRandom();
   }
@@ -34,7 +42,7 @@ class Profile extends Component {
   render(){ 
     return (
       <div>
-              {(this.state.authenticated ?
+              {(Authenticator.isAuthenticated ?
               <div>
                 <Row>
                   <Col size="md-4">
@@ -44,9 +52,11 @@ class Profile extends Component {
                     <div className='display-7'>Created: {moment(this.state.user.createdAt).fromNow()}</div>
                   </Col>
                   <Col size="md-8">
-                    <p className="float-right">About<hr className='bg-white' />
+                  About<hr className='bg-white' />
+                    <p className="float-right">
                       {this.state.user.bio}
                     </p>
+                    
                   </Col>
               </Row>
               <Row>
