@@ -56,12 +56,14 @@
 #VGNLogo {
   height: 45px;
 }
-.nav {
+.nav{
   background: #222;
   border-color: #000;
-  color: #f6f6f7;
   min-height: 44px;
   z-index: 10;
+}
+.nav button{
+  color: #f6f6f7;
 }
 
 .navbar{
@@ -106,7 +108,15 @@ input[type='image']{
   background-color: #222;
   color: #EE135B;
 }
-
+.dropdown-item:hover a{ 
+  color: #EE135B !important;
+}
+.dropdown-item{
+  border-left: 2px solid transparent;
+}
+.dropdown-item:hover{
+  border-left: 2px solid #EE135B;
+}
 /* Add colored border when active */
 .nav-tabs .nav-link.active {
   border-color: #EE135B;

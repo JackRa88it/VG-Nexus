@@ -2,6 +2,7 @@ import './Home.css'
 import React from 'react'
 import API from '../../utils/API'
 import Authenticator from '../../utils/Authenticator';
+import GameContainer from '../../components/GameContainer/'
 
 class Home extends React.Component{
   state = {
@@ -10,22 +11,22 @@ class Home extends React.Component{
     tags: [],
     newest: [],
     random: [],
+    favorites: [],
     authenticated: false
   }
   getFavorites(){
-    // API.getBest()
-    // .then((res)=>{
-    //   console.log(res.data)
-    //   this.setState({best:res.data})
-    // })
-    // .catch((err)=>{
-    //   console.log(err)
-    // })
+    API.getFavorites()
+    .then((res)=>{
+      console.log(res.data)
+      this.setState({favorites:res.data})
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
   }
   getRandom(){
     API.getRandom()
     .then((res)=>{
-      console.log(res.data)
       this.setState({random:res.data})
     })
     .catch((err)=>{
@@ -82,31 +83,11 @@ class Home extends React.Component{
           </div>
           
           <div className='homerow'>
-            <div id='new'>
-              <div className='categoryHeader'>Newest Games</div>
-              {this.state.best.map((game)=>{
-                return(
-                  <div className='newestBox'>
-                    <img src={'/assets/gameThumbnails/' + game.id}></img>
-                  </div>
-                )
-              })}
-            </div>
+            <GameContainer games={this.state.newest} header={'Newest Games'} />
             {(this.state.authenticated ?
-              <div id='favorites'>
-                <div className='categoryHeader'>Your favorites</div>
-              </div> : 
-              <div id='random'>
-                <div className='categoryHeader'>Random</div>
-                {this.state.best.map((game)=>{
-                  return(
-                    <div className='randomBox'>
-                      <img src={'/assets/gameThumbnails/' + game.id}></img>
-                    </div>
-                  )
-                })}
-              </div>)}
-            
+              <GameContainer games={this.state.favorites} header={'Your favorites'} /> : 
+              <GameContainer games={this.state.random} header={'Random'} />
+            )}
           </div>
           <div className='homerow'>
             <div id='best'>

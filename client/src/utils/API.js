@@ -34,6 +34,9 @@ export default {
   getVote: function(postId){
     return axios.get('/api/post/'+postId+'/vote/')
   },
+  postGameVote: function(gameId, bool){
+    return axios.post('/api/game/'+gameId+'/vote/',{vote: bool})
+  },
   getForumList: function() {
     return axios.get("/api/forumList")
   },
@@ -63,5 +66,8 @@ export default {
   },
   getRandom: function(){
     return axios.get('/api/games/random')
+  },
+  getFavorites: function(){
+    return axios.get('/api/games/favorites')
   }
 };
