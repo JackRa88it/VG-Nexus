@@ -58,3 +58,8 @@ h1 {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.container{
+  border: 1px solid rgba(248, 249, 250,0.1);
+  background-color: rgba(43, 43, 43, 0.9);
+}

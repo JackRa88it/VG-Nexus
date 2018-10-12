@@ -16,6 +16,7 @@ Authenticator.authenticate()
 class Form extends Component{
     state = {
         tags: [],
+        description: ''
     }
     postGame = (event) => {
         event.preventDefault()
@@ -43,7 +44,16 @@ class Form extends Component{
         this.setState(({ tags: tags }));
         cb(tags)
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+          [name]: value
+        });
+      };
+
     render(){
+        console.log(this.state.description)
         return(
             Authenticator.isAuthenticated ? (
                 <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data" id='gameForm' onSubmit={this.postGame}>
@@ -56,7 +66,7 @@ class Form extends Component{
                 1. Make sure the file you want to render is called index.html
                 <br /><br />
                 2. If you are uploading a game made in the Phaser framework append the following code block anywhere after your "game" object is defined:
-
+                    This code ensures that your game canvas will be resizable into the HTML element its placed inside.
                 <pre>
                     {`
     function resize() {
@@ -87,29 +97,26 @@ class Form extends Component{
                     `}
                 </pre>
 
-                3. That's it! Now you just need to fill out the fields.
-                Game ZIP file:
+                <h2>Upload Files</h2>
+                Game ZIP file: <br></br>
                 <input type="file" name="filetoupload" id='fileInput'/><br />
                 <br></br>
-                3. Upload a thumbnail so that we can showcase your game.
-                <br></br>
                 Thumbnail: 
-                {/* <input type='file' name='thumbnail' id='thumbnailInput'/><br /> */}
                 <ImageUpload name = 'thumbnail'/>
                 <br></br>
-                4. Give your game a name
                 <br></br>
+                <h2>Game Info</h2>
                 Name:
+                <br></br>
                 <input type='text' name ='name' /><br />
-                5. Give your game a description. You can put any attributions or portfolios here.
                 <br></br>
                 Description:
-                <input type='text' name ='description' /><br />
-                6. Select at least one tag
                 <br></br>
-                Tags:
+                <textarea class="form-control" id="textInput" name = 'description' rows="3" onChange={this.handleInputChange}></textarea>
+                <br />
+                Tags(minimum one)
+                <br></br>
                 <TagSelect handleDelete={this.handleDelete} handleAddition={this.handleAddition}/>
-                7. Now submit!
                 <br></br>
                 <input type="submit" />
                 </form>
