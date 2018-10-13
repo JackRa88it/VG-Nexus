@@ -60,21 +60,6 @@ class Signup extends Component{
                     placeholder="Username"
                 />
                 </div>
-                {/* <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="bio"
-                    type="text"
-                    placeholder="Tell me about yourself"
-                />
-                <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="postBanner"
-                    type="text"
-                    placeholder="Your Banner text!"
-                />   
-                                              */}
              <div className="pt-2">
                 <FormBtn
                     disabled={!(this.state.password && this.state.email && this.state.username)}

@@ -50,7 +50,7 @@ class CommentList extends React.Component{
       return (
           <div>
             <h3>Comments</h3>
-              <div className="form-group">
+              <div className="form-group w-85 text-center">
                 <TextArea className="form-control" rows="4" onChange={this.handleInputChange} name="newComment"/>
                 <FormBtn onClick={()=>{this.postComment(this.props.gameId,this.state.newComment)}}>Submit</FormBtn>
               </div>
