@@ -52,7 +52,7 @@ class Login_Signup extends Component
           {!this.state.isLogin ?
               <div className="logsign-container">
                 <Signup />
-                Try loggin in <u className="mr-1 linkable" onClick={this.handleSwitch}>here</u>!
+                Try logging in <u className="mr-1 linkable" onClick={this.handleSwitch}>here</u>!
               </div>
             :
               <div className="logsign-container">
