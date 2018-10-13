@@ -86,10 +86,10 @@ class Home extends React.Component{
               <GameContainer games={this.state.newest} header={'Newest Games'} />
             </div>
             <div className='halfWidth'>
-              {(Authenticator.isAuthenticated ?
-                <GameContainer games={this.state.favorites} header={'Your favorites'}/> : 
+              {/* {(Authenticator.isAuthenticated ?
+                <GameContainer games={this.state.favorites} header={'Your favorites'}/> :  */}
                 <GameContainer games={this.state.random} header={'Random'} />
-              )}
+              
             </div>
           </div>
           <div className='homerow'>
