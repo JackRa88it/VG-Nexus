@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
 import Authenticator from "../../utils/Authenticator"
+import {Container} from "../../components/Grid"
 class Login extends Component{
     state = {
         email: '',
@@ -34,8 +35,10 @@ class Login extends Component{
     };
     render(){
         return(
-            <div>
-               <h2 className="display-5 mb-4">Login</h2> 
+            <div className="mb-4">
+             <h2 className="display-5 mb-4">Login</h2> 
+
+            <div className="mb-2">
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
@@ -49,14 +52,16 @@ class Login extends Component{
                     type="password"
                     placeholder="Password"
                 />
-                <br></br>
-                <br></br>
+            </div>
+
+            <div className="pt-2">
                 <FormBtn
                     disabled={!(this.state.password && this.state.email)}
                     onClick={this.handleFormSubmit}>
                     Submit
                 </FormBtn>
             </div>
+        </div>
         )
     }
 }
