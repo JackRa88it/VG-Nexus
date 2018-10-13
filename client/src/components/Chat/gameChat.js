@@ -73,7 +73,7 @@ class Chatroom extends Component{
         if (this.socket){
             this.socket.disconnect();
         }
-        this.socket = io.connect("http://54.193.77.190:3001/game/" + gameId);
+        this.socket = io("http://54.193.77.190:3001/game/" + gameId);
         if(Authenticator.isAuthenticated){
             API.getUser(Authenticator.user.id)
             .then((res) => {
