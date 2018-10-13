@@ -48,6 +48,11 @@ class Game extends Component{
             }
         })
     }
+
+    isFavorite = () =>{
+        
+    }
+
     componentDidMount(){
         this.getGame(this.props.match.params.id)
         this.getRandom()
