@@ -27,3 +27,4 @@ yarn-error.log*
 # /client/public/user
 
 config/config.json
+seeds.sql
