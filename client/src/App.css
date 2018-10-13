@@ -26,6 +26,10 @@ h1 {
   padding: 50px;
   margin: 75px auto;
 }
+.container-lighter{
+    border: 1px solid rgba(248, 249, 250,0.1);
+    background-color: rgba(43, 43, 43, 0.9);
+}
 .forumTable{
   margin-top: 20px;
   background-color: rgba(43, 43, 43, 0.9); 
@@ -76,4 +80,8 @@ u{
 .lighter{
   border: 1px solid rgba(248, 249, 250,0.1);
   background-color: rgba(43, 43, 43, 0.9);
+}
+
+.linkable {
+  color: rgba(238, 19, 91,0.8)
 }
