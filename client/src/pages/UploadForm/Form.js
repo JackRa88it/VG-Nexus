@@ -120,10 +120,11 @@ class Form extends Component{
                 <input type="submit" />
                 </form>
             ) : (
-               <p>
-                   Sorry about that, game uploading is only available for verified users. <br />
-                   You can <Link to="/login_signup">signup</Link> to get started.
-              </p> )
+                <div className="text-center">
+                    <h3>Sorry about that ...</h3> <p>Game uploading is only available for verified users. <br />
+                    <Link className="linkable" to="/login_signup">Signup</Link> to get started.</p>
+               </div>
+              )
         )
     }
 }
