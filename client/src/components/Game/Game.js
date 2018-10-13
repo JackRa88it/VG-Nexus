@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CommentList from "../CommentList"
 import GameContainer from '../GameContainer'
 import Chatroom from "../Chat/gameChat"
+import {Container,Col,Row} from "../../components/Grid"
 import API from '../../utils/API'
 
 
@@ -73,14 +74,21 @@ class Game extends Component{
                     
                         <Chatroom gameId = {this.props.match.params.id} gameInfo={this.state} />
                     </div>
-                    <div class = 'gameRow'>
-                        <div class='commentCol'>
-                            <CommentList gameId = {this.props.match.params.id}/>
-                        </div>
-                        <div class='suggestedCol'>
+                    <div className = 'gameRow px-auto'>
+                    <Container lighter>
+                        <div className="mx-auto w-100">
+                        <Col size="md-9" className='mx-auto'>
                             <h3>Suggested Games</h3>
                             <GameContainer games = {this.state.randomGames}/>
+                        </Col>
                         </div>
+
+                        <Col size="md-9">
+                            <CommentList gameId = {this.props.match.params.id}/>
+                        </Col>
+                        
+                        
+                    </Container>
                     </div>
                 </div>
             </div>
