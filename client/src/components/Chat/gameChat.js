@@ -12,7 +12,8 @@ class Chatroom extends Component{
     state = {
         messages: [],
         newMessage: '',
-        location: 'chatroom'
+        location: 'chatroom',
+        favorite: 'false'
     }
     socket = null
     name = "Anonymous"
@@ -54,16 +55,31 @@ class Chatroom extends Component{
     handleFavoriteClick = () => {
         console.log(this.props.gameId)
         API.favoriteGame(this.props.gameId).then((res) =>{
-            
+            this.setState({
+                favorite: "true"
+            })
         })
     }
 
     isFavorited = () => {
-        
+        var fav; 
+        API.isThisGameFavorited(this.props.gameId)
+        .then((res)=>{
+            if(Authenticator.user){
+                res.data.forEach((r)=>{
+                    if (r.id === Authenticator.user.id){
+                        this.setState({
+                            favorite: "true"
+                        })
+                    }
+                })
+            }
+        })
     }
 
     componentDidMount(){
         this.connect(this.props.gameId);
+        this.isFavorited()
     }
 
 
@@ -95,9 +111,13 @@ class Chatroom extends Component{
         return(
             <div className="chatroom">
                 <div className="gametabs">
-                    <button className="fas fa-star"
-                    onClick={this.handleFavoriteClick}>
-                    </button>
+                  {
+                      (this.state.favorite === 'true')
+                        ? <button className="fas fa-star blue">
+                        </button>
+                        : <button className="fas fa-star"
+                        onClick={this.handleFavoriteClick}></button>
+                  }
                     <button
                      className="details-tab"
                      name="location"

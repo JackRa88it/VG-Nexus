@@ -187,6 +187,20 @@ module.exports = function (app,io){
         })
     })
 
+    app.get('/api/game/:id/favorites', (req,res)=>{
+        db.Game.findOne({
+            where: {id: req.params.id},
+        }).then((game)=>{
+            game.getFavorites()
+            .then(function(fav){
+                res.json(fav)
+            })
+        }).catch(function(err){
+            console.log(err);
+            res.json(err)
+        })
+    })
+
 
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({
