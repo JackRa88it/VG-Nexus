@@ -3,6 +3,7 @@ import { Row, Col, Container } from "../../components/Grid"
 import Login from "./Login";
 import Signup from "./Signup";
 import API from "../../utils/API";
+import "./loginSignup.css";
 
 class Login_Signup extends Component
 {
@@ -17,6 +18,7 @@ class Login_Signup extends Component
       [name]: value
     });
   };
+
   handleSwitch = event =>
   {
     const val = this.state.isLogin;
@@ -25,6 +27,7 @@ class Login_Signup extends Component
       isLogin: !val
     })
   }
+
   handleSignUpSubmit = event =>
   {
     event.preventDefault();
@@ -45,27 +48,18 @@ class Login_Signup extends Component
   {
     return (
       // THE VIEW FOR THE LOGIN / SIGNUP PAGE
-      <div className='ml-auto'>
-        <Row>
-          {this.state.isLogin ?
-            <Col size="md-6" className="col-md-offset-3">
-              <Container lighter>
-
+      <div>
+          {!this.state.isLogin ?
+              <div className="logsign-container">
                 <Signup />
-                Try loggin in <u className="mr-1" onClick={this.handleSwitch}>here</u>!
-              </Container>
-
-            </Col>
+                Try loggin in <u className="mr-1 linkable" onClick={this.handleSwitch}>here</u>!
+              </div>
             :
-            <Col size="md-6">
-              <Container lighter>
+              <div className="logsign-container">
                 <Login />
                 Don't have an account? <br />You can sign up
-             <u className="mx-1" onClick={this.handleSwitch}>here</u>
-              </Container>
-
-            </Col>
-
+             <u className="mx-1 linkable" onClick={this.handleSwitch}>here</u>
+              </div>
           }
 
           {this.state.isLogin ? (<div>
@@ -76,16 +70,6 @@ class Login_Signup extends Component
             </div>
 
           }
-
-
-
-
-        </Row>
-
-
-
-
-
       </div>
 
     );

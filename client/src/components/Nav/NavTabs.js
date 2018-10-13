@@ -12,6 +12,7 @@ class NavTabs extends Component {
   logoutHandler = (event) => {
     event.preventDefault()
     Authenticator.signout()
+    window.location.assign('/')
   }
 
   componentDidMount() {
