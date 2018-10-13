@@ -1,9 +1,10 @@
 {
     "development": {
-      "username": "root",
-      "password": "Raymond12",
-      "database": "vg_nexus_db",
-      "host": "127.0.0.1",
+
+      "username": "wp271y0supuzzk8x",
+      "password": "va9d3a7v3uvux5iu",
+      "database": "q1u9gnricx1xg22v",
+      "host": "yhrz9vns005e0734.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
       "port": 3306,
       "dialect": "mysql"
     },
@@ -16,9 +17,11 @@
       "dialect": "mysql"
     },
     "production": {
-      "use_env_variable": "JAWSDB_URL",
+      "username": "root",
+      "password": null,
+      "database": "database_production",
+      "host": "127.0.0.1",
+      "port": 3306,
       "dialect": "mysql"
-
     }
   }
-  

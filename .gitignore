@@ -25,7 +25,10 @@ yarn-error.log*
 # /client/public/user
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 config/config.json
+=======
+>>>>>>> 2b58925bc0b1188ecf46e800a477a4f74b9050fb
 seeds.sql
 >>>>>>> f399102dce19dee8091394b2ba0a92a89a632b57
