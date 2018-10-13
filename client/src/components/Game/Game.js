@@ -67,7 +67,7 @@ class Game extends Component{
                     <div className ={'gameUpvote ' + (this.state.upVoted ? 'gameUpvoted' : '')} onClick={(this.upVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,true)})}>+</div>
                     <div className = {'gameDownvote ' + (this.state.downVoted ? 'gameDownvoted' : '')} onClick={(this.state.downVoted ? ()=>{} : ()=>{this.voteGameHandler(this.props.match.params.id,false)})}>-</div>
                 </div>
-                <div className="w-100">
+                <div>
                     <div className='d-inline-flex w-100 ml-5'>
                         <iframe title="gamewindow"
                             scrolling="no"
@@ -80,22 +80,21 @@ class Game extends Component{
                         <Chatroom gameId = {this.props.match.params.id} gameInfo={this.state} />
                     </div>
                     <div className = 'gameRow px-auto'>
+
                     <Container lighter>
                         <div className="mx-auto w-100">
-                        <Col size="md-9" className='mx-auto'>
-                            <h3>Suggested Games</h3>
-                            <GameContainer games = {this.state.randomGames}/>
-                        </Col>
+                            <Col size="md-12" className='mx-auto'>
+                                <h3>Suggested Games</h3>
+                                <GameContainer games = {this.state.randomGames}/>
+                            </Col>
                         </div>
-
-                        <Col size="md-9">
-                            <CommentList gameId = {this.props.match.params.id}/>
-                        </Col>
                         
-                        
+                            <Col size="md-10">
+                                <CommentList gameId = {this.props.match.params.id}/>
+                            </Col>   
                     </Container>
-                    </div>
                 </div>
+            </div>
             </div>
         )
     }

@@ -129,10 +129,10 @@ class NavTabs extends Component {
                     {/* If you click "Your Posts," you go to that tab on that page */}
                     <Link className="dropdown-item" to="/UserNexus">Your Posts</Link>
                     <div className="dropdown-divider"></div>
-                    <div className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="/about">
                       Help
                     <i className="far fa-question-circle"></i>
-                    </div>
+                    </Link>
                     <div className="dropdown-item" href="#">
                       Settings
                   <i class="fas fa-wrench"></i>
@@ -141,7 +141,7 @@ class NavTabs extends Component {
                     <Link
                       to="/logout"
                       onClick={this.logoutHandler}>
-                      <div className="dropdown-item" href="#">
+                      <div className="dropdown-item">
                        Logout
                        <i className="fas fa-sign-out-alt"></i>
                       </div>

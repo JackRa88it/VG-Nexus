@@ -82,7 +82,7 @@ class Signup extends Component{
                     Submit
                 </FormBtn>
               </div>
-        </div>
+        `</div>
         );
     }
 }
