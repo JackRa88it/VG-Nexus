@@ -7,7 +7,7 @@ import API from "../../utils/API";
 class Login_Signup extends Component
 {
   state = {
-    isLogin: "false"
+    isLogin: true
   };
 
   handleInputChange = event =>
@@ -17,7 +17,14 @@ class Login_Signup extends Component
       [name]: value
     });
   };
+  handleSwitch = event =>
+  {
+    const val = this.state.isLogin;
 
+    this.setState({
+      isLogin: !val
+    })
+  }
   handleSignUpSubmit = event =>
   {
     event.preventDefault();
@@ -31,26 +38,46 @@ class Login_Signup extends Component
         postBanner: this.state.postBanner
       })
         .then(res => window.location.assign(res.data))
-        .catch(err => console.log(err));
+        .catch(err => console.log(err)); // TODO: switch on error
     }
   };
   render()
   {
     return (
       // THE VIEW FOR THE LOGIN / SIGNUP PAGE
-      <div>
+      <div className='ml-auto'>
         <Row>
-          <Col size="md-6">
-            <div className="mr-4">
-              <Signup />
-            </div>
-          </Col>
+          {this.state.isLogin ?
+            <Col size="md-6" className="col-md-offset-3">
+              <Container lighter>
 
-          <Col size="md-6">
-            <div className="ml-5">
-              <Login />
+                <Signup />
+                Try loggin in <u className="mr-1" onClick={this.handleSwitch}>here</u>!
+              </Container>
+
+            </Col>
+            :
+            <Col size="md-6">
+              <Container lighter>
+                <Login />
+                Don't have an account? <br />You can sign up
+             <u className="mx-1" onClick={this.handleSwitch}>here</u>
+              </Container>
+
+            </Col>
+
+          }
+
+          {this.state.isLogin ? (<div>
+
+          </div>
+          ) :
+            <div className="linkable">
             </div>
-          </Col>
+
+          }
+
+
 
 
         </Row>

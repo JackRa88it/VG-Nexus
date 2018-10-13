@@ -17,7 +17,9 @@
 .forumTable tbody tr {
   height: 100px;
 }
-
+.forumTable .th{
+  background-color: rgba(43, 43, 43, 0.9); 
+}
 .forumTable tr:nth-child(even) {
   background-color: rgba(49, 49, 49, 0.9);
 }
