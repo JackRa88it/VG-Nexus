@@ -78,5 +78,8 @@ export default {
   },
   getFavorites: function(){
     return axios.get('/api/user/favorites')
+  },
+  getUserPosts: function(){
+    return axios.get('api/YourPosts')
   }
 };
