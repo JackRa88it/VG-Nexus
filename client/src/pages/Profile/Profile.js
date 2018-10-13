@@ -11,14 +11,11 @@ class Profile extends Component {
   state = {
     user: {},
     username: "",
-    random: []
+    random: [], // TODO: this shouldn't be random, it should be their uploads
   }
   componentDidMount() {
     Authenticator.authenticate(() => {
       let userId = this.props.match.params.id;
-      console.log("!!!!!!!");
-      console.log(userId);
-      console.log("!!!!!!!");
 
       API.getUser(userId)
       .then(user =>{
