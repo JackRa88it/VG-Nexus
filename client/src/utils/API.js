@@ -81,5 +81,8 @@ export default {
   },
   getUserPosts: function(){
     return axios.get('api/YourPosts')
+  },
+  isThisGameFavorited: function(gameId){
+    return axios.get('/api/game/'+gameId+'/favorites')
   }
 };

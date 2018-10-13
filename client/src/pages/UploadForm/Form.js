@@ -5,6 +5,7 @@ import axios from "axios";
 import Authenticator from '../../utils/Authenticator';
 import TagSelect from '../../components/Form/TagSelect';
 import ImageUpload from './ImageUpload';
+import { Link } from "react-router-dom";
 // importing {bracketed} exports from Authenticator and TagSelect not working
 
 // import axios from 'axios';
@@ -52,6 +53,7 @@ class Form extends Component{
     render(){
         console.log(this.state.description)
         return(
+
             Authenticator.isAuthenticated ? (
                 <form action="http://localhost:3001/upload" method="post" encType="multipart/form-data" id='gameForm' onSubmit={this.postGame}>
                 <h1 id='uploadTitle'>Deploying a Game</h1>
@@ -117,8 +119,12 @@ class Form extends Component{
                 <br></br>
                 <input type="submit" />
                 </form>
-            ) : 
-                ('403 Forbidden')
+            ) : (
+                <div className="text-center">
+                    <h3>Sorry about that ...</h3> <p>Game uploading is only available for verified users. <br />
+                    <Link className="linkable" to="/login_signup">Signup</Link> to get started.</p>
+               </div>
+              )
         )
     }
 }

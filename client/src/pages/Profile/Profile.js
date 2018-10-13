@@ -68,23 +68,26 @@ class Profile extends Component
                     <img className="bg-light rounded-circle p-2 mr-3 " src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
                     <div className="float-right py-4">
                       <span className="bigger">{this.state.username}</span>
-                      <div class='smaller'>Created: {moment(this.state.createdAt).fromNow()}</div>
+                      <div className='smaller'>Created: {moment(this.state.createdAt).fromNow()}</div>
+                      <div className=' text-secondary display-5 mt-3 float-left'><em> "{this.state.postBanner}" </em></div>
+
                     </div>
                   
                  </div>
                 </Row>
-                  <div className='display-5 mt-3 float-left'><em> {this.state.postBanner} </em></div>
               </Col>
               <Col size="md-8">
-                About<hr className='bg-white' />
-                <p className="float-right">
-                  {this.state.bio}
-                </p>
+                <div className="mt-4">
+                  About<hr className='bg-white' />
+                  <p id='bio' className="float-right">
+                    {this.state.bio}
+                  </p>
+                </div>
 
               </Col>
             </Row>
             <Row>
-              <div className="ml-auto">
+              <div className="mx-auto mt-5">
                 <GameContainer games={this.state.random} header={'Your Uploads'} className="fullWidth" />
               </div>
             </Row>
