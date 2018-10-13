@@ -10,6 +10,7 @@ import { Row, Col, Container } from "../../components/Grid"
 import API from "../../utils/API";
 import Authenticator from '../../utils/Authenticator';
 import ImageUpload from "../UploadForm/ImageUpload";
+import "./UserNexus.css";
 
 // Refer to this image for what edit profile looks like: https://i.imgur.com/iaBGqD1.jpg
 class UserNexus extends React.Component {
@@ -77,12 +78,12 @@ class UserNexus extends React.Component {
                     placeholder="Current username text here"
                     onChange = {this.handleInputChange}
                   />
-                  <Input
+                  <textarea
                     name="Bio"
                     placeholder="Current User Bio Text here"
                     onChange = {this.handleInputChange}
                   />
-                  <Input
+                  <textarea
                     name="Banner"
                     placeholder="Current User Banner Text here"
                     onChange = {this.handleInputChange}
@@ -93,7 +94,7 @@ class UserNexus extends React.Component {
                   >
                     Upload avatar image
                   </ImageUpload>
-                  <input type="submit" />
+                  <input className="nexus-button" type="submit" />
                 </form>
               </div>
             </Col>

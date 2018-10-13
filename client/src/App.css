@@ -85,3 +85,10 @@ u{
 .linkable {
   color: rgba(238, 19, 91,0.8)
 }
+
+.nexus-button {
+  background-image: linear-gradient(#EE135B, #e91e40);
+  border: none;
+  color: #f6f6f7;
+  font-weight: bold;
+}
