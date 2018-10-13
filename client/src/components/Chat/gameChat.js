@@ -12,8 +12,8 @@ class Chatroom extends Component{
     state = {
         messages: [],
         newMessage: '',
-        location: 'chatroom',
-        favorite: 'false'
+        location: 'details',
+        favorite: 'false',
     }
     socket = null
     name = "Anonymous"
@@ -165,6 +165,7 @@ class Chatroom extends Component{
             )
         }
         else if(this.state.location === "details"){
+            console.log(this.props.gameInfo.User.username)
             return(
                 <div className="chatroom">
                     <div className="gametabs">
@@ -189,7 +190,7 @@ class Chatroom extends Component{
                             <p className="detail">Title: {this.props.gameInfo.name}</p>
                             <p className="detail">About: {this.props.gameInfo.description}</p>
                             <p className="detail">Created at: {moment(this.props.gameInfo.createdAt).format('MM/DD/YYYY')}</p>
-                            <p className="detail">Created by: {this.props.gameInfo.username}</p>
+                            <p className="detail">Created by: {this.props.gameInfo.User.username}</p>
                             <p className="detail">Score: {this.props.gameInfo.score}</p>
                         </div>
                     </div>
