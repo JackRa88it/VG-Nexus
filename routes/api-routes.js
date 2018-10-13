@@ -48,40 +48,42 @@ module.exports = function (app,io){
                                 //Grab the path of the file that was just uploaded "filetoupload" is the name of the input on the frontend
                                 var oldpath = files.filetoupload.path;
                                 var thumbnailPath = files.thumbnail.path;
-                                console.log(thumbnailPath,'\n',newThumbnailPath)
                                 //Create a newpath to store the file at
                                 var newpath = path.join(__dirname, "../" + files.filetoupload.name)
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
-                                console.log('i am about to copy your image \n\n\n\n\n')
-                                fs.copyFileSync(thumbnailPath,newThumbnailPath)
-                                console.log('i copied your image\n\n')
-                                //Rename thumbnail
-                                // if(err) throw err;
-                                fs.copyFileSync(oldpath, newpath) 
-                                 //Create a directory if it doesn't already exist
-                                var dir = "./client/public/games/" + game.id
-                                if (!fs.existsSync(dir)){
-                                    // console.log('path does not exist \n creating newpath')
-                                    fs.mkdirSync(dir);
-                                }
+                                fs.rename(thumbnailPath,newThumbnailPath, function(err) {
+                                    if(err) console.log(err);
+                                    //Rename thumbnail
+                                    // if(err) throw err;
+                                    fs.rename(oldpath, newpath, function (err) {
+                                        console.log('renaming filepaths')
+                                        if (err) console.log(err);
+                                        
+                                        //Create a directory if it doesn't already exist
+                                        var dir = "./client/public/games/" + game.id
+                                        if (!fs.existsSync(dir)){
+                                            console.log('path does not exist \n creating newpath')
+                                            fs.mkdirSync(dir);
+                                        }
                 
                                         //Unzip the file to target directory
-                                var target = path.join(__dirname,'../client/public/games/' + game.id)
-                                extract(newpath,{dir:target},function(err){
-                                    console
-                                    // console.log('extracting to ', target)
-                                    if(err) console.log(err);
-                                    fs.unlink(oldpath, (err) => {
-                                        if (err) console.log(err);
-                                        // console.log('deleting' + newpath );
-                                        //Redirect the user in the frontend to their game
-                                        newGame(game, io);
-                                        if(res.headersSent){
-                                            console.log('headers already sent')
-                                        }
-                                        else{
-                                            return res.send('/all/games/'+game.id);  
-                                        }
+                                        var target = path.join(__dirname,'../client/public/games/' + game.id)
+                                        extract(newpath,{dir:target},function(err){
+                                            console.log('extracting to ', target)
+                                            if(err) console.log(err);
+                                            fs.unlink(newpath, (err) => {
+                                                if (err) console.log(err);
+                                                console.log('deleting' + newpath );
+                                                //Redirect the user in the frontend to their game
+                                                newGame(game, io);
+                                                if(res.headersSent){
+                                                    console.log('headers already sent')
+                                                }
+                                                else{
+                                                    return res.send('/all/games/'+game.id);  
+                                                }
+                                            });
+                                        })
                                     });
                                 }) 
                             })
@@ -89,7 +91,7 @@ module.exports = function (app,io){
                     })  
                 })
             })
-        }  
+        }
     })
 
     app.get('/api/authenticate',function(req,res){
