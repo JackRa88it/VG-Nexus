@@ -25,11 +25,6 @@ module.exports = function(sequelize, DataTypes) {
     bio: {
       type: DataTypes.STRING,
     },
-    avatar: {
-      type: DataTypes.STRING,
-      defaultValue: "https://i2.wp.com/www.ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png",
-      // **look into storing images**
-    },
     score: {
       type: DataTypes.INTEGER,
       defaultValue: 0,

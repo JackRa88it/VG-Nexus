@@ -9,6 +9,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Row, Col, Container } from "../../components/Grid"
 import API from "../../utils/API";
 import Authenticator from '../../utils/Authenticator';
+import ImageUpload from "../UploadForm/ImageUpload";
 
 // Refer to this image for what edit profile looks like: https://i.imgur.com/iaBGqD1.jpg
 class UserNexus extends React.Component {
@@ -35,13 +36,12 @@ class UserNexus extends React.Component {
   };
 
   handleSubmitEditProfile = (event) =>{
-    if(Authenticator.isAuthenticated){    
-      let editedUser = {}
-      editedUser.id = Authenticator.user.id
-      editedUser.Username = this.state.Username
-      editedUser.Banner = this.state.Banner
-      editedUser.Bio = this.state.Bio
-      API.editUser(editedUser)
+    event.preventDefault();
+    if(Authenticator.isAuthenticated){
+      const formData = new FormData(event.target);
+      let userId = Authenticator.user.id
+      formData.append("userId", userId)
+      API.editProfile(formData)
       .then(res => {
         console.log(res)
         window.location.assign("/profile/"+Authenticator.user.id)
@@ -71,15 +71,10 @@ class UserNexus extends React.Component {
             {/* Left column */}
             <Col size="md-6">
               <div className="mr-4">
-                <div>
+                <form encType="multipart/form-data" id="editProfileForm" onSubmit={this.handleSubmitEditProfile}>
                   <Input
                     name="Username"
                     placeholder="Current username text here"
-                    onChange = {this.handleInputChange}
-                  />
-                  <Input
-                    name="Banner"
-                    placeholder="Current User Banner Text here"
                     onChange = {this.handleInputChange}
                   />
                   <Input
@@ -87,18 +82,19 @@ class UserNexus extends React.Component {
                     placeholder="Current User Bio Text here"
                     onChange = {this.handleInputChange}
                   />
-
-                  <FormBtn onClick ={this.handleSubmitEditProfile}>
-                    Submit
-                  </FormBtn>
+                  <Input
+                    name="Banner"
+                    placeholder="Current User Banner Text here"
+                    onChange = {this.handleInputChange}
+                  />
                   <h2 className="display-5 mb-4">Uploading Images</h2>
-                  <FormBtn>
+                  <ImageUpload
+                    name="Avatar"
+                  >
                     Upload avatar image
-                  </FormBtn>
-                  <FormBtn>
-                    Upload banner image
-              </FormBtn>
-                </div>
+                  </ImageUpload>
+                  <input type="submit" />
+                </form>
               </div>
             </Col>
             {/* Right column */}

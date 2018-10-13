@@ -58,8 +58,8 @@ export default {
   editForumPost: function(editedPost) {
     return axios.put('/api/community/editForumPost/', {editedPost: editedPost})
   },
-  editUser: function(editedUser) {
-    return axios.put('/api/editProfile/', {editedUser: editedUser})
+  editProfile: function(formData) {
+    return axios.put('/api/editProfile/', formData)
   },
   newForumThread: function(newThread) {
     return axios.post('/api/community/newForumThread/', {newThread: newThread})

@@ -25,4 +25,5 @@ class Upload extends React.Component {
     );
   }
 }
+
 module.exports = Upload
