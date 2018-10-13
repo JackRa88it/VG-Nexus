@@ -78,5 +78,8 @@ export default {
   },
   getFavorites: function(){
     return axios.get('/api/user/favorites')
+  },
+  isThisGameFavorited: function(gameId){
+    return axios.get('/api/game/'+gameId+'/favorites')
   }
 };
