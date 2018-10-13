@@ -17,12 +17,15 @@ INSERT INTO Tags (name,  createdAt, updatedAt) VALUES
 ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+<<<<<<< HEAD
 
 -- INSERT INTO tags (name,  createdAt, updatedAt) VALUES
 -- ("Action", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+=======
+>>>>>>> f399102dce19dee8091394b2ba0a92a89a632b57
 
 
 -- INSERT INTO Forums (title, description, createdAt, updatedAt) VALUES
@@ -69,4 +72,3 @@ INSERT INTO Tags (name,  createdAt, updatedAt) VALUES
 -- ("Rule #1: don't talk aobut VG Nexus. Rule #2: a cheeseburger a day keeps the doctor away. Rule #3: guess I'll just die then?", 5, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ("absolute shitpost", 5, 3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 -- ("nice", 5, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-

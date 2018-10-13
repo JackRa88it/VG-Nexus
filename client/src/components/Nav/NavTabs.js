@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import API from "../../utils/API"
 import Authenticator from '../../utils/Authenticator';
 import "./Nav.css";
 
 class NavTabs extends Component {
   state = {
-    authenticated: false,
     username: "Anonymous",
     user: undefined
   }
   logoutHandler = (event) => {
     event.preventDefault()
-    Authenticator.signout(() => {
-      this.setState({ authenticated: false })
-    })
+    Authenticator.signout()
   }
 
   componentDidMount() {
     Authenticator.authenticate(() => {
-      this.setState({
-        authenticated: true,
-        username: Authenticator.username,
-        user: Authenticator.user
+      API.getUser(Authenticator.user.id)
+      .then(user =>{
+        this.setState({
+          user: user.data,
+          username: user.data.username
+        })
       })
+      .catch(err => {
+        console.log(err)
+      })
+      
     })
   }
   render() {
@@ -41,12 +45,12 @@ class NavTabs extends Component {
           </li>
         </ul>
         <ul className="nav nav-tabs navbar-collapse">
-
+        {/* TODO: FIX BELOW */}
          
           <li className="nav-item dropdown">
             <button className="nav-link special" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Games
-            </button>
+            </button> 
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
               <Link
                 to="/all"
@@ -96,7 +100,7 @@ class NavTabs extends Component {
         {/* user */}
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            {!this.state.authenticated ? (
+            {!Authenticator.isAuthenticated ? (
               <div className='d-inline-flex'>
                 <Link to="/login_signup" className="nav-link">Sign In</Link>
               </div>
@@ -113,7 +117,7 @@ class NavTabs extends Component {
                     <div className="dropdown-divider"></div>
                     {/* takes you to public profile, like how clicking on your name takes you there too */}
                     {/* it's there because it's more explicit than clicking on your name */}
-                    <Link className="dropdown-item" to="/profile">View Profile</Link>
+                    <Link className="dropdown-item" to={`/profile/${Authenticator.user.id}`}>View Profile</Link>
                     <div className="dropdown-divider"></div>
                     {/* Your ... is where you can edit your stuff. Each one takes you to the same page. */}
                     {/* Your Games */}
@@ -126,7 +130,7 @@ class NavTabs extends Component {
                     <div className="dropdown-divider"></div>
                     <div className="dropdown-item" href="#">
                       Help
-                    <i class="far fa-question-circle"></i>
+                    <i className="far fa-question-circle"></i>
                     </div>
                     <div className="dropdown-item" href="#">
                       Settings

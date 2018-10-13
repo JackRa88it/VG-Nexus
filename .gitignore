@@ -24,3 +24,8 @@ yarn-error.log*
 /client/node_modules
 # /client/public/user
 
+<<<<<<< HEAD
+=======
+config/config.json
+seeds.sql
+>>>>>>> f399102dce19dee8091394b2ba0a92a89a632b57

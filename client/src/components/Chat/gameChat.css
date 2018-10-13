@@ -51,7 +51,6 @@
 }
 .messagedisplay {
     position: absolute;
-    outline: dotted;
     height: 85%;
     width: 99%;
     overflow: auto;
@@ -79,7 +78,7 @@
 .fa-telegram-plane {
     font-size: 24px;
     position: relative;
-    top:5px;
+    top: 2.5px;
 }
 .gametabs {
     float: left;
@@ -113,3 +112,21 @@
     height: 20px;
     width: 20px;   
 } */
+
+.detail-display {
+    position: absolute;
+    height: 93%;
+    width: 99%;
+    overflow: auto;
+    background-color: rgb(17,17,17);
+    font-size: 12px;
+    left: 1px;
+    top: 30px;
+}
+
+.detail {
+    margin: 4px;
+    margin-top: 8px;
+    font-size: 16px;
+}
+

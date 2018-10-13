@@ -4,7 +4,7 @@ class Upload extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      file: null
+      file: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -20,7 +20,7 @@ class Upload extends React.Component {
     return (
       <div>
         <input type="file" name={this.props.name} onChange={this.handleChange}/>
-        <img id='uploadThumbnail' src={this.state.file}/>
+        <img src={this.state.file} alt='upload-thumbnail' id='uploadThumbnail'  />
       </div>
     );
   }

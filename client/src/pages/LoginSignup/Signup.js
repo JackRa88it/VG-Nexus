@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
+import {Container} from "../../components/Grid"
 
 class Signup extends Component{
     state = {
@@ -21,7 +22,7 @@ class Signup extends Component{
     handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.password && this.state.email && this.state.username) {
-            console.log(this.state)
+            // console.log(this.state)
           API.signup({
             email: this.state.email,
             password: this.state.password,
@@ -37,6 +38,7 @@ class Signup extends Component{
         return(
             <div>
                <h2 className="display-5 mb-4">SIGN UP</h2> 
+               <div className="mb-2">
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
@@ -57,28 +59,31 @@ class Signup extends Component{
                     name="username"
                     placeholder="Username"
                 />
-                <Input
+                </div>
+                {/* <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="bio"
-                    type=""
+                    type="text"
                     placeholder="Tell me about yourself"
                 />
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="postBanner"
+                    type="text"
                     placeholder="Your Banner text!"
-                />                                
-                <br></br>
-                <br></br>
+                />   
+                                              */}
+             <div className="pt-2">
                 <FormBtn
                     disabled={!(this.state.password && this.state.email && this.state.username)}
                     onClick={this.handleFormSubmit}>
                     Submit
                 </FormBtn>
-            </div>
-        )
+              </div>
+        </div>
+        );
     }
 }
 
