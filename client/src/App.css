@@ -26,9 +26,17 @@ h1 {
   padding: 50px;
   margin: 75px auto;
 }
-
+.forumTable{
+  margin-top: 20px;
+  background-color: rgba(43, 43, 43, 0.9); 
+}
 .App {
   text-align: center;
+}
+u{
+  color: #528BFF;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .chatroom{
   z-index:1;
@@ -65,7 +73,7 @@ h1 {
   to { transform: rotate(360deg); }
 }
 
-.container{
+.lighter{
   border: 1px solid rgba(248, 249, 250,0.1);
   background-color: rgba(43, 43, 43, 0.9);
 }

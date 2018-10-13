@@ -19,7 +19,7 @@ iframe{
 }
 
 .suggestedCol{
-  width: 300px;
+  /* width: 300px; */
 }
 .suggestedCol > h3{
   margin-left: 12px;
