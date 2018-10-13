@@ -21,11 +21,21 @@ class UserNexus extends React.Component {
     Bio: ""
   };
 
+  formPopulate = ()=>{
+    if(Authenticator.isAuthenticated){
+      API.getUser(Authenticator.user.id)
+      .then(res => {
+        console.log(res)
+        this.setState({
+          Username: res.data.username,
+          Banner: res.data.postBanner,
+          Bio: res.data.bio
+        })
+      })
+    }
+  }
+
   handleTabClick = (event) => {
-    console.log(event)
-    console.log("============")
-    console.log("Tab Clicked")
-    console.log("============")
     const name = (event.target.getAttribute("name"))
     const value = (event.target.getAttribute("value"))
     console.log(name)
@@ -61,6 +71,10 @@ class UserNexus extends React.Component {
     });
   };
 
+  componentDidMount(){
+    this.formPopulate()
+  }
+
   render() {
 
     if (this.state.location === "Edit Profile") {
@@ -75,12 +89,12 @@ class UserNexus extends React.Component {
                 <form encType="multipart/form-data" id="editProfileForm" onSubmit={this.handleSubmitEditProfile}>
                   <Input
                     name="Username"
-                    placeholder="Current username text here"
+                    value={this.state.Username}
                     onChange = {this.handleInputChange}
                   />
-                  <textarea
+                  <Input
                     name="Bio"
-                    placeholder="Current User Bio Text here"
+                    value={this.state.Bio}
                     onChange = {this.handleInputChange}
                   />
                   <textarea

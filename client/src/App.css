@@ -83,7 +83,12 @@ u{
 }
 
 .linkable {
-  color: rgba(238, 19, 91,0.8)
+  color: #EE135B;
+  text-decoration: none
+}
+
+.linkable:hover {
+  text-decoration: underline;
 }
 
 .nexus-button {
