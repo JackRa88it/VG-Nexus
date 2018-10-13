@@ -54,10 +54,13 @@ class Chatroom extends Component{
     handleFavoriteClick = () => {
         console.log(this.props.gameId)
         API.favoriteGame(this.props.gameId).then((res) =>{
-            console.log('worked, now check')
+            
         })
     }
 
+    isFavorited = () => {
+        
+    }
 
     componentDidMount(){
         this.connect(this.props.gameId);

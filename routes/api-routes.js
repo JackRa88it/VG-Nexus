@@ -298,15 +298,6 @@ module.exports = function (app,io){
         })
     })
 
-    app.get('/api/games/favorites', function(req,res){
-        db.User.findOne({
-            where: {
-                UserId: req.user.id},
-                include: [db.Game]
-        }).then((votes) => {
-            res.json(votes)
-        })
-    })
 
     app.post('/api/game/:id/vote', function(req,res){
         if(req.user){
