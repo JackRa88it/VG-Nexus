@@ -1,10 +1,6 @@
 import React from 'react';
-// import tabs
 import Tabs from "../../components/UserNexus/Tabs"
-// import editprofile
-// import EditProfile from "../../components/UserNexus/EditProfile"
-// import editgames
-// import EditGame from "../../components/UserNexus/EditGame"
+import Posts from "../../components/UserNexus/Posts"
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Row, Col, Container } from "../../components/Grid"
 import API from "../../utils/API";
@@ -16,7 +12,8 @@ class UserNexus extends React.Component {
     location: "Edit Profile",
     Username: "",
     Banner: "",
-    Bio: ""
+    Bio: "",
+
   };
 
   formPopulate = ()=>{
@@ -138,6 +135,7 @@ class UserNexus extends React.Component {
         <div>
           <Tabs handleTabClick={this.handleTabClick} />
           <h1>Posts</h1>
+          <Posts/>
         </div>
       )
     }
