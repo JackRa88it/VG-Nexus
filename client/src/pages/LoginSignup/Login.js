@@ -30,7 +30,10 @@ class Login extends Component{
                 })
                
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                alert("Either your email or password is invalid")
+            });
         }
     };
     render(){

@@ -126,7 +126,7 @@ class Home extends React.Component{
               <div className='categoryHeader'>Games by tags</div>
               {this.state.tags.map((tag)=>{
                 return(
-                  <div className = 'tagBox'>
+                  <div className = 'tagBox p-2'>
                     <div>{tag.name}</div>
                     <div className = 'tagGameBox'>
                       {tag.Games.map((game)=>{

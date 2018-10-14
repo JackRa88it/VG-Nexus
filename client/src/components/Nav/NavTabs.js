@@ -99,7 +99,7 @@ class NavTabs extends Component {
           </li>
         </ul>
         {/* user */}
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs pr-2">
           <li className="nav-item">
             {!Authenticator.isAuthenticated ? (
               <div className='d-inline-flex'>
