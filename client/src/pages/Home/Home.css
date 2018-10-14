@@ -33,7 +33,10 @@
     padding-top: 5px;
 
 }
-
+.categoryHeader{
+    margin-left:5px;
+    margin-bottom: 5px;
+}
 .bestBox{
     height: 360px;
     width: 49%;

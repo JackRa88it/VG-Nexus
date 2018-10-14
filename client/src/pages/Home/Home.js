@@ -94,15 +94,15 @@ class Home extends React.Component{
           </div>
           <div className='homerow'>
             <div id='best'>
-                <div className='categoryHeader'>Top Rated Games</div>
+                <div className='categoryHeader p-1'>Top Rated Games</div>
                 {this.state.best.map((game)=>{
                   return(
                     <div className='bestBox'>
-                      <div className='bestCard'>
+                      <div className='bestCard py-2'>
                         <Link to={"/all/games/" + game.id}>
                           <img className='bestThumbnail' src={'/assets/gameThumbnails/' + game.id}></img>
                         </Link>
-                        <div className='bestCardTitle'><Link to={"/all/games/" + game.id}>{game.name}</Link></div>
+                        <div className='bestCardTitle '><Link to={"/all/games/" + game.id} className="linkable">{game.name}</Link></div>
                         <div className='bestCardTags'>
                           {game.Tags.map((tag)=>{
                             return(
@@ -126,7 +126,7 @@ class Home extends React.Component{
               <div className='categoryHeader'>Games by tags</div>
               {this.state.tags.map((tag)=>{
                 return(
-                  <div className = 'tagBox'>
+                  <div className = 'tagBox p-2'>
                     <div>{tag.name}</div>
                     <div className = 'tagGameBox'>
                       {tag.Games.map((game)=>{

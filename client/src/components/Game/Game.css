@@ -18,9 +18,6 @@ iframe{
   justify-content: space-between;
 }
 
-.suggestedCol{
-  /* width: 300px; */
-}
 .suggestedCol > h3{
   margin-left: 12px;
 }

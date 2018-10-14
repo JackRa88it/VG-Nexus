@@ -1,9 +1,14 @@
 p#bio{
-  font-size: 18px;
+  font-size: 16px;
 }
 .bigger{
   font-size: 25px;
 }
 .smaller{
   font-size: 13px;
+}
+/*  */
+.imgwrap{
+  width: 144px;
+  height: 144px;
 }
