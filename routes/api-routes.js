@@ -528,12 +528,12 @@ module.exports = function (app,io){
         }
     })
     app.put('/api/editProfile', function(req,res){
-        console.log(req.body.editedUser)
+        // console.log(req.body.editedUser)
         if(req.user){
-            console.log(req.body.editedUser.id)
-            console.log(req.body.editedUser.Username)
-            console.log(req.body.editedUser.Bio)
-            console.log(req.body.editedUser.Banner)
+            // console.log(req.body.editedUser.id)
+            // console.log(req.body.editedUser.Username)
+            // console.log(req.body.editedUser.Bio)
+            // console.log(req.body.editedUser.Banner)
             db.User.update(
                 {
                     username: req.body.editedUser.Username,
@@ -549,6 +549,25 @@ module.exports = function (app,io){
             })
         }
     })
+    app.get('/api/YourPosts', function(req,res){
+        // Grab all posts by userID
+        var userID = req.user.id;
+        db.Post.findAll({
+            where:{
+                UserId: userID
+            },
+            order:[
+                ['createdAt','DESC']
+            ],
+        }).then((posts) => {
+            res.json(posts)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+        
+    })
+
 }
 
 

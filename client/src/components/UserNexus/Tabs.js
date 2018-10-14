@@ -7,7 +7,7 @@ class Tabs extends Component {
 
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <div>
                 <nav className="p-0 mb-3 navbar-expand-lg w-100">
