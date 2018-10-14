@@ -173,18 +173,20 @@ module.exports = function (app,io){
     })
 
     app.get('/api/user/favorites', (req,res)=>{
-        db.User.findOne({
-            where: {id: req.user.id},
-        }).then((user)=>{
-            user.getFavorites()
-            .then(function(fav){
-                res.json(fav)
+        if(req.user){
+            db.User.findOne({
+                where: {id: req.user.id},
+            }).then((user)=>{
+                user.getFavorites()
+                .then(function(fav){
+                    res.json(fav)
+                })
+                // res.json(user)
+            }).catch(function(err){
+                console.log(err);
+                res.json(err)
             })
-            // res.json(user)
-        }).catch(function(err){
-            console.log(err);
-            res.json(err)
-        })
+        }
     })
 
     app.get('/api/game/:id/favorites', (req,res)=>{

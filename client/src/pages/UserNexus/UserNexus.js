@@ -14,11 +14,7 @@ class UserNexus extends React.Component {
     Username: "",
     Banner: "",
     Bio: "",
-<<<<<<< HEAD
-
-=======
     Games: []
->>>>>>> b709129a5afbb55d245996ed7257c74647a59774
   };
 
   formPopulate = ()=>{
@@ -45,7 +41,10 @@ class UserNexus extends React.Component {
       [name]: value
     })
     if(value == 'Game'){
-      API.getUserGames
+      API.getUserGames(Authenticator.user.id)
+      .then(res =>{
+        this.setState({Games: res.data})
+      })
     }
     console.log(this.state.location);
   };

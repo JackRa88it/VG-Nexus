@@ -1,7 +1,47 @@
 .gameListItem{
-    height: 200px;
-    background-color: pink;
+    border: solid 4px;
+    border-image: linear-gradient(#EE135B, #e91e40);
+    border-image-slice: 1;
+    background-color: rgb(31, 27, 28);
+    margin: 20px 0px;
+    overflow: auto;
+    padding: 12px;
 }
 .gameListItem > div{
     float: left;
+}
+.gameListImage{
+    float:left;
+    height: 120px;
+    width: 120px;
+    margin-right: 12px;
+}
+.gameListTitle{
+    font-size: 20px;
+    font-weight: bold;
+    height: 28px;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gameListCreatedAt{
+    font-size: 12px;
+    height: 20px;
+    text-align: right;
+    width: 100%;
+    overflow: hidden;
+}
+
+.gameListInfo{
+    height: 120px;
+    width: calc(100% - 132px)
+}
+
+.gameListDescription{
+    height: 76px;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    
 }
