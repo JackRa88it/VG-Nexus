@@ -12,7 +12,8 @@ import About from "./pages/About/About";
 import ChooseGame from "./pages/ChooseGame/ChooseGame";
 import ChooseUser from "./pages/ChooseUser/ChooseUser";
 import Community from "./pages/Community/Community";
-import UserNexus from "./pages/UserNexus/UserNexus"
+import UserNexus from "./pages/UserNexus/UserNexus";
+import AllGames from "./pages/AllGames/AllGames"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 
@@ -27,6 +28,7 @@ class App extends Component {
         <Container>
           <Route exact path="/" component={Home} />
           <Route path="/all" component={ChooseGame} />
+          <Route path="/browse" component={AllGames} />
           <Route exact path="/upload" component={Form} />
           <Route exact path="/game" component={Game} />
           <Route exact path='/login_signup' component={LoginSignup} />

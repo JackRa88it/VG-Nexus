@@ -10,6 +10,7 @@ class Signup extends Component{
         username: '',
         bio: '',
         postBanner: '',
+        isValid: 'false'
       };
 
     handleInputChange = event => {
@@ -20,9 +21,7 @@ class Signup extends Component{
       };
 
     handleFormSubmit = event => {
-        event.preventDefault();
         if (this.state.password && this.state.email && this.state.username) {
-            // console.log(this.state)
             API.signup({
                 email: this.state.email,
                 password: this.state.password,
@@ -33,11 +32,35 @@ class Signup extends Component{
                     if(!err && res.status==200){
                     window.location.assign(res.data)
                     }
-                    else{ alert('email already taken')}
                 })
             }
         
     };
+    validateEmail = () => {
+        API.validateEmail(this.state.email)
+        .then((res,err)=>{
+            if (res.data) {
+                alert('that email is already taken')
+            }
+            if (!res.data){
+                this.handleFormSubmit()
+            }
+        })
+    }
+
+    //The order is a bit weird, but validate username is called on click and starts whole signup process
+    validateUsername = event => {
+        event.preventDefault()
+        API.validateUser(this.state.username)
+        .then((res,err)=>{
+            if (res.data) {
+                alert('that username is already taken')
+            }
+            if (!res.data){
+                this.validateEmail()
+            }
+        })
+    }
     render(){
         return(
             <div className="logsign-container">
@@ -69,7 +92,7 @@ class Signup extends Component{
              <div className="pt-2">
                 <FormBtn
                     disabled={!(this.state.password && this.state.email && this.state.username)}
-                    onClick={this.handleFormSubmit}>
+                    onClick={this.validateUsername}>
                     Submit
                 </FormBtn>
               </div>

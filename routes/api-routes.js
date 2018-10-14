@@ -5,6 +5,7 @@ const path = require('path')
 var fs = require('fs')
 var extract = require('extract-zip')
 var rimraf = require('rimraf');
+var moment = require("moment");
 
 
 module.exports = function (app,io){
@@ -142,24 +143,58 @@ module.exports = function (app,io){
     })
 
     app.post("/api/signup", function(req, res) {
-        db.User.create({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-          }).then(function(user) {
-            var random = Math.floor(Math.random()*9) + 1
-            var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
-            var userImageCopy = path.join(__dirname, '../client/public/assets/userThumbnails/' + user.id)
-            fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
-            res.redirect(307, "/api/login");
+        // db.User.findOne({
+        //     where: {username: req.body.username}
+        // }).then(function(user){
+        //     if (user){
+        //         console.log('------------------------------------')
+        //         console.log(user)
+        //         console.log('------------------------------------')
+        //         res.status(400).send({error: "username already taken"})
+        //     }
+        //     if (!user){
+                db.User.create({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password,
+                  }).then(function(user) {
+                    var random = Math.floor(Math.random()*9) + 1
+                    var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
+                    var userImageCopy = path.join(__dirname, '../client/public/assets/userThumbnails/' + user.id)
+                    fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
+                    res.redirect(307, "/api/login");
+        
+                }).catch(function(err) {
+                    console.log(err);
+                    res.redirect(307, "/api/login");
+                    // res.send(err);
+                });
 
-        }).catch(function(err) {
-            console.log(err);
-            res.redirect(307, "/api/login");
-            res.send(err);
-        });
+        //     }
+        // })            
     });
 
+    app.get("/api/validateUser/:name", function(req,res){
+        db.User.findOne({
+            where: {username: req.params.name}
+        }).then(function(user){
+            res.json(user)
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+    
+    app.get("/api/validateEmail/:email", function(req,res){
+        db.User.findOne({
+            where: {email: req.params.email}
+        }).then(function(user){
+            res.json(user)
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+
+    
     app.get('/api/tags/games/all', (req,res)=>{
         db.Tag.findAll({
             include:[{
@@ -189,6 +224,14 @@ module.exports = function (app,io){
             })
         }
     })
+
+    app.get('/api/games/all', (req,res)=>{
+        db.Game.findAll({
+        })
+        .then((games)=>{
+            res.json(games)
+        })
+    });
 
     app.get('/api/game/:id/favorites', (req,res)=>{
         db.Game.findOne({
@@ -246,6 +289,20 @@ module.exports = function (app,io){
             ],
             include:[db.Vote,db.Tag, db.User]
         }).then((games) => {
+            games.forEach((game)=>{
+                game.upVoteCount = 0
+                if(game.dataValues.Votes.length){
+                    game.dataValues.Votes.forEach((vote) => {
+                        if(vote.dataValues.upDown){
+                            game.upVoteCount++
+                        }
+                    })
+                    game.dataValues.score = game.upVoteCount/game.Votes.length
+                }
+                else{
+                    game.dataValues.score = 1
+                }
+            })
             res.json(games)
         }).catch(function(err){
             console.log(err);
@@ -612,11 +669,17 @@ module.exports = function (app,io){
 
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
+    var chatLogs = []
     gameRoom.on('connection', function (socket) {
+        socket.emit('currentLogs',chatLogs)
         console.log('a user connected to /game/' + game.id);
         socket.on('messagePost', function (msg, name, id) {
-            console.log("something sent");
-            gameRoom.emit('messagePost', msg, name, id);
+            var timestamp = moment().format('hh:mm:ssa')
+            chatLogs.push({msg: msg, name: name, id: id, timestamp: timestamp})
+            if(chatLogs.length>8){
+                chatLogs.shift()
+            }
+            gameRoom.emit('messagePost', msg, name, id, timestamp);
         });
         gameRoom.on('disconnect', function () {
             console.log('user disconnected from /game/' + game.id);

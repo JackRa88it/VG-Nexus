@@ -50,9 +50,9 @@ class NavTabs extends Component {
          
           <li className="nav-item">
           <Link
-              to="/all"
+              to="/browse"
               className={
-                window.location.pathname === "/all"
+                window.location.pathname === "/browse"
                   ? "nav-link active"
                   : "nav-link"
               }
