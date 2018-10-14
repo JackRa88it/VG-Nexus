@@ -5,6 +5,7 @@ const path = require('path')
 var fs = require('fs')
 var extract = require('extract-zip')
 var rimraf = require('rimraf');
+var moment = require("moment");
 
 
 module.exports = function (app,io){
@@ -668,11 +669,17 @@ module.exports = function (app,io){
 
 function newGame(game,io) {
     const gameRoom = io.of('/game/' + game.id);
+    var chatLogs = []
     gameRoom.on('connection', function (socket) {
+        socket.emit('currentLogs',chatLogs)
         console.log('a user connected to /game/' + game.id);
         socket.on('messagePost', function (msg, name, id) {
-            console.log("something sent");
-            gameRoom.emit('messagePost', msg, name, id);
+            var timestamp = moment().format('hh:mm:ssa')
+            chatLogs.push({msg: msg, name: name, id: id, timestamp: timestamp})
+            if(chatLogs.length>8){
+                chatLogs.shift()
+            }
+            gameRoom.emit('messagePost', msg, name, id, timestamp);
         });
         gameRoom.on('disconnect', function () {
             console.log('user disconnected from /game/' + game.id);
