@@ -542,10 +542,14 @@ module.exports = function (app,io){
                 ).then((user) => {
                     var oldPath = files.Avatar.path;
                     var newPath = path.join(__dirname, '../client/public/assets/userThumbnails/' + fields.userId )
-                    fs.rename(oldPath,newPath, function(err) {
-                        if(err) throw err
+                    if (files.Avatar.name) {
+                        fs.rename(oldPath,newPath, function(err) {
+                            if(err) throw err
+                            res.send('200')
+                        })
+                    } else {
                         res.send('200')
-                    })
+                    }
                 }).catch((err) => {
                     console.log(err);
                     res.json(err)

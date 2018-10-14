@@ -9,7 +9,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Row, Col, Container } from "../../components/Grid"
 import API from "../../utils/API";
 import Authenticator from '../../utils/Authenticator';
-import ImageUpload from "../UploadForm/ImageUpload";
+import AvatarUpload from "./AvatarUpload";
 import "./UserNexus.css";
 
 // Refer to this image for what edit profile looks like: https://i.imgur.com/iaBGqD1.jpg
@@ -25,7 +25,6 @@ class UserNexus extends React.Component {
     if(Authenticator.isAuthenticated){
       API.getUser(Authenticator.user.id)
       .then(res => {
-        console.log(res)
         this.setState({
           Username: res.data.username,
           Banner: res.data.postBanner,
@@ -81,44 +80,40 @@ class UserNexus extends React.Component {
       return (
         <div>
           <Tabs handleTabClick={this.handleTabClick} />
-          <h1>Edit Profile</h1>
-          <Row>
-            {/* Left column */}
-            <Col size="md-6">
-              <div className="mr-4">
-                <form encType="multipart/form-data" id="editProfileForm" onSubmit={this.handleSubmitEditProfile}>
-                  <Input
-                    name="Username"
-                    value={this.state.Username}
-                    onChange = {this.handleInputChange}
-                  />
-                  <Input
-                    name="Bio"
-                    value={this.state.Bio}
-                    onChange = {this.handleInputChange}
-                  />
-                  <textarea
-                    name="Banner"
-                    placeholder="Current User Banner Text here"
-                    onChange = {this.handleInputChange}
-                  />
-                  <h2 className="display-5 mb-4">Uploading Images</h2>
-                  <ImageUpload
-                    name="Avatar"
-                  >
-                    Upload avatar image
-                  </ImageUpload>
-                  <input className="nexus-button" type="submit" />
-                </form>
-              </div>
-            </Col>
-            {/* Right column */}
-            <Col size="md-6">
-              <div className="ml-5">
-                {/* Avatar image on this line */}
-              </div>
-            </Col>
-          </Row>
+          <form encType="multipart/form-data" id="editProfileForm" onSubmit={this.handleSubmitEditProfile}>
+            <h3>Edit Profile</h3>
+            <hr />
+            <p>avatar image:</p>
+            <div id="formAvatarContainer">
+              <AvatarUpload
+                name="Avatar"
+              >
+                Upload avatar image
+              </AvatarUpload>
+            </div>
+            <br></br>
+            <p>username:</p>
+            <Input
+              name="Username"
+              value={this.state.Username}
+              onChange = {this.handleInputChange}
+            />
+            <p>bio:</p>
+            <textarea
+              name="Bio"
+              value={this.state.Bio}
+              onChange = {this.handleInputChange}
+            />
+            <p>forum post banner:</p>
+            <textarea
+              name="Banner"
+              value={this.state.Banner}
+              onChange = {this.handleInputChange}
+            />
+            <br></br>
+            <br></br>
+            <input className="nexus-button" type="submit" />
+          </form>
         </div>
       )
     }
