@@ -1,6 +1,7 @@
+import Authenticator from "../../utils/Authenticator";
 const React = require('react')
 
-class ImageUpload extends React.Component {
+class AvatarUpload extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -20,10 +21,10 @@ class ImageUpload extends React.Component {
     return (
       <div>
         <input type="file" name={this.props.name} onChange={this.handleChange}/>
-        {this.state.file.length ? <img src={this.state.file} alt='upload-thumbnail' id='uploadThumbnail'  /> : null}
+        {this.state.file.length ? <img src={this.state.file} alt='upload-thumbnail' id='uploadThumbnail'  /> : <img src={"/assets/userThumbnails/" + Authenticator.user.id} alt='upload-thumbnail' id='uploadThumbnail'  />}
       </div>
     );
   }
 }
 
-export default ImageUpload;
+export default AvatarUpload;
