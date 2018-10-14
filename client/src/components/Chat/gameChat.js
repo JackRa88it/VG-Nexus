@@ -138,7 +138,7 @@ class Chatroom extends Component{
                         (<div>
                             <p className={"px-3 my-1 py-1 chatroom-message"+ (i%2)}>
                             <div className="border-bottom mb-1">
-                                <a href={"/user/"+message.id}><em>{message.name.substring(0,24)}</em></a>
+                                <a href={"/profile/"+message.id}><em>{message.name.substring(0,24)}</em></a>
                                 <small id='time' className="float-right pt-1">{message.now}</small><br></br>
                             </div>
                             <span id='msg'>{message.msg.substring(0,250)}</span>
