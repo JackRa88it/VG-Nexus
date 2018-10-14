@@ -62,10 +62,12 @@ class Form extends Component{
                 <br /><br />
                 <h2>Prerequisites</h2>
                 <br /><br />
-                1. Make sure the file you want to render is called index.html
-                <br /><br />
-                2. If you are uploading a game made in the Phaser framework append the following code block anywhere after your "game" object is defined:
-                    This code ensures that your game canvas will be resizable into the HTML element its placed inside.
+                <ol>
+                    <li>Make sure the file you want to render is called index.html</li><br />
+                    <li>If you are uploading a game made in the Phaser framework append the following code block anywhere after your "game" object is defined
+                        <em> This code ensures that your game canvas will resize to fit the dimensions of it's parent element </em>
+                    </li>
+                </ol>
                 <pre>
                     {`
     function resize() {
@@ -109,7 +111,7 @@ class Form extends Component{
                 <br></br>
                 <input type='text' name ='name' /><br />
                 <br></br>
-                Description:
+                Description / Instructions
                 <br></br>
                 <textarea class="form-control" id="textInput" name = 'description' rows="3" onChange={this.handleInputChange}></textarea>
                 <br />
