@@ -53,7 +53,6 @@ class Chatroom extends Component{
     }
 
     handleFavoriteClick = () => {
-        console.log(this.props.gameId)
         API.favoriteGame(this.props.gameId).then((res) =>{
             this.setState({
                 favorite: "true"
@@ -165,11 +164,16 @@ class Chatroom extends Component{
             )
         }
         else if(this.state.location === "details"){
-            console.log(this.props.gameInfo.User.username)
             return(
                 <div className="chatroom">
                     <div className="gametabs">
-                        <button className="fas fa-star"></button>
+                    {
+                      (this.state.favorite === 'true')
+                        ? <button className="fas fa-star blue">
+                        </button>
+                        : <button className="fas fa-star"
+                        onClick={this.handleFavoriteClick}></button>
+                    }
                         <button
                          className="details-tab"
                          name="location"
