@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Tabs from "../../components/UserNexus/Tabs"
 import Posts from "../../components/UserNexus/Posts"
 import { Input, TextArea, FormBtn } from "../../components/Form";
@@ -6,29 +7,36 @@ import { Row, Col, Container } from "../../components/Grid"
 import GameList from '../../components/GameList';
 import API from "../../utils/API";
 import Authenticator from '../../utils/Authenticator';
-import AvatarUpload from "./AvatarUpload";
+import EditProfile from "../../components/EditProfile/EditProfile";
 import "./UserNexus.css";
 
 // Refer to this image for what edit profile looks like: https://i.imgur.com/iaBGqD1.jpg
 class UserNexus extends React.Component {
   state = {
-    location: "Edit Profile",
-    Username: "",
-    Banner: "",
-    Bio: "",
-    Games: []
+    location: "",
+    Games: [],
   };
 
-
-  formPopulate = ()=>{
-    if(Authenticator.isAuthenticated){
-      API.getUser(Authenticator.user.id)
-      .then(res => {
+  componentDidMount() {
+    Authenticator.authenticate(() => {
+      this.getUserGames();
+      if(this.props.match.params.location) {
         this.setState({
-          Username: res.data.username,
-          Banner: res.data.postBanner,
-          Bio: res.data.bio
+          location: this.props.match.params.location,
         })
+      }
+      else {
+        this.setState({
+          location: "EditProfile"
+        })
+      }
+    })
+  }
+
+  componentDidUpdate() {
+    if(this.props.match.params.location != this.state.location) {
+      this.setState({
+        location: this.props.match.params.location,
       })
     }
   }
@@ -50,108 +58,47 @@ class UserNexus extends React.Component {
   handleTabClick = (event) => {
     const name = (event.target.getAttribute("name"))
     const value = (event.target.getAttribute("value"))
-    console.log(name)
-    console.log(value)
-
     this.setState({
       [name]: value
     })
-    if(value == 'Game'){
+    if(value == 'Games'){
       this.getUserGames();
     }
-    console.log(this.state.location);
   };
-
-  handleSubmitEditProfile = (event) =>{
-    event.preventDefault();
-    if(Authenticator.isAuthenticated){
-      const formData = new FormData(event.target);
-      let userId = Authenticator.user.id
-      formData.append("userId", userId)
-      API.editProfile(formData)
-      .then(res => {
-        console.log(res)
-        window.location.assign("/profile/"+Authenticator.user.id)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-
-  };
-  }
-  handleInputChange = event => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      [name]: value
-    });
-  };
-
-
-
-  componentDidMount(){
-    this.formPopulate()
-  }
 
   render() {
-
-    if (this.state.location === "Edit Profile") {
+    if (this.state.location === "EditProfile") {
       return (
         <div>
+          <h1>USER NEXUS</h1>
           <Tabs handleTabClick={this.handleTabClick} />
-          <form encType="multipart/form-data" id="editProfileForm" onSubmit={this.handleSubmitEditProfile}>
-            <h3>Edit Profile</h3>
-            <hr />
-            <span>User avatar:</span>
-            <div id="formAvatarContainer">
-              <AvatarUpload
-                name="Avatar"
-              / >
-  
-            </div>
-            <br></br>
-            <p>username:</p>
-            <Input
-              name="Username"
-              value={this.state.Username}
-              onChange = {this.handleInputChange}
-            />
-            <p>bio:</p>
-            <textarea
-              name="Bio"
-              value={this.state.Bio}
-              onChange = {this.handleInputChange}
-            />
-            <p>forum post banner:</p>
-            <textarea
-              name="Banner"
-              value={this.state.Banner}
-              onChange = {this.handleInputChange}
-            />
-            <br></br>
-            <br></br>
-            <input className="nexus-button" type="submit" />
-          </form>
+          <h3>Edit Profile</h3>
+          <EditProfile />
         </div>
       )
     }
-    else if (this.state.location === "Game") {
+    else if (this.state.location === "Games") {
       return (
         <div>
+          <h1>USER NEXUS</h1>
           <Tabs handleTabClick={this.handleTabClick} />
-          <h1>Game</h1>
-          <GameList games = {this.state.Games} owner={true} deleteHandler={this.deleteHandler}/>
+          <h3>Games</h3>
+          <GameList games={this.state.Games} owner={true} deleteHandler={this.deleteHandler}/>
         </div>
       )
     }
     else if (this.state.location === "Posts") {
       return (
         <div>
+          <h1>USER NEXUS</h1>
           <Tabs handleTabClick={this.handleTabClick} />
-          <h1>Posts</h1>
+          <h3>Posts</h3>
           <Posts/>
         </div>
       )
+    }
+    else {
+      return null;
     }
   };
 };

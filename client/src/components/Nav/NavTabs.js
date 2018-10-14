@@ -48,29 +48,17 @@ class NavTabs extends Component {
         <ul className="nav nav-tabs navbar-collapse">
         {/* TODO: FIX BELOW */}
          
-          <li className="nav-item dropdown">
-            <button className="nav-link special" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Games
-            </button> 
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link
-                to="/all"
-                className={
-                  window.location.pathname === "/all"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-              >
-                <div className="dropdown-item" href="#">Browse</div>
-              </Link>
-              <Link to="/all" className={
+          <li className="nav-item">
+          <Link
+              to="/all"
+              className={
                 window.location.pathname === "/all"
                   ? "nav-link active"
                   : "nav-link"
-              }                                                                                                                                                        >
-                <div className="dropdown-item" href="#">Play</div>
-              </Link>
-            </div>
+              }
+            >
+              Games
+            </Link>
           </li>
 
           <li className="nav-item">
@@ -112,20 +100,20 @@ class NavTabs extends Component {
                   </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     {/* your name should take you to your public profile */}
-                    <div className="dropdown-item" href="#">{this.state.username}</div>
+                    <Link className="dropdown-item" to={`/profile/${Authenticator.user.id}`}>{this.state.username}</Link>
                     <div className="dropdown-divider"></div>
                     {/* takes you to public profile, like how clicking on your name takes you there too */}
                     {/* it's there because it's more explicit than clicking on your name */}
                     <Link className="dropdown-item" to={`/profile/${Authenticator.user.id}`}>View Profile</Link>
                     <div className="dropdown-divider"></div>
                     {/* Your ... is where you can edit your stuff. Each one takes you to the same page. */}
-                    {/* Your Games */}
-                    <Link className="dropdown-item" to="/UserNexus">Your Games</Link>
                     {/* Your Profile */}
-                    <Link className="dropdown-item" to="/UserNexus">Your Profile</Link>
+                    <Link className="dropdown-item" to="/UserNexus/EditProfile">Edit Profile</Link>
+                    {/* Your Games */}
+                    <Link className="dropdown-item" to="/UserNexus/Games">Your Games</Link>
                     {/* Your Posts */}
                     {/* If you click "Your Posts," you go to that tab on that page */}
-                    <Link className="dropdown-item" to="/UserNexus">Your Posts</Link>
+                    <Link className="dropdown-item" to="/UserNexus/Posts">Your Posts</Link>
                     <div className="dropdown-divider"></div>
                     <Link className="dropdown-item" to="/about">
                       Help
@@ -133,7 +121,7 @@ class NavTabs extends Component {
                     </Link>
                     <div className="dropdown-item" href="#">
                       Settings
-                  <i class="fas fa-wrench"></i>
+                  <i className="fas fa-wrench"></i>
                     </div>
                     {/* Log out button */}
                     <Link

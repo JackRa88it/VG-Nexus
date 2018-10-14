@@ -1,0 +1,30 @@
+
+.postBody {
+  padding: 10px 0px 10px 10px;
+  overflow: auto;
+}
+
+.postText {
+  float: left;
+  width: 95%;
+  color: #f6f6f7;
+  white-space: pre-wrap;
+}
+
+.postEditButton {
+  float: right;
+  width: 5%;
+  vertical-align: top;
+}
+
+
+.editButton {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  color: grey;
+}
+
+.pattern0{
+  background-color: rgb(17, 17, 17);
+}
