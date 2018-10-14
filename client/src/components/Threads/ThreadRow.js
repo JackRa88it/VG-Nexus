@@ -12,7 +12,7 @@ const ThreadRow = (props) => (
         >
           {props.thread.title}
         </p>
-        <a href={"/profile/"+props.thread.User.id}><em className="threadAuthor">{props.thread.User.username}</em></a>
+        <a href={"/profile/"+props.thread.User.id}><em className="threadAuthor linkable">{props.thread.User.username}</em></a>
         {/* <p className="threadAuthor">{props.thread.User.username}</p> */}
     </td>
     <td

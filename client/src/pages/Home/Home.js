@@ -115,7 +115,7 @@ class Home extends React.Component{
                       <div className='bestInfo'>
                           <div className='bestDescription'>{game.description}</div>
                           <Link to={'/profile/' + game.User.id}>
-                          <div className='bestAuthor'>{game.User.username}</div>
+                          <div className='bestAuthor linkable'>{game.User.username}</div>
                           </Link>
                       </div>
                     </div>
