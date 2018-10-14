@@ -159,7 +159,7 @@ module.exports = function (app,io){
             res.send(err);
         });
     });
-
+    
     app.get('/api/tags/games/all', (req,res)=>{
         db.Tag.findAll({
             include:[{
@@ -189,6 +189,14 @@ module.exports = function (app,io){
             })
         }
     })
+
+    app.get('/api/games/all', (req,res)=>{
+        db.Game.findAll({
+        })
+        .then((games)=>{
+            res.json(games)
+        })
+    });
 
     app.get('/api/game/:id/favorites', (req,res)=>{
         db.Game.findOne({
