@@ -88,19 +88,11 @@ class Profile extends Component
             </Row>
             <Row>
               <div className="mx-auto mt-5">
-                <GameContainer games={this.state.random} header={'Your Uploads'} className="fullWidth" />
+                <GameContainer games={this.state.random} header={'User Uploads'} className="fullWidth" />
               </div>
             </Row>
         </div>
        </div>);
-          {/* </div> :
-          <div >
-            <p className="text-center">Sorry about that, currently we only allow visiting user profiles for verified accounts</p>
-            <h2 className="text-center"><Link to="/login_signup">Sign up now!</Link></h2>
-          </div>
-        )}
-      </div>
-    ) */}
   }
 }
 export default Profile;
