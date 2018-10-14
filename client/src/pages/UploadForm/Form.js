@@ -62,11 +62,13 @@ class Form extends Component{
                 <br /><br />
                 <h2>Prerequisites</h2>
                 <br /><br />
-                1. Make sure the file you want to render is called index.html
-                <br /><br />
-                2. If you are uploading a game made in the Phaser framework append the following code block anywhere after your "game" object is defined:
-                    This code ensures that your game canvas will be resizable into the HTML element its placed inside.
-                <pre>
+                <ol>
+                    <li>Make sure the file you want to render is called index.html</li><br></br>
+                    <li>If you are uploading a game made in the Phaser framework append the following code block anywhere after your "game" object is defined
+                        <em> This code ensures that your game canvas will resize to fit the dimensions of it's parent element </em>
+                    </li>
+                </ol>
+                <code><pre>
                     {`
     function resize() {
         var w = window.innerWidth;
@@ -94,7 +96,7 @@ class Form extends Component{
 
     resize()
                     `}
-                </pre>
+               </pre> </code>
 
                 <h2>Upload Files</h2>
                 Game ZIP file: <br></br>
@@ -109,7 +111,7 @@ class Form extends Component{
                 <br></br>
                 <input type='text' name ='name' /><br />
                 <br></br>
-                Description:
+                Description / Instructions
                 <br></br>
                 <textarea class="form-control" id="textInput" name = 'description' rows="3" onChange={this.handleInputChange}></textarea>
                 <br />
@@ -122,7 +124,7 @@ class Form extends Component{
             ) : (
                 <div className="text-center">
                     <h3>Sorry about that ...</h3> <p>Game uploading is only available for verified users. <br />
-                    <Link className="linkable" to="/login_signup">Signup</Link> to get started.</p>
+                    <Link className="linkable" to="/login_signup">Login</Link> to get started.</p>
                </div>
               )
         )

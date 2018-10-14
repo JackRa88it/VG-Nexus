@@ -30,13 +30,16 @@ class Login extends Component{
                 })
                
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                alert("Either your email or password is invalid")
+            });
         }
     };
     render(){
         return(
-            <div className="mb-4">
-             <h2 className="display-5 mb-4">Login</h2> 
+            <div className="logsign-container ">
+             <h2 className="display-5 mb-3">Login</h2> 
 
             <div className="mb-2">
                 <Input

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Form from './pages/UploadForm';
 import Game from './components/Game/Game';
 import LoginSignup from "./pages/LoginSignup";
+import Signup from "./pages/LoginSignup/Signup";
 import NavTabs from "./components/Nav";
 import {Container} from "./components/Grid";
 import Footer from "./components/Footer"
@@ -29,6 +30,7 @@ class App extends Component {
           <Route exact path="/upload" component={Form} />
           <Route exact path="/game" component={Game} />
           <Route exact path='/login_signup' component={LoginSignup} />
+          <Route exact path='/signup' component={Signup} />
           <Route exact path='/community' component={Community} />
           <Route exact path='/UserNexus' component={UserNexus} />
           <Route path={'/profile'} component={ChooseUser}/>

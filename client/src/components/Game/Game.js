@@ -16,9 +16,11 @@ class Game extends Component{
         username: '',
         upVoted: false,
         downVoted: false,
+        User: {},
         score: 0,
         favorite: false,
-        randomGames: []
+        randomGames: [],
+        gameData: {}
     };
     getRandom(){
         API.getRandom()
