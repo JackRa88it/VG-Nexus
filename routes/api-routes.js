@@ -4,6 +4,8 @@ var formidable = require('formidable');
 const path = require('path')
 var fs = require('fs')
 var extract = require('extract-zip')
+var rimraf = require('rimraf');
+
 
 module.exports = function (app,io){
     io.on('connection',function(socket){
@@ -162,7 +164,6 @@ module.exports = function (app,io){
         db.Tag.findAll({
             include:[{
                 model:db.Game,
-                // limit: 3
             }]
         }).then((tags)=>{
             res.json(tags)
@@ -203,6 +204,21 @@ module.exports = function (app,io){
         })
     })
 
+    app.post('/api/delete/game/:id', function(req,res){
+        db.Game.destroy({
+            where: {id: req.params.id}
+        }).then((deletedGames) => {
+            rimraf(path.join(__dirname,'../client/public/games/' + req.params.id),()=>{
+                fs.unlinkSync(path.join(__dirname,'../client/public/assets/gameThumbnails/' + req.params.id))
+                if(deletedGames >= 1){
+                    res.status(200).json({message:"Deleted succesfully"})
+                }
+                else{
+                    res.status(404).json({message:'record not found'})
+                }
+            })
+        })
+    })
 
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({

@@ -13,6 +13,9 @@ export default {
   authenticate: function(){
     return axios.get('/api/authenticate')
   },
+  deleteGame: function(gameId){
+    return axios.post('/api/delete/game/'+gameId)
+  },
   getUser: function(userId){
     return axios.get('/api/getUser/'+userId )
   },

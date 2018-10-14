@@ -16,7 +16,11 @@
     width: 120px;
     margin-right: 12px;
 }
+.gameListHeader{
+    overflow: auto;
+}
 .gameListTitle{
+    float: left;
     font-size: 20px;
     font-weight: bold;
     height: 28px;
@@ -24,6 +28,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.gameListDelete{
+    float: right;
 }
 
 .gameListCreatedAt{
@@ -43,5 +50,5 @@
     height: 76px;
     text-overflow: ellipsis;
     overflow:hidden;
-    
 }
+
