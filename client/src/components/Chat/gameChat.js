@@ -196,7 +196,7 @@ class Chatroom extends Component{
                             <p className="detail">Title: {this.props.gameInfo.name}</p>
                             <p className="detail">About: {this.props.gameInfo.description}</p>
                             <p className="detail">Created at: {moment(this.props.gameInfo.createdAt).format('MM/DD/YYYY')}</p>
-                            <p className="detail">Created by: {this.props.gameInfo.User.username}</p>
+                            <p className="detail">Created by: <a href={"/profile/"+this.props.gameInfo.User.id}><em className="linkable">{this.props.gameInfo.User.username}</em></a></p>
                             <p className="detail">Score: {this.props.gameInfo.score}</p>
                         </div>
                     </div>
