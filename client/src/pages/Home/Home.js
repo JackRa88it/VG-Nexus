@@ -110,7 +110,7 @@ class Home extends React.Component{
                             )})
                           }
                         </div>
-                        <div className='bestCardRating'>{game.rating.toFixed(3)} ({game.Votes.length} Votes)</div>
+                        <div className='bestCardRating'>{(game.score*10).toFixed(3)} ({game.Votes.length} Votes)</div>
                       </div>
                       <div className='bestInfo'>
                           <div className='bestDescription'>{game.description}</div>
