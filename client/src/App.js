@@ -30,7 +30,7 @@ class App extends Component {
           <Route exact path="/game" component={Game} />
           <Route exact path='/login_signup' component={LoginSignup} />
           <Route exact path='/community' component={Community} />
-          <Route exact path='/UserNexus' component={UserNexus} />
+          <Route path='/UserNexus/:location' component={UserNexus} />
           <Route path={'/profile'} component={ChooseUser}/>
           {/*<Route exact path="/profile/:id" component={Profile} />   */}          
           <Route exact path="/about" component={About} />

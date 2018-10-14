@@ -123,7 +123,7 @@ class NavTabs extends Component {
                     </Link>
                     <div className="dropdown-item" href="#">
                       Settings
-                  <i class="fas fa-wrench"></i>
+                  <i className="fas fa-wrench"></i>
                     </div>
                     {/* Log out button */}
                     <Link

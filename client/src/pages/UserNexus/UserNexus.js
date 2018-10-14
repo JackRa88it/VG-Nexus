@@ -12,9 +12,18 @@ import "./UserNexus.css";
 // Refer to this image for what edit profile looks like: https://i.imgur.com/iaBGqD1.jpg
 class UserNexus extends React.Component {
   state = {
-    location: "Edit Profile",
-    Games: []
+    location: "",
+    Games: [],
   };
+
+  componentDidMount() {
+
+    Authenticator.authenticate(() => {
+      this.setState({
+        location: this.props.match.params.location,
+      })
+    })
+  }
 
   deleteHandler = (gameId) => {
     API.deleteGame(gameId)
@@ -42,7 +51,7 @@ class UserNexus extends React.Component {
   };
 
   render() {
-    if (this.state.location === "Edit Profile") {
+    if (this.state.location === "EditProfile") {
       return (
         <div>
           <Tabs handleTabClick={this.handleTabClick} />
@@ -67,6 +76,9 @@ class UserNexus extends React.Component {
           <Posts/>
         </div>
       )
+    }
+    else {
+      return null;
     }
   };
 };

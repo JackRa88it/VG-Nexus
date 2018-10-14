@@ -22,7 +22,9 @@ class Profile extends Component
 
       // userID won't change
       const userId = this.props.match.params.id;
-
+      console.log('LOGGING PROPS=================')
+      console.log(this.props.match.params.id)
+      console.log('============================')
       API.getUser(userId)
         .then(user =>
         {
@@ -55,6 +57,7 @@ class Profile extends Component
         console.log(err)
       })
   }
+  
   render()
   {
     return (
@@ -65,7 +68,9 @@ class Profile extends Component
 
                <Row> 
                   <div className='d-inline-block'>
-                    <img className="bg-light rounded-circle p-2 mr-3 " src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
+                    <div>
+                      <img id="profile-image-porthole" className="bg-light rounded-circle p-2 mr-3" src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
+                    </div>
                     <div className="float-right py-4">
                       <span className="bigger">{this.state.username}</span>
                       <div className='smaller'>Created: {moment(this.state.createdAt).fromNow()}</div>
@@ -88,7 +93,7 @@ class Profile extends Component
             </Row>
             <Row>
               <div className="mx-auto mt-5">
-                <GameContainer games={this.state.random} header={'Your Uploads'} className="fullWidth" />
+                <GameContainer games={this.state.random} header={'Uploads'} className="fullWidth" />
               </div>
             </Row>
         </div>

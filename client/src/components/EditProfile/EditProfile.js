@@ -20,7 +20,7 @@ class EditProfile extends React.Component {
         this.setState({
           Username: res.data.username,
           Banner: res.data.postBanner,
-          Bio: res.data.bio
+          Bio: res.data.bio,
         })
       })
     }
@@ -65,6 +65,7 @@ class EditProfile extends React.Component {
           <div id="formAvatarContainer">
             <AvatarUpload
               name="Avatar"
+              // AvatarUpload cannot get Authenticator.user if navigating to /UserNexus directly in the url bar
             >
               Upload avatar image
             </AvatarUpload>

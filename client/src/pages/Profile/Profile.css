@@ -7,3 +7,8 @@ p#bio{
 .smaller{
   font-size: 13px;
 }
+
+#profile-image-porthole {
+  width: 316px;
+  height: 316px;
+}
