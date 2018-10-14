@@ -38,8 +38,8 @@ class Login extends Component{
     };
     render(){
         return(
-            <div className="mb-4">
-             <h2 className="display-5 mb-4">Login</h2> 
+            <div className="logsign-container ">
+             <h2 className="display-5 mb-3">Login</h2> 
 
             <div className="mb-2">
                 <Input

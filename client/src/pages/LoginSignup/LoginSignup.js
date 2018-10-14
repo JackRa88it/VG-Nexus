@@ -37,11 +37,9 @@ class Login_Signup extends Component
         email: this.state.email,
         password: this.state.password,
         username: this.state.username,
-        bio: this.state.bio,
-        postBanner: this.state.postBanner
       })
         .then(res => window.location.assign(res.data))
-        .catch(err => console.log(err)); // TODO: switch on error
+        .catch(err => {console.log(err.name); alert("That email alaready exists...")}); // TODO: switch on error
     }
   };
   render()
@@ -52,13 +50,13 @@ class Login_Signup extends Component
           {!this.state.isLogin ?
               <div className="logsign-container">
                 <Signup />
-                Try logging in <u className="mr-1 linkable" onClick={this.handleSwitch}>here</u>!
+                <div className="text-center">Need to  <u className="mr-1 linkable" onClick={this.handleSwitch}>log in</u> instead?</div>
               </div>
             :
               <div className="logsign-container">
                 <Login />
-                Don't have an account? <br />You can sign up
-             <u className="mx-1 linkable" onClick={this.handleSwitch}>here</u>
+                <div className="text-center" >
+                 Don't have an account?  Sign up<u className="mx-1 linkable" onClick={this.handleSwitch}>here</u></div>
               </div>
           }
 

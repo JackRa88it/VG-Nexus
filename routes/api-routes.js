@@ -146,16 +146,16 @@ module.exports = function (app,io){
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            bio: req.body.bio,
-            postBanner: req.body.postBanner
           }).then(function(user) {
             var random = Math.floor(Math.random()*9) + 1
             var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
             var userImageCopy = path.join(__dirname, '../client/public/assets/userThumbnails/' + user.id)
             fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
             res.redirect(307, "/api/login");
+
         }).catch(function(err) {
             console.log(err);
+            res.redirect(307, "/api/login");
             res.send(err);
         });
     });

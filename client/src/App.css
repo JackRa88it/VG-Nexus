@@ -18,7 +18,7 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 .bg-standard{
-  background: rgba(43, 43, 43, 0.9);
+  background: rgb(48, 48, 48);
 }
 .container {
   /* border: 1px solid rgba(248, 249, 250,0.1);
@@ -29,7 +29,7 @@ h1 {
 
 .container-lighter{
     border: 1px solid rgba(248, 249, 250,0.1);
-    background-color: rgba(43, 43, 43, 0.9);
+    background-color: rgb(43, 43, 43);
 }
 .forumTable{
   margin-top: 20px;
