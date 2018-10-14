@@ -7,6 +7,12 @@ export default {
   signup: function(userInfo) {
     return axios.post("/api/signup",userInfo);
   },
+  validateUser: function(name) {
+    return axios.get("/api/validateUser/"+name)
+  },
+  validateEmail: function(email) {
+    return axios.get("/api/validateEmail/"+email)
+  },
   joinChat: function(){
     return axios.get("/api/messages")
   },
