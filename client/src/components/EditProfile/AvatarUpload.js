@@ -5,7 +5,8 @@ class AvatarUpload extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      file: {}
+      file: {},
+      userID: ""
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -13,7 +14,7 @@ class AvatarUpload extends React.Component {
 
   handleChange(event) {
     this.setState({
-      file: URL.createObjectURL(event.target.files[0])
+      file: URL.createObjectURL(event.target.files[0]),
     })
   }
 

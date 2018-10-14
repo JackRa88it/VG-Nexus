@@ -3,6 +3,7 @@ import React from 'react'
 import './GameList.css'
 import { Link } from "react-router-dom";
 import API from '../../utils/API';
+var moment = require('moment')
 
 class GameList extends React.Component{
     render(){
@@ -31,7 +32,7 @@ class GameList extends React.Component{
                                     }
                             </div>
                             <div className='gameListDescription'>{game.description}</div>
-                            <div className='gameListCreatedAt'>Published on {game.createdAt}</div>
+                            <div className='gameListCreatedAt'>Published on {moment(game.createdAt).format('YYYY MMM DD hh:mm')}</div>
                         </div>
                     </div>
                 )

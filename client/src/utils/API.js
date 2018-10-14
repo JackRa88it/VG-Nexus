@@ -43,6 +43,9 @@ export default {
   getGameData: function(gameId){
     return axios.get('/api/game/' + gameId)
   },
+  getAllGames: function(){
+    return axios.get('/api/games/all')
+  },
   favoriteGame: function(gameId){
     return axios.get('/api/game/'+gameId+'/addFavorite')
   },
@@ -92,7 +95,7 @@ export default {
     return axios.get('/api/user/favorites')
   },
   getUserPosts: function(){
-    return axios.get('api/YourPosts')
+    return axios.get('/api/YourPosts')
   },
   isThisGameFavorited: function(gameId){
     return axios.get('/api/game/'+gameId+'/favorites')

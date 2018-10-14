@@ -193,6 +193,7 @@ module.exports = function (app,io){
         })
     })
 
+    
     app.get('/api/tags/games/all', (req,res)=>{
         db.Tag.findAll({
             include:[{
@@ -222,6 +223,14 @@ module.exports = function (app,io){
             })
         }
     })
+
+    app.get('/api/games/all', (req,res)=>{
+        db.Game.findAll({
+        })
+        .then((games)=>{
+            res.json(games)
+        })
+    });
 
     app.get('/api/game/:id/favorites', (req,res)=>{
         db.Game.findOne({
@@ -279,6 +288,20 @@ module.exports = function (app,io){
             ],
             include:[db.Vote,db.Tag, db.User]
         }).then((games) => {
+            games.forEach((game)=>{
+                game.upVoteCount = 0
+                if(game.dataValues.Votes.length){
+                    game.dataValues.Votes.forEach((vote) => {
+                        if(vote.dataValues.upDown){
+                            game.upVoteCount++
+                        }
+                    })
+                    game.dataValues.score = game.upVoteCount/game.Votes.length
+                }
+                else{
+                    game.dataValues.score = 1
+                }
+            })
             res.json(games)
         }).catch(function(err){
             console.log(err);
@@ -621,6 +644,7 @@ module.exports = function (app,io){
             })
         }
     })
+
     app.get('/api/YourPosts', function(req,res){
         // Grab all posts by userID
         var userID = req.user.id;
@@ -636,8 +660,7 @@ module.exports = function (app,io){
         }).catch(function(err) {
             console.log(err);
             res.json(err);
-        });
-        
+        }); 
     })
 
 }
