@@ -3,6 +3,7 @@ import Tabs from "../../components/UserNexus/Tabs"
 import Posts from "../../components/UserNexus/Posts"
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Row, Col, Container } from "../../components/Grid"
+import GameList from '../../components/GameList';
 import API from "../../utils/API";
 import Authenticator from '../../utils/Authenticator';
 
@@ -13,7 +14,11 @@ class UserNexus extends React.Component {
     Username: "",
     Banner: "",
     Bio: "",
+<<<<<<< HEAD
 
+=======
+    Games: []
+>>>>>>> b709129a5afbb55d245996ed7257c74647a59774
   };
 
   formPopulate = ()=>{
@@ -35,9 +40,13 @@ class UserNexus extends React.Component {
     const value = (event.target.getAttribute("value"))
     console.log(name)
     console.log(value)
+
     this.setState({
       [name]: value
     })
+    if(value == 'Game'){
+      API.getUserGames
+    }
     console.log(this.state.location);
   };
 
@@ -127,6 +136,7 @@ class UserNexus extends React.Component {
         <div>
           <Tabs handleTabClick={this.handleTabClick} />
           <h1>Game</h1>
+          <GameList games = {this.state.Games} />
         </div>
       )
     }

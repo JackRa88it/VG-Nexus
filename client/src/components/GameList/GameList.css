@@ -1,0 +1,7 @@
+.gameListItem{
+    height: 200px;
+    background-color: pink;
+}
+.gameListItem > div{
+    float: left;
+}

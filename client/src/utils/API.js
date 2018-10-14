@@ -16,6 +16,9 @@ export default {
   getUser: function(userId){
     return axios.get('/api/getUser/'+userId )
   },
+  getUserGames: function(userId){
+    return axios.get('/api/games/user/'+userId)
+  },
   logout: function(){
     return axios.get('/api/logout')
   },

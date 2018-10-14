@@ -302,6 +302,16 @@ module.exports = function (app,io){
         }
     })
 
+    app.get('/api/games/user/:id', function(req,res){
+        //Grabs all games made by a certain user
+        db.Game.findAll({
+            where: {
+                UserId: req.params.id
+            }
+        }).then((games) => {
+            res.json(games)
+        })
+    })
 
     app.get('/api/games/random', function(req,res){
         db.Game.findAll({
