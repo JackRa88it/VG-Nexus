@@ -84,7 +84,12 @@ class Chatroom extends Component{
         this.setState({messages: []})
         this.connect(nextProps.gameId)
     }
-
+    componentDidUpdate = ()=>{
+        this.scrollToBottom()
+    }
+    scrollToBottom = () => {
+        this.messagesEnd.current.scrollIntoView({ behavior:'smooth'})
+    }
     connect(gameId) {
         if (this.socket){
             this.socket.disconnect();
@@ -99,8 +104,6 @@ class Chatroom extends Component{
         }
         this.socket.on('currentLogs',(messages) => {
             //This signal is received when a client first connects to the chat
-            console.log('-_------------------')
-            console.log(messages)
             this.setState({messages: messages})
         })
         this.socket.on("messagePost", (msg, name, id, timestamp) => {
@@ -135,7 +138,7 @@ class Chatroom extends Component{
                     Chat
                     </button>
                 </div>
-                <div className="messagedisplay">
+                <div className="messagedisplay" id='chatbox'>
                     {this.state.messages.map((message, i) => (
                         (<div>
                             <p className={"px-3 my-1 py-1 chatroom-message"+ (i%2)}>
