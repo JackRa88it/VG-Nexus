@@ -64,33 +64,31 @@ class Profile extends Component
               <Col size="md-4">
 
                <Row> 
-                  <div className='d-inline-block bg-standard'>
-                    <div class="imgwrap mx-auto mt-4 mb-2">
-                        <img className="bg-light border mr-3 mt-3 avatar" src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
+                  <div className='media my-4'>
+                    <div class="align-self-center imgwrap mr-3">
+                        <img className="bg-light border mr-3 avatar" src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
                     </div>
-                    <div className="float-right py-4  px-4 ml-2">
+                    <div className="pt-4 media-body px-4 ml-2">
                       <span className="bigger">{this.state.username}</span>
-                      <div className='smaller'>Created: {moment(this.state.createdAt).fromNow()}</div>
-
+                      <div className='smaller'>Joined: {moment(this.state.createdAt).fromNow()}</div>
                     </div>
                   
                  </div>
                 </Row>
               </Col>
-              <Col size="md-8">
-                <div className="mt-4">
+              <Col size="md-7" off>
+                <div className="mx-1 mt-4">
                   About<hr className='bg-white' />
-                  <p id='bio' className="float-right">
+                  <p id='bio' className="">
                     {this.state.bio}
                   </p>
-                  <div className=' text-secondary display-5 mt-3 float-left'><em> "{this.state.postBanner}" </em></div>
+                  <div className='text-secondary display-5 mt-3 float-left'><em> "{this.state.postBanner}" </em></div>
                 </div>
-
               </Col>
             </Row>
             <Row>
-              <div className="mx-auto mt-5 pt-3">
-                <GameContainer games={this.state.random} header={'User Uploads'} className="fullWidth py-2" />
+              <div className="mx-auto h-10 mt-4">
+                <GameContainer games={this.state.random} header={'User Uploads'} className="fullWidth p-5" />
               </div>
             </Row>
         </div>

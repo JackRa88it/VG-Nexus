@@ -11,7 +11,8 @@
 }
 
 .categoryHeader{
-    width: 100%
+    width: 100%;
+    padding: 5px;
 }
 
 .gamesContainer{
@@ -26,7 +27,4 @@
     justify-content: space-around;
     padding-bottom: 20px;
 
-}
-.gamesContainer.fullWidth{
-    width:100% !important;
 }
