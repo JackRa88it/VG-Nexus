@@ -42,7 +42,7 @@ class Signup extends Component{
         return(
             <div className="logsign-container">
                <h2 className="display-5 mb-4">SIGN UP</h2> 
-               <div className="mb-2">
+               <div className="">
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}

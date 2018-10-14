@@ -50,7 +50,8 @@ class Login_Signup extends Component
           {!this.state.isLogin ?
               <div className="logsign-container">
                 <Signup />
-                <div className="text-center">Need to  <u className="mr-1 linkable" onClick={this.handleSwitch}>log in</u> instead?</div>
+                <div className="text-center">Need to  
+                <u className="mx-1 linkable" onClick={this.handleSwitch}>log in</u> instead?</div>
               </div>
             :
               <div className="logsign-container">
@@ -60,14 +61,6 @@ class Login_Signup extends Component
               </div>
           }
 
-          {this.state.isLogin ? (<div>
-
-          </div>
-          ) :
-            <div className="linkable">
-            </div>
-
-          }
       </div>
 
     );
