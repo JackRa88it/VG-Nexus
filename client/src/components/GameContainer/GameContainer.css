@@ -1,18 +1,19 @@
 .gameBox{
     height: 120px;
     width: 120px;
-    padding-top: 5px;
+    background:#333;
+    margin-top: 5px;
 
 }
 
 .gameBox > img{
     height: 100%;
     width: 100%;
+    object-fit: contain;
 }
 
 .categoryHeader{
-    width: 100%;
-    padding: 5px;
+    width: 100%
 }
 
 .gamesContainer{
