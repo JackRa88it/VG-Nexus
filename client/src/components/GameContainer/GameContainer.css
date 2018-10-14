@@ -2,14 +2,13 @@
     height: 120px;
     width: 120px;
     background:#333;
-    margin-top: 5px;
-
+    margin-top: 10px;
 }
 
 .gameBox > img{
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .categoryHeader{
@@ -19,10 +18,7 @@
 .gamesContainer{
     background-color: rgb(63, 63, 63);
     min-height: 100%;
-    /* width: 49%; */
-    /* width: 300px; */
-    /* float: left; */
-    /* margin: 3px 0px; */
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

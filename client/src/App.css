@@ -14,6 +14,13 @@ body {
 
   /* font-family: 'Open Sans', sans-serif; */
 }
+div.avatar > img{
+    height: 100%;
+    width: 100%;
+    top:50%;
+    object-position: 50% 0%; 
+    object-fit: cover;
+}
 h1 {
   font-family: 'Roboto', sans-serif;
 }

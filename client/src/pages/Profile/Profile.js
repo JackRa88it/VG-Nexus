@@ -65,8 +65,8 @@ class Profile extends Component
 
                <Row> 
                   <div className='media my-4'>
-                    <div class="align-self-center imgwrap mr-3">
-                        <img className="bg-light border mr-3 avatar" src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
+                    <div class="align-self-center imgwrap avatar mr-3">
+                        <img className="bg-light border mr-3 " src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
                     </div>
                     <div className="pt-4 media-body px-4 ml-2">
                       <span className="bigger">{this.state.username}</span>

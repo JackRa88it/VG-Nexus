@@ -102,13 +102,12 @@ class UserNexus extends React.Component {
           <form encType="multipart/form-data" id="editProfileForm" onSubmit={this.handleSubmitEditProfile}>
             <h3>Edit Profile</h3>
             <hr />
-            <p>avatar image:</p>
+            <span>User avatar:</span>
             <div id="formAvatarContainer">
               <AvatarUpload
                 name="Avatar"
-              >
-                Upload avatar image
-              </AvatarUpload>
+              / >
+  
             </div>
             <br></br>
             <p>username:</p>

@@ -7,10 +7,7 @@ p#bio{
 .smaller{
   font-size: 13px;
 }
-.avatar{
-  max-height: 100%;
-  max-width: 100%;
-}
+/*  */
 .imgwrap{
   width: 144px;
   height: 144px;
