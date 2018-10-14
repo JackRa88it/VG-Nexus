@@ -64,12 +64,13 @@ class Profile extends Component
               <Col size="md-4">
 
                <Row> 
-                  <div className='d-inline-block'>
-                    <img className="bg-light rounded-circle p-2 mr-3 " src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
-                    <div className="float-right py-4">
+                  <div className='d-inline-block bg-standard'>
+                    <div class="imgwrap mx-auto mt-4 mb-2">
+                        <img className="bg-light border mr-3 mt-3 avatar" src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
+                    </div>
+                    <div className="float-right py-4  px-4 ml-2">
                       <span className="bigger">{this.state.username}</span>
                       <div className='smaller'>Created: {moment(this.state.createdAt).fromNow()}</div>
-                      <div className=' text-secondary display-5 mt-3 float-left'><em> "{this.state.postBanner}" </em></div>
 
                     </div>
                   
@@ -82,13 +83,14 @@ class Profile extends Component
                   <p id='bio' className="float-right">
                     {this.state.bio}
                   </p>
+                  <div className=' text-secondary display-5 mt-3 float-left'><em> "{this.state.postBanner}" </em></div>
                 </div>
 
               </Col>
             </Row>
             <Row>
-              <div className="mx-auto mt-5">
-                <GameContainer games={this.state.random} header={'User Uploads'} className="fullWidth" />
+              <div className="mx-auto mt-5 pt-3">
+                <GameContainer games={this.state.random} header={'User Uploads'} className="fullWidth py-2" />
               </div>
             </Row>
         </div>

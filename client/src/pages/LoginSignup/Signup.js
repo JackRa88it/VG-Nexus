@@ -36,7 +36,7 @@ class Signup extends Component{
     };
     render(){
         return(
-            <div>
+            <div className="bg-standard p-5">
                <h2 className="display-5 mb-4">SIGN UP</h2> 
                <div className="mb-2">
                 <Input
