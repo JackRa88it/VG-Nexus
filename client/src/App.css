@@ -14,11 +14,18 @@ body {
 
   /* font-family: 'Open Sans', sans-serif; */
 }
+div.avatar > img{
+    height: 100%;
+    width: 100%;
+    top:50%;
+    object-position: 50% 0%; 
+    object-fit: cover;
+}
 h1 {
   font-family: 'Roboto', sans-serif;
 }
 .bg-standard{
-  background: rgba(43, 43, 43, 0.9);
+  background: rgb(48, 48, 48);
 }
 .container {
   /* border: 1px solid rgba(248, 249, 250,0.1);
@@ -29,7 +36,7 @@ h1 {
 
 .container-lighter{
     border: 1px solid rgba(248, 249, 250,0.1);
-    background-color: rgba(43, 43, 43, 0.9);
+    background-color: rgb(43, 43, 43);
 }
 .forumTable{
   margin-top: 20px;
@@ -39,7 +46,7 @@ h1 {
   text-align: center;
 }
 u{
-  color: #528BFF;
+  /* color: #528BFF; */
   text-decoration: underline;
   cursor: pointer;
 }
@@ -89,6 +96,13 @@ u{
 }
 
 .linkable:hover {
+  color: #EE135B;
   text-decoration: underline;
+}
 
+.nexus-button {
+  background-image: linear-gradient(#EE135B, #e91e40);
+  border: none;
+  color: #f6f6f7;
+  font-weight: bold;
 }

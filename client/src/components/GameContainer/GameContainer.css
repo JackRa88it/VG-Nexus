@@ -1,13 +1,14 @@
 .gameBox{
     height: 120px;
     width: 120px;
-    padding-top: 5px;
-
+    background:#333;
+    margin-top: 10px;
 }
 
 .gameBox > img{
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .categoryHeader{
@@ -17,16 +18,10 @@
 .gamesContainer{
     background-color: rgb(63, 63, 63);
     min-height: 100%;
-    /* width: 49%; */
-    /* width: 300px; */
-    /* float: left; */
-    /* margin: 3px 0px; */
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding-bottom: 20px;
 
-}
-.gamesContainer.fullWidth{
-    width:100% !important;
 }
