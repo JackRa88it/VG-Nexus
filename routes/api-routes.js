@@ -4,6 +4,8 @@ var formidable = require('formidable');
 const path = require('path')
 var fs = require('fs')
 var extract = require('extract-zip')
+var rimraf = require('rimraf');
+
 
 module.exports = function (app,io){
     io.on('connection',function(socket){
@@ -162,7 +164,6 @@ module.exports = function (app,io){
         db.Tag.findAll({
             include:[{
                 model:db.Game,
-                // limit: 3
             }]
         }).then((tags)=>{
             res.json(tags)
@@ -173,18 +174,20 @@ module.exports = function (app,io){
     })
 
     app.get('/api/user/favorites', (req,res)=>{
-        db.User.findOne({
-            where: {id: req.user.id},
-        }).then((user)=>{
-            user.getFavorites()
-            .then(function(fav){
-                res.json(fav)
+        if(req.user){
+            db.User.findOne({
+                where: {id: req.user.id},
+            }).then((user)=>{
+                user.getFavorites()
+                .then(function(fav){
+                    res.json(fav)
+                })
+                // res.json(user)
+            }).catch(function(err){
+                console.log(err);
+                res.json(err)
             })
-            // res.json(user)
-        }).catch(function(err){
-            console.log(err);
-            res.json(err)
-        })
+        }
     })
 
     app.get('/api/game/:id/favorites', (req,res)=>{
@@ -201,6 +204,24 @@ module.exports = function (app,io){
         })
     })
 
+    app.post('/api/delete/game/:id', function(req,res){
+        db.Game.destroy({
+            where: {id: req.params.id}
+        }).then((deletedGames) => {
+            rimraf(path.join(__dirname,'../client/public/games/' + req.params.id),()=>{
+                fs.unlink(path.join(__dirname,'../client/public/assets/gameThumbnails/' + req.params.id),(err)=>{
+                    if(err){console.log(err)};
+                    if(deletedGames >= 1){
+                        res.status(200).json({message:"Deleted succesfully"})
+                    }
+                    else{
+                        res.status(404).json({message:'record not found'})
+                    }
+                })
+                
+            })
+        })
+    })
 
     app.get('/api/games/newest', function(req,res){
         db.Game.findAll({
@@ -302,6 +323,16 @@ module.exports = function (app,io){
         }
     })
 
+    app.get('/api/games/user/:id', function(req,res){
+        //Grabs all games made by a certain user
+        db.Game.findAll({
+            where: {
+                UserId: req.params.id
+            }
+        }).then((games) => {
+            res.json(games)
+        })
+    })
 
     app.get('/api/games/random', function(req,res){
         db.Game.findAll({
@@ -528,24 +559,32 @@ module.exports = function (app,io){
         }
     })
     app.put('/api/editProfile', function(req,res){
-        // console.log(req.body.editedUser)
         if(req.user){
-            // console.log(req.body.editedUser.id)
-            // console.log(req.body.editedUser.Username)
-            // console.log(req.body.editedUser.Bio)
-            // console.log(req.body.editedUser.Banner)
-            db.User.update(
-                {
-                    username: req.body.editedUser.Username,
-                    bio: req.body.editedUser.Bio,
-                    postBanner: req.body.editedUser.Banner
-                },
-                {where: {id: req.body.editedUser.id}}
-            ).then((user) => {
-                res.send('200')
-            }).catch((err) => {
-                console.log(err);
-                res.json(err)
+            var form = new formidable.IncomingForm();
+            form.maxFileSize = Math.pow(1024, 3);
+            form.parse(req, function(err, fields, files) {
+                db.User.update(
+                    {
+                        username: fields.Username,
+                        bio: fields.Bio,
+                        postBanner: fields.Banner
+                    },
+                    {where: {id: fields.userId}}
+                ).then((user) => {
+                    var oldPath = files.Avatar.path;
+                    var newPath = path.join(__dirname, '../client/public/assets/userThumbnails/' + fields.userId )
+                    if (files.Avatar.name) {
+                        fs.rename(oldPath,newPath, function(err) {
+                            if(err) throw err
+                            res.send('200')
+                        })
+                    } else {
+                        res.send('200')
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    res.json(err)
+                })
             })
         }
     })

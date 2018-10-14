@@ -13,8 +13,14 @@ export default {
   authenticate: function(){
     return axios.get('/api/authenticate')
   },
+  deleteGame: function(gameId){
+    return axios.post('/api/delete/game/'+gameId)
+  },
   getUser: function(userId){
     return axios.get('/api/getUser/'+userId )
+  },
+  getUserGames: function(userId){
+    return axios.get('/api/games/user/'+userId)
   },
   logout: function(){
     return axios.get('/api/logout')
@@ -58,8 +64,8 @@ export default {
   editForumPost: function(editedPost) {
     return axios.put('/api/community/editForumPost/', {editedPost: editedPost})
   },
-  editUser: function(editedUser) {
-    return axios.put('/api/editProfile/', {editedUser: editedUser})
+  editProfile: function(formData) {
+    return axios.put('/api/editProfile/', formData)
   },
   newForumThread: function(newThread) {
     return axios.post('/api/community/newForumThread/', {newThread: newThread})
