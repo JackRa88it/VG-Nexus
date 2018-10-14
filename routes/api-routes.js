@@ -557,6 +557,25 @@ module.exports = function (app,io){
             })
         }
     })
+    app.get('/api/YourPosts', function(req,res){
+        // Grab all posts by userID
+        var userID = req.user.id;
+        db.Post.findAll({
+            where:{
+                UserId: userID
+            },
+            order:[
+                ['createdAt','DESC']
+            ],
+        }).then((posts) => {
+            res.json(posts)
+        }).catch(function(err) {
+            console.log(err);
+            res.json(err);
+        });
+        
+    })
+
 }
 
 
