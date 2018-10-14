@@ -209,13 +209,16 @@ module.exports = function (app,io){
             where: {id: req.params.id}
         }).then((deletedGames) => {
             rimraf(path.join(__dirname,'../client/public/games/' + req.params.id),()=>{
-                fs.unlinkSync(path.join(__dirname,'../client/public/assets/gameThumbnails/' + req.params.id))
-                if(deletedGames >= 1){
-                    res.status(200).json({message:"Deleted succesfully"})
-                }
-                else{
-                    res.status(404).json({message:'record not found'})
-                }
+                fs.unlink(path.join(__dirname,'../client/public/assets/gameThumbnails/' + req.params.id),(err)=>{
+                    if(err){console.log(err)};
+                    if(deletedGames >= 1){
+                        res.status(200).json({message:"Deleted succesfully"})
+                    }
+                    else{
+                        res.status(404).json({message:'record not found'})
+                    }
+                })
+                
             })
         })
     })
