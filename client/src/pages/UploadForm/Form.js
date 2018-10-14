@@ -63,12 +63,12 @@ class Form extends Component{
                 <h2>Prerequisites</h2>
                 <br /><br />
                 <ol>
-                    <li>Make sure the file you want to render is called index.html</li><br />
+                    <li>Make sure the file you want to render is called index.html</li><br></br>
                     <li>If you are uploading a game made in the Phaser framework append the following code block anywhere after your "game" object is defined
                         <em> This code ensures that your game canvas will resize to fit the dimensions of it's parent element </em>
                     </li>
                 </ol>
-                <pre>
+                <code><pre>
                     {`
     function resize() {
         var w = window.innerWidth;
@@ -96,7 +96,7 @@ class Form extends Component{
 
     resize()
                     `}
-                </pre>
+               </pre> </code>
 
                 <h2>Upload Files</h2>
                 Game ZIP file: <br></br>

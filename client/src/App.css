@@ -39,7 +39,7 @@ h1 {
   text-align: center;
 }
 u{
-  color: #528BFF;
+  /* color: #528BFF; */
   text-decoration: underline;
   cursor: pointer;
 }
@@ -89,6 +89,7 @@ u{
 }
 
 .linkable:hover {
+  color: #EE135B;
   text-decoration: underline;
 }
 
