@@ -142,23 +142,57 @@ module.exports = function (app,io){
     })
 
     app.post("/api/signup", function(req, res) {
-        db.User.create({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-          }).then(function(user) {
-            var random = Math.floor(Math.random()*9) + 1
-            var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
-            var userImageCopy = path.join(__dirname, '../client/public/assets/userThumbnails/' + user.id)
-            fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
-            res.redirect(307, "/api/login");
+        // db.User.findOne({
+        //     where: {username: req.body.username}
+        // }).then(function(user){
+        //     if (user){
+        //         console.log('------------------------------------')
+        //         console.log(user)
+        //         console.log('------------------------------------')
+        //         res.status(400).send({error: "username already taken"})
+        //     }
+        //     if (!user){
+                db.User.create({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password,
+                  }).then(function(user) {
+                    var random = Math.floor(Math.random()*9) + 1
+                    var userImage = path.join(__dirname, '../client/public/assets/userThumbnails/Default'+random+'.png')
+                    var userImageCopy = path.join(__dirname, '../client/public/assets/userThumbnails/' + user.id)
+                    fs.createReadStream(userImage).pipe(fs.createWriteStream(userImageCopy));
+                    res.redirect(307, "/api/login");
+        
+                }).catch(function(err) {
+                    console.log(err);
+                    res.redirect(307, "/api/login");
+                    // res.send(err);
+                });
 
-        }).catch(function(err) {
-            console.log(err);
-            res.redirect(307, "/api/login");
-            res.send(err);
-        });
+        //     }
+        // })            
     });
+
+    app.get("/api/validateUser/:name", function(req,res){
+        db.User.findOne({
+            where: {username: req.params.name}
+        }).then(function(user){
+            res.json(user)
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+    
+    app.get("/api/validateEmail/:email", function(req,res){
+        db.User.findOne({
+            where: {email: req.params.email}
+        }).then(function(user){
+            res.json(user)
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+
     
     app.get('/api/tags/games/all', (req,res)=>{
         db.Tag.findAll({
