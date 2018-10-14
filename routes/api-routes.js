@@ -642,6 +642,9 @@ function newGame(game,io) {
         socket.on('messagePost', function (msg, name, id) {
             var timestamp = moment().format('hh:mm:ssa')
             chatLogs.push({msg: msg, name: name, id: id, timestamp: timestamp})
+            if(chatLogs.length>8){
+                chatLogs.shift()
+            }
             gameRoom.emit('messagePost', msg, name, id, timestamp);
         });
         gameRoom.on('disconnect', function () {
