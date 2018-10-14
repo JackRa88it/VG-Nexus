@@ -246,6 +246,20 @@ module.exports = function (app,io){
             ],
             include:[db.Vote,db.Tag, db.User]
         }).then((games) => {
+            games.forEach((game)=>{
+                game.upVoteCount = 0
+                if(game.dataValues.Votes.length){
+                    game.dataValues.Votes.forEach((vote) => {
+                        if(vote.dataValues.upDown){
+                            game.upVoteCount++
+                        }
+                    })
+                    game.dataValues.score = game.upVoteCount/game.Votes.length
+                }
+                else{
+                    game.dataValues.score = 1
+                }
+            })
             res.json(games)
         }).catch(function(err){
             console.log(err);
