@@ -1,0 +1,14 @@
+.logsign-container,.signup {
+    background-color: rgb(48, 48, 48);
+    width: 800px;
+    margin: auto;
+    padding: 30px;
+    max-width: 80%;
+    border-radius: 5px;
+}
+/* .signup{
+    width: 70%;
+    margin: 0px auto;
+    text-align: center;
+} */
+

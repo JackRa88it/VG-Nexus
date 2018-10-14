@@ -24,11 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     bio: {
       type: DataTypes.STRING,
-    },
-    avatar: {
-      type: DataTypes.STRING,
-      defaultValue: "https://i2.wp.com/www.ahfirstaid.org/wp-content/uploads/2014/07/avatar-placeholder.png",
-      // **look into storing images**
+      defaultValue: ""
     },
     score: {
       type: DataTypes.INTEGER,
@@ -40,6 +36,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     postBanner: {
       type: DataTypes.STRING,
+      defaultValue: ""
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database

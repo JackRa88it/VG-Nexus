@@ -3,6 +3,7 @@ import { Row, Col, Container } from "../../components/Grid"
 import Login from "./Login";
 import Signup from "./Signup";
 import API from "../../utils/API";
+import "./loginSignup.css";
 
 class Login_Signup extends Component
 {
@@ -17,6 +18,7 @@ class Login_Signup extends Component
       [name]: value
     });
   };
+
   handleSwitch = event =>
   {
     const val = this.state.isLogin;
@@ -25,6 +27,7 @@ class Login_Signup extends Component
       isLogin: !val
     })
   }
+
   handleSignUpSubmit = event =>
   {
     event.preventDefault();
@@ -34,57 +37,29 @@ class Login_Signup extends Component
         email: this.state.email,
         password: this.state.password,
         username: this.state.username,
-        bio: this.state.bio,
-        postBanner: this.state.postBanner
       })
         .then(res => window.location.assign(res.data))
-        .catch(err => console.log(err)); // TODO: switch on error
+        .catch(err => {console.log(err.name); alert("That email alaready exists...")}); // TODO: switch on error
     }
   };
   render()
   {
     return (
       // THE VIEW FOR THE LOGIN / SIGNUP PAGE
-      <div className='ml-auto'>
-        <Row>
-          {this.state.isLogin ?
-            <Col size="md-6" className="col-md-offset-3">
-              <Container lighter>
-
+      <div>
+          {!this.state.isLogin ?
+              <div className="logsign-container">
                 <Signup />
-                Try loggin in <u className="mr-1" onClick={this.handleSwitch}>here</u>!
-              </Container>
-
-            </Col>
+                <div className="text-center">Need to  
+                <u className="mx-1 linkable" onClick={this.handleSwitch}>log in</u> instead?</div>
+              </div>
             :
-            <Col size="md-6">
-              <Container lighter>
+              <div className="logsign-container">
                 <Login />
-                Don't have an account? <br />You can sign up
-             <u className="mx-1" onClick={this.handleSwitch}>here</u>
-              </Container>
-
-            </Col>
-
+                <div className="text-center" >
+                 Don't have an account?  Sign up<u className="mx-1 linkable" onClick={this.handleSwitch}>here</u></div>
+              </div>
           }
-
-          {this.state.isLogin ? (<div>
-
-          </div>
-          ) :
-            <div className="linkable">
-            </div>
-
-          }
-
-
-
-
-        </Row>
-
-
-
-
 
       </div>
 

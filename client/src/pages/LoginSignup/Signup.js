@@ -10,6 +10,7 @@ class Signup extends Component{
         username: '',
         bio: '',
         postBanner: '',
+        isValid: 'false'
       };
 
     handleInputChange = event => {
@@ -20,28 +21,55 @@ class Signup extends Component{
       };
 
     handleFormSubmit = event => {
-        event.preventDefault();
         if (this.state.password && this.state.email && this.state.username) {
-            // console.log(this.state)
-          API.signup({
-            email: this.state.email,
-            password: this.state.password,
-            username: this.state.username,
-            bio: this.state.bio,
-            postBanner: this.state.postBanner
-          })
-            .then(res => window.location.assign(res.data))
-            .catch(err => console.log(err));
-        }
+            API.signup({
+                email: this.state.email,
+                password: this.state.password,
+                username: this.state.username,
+                bio: '',
+                postBanner: ''
+                }).then( (res,err) => {
+                    if(!err && res.status==200){
+                    window.location.assign(res.data)
+                    }
+                })
+            }
+        
     };
+    validateEmail = () => {
+        API.validateEmail(this.state.email)
+        .then((res,err)=>{
+            if (res.data) {
+                alert('that email is already taken')
+            }
+            if (!res.data){
+                this.handleFormSubmit()
+            }
+        })
+    }
+
+    //The order is a bit weird, but validate username is called on click and starts whole signup process
+    validateUsername = event => {
+        event.preventDefault()
+        API.validateUser(this.state.username)
+        .then((res,err)=>{
+            if (res.data) {
+                alert('that username is already taken')
+            }
+            if (!res.data){
+                this.validateEmail()
+            }
+        })
+    }
     render(){
         return(
-            <div>
+            <div className="logsign-container">
                <h2 className="display-5 mb-4">SIGN UP</h2> 
-               <div className="mb-2">
+               <div className="">
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
+                    autoComplete="off"
                     name="email"
                     placeholder="Email"
                 />
@@ -51,6 +79,7 @@ class Signup extends Component{
                     type="password"
                     name="password"
                     type="password"
+                    autoComplete="off"
                     placeholder="Password"
                 />
                 <Input
@@ -60,25 +89,10 @@ class Signup extends Component{
                     placeholder="Username"
                 />
                 </div>
-                {/* <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="bio"
-                    type="text"
-                    placeholder="Tell me about yourself"
-                />
-                <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="postBanner"
-                    type="text"
-                    placeholder="Your Banner text!"
-                />   
-                                              */}
              <div className="pt-2">
                 <FormBtn
                     disabled={!(this.state.password && this.state.email && this.state.username)}
-                    onClick={this.handleFormSubmit}>
+                    onClick={this.validateUsername}>
                     Submit
                 </FormBtn>
               </div>

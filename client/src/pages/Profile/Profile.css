@@ -1,9 +1,19 @@
-p{
-  font-size: 18px;
+p#bio{
+  font-size: 16px;
 }
 .bigger{
   font-size: 25px;
 }
 .smaller{
   font-size: 13px;
+}
+
+#profile-image-porthole {
+  width: 285px;
+  height: 285px;
+}
+
+.imgwrap{
+  width: 144px;
+  height: 144px;
 }

@@ -19,6 +19,11 @@
     text-decoration: none;
 }
 
+.avatarContainer .username:hover {
+    color: #EE135B;
+    text-decoration: underline;
+}
+
 .avatarContainer .userScore {
     position: relative;
     top: 10px;

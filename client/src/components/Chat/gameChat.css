@@ -114,19 +114,26 @@
 } */
 
 .detail-display {
+    margin: 3px;
     position: absolute;
-    height: 93%;
-    width: 99%;
+    height: 92%;
+    width: 96.35%;
     overflow: auto;
-    background-color: rgb(17,17,17);
+    background-color: rgb(73,72,69);
+    padding: 10px;
     font-size: 12px;
     left: 1px;
     top: 30px;
+    border-radius: 5px;
 }
 
 .detail {
     margin: 4px;
     margin-top: 8px;
     font-size: 16px;
+}
+
+.blue {
+    color: blue;
 }
 

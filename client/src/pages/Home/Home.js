@@ -86,23 +86,23 @@ class Home extends React.Component{
               <GameContainer games={this.state.newest} header={'Newest Games'} />
             </div>
             <div className='halfWidth'>
-              {(Authenticator.isAuthenticated ?
-                <GameContainer games={this.state.favorites} header={'Your favorites'}/> : 
+              {/* {(Authenticator.isAuthenticated ?
+                <GameContainer games={this.state.favorites} header={'Your favorites'}/> :  */}
                 <GameContainer games={this.state.random} header={'Random'} />
-              )}
+              
             </div>
           </div>
           <div className='homerow'>
             <div id='best'>
-                <div className='categoryHeader'>Top Rated Games</div>
+                <div className='categoryHeader p-1'>Top Rated Games</div>
                 {this.state.best.map((game)=>{
                   return(
                     <div className='bestBox'>
-                      <div className='bestCard'>
+                      <div className='bestCard py-2'>
                         <Link to={"/all/games/" + game.id}>
                           <img className='bestThumbnail' src={'/assets/gameThumbnails/' + game.id}></img>
                         </Link>
-                        <div className='bestCardTitle'><Link to={"/all/games/" + game.id}>{game.name}</Link></div>
+                        <div className='bestCardTitle '><Link to={"/all/games/" + game.id} className="linkable">{game.name}</Link></div>
                         <div className='bestCardTags'>
                           {game.Tags.map((tag)=>{
                             return(
@@ -110,11 +110,13 @@ class Home extends React.Component{
                             )})
                           }
                         </div>
-                        <div className='bestCardRating'>{game.rating.toFixed(3)} ({game.Votes.length} Votes)</div>
+                        <div className='bestCardRating'>{(game.score*10).toFixed(3)} ({game.Votes.length} Votes)</div>
                       </div>
                       <div className='bestInfo'>
                           <div className='bestDescription'>{game.description}</div>
-                          <div className='bestAuthor'>{game.User.username}</div>
+                          <Link to={'/profile/' + game.User.id}>
+                          <div className='bestAuthor linkable'>{game.User.username}</div>
+                          </Link>
                       </div>
                     </div>
                   )
@@ -126,7 +128,7 @@ class Home extends React.Component{
               <div className='categoryHeader'>Games by tags</div>
               {this.state.tags.map((tag)=>{
                 return(
-                  <div className = 'tagBox'>
+                  <div className = 'tagBox p-2'>
                     <div>{tag.name}</div>
                     <div className = 'tagGameBox'>
                       {tag.Games.map((game)=>{
@@ -135,7 +137,7 @@ class Home extends React.Component{
                             <div className = 'tagGame'>
                             <Link to={"/all/games/" + game.id}>
                               <img class='tagThumbnail' src={'/assets/gameThumbnails/' + game.id}></img>
-                              <div className = 'tagGameTitle'>{game.name}</div>
+                              <div className = 'tagGameTitle linkable'>{game.name}</div>
                             </Link>
                               <div className = 'tagGameRating'>{game.rating.toFixed(2)}</div>
                             </div>

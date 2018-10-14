@@ -7,14 +7,26 @@ export default {
   signup: function(userInfo) {
     return axios.post("/api/signup",userInfo);
   },
+  validateUser: function(name) {
+    return axios.get("/api/validateUser/"+name)
+  },
+  validateEmail: function(email) {
+    return axios.get("/api/validateEmail/"+email)
+  },
   joinChat: function(){
     return axios.get("/api/messages")
   },
   authenticate: function(){
     return axios.get('/api/authenticate')
   },
+  deleteGame: function(gameId){
+    return axios.post('/api/delete/game/'+gameId)
+  },
   getUser: function(userId){
     return axios.get('/api/getUser/'+userId )
+  },
+  getUserGames: function(userId){
+    return axios.get('/api/games/user/'+userId)
   },
   logout: function(){
     return axios.get('/api/logout')
@@ -30,6 +42,9 @@ export default {
   },
   getGameData: function(gameId){
     return axios.get('/api/game/' + gameId)
+  },
+  getAllGames: function(){
+    return axios.get('/api/games/all')
   },
   favoriteGame: function(gameId){
     return axios.get('/api/game/'+gameId+'/addFavorite')
@@ -58,8 +73,8 @@ export default {
   editForumPost: function(editedPost) {
     return axios.put('/api/community/editForumPost/', {editedPost: editedPost})
   },
-  editUser: function(editedUser) {
-    return axios.put('/api/editProfile/', {editedUser: editedUser})
+  editProfile: function(formData) {
+    return axios.put('/api/editProfile/', formData)
   },
   newForumThread: function(newThread) {
     return axios.post('/api/community/newForumThread/', {newThread: newThread})
@@ -78,5 +93,11 @@ export default {
   },
   getFavorites: function(){
     return axios.get('/api/user/favorites')
+  },
+  getUserPosts: function(){
+    return axios.get('/api/YourPosts')
+  },
+  isThisGameFavorited: function(gameId){
+    return axios.get('/api/game/'+gameId+'/favorites')
   }
 };

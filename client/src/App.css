@@ -11,20 +11,28 @@ body {
 .git{
   padding: 10px;
   color: #f6f6f7;
-
-  /* font-family: 'Open Sans', sans-serif; */
+}
+div.avatar > img{
+    height: 100%;
+    width: 100%;
+    top:50%;
+    object-position: 50% 0%; 
+    object-fit: cover;
 }
 h1 {
   font-family: 'Roboto', sans-serif;
 }
 .bg-standard{
-  background: rgba(43, 43, 43, 0.9);
+  background: rgb(48, 48, 48);
 }
 .container {
-  /* border: 1px solid rgba(248, 249, 250,0.1);
-  background-color: rgba(43, 43, 43, 0.9); */
   padding: 50px;
   margin: 75px auto;
+}
+
+.container-lighter{
+    border: 1px solid rgba(248, 249, 250,0.1);
+    background-color: rgb(43, 43, 43);
 }
 .forumTable{
   margin-top: 20px;
@@ -33,13 +41,17 @@ h1 {
 .App {
   text-align: center;
 }
+
 u{
-  color: #528BFF;
   text-decoration: underline;
   cursor: pointer;
 }
+
 .chatroom{
   z-index:1;
+}
+.footer{
+  z-index: 10;
 }
 .dropdown{
   margin:0px;
@@ -76,4 +88,21 @@ u{
 .lighter{
   border: 1px solid rgba(248, 249, 250,0.1);
   background-color: rgba(43, 43, 43, 0.9);
+}
+
+.linkable {
+  color: #EE135B;
+  text-decoration: none
+}
+
+.linkable:hover {
+  color: #EE135B;
+  text-decoration: underline;
+}
+
+.nexus-button {
+  background-image: linear-gradient(#EE135B, #e91e40);
+  border: none;
+  color: #f6f6f7;
+  font-weight: bold;
 }

@@ -1,6 +1,6 @@
 const React = require('react')
 
-class Upload extends React.Component {
+class ImageUpload extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -20,9 +20,10 @@ class Upload extends React.Component {
     return (
       <div>
         <input type="file" name={this.props.name} onChange={this.handleChange}/>
-        <img src={this.state.file} alt='upload-thumbnail' id='uploadThumbnail'  />
+        {this.state.file.length ? <img src={this.state.file} alt='upload-thumbnail' id='uploadThumbnail'  /> : null}
       </div>
     );
   }
 }
-module.exports = Upload
+
+export default ImageUpload;
