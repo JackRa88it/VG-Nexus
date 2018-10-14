@@ -48,29 +48,17 @@ class NavTabs extends Component {
         <ul className="nav nav-tabs navbar-collapse">
         {/* TODO: FIX BELOW */}
          
-          <li className="nav-item dropdown">
-            <button className="nav-link special" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Games
-            </button> 
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link
-                to="/all"
-                className={
-                  window.location.pathname === "/all"
-                    ? "nav-link active"
-                    : "nav-link"
-                }
-              >
-                <div className="dropdown-item" href="#">Browse</div>
-              </Link>
-              <Link to="/all" className={
+          <li className="nav-item">
+          <Link
+              to="/all"
+              className={
                 window.location.pathname === "/all"
                   ? "nav-link active"
                   : "nav-link"
-              }                                                                                                                                                        >
-                <div className="dropdown-item" href="#">Play</div>
-              </Link>
-            </div>
+              }
+            >
+              Games
+            </Link>
           </li>
 
           <li className="nav-item">
@@ -114,7 +102,7 @@ class NavTabs extends Component {
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
                     {/* your name should take you to your public profile */}
-                    <div className="dropdown-item" href="#">{this.state.username}</div>
+                    <Link className="dropdown-item" to={`/profile/${Authenticator.user.id}`}>{this.state.username}</Link>
                     <div className="dropdown-divider"></div>
                     {/* takes you to public profile, like how clicking on your name takes you there too */}
                     {/* it's there because it's more explicit than clicking on your name */}
