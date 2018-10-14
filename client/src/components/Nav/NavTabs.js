@@ -87,7 +87,7 @@ class NavTabs extends Component {
           </li>
         </ul>
         {/* user */}
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs pr-2">
           <li className="nav-item">
             {!Authenticator.isAuthenticated ? (
               <div className='d-inline-flex'>
@@ -96,11 +96,9 @@ class NavTabs extends Component {
             ) : (
                 <div className="nav-item dropdown dropdownMenu">
                   <div className="nav-link special dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {/* Img here  */}
                     <input type="image" src={"/assets/userThumbnails/" + this.state.user.id} />
                   </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    {/* You're signed in as "name here." Go on github and see how they do their github dropdown */}
                     {/* your name should take you to your public profile */}
                     <Link className="dropdown-item" to={`/profile/${Authenticator.user.id}`}>{this.state.username}</Link>
                     <div className="dropdown-divider"></div>

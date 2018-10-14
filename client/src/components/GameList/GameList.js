@@ -22,7 +22,13 @@ class GameList extends React.Component{
                                 <Link to={"/all/games/" + game.id}>
                                     <div className='gameListTitle'>{game.name}</div>
                                 </Link>
-                                {(this.props.owner ? <button className='gameListDelete' onClick={()=>{this.props.deleteHandler(game.id)}}>DELETE</button> : <div></div>)}
+                                {(this.props.owner ? (<button className='gameListDelete' onClick={()=>{
+                                    var ans = window.confirm("Are you sure you want to delete this? There's no going back...");
+                                    if(ans==true){
+                                        this.props.deleteHandler(game.id)
+                                    }}
+                                        }>DELETE</button> ): (<div></div>))
+                                    }
                             </div>
                             <div className='gameListDescription'>{game.description}</div>
                             <div className='gameListCreatedAt'>Published on {game.createdAt}</div>

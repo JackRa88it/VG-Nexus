@@ -24,6 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     bio: {
       type: DataTypes.STRING,
+      defaultValue: ""
     },
     score: {
       type: DataTypes.INTEGER,
@@ -35,6 +36,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     postBanner: {
       type: DataTypes.STRING,
+      defaultValue: ""
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database

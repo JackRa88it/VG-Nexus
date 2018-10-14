@@ -11,9 +11,9 @@ class GameContainer extends React.Component{
                 {this.props.games.map((game)=>{
                 return(
                     <Link to={"/all/games/" + game.id}>
-                        <div className='gameBox'>
-                        <img src={'/assets/gameThumbnails/' + game.id}></img>
-                        </div>
+                          <div className='gameBox'>
+                            <img src={'/assets/gameThumbnails/' + game.id}></img>
+                          </div>
                     </Link>
                 )
                 })}

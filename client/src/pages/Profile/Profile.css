@@ -1,5 +1,5 @@
 p#bio{
-  font-size: 18px;
+  font-size: 16px;
 }
 .bigger{
   font-size: 25px;
@@ -9,6 +9,11 @@ p#bio{
 }
 
 #profile-image-porthole {
-  width: 316px;
-  height: 316px;
+  width: 285px;
+  height: 285px;
+}
+
+.imgwrap{
+  width: 144px;
+  height: 144px;
 }

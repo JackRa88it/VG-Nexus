@@ -19,3 +19,6 @@
   display: flex;
   align-items: center;
 }
+textarea{
+  padding: 12px;
+}

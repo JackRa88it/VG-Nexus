@@ -23,25 +23,30 @@ class Signup extends Component{
         event.preventDefault();
         if (this.state.password && this.state.email && this.state.username) {
             // console.log(this.state)
-          API.signup({
-            email: this.state.email,
-            password: this.state.password,
-            username: this.state.username,
-            bio: this.state.bio,
-            postBanner: this.state.postBanner
-          })
-            .then(res => window.location.assign(res.data))
-            .catch(err => console.log(err));
-        }
+            API.signup({
+                email: this.state.email,
+                password: this.state.password,
+                username: this.state.username,
+                bio: '',
+                postBanner: ''
+                }).then( (res,err) => {
+                    if(!err && res.status==200){
+                    window.location.assign(res.data)
+                    }
+                    else{ alert('email already taken')}
+                })
+            }
+        
     };
     render(){
         return(
-            <div>
+            <div className="logsign-container">
                <h2 className="display-5 mb-4">SIGN UP</h2> 
-               <div className="mb-2">
+               <div className="">
                 <Input
                     value={this.state.title}
                     onChange={this.handleInputChange}
+                    autoComplete="off"
                     name="email"
                     placeholder="Email"
                 />
@@ -51,6 +56,7 @@ class Signup extends Component{
                     type="password"
                     name="password"
                     type="password"
+                    autoComplete="off"
                     placeholder="Password"
                 />
                 <Input
