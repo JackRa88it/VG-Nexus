@@ -11,7 +11,7 @@ class Tabs extends Component {
         return (
             <div>
                 <nav className="p-0 mb-3 navbar-expand-lg w-100">
-                    <h1>NEXUS</h1>
+                    <h1>USER NEXUS</h1>
                     <ul className="nav nav-tabs navbar-collapse">
                         <li className="nav-item">
                             <div
@@ -21,10 +21,10 @@ class Tabs extends Component {
                                         : "nav-link"
                                 }
                                 name = "location"
-                                value = "Edit Profile"
+                                value = "EditProfile"
                                 onClick={this.props.handleTabClick}
                             >
-                                Customize Profile
+                                Edit Profile
                         </div>
                         </li>
                         <li className="nav-item">
@@ -35,7 +35,7 @@ class Tabs extends Component {
                                     : "nav-link"
                             }
                                 name = "location"
-                                value = "Game"
+                                value = "Games"
                                 onClick={this.props.handleTabClick}>
                                 Your Games
                             </div>

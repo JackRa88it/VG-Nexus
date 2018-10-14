@@ -17,11 +17,18 @@ class UserNexus extends React.Component {
   };
 
   componentDidMount() {
-
     Authenticator.authenticate(() => {
-      this.setState({
-        location: this.props.match.params.location,
-      })
+      this.getUserGames();
+      if(this.props.match.params.location) {
+        this.setState({
+          location: this.props.match.params.location,
+        })
+      }
+      else {
+        this.setState({
+          location: "EditProfile"
+        })
+      }
     })
   }
 
@@ -45,7 +52,7 @@ class UserNexus extends React.Component {
     this.setState({
       [name]: value
     })
-    if(value == 'Game'){
+    if(value == 'Games'){
       this.getUserGames();
     }
   };
@@ -59,7 +66,7 @@ class UserNexus extends React.Component {
         </div>
       )
     }
-    else if (this.state.location === "Game") {
+    else if (this.state.location === "Games") {
       return (
         <div>
           <Tabs handleTabClick={this.handleTabClick} />
