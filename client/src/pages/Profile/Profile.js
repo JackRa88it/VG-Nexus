@@ -22,9 +22,6 @@ class Profile extends Component
 
       // userID won't change
       const userId = this.props.match.params.id;
-      console.log('LOGGING PROPS=================')
-      console.log(this.props.match.params.id)
-      console.log('============================')
       API.getUser(userId)
         .then(user =>
         {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import Tabs from "../../components/UserNexus/Tabs"
 import Posts from "../../components/UserNexus/Posts"
 import { Input, TextArea, FormBtn } from "../../components/Form";
@@ -32,6 +33,14 @@ class UserNexus extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+    if(this.props.match.params.location != this.state.location) {
+      this.setState({
+        location: this.props.match.params.location,
+      })
+    }
+  }
+
   deleteHandler = (gameId) => {
     API.deleteGame(gameId)
     .then((res)=>{
@@ -61,7 +70,9 @@ class UserNexus extends React.Component {
     if (this.state.location === "EditProfile") {
       return (
         <div>
+          <h1>USER NEXUS</h1>
           <Tabs handleTabClick={this.handleTabClick} />
+          <h3>Edit Profile</h3>
           <EditProfile />
         </div>
       )
@@ -69,17 +80,19 @@ class UserNexus extends React.Component {
     else if (this.state.location === "Games") {
       return (
         <div>
+          <h1>USER NEXUS</h1>
           <Tabs handleTabClick={this.handleTabClick} />
-          <h1>Game</h1>
-          <GameList games = {this.state.Games} owner={true} deleteHandler={this.deleteHandler}/>
+          <h3>Games</h3>
+          <GameList games={this.state.Games} owner={true} deleteHandler={this.deleteHandler}/>
         </div>
       )
     }
     else if (this.state.location === "Posts") {
       return (
         <div>
+          <h1>USER NEXUS</h1>
           <Tabs handleTabClick={this.handleTabClick} />
-          <h1>Posts</h1>
+          <h3>Posts</h3>
           <Posts/>
         </div>
       )

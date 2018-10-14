@@ -109,13 +109,13 @@ class NavTabs extends Component {
                     <Link className="dropdown-item" to={`/profile/${Authenticator.user.id}`}>View Profile</Link>
                     <div className="dropdown-divider"></div>
                     {/* Your ... is where you can edit your stuff. Each one takes you to the same page. */}
-                    {/* Your Games */}
-                    <Link className="dropdown-item" to="/UserNexus">Your Games</Link>
                     {/* Your Profile */}
-                    <Link className="dropdown-item" to="/UserNexus">Your Profile</Link>
+                    <Link className="dropdown-item" to="/UserNexus/EditProfile">Edit Profile</Link>
+                    {/* Your Games */}
+                    <Link className="dropdown-item" to="/UserNexus/Games">Your Games</Link>
                     {/* Your Posts */}
                     {/* If you click "Your Posts," you go to that tab on that page */}
-                    <Link className="dropdown-item" to="/UserNexus">Your Posts</Link>
+                    <Link className="dropdown-item" to="/UserNexus/Posts">Your Posts</Link>
                     <div className="dropdown-divider"></div>
                     <Link className="dropdown-item" to="/about">
                       Help

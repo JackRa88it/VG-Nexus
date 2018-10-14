@@ -59,7 +59,6 @@ class EditProfile extends React.Component {
     return (
       <div>
         <form encType="multipart/form-data" id="editProfileForm" onSubmit={this.handleSubmitEditProfile}>
-          <h3>Edit Profile</h3>
           <hr />
           <p>avatar image:</p>
           <div id="formAvatarContainer">
