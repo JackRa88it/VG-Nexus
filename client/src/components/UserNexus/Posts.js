@@ -4,16 +4,16 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import Authenticator from '../../utils/Authenticator';
 import UserPostRow from "./UserPostRow";
+
 class Posts extends Component {
     state = {
         posts: [],
         threadId: ''
       };
-      componentDidMount()
-    { 
 
-      
-      API.getUserPosts()
+      componentDidMount(){ 
+        Authenticator.authenticate()
+        API.getUserPosts()
         .then(Posts =>
         {
           // console.log(user);
@@ -26,7 +26,7 @@ class Posts extends Component {
         {
           console.log(err)
         })
-    }
+      }
     render() {
         // console.log(this.props)
         return (

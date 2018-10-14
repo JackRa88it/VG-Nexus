@@ -8,50 +8,52 @@ class Tabs extends Component {
 
     render() {
         // console.log(this.props)
+        // onClick={this.props.handleTabClick}
         return (
             <div>
                 <nav className="p-0 mb-3 navbar-expand-lg w-100">
-                    <h1>NEXUS</h1>
                     <ul className="nav nav-tabs navbar-collapse">
                         <li className="nav-item">
-                            <div
+                            <Link
                                 className={
                                     window.location.pathname === "/#"
                                         ? "nav-link active"
                                         : "nav-link"
                                 }
+                                to = "/UserNexus/EditProfile"
                                 name = "location"
-                                value = "Edit Profile"
-                                onClick={this.props.handleTabClick}
+                                value = "EditProfile"
                             >
-                                Customize Profile
-                        </div>
+                                Edit Profile
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <div 
+                            <Link 
                                 className={
                                 window.location.pathname === "/#"
                                     ? "nav-link active"
                                     : "nav-link"
-                            }
+                                }
+                                to = "/UserNexus/Games"
                                 name = "location"
-                                value = "Game"
-                                onClick={this.props.handleTabClick}>
+                                value = "Games"
+                            >
                                 Your Games
-                            </div>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <div 
+                            <Link 
                                 className={
                                 window.location.pathname === "#"
                                     ? "nav-link active"
                                     : "nav-link"
-                            }
+                                }
+                                to = "/UserNexus/Posts"
                                 name = "location"
                                 value = "Posts"
-                                onClick={this.props.handleTabClick}>
+                            >
                                 Your Posts
-                            </div>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

@@ -588,6 +588,7 @@ module.exports = function (app,io){
             })
         }
     })
+
     app.get('/api/YourPosts', function(req,res){
         // Grab all posts by userID
         var userID = req.user.id;
@@ -603,8 +604,7 @@ module.exports = function (app,io){
         }).catch(function(err) {
             console.log(err);
             res.json(err);
-        });
-        
+        }); 
     })
 
 }

@@ -22,7 +22,6 @@ class Profile extends Component
 
       // userID won't change
       const userId = this.props.match.params.id;
-
       API.getUser(userId)
         .then(user =>
         {
@@ -55,6 +54,8 @@ class Profile extends Component
         console.log(err)
       })
   }
+  
+  // className="float-right py-4"
   render()
   {
     return (
@@ -62,23 +63,21 @@ class Profile extends Component
           <div>
             <Row>
               <Col size="md-4">
-
                <Row> 
-                  <div className='media my-4'>
-                    <div class="align-self-center imgwrap avatar mr-3">
-                        <img className="bg-light border mr-3 " src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
+                  <div className='d-inline-block'>
+                    <div>
+                      <img id="profile-image-porthole" className="bg-light rounded-circle p-2 mr-3" src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
                     </div>
-                    <div className="pt-4 media-body px-4 ml-2">
-                      <span className="bigger">{this.state.username}</span>
-                      <div className='smaller'>Joined: {moment(this.state.createdAt).fromNow()}</div>
-                    </div>
-                  
                  </div>
                 </Row>
               </Col>
-              <Col size="md-7" off>
+              <Col size="md-7">
                 <div className="mx-1 mt-4">
-                  About<hr className='bg-white' />
+                  <div>
+                    <span className="bigger">{this.state.username}</span>
+                    <div className='smaller'>Joined: {moment(this.state.createdAt).fromNow()}</div>
+                  </div>
+                  <hr className='bg-white' />
                   <p id='bio' className="">
                     {this.state.bio}
                   </p>
@@ -86,6 +85,8 @@ class Profile extends Component
                 </div>
               </Col>
             </Row>
+            <br></br>
+            <br></br>
             <Row>
               <div className="mx-auto h-10 mt-4">
                 <GameContainer games={this.state.random} header={'User Uploads'} className="fullWidth p-5" />
