@@ -1,0 +1,38 @@
+saturday TODO
+
+NAVBAR:
+
+[ ] upper right 
+[ ] logout button does not take you anywhere
+[ ] sign in page should default to login, and be centered, and make link colors red
+[ ] remove/fix dead links in upper right dropdown
+
+HOME:
+
+[ ] featured needs a banner made in illustrator
+[ ] delete favorites div, extend newest games into a 100% width row
+[ ] make links red
+[ ] username links should have data-id of UserId, and navigate to /profile/:id
+
+GAMES:
+
+[ ] delete games dropdown for now
+[ ] make games list page for all games
+
+UPLOAD:
+
+[ ] add grey background to container
+[ ] use standard red for button colors
+
+COMMUNITY:
+
+[ ] add grey background to container
+
+USER PROFILE:
+[ ] fix empty links
+[ ] fix form to autofill existing values
+[ ] fix avatar selection button
+[ ] fix banner (turn into text)
+ 
+GENERAL:
+[ ] user avatars--upload image

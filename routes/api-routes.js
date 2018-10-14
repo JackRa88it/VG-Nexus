@@ -559,24 +559,32 @@ module.exports = function (app,io){
         }
     })
     app.put('/api/editProfile', function(req,res){
-        // console.log(req.body.editedUser)
         if(req.user){
-            // console.log(req.body.editedUser.id)
-            // console.log(req.body.editedUser.Username)
-            // console.log(req.body.editedUser.Bio)
-            // console.log(req.body.editedUser.Banner)
-            db.User.update(
-                {
-                    username: req.body.editedUser.Username,
-                    bio: req.body.editedUser.Bio,
-                    postBanner: req.body.editedUser.Banner
-                },
-                {where: {id: req.body.editedUser.id}}
-            ).then((user) => {
-                res.send('200')
-            }).catch((err) => {
-                console.log(err);
-                res.json(err)
+            var form = new formidable.IncomingForm();
+            form.maxFileSize = Math.pow(1024, 3);
+            form.parse(req, function(err, fields, files) {
+                db.User.update(
+                    {
+                        username: fields.Username,
+                        bio: fields.Bio,
+                        postBanner: fields.Banner
+                    },
+                    {where: {id: fields.userId}}
+                ).then((user) => {
+                    var oldPath = files.Avatar.path;
+                    var newPath = path.join(__dirname, '../client/public/assets/userThumbnails/' + fields.userId )
+                    if (files.Avatar.name) {
+                        fs.rename(oldPath,newPath, function(err) {
+                            if(err) throw err
+                            res.send('200')
+                        })
+                    } else {
+                        res.send('200')
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    res.json(err)
+                })
             })
         }
     })
