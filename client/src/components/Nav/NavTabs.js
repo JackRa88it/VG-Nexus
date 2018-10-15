@@ -119,10 +119,6 @@ class NavTabs extends Component {
                       Help
                     <i className="far fa-question-circle"></i>
                     </Link>
-                    <div className="dropdown-item" href="#">
-                      Settings
-                  <i className="fas fa-wrench"></i>
-                    </div>
                     {/* Log out button */}
                     <Link
                       to="/logout"
