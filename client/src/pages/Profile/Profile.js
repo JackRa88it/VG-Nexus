@@ -65,7 +65,7 @@ class Profile extends Component
               <Col size="md-4">
                <Row> 
                   <div className='d-inline-block'>
-                    <div>
+                    <div className="avatar">
                       <img id="profile-image-porthole" className="bg-light rounded-circle p-2 mr-3" src={`/assets/userThumbnails/${this.state.id}`} alt={`pic-${this.state.id}`} />
                     </div>
                  </div>
@@ -85,6 +85,9 @@ class Profile extends Component
                 </div>
               </Col>
             </Row>
+            <br></br>
+            <br></br>
+            <br></br>
             <br></br>
             <br></br>
             <Row>

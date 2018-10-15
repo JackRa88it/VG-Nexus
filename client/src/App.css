@@ -12,6 +12,12 @@ body {
   padding: 10px;
   color: #f6f6f7;
 }
+
+div.avatar {
+  width: 140px;
+  height: 140px;
+}
+
 div.avatar > img{
     height: 100%;
     width: 100%;
