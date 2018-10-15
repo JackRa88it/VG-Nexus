@@ -17,16 +17,6 @@ INSERT INTO Tags (name,  createdAt, updatedAt) VALUES
 ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-<<<<<<< HEAD
-
--- INSERT INTO tags (name,  createdAt, updatedAt) VALUES
--- ("Action", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ("Arcade", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ("Shooter", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
--- ("Role Playing", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-=======
->>>>>>> f399102dce19dee8091394b2ba0a92a89a632b57
-
 
 INSERT INTO Forums (title, description, createdAt, updatedAt) VALUES
 ("General", "The place to discuss anything and everything about this site", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
