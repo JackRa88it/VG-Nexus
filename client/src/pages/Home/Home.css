@@ -1,10 +1,10 @@
 .homerow{
     width: 100%;
     padding: 10px;
-    /* background-color: rgba(206, 28, 87, 0.796); */
-    background-image: linear-gradient(#EE135B, #e91e40);
+    background-color: #EE135B;
+    /* background-image: linear-gradient(#EE135B, #e91e40); */
     overflow: auto;
-    margin: 10px 0px;
+    margin: 10px 0px 20px 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -20,6 +20,11 @@
     height: 300px;
     width: 100%;
 }
+
+#featured img {
+    height: 100%;
+}
+
 #best{
     background-color: rgb(63, 63, 63);
     width: 100%;
@@ -112,10 +117,14 @@
 }
 
 
-.bestAuthor{
+.bestAuthor a{
     float: right;
+    color: #f6f6f7;
+    /* margin-left: auto; */
 }
-
+Link{
+    color: transparent;
+}
 .randomBox > img{
     height: 100%;
     width: 100%;
