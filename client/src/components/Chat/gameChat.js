@@ -83,12 +83,12 @@ class Chatroom extends Component{
         this.setState({messages: []})
         this.connect(nextProps.gameId)
     }
-    componentDidUpdate = ()=>{
-        this.scrollToBottom()
-    }
-    scrollToBottom = () => {
-        this.messagesEnd.current.scrollIntoView({ behavior:'smooth'})
-    }
+    // componentDidUpdate = ()=>{
+    //     this.scrollToBottom()
+    // }
+    // scrollToBottom = () => {
+    //     this.messagesEnd.current.scrollIntoView({ behavior:'smooth'})
+    // }
     connect(gameId) {
         if (this.socket){
             this.socket.disconnect();
