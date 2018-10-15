@@ -15,7 +15,7 @@ class Profile extends Component
     username: "",
     createdAt: undefined,
     bio: "",
-    random: [], // TODO: this shouldn't be random, it should be their uploads
+    games: [], // TODO: this shouldn't be random, it should be their uploads
   }
   componentDidMount()
   {
@@ -40,14 +40,15 @@ class Profile extends Component
           console.log(err)
         })
  
-    this.getRandom();
+    this.getGames(userId);
   }
-  getRandom()
+
+  getGames(userId)
   {
-    API.getRandom()
+    API.getUserGames(userId)
       .then((res) =>
       {
-        this.setState({ random: res.data })
+        this.setState({ games: res.data })
       })
       .catch((err) =>
       {
@@ -92,7 +93,7 @@ class Profile extends Component
             <br></br>
             <Row>
               <div className="mx-auto h-10 mt-4">
-                <GameContainer games={this.state.random} header={'User Uploads'} className="fullWidth p-5" />
+                <GameContainer games={this.state.games} header={'User Uploads'} className="fullWidth p-5" />
               </div>
             </Row>
         </div>
