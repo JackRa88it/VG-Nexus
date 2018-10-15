@@ -1,9 +1,9 @@
-.avatarContainer .avatarImage {
+/* .avatarContainer .avatarImage {
     height: 120px;
     width: 140px;
     outline: solid;
     outline-color: #171717
-}
+} */
 
 .avatarContainer {
     height: 220px;
@@ -12,6 +12,11 @@
     outline-color: #171717;
     background-color: #171717;
 }
+
+.avatarContainer div.avatar {
+    width: 140px;
+    height: 140px;
+  }
 
 .avatarContainer .username {
     margin: 5px;
@@ -26,14 +31,14 @@
 
 .avatarContainer .userScore {
     position: relative;
-    top: 10px;
+    /* top: 10px; */
     margin: 5px;
     font-size: 12px;
 }
 
 .avatarContainer .createdAt {
     position: relative;
-    top: 15px;
+    /* top: 15px; */
     margin: 5px;
     margin-bottom: 3px;
     font-size: 12px;
