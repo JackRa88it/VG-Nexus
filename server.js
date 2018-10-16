@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 3001;
 const routes = require("express").Router();
+const path = require('path')
 
 // var passport = require("./config/passport");
 // var db = require("./models");
@@ -37,9 +38,9 @@ else{
 app.use(routes)
 // Start the API server
 
-// router.use('/', function(req, res) {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
+router.use('/', function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
 
 
 // db.sequelize.sync().then(function(){
