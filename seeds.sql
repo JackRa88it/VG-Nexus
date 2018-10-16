@@ -1,5 +1,5 @@
 -- USE VG_Nexus_db;
-USE q1u9gnricx1xg22v;
+USE VGNexus;
 
 -- INSERT INTO Users (username, email, password, postBanner, bio, createdAt, updatedAt) VALUES
 -- ("holfman", "haffedmcnair@test.com", "test", "pretty picture", "just a fake dude", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),

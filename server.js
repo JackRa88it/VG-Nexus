@@ -12,9 +12,7 @@ require('dotenv').config()
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-
-
-
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // Define middleware here
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,7 +20,15 @@ app.use(bodyParser.json());
 // Serve up static assets (usually on heroku)
 
 
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(session(
+  { secret: "keyboard cat", 
+    resave: false,
+    saveUninitialized: true ,
+    store: new SequelizeStore({
+      db: db.sequelize
+    }),
+  }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
