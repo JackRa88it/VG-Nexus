@@ -50,7 +50,7 @@ router.use('/', function(req, res) {
 
 
 db.sequelize.sync().then(function(){
-    app.listen(PORT, function() {
+    http.listen(PORT, function() {
         console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
       });
 })
