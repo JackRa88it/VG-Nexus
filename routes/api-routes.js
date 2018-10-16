@@ -6,9 +6,9 @@ var fs = require('fs')
 var extract = require('extract-zip')
 var rimraf = require('rimraf');
 var moment = require("moment");
+const router = require("express").Router();
 
-
-module.exports = function (app,io){
+module.exports = function (io){
     io.on('connection',function(socket){
         console.log('a user connected to /');        
         socket.on('disconnect', function(){
@@ -22,9 +22,13 @@ module.exports = function (app,io){
             }  
         })
     
+    router.route('/test')
+        .get((req,res) =>{
+            console.log('testing!')
+            res.json({this: 'test'})
+        })
 
-
-    app.post('/upload',function(req,res){
+    router.post('/upload',function(req,res){
         if(req.user){
             //Initialize an empty form
             var form = new formidable.IncomingForm()
@@ -97,7 +101,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/authenticate',function(req,res){
+    router.get('/api/authenticate',function(req,res){
         if(req.user){
             console.log("user authenticated")
             res.send(req.user);
@@ -109,7 +113,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/getUser/:id', function(req,res){
+    router.get('/api/getUser/:id', function(req,res){
         let userId= req.params.id
         db.User.findOne({
             where: {id: userId}
@@ -120,16 +124,16 @@ module.exports = function (app,io){
         })
     })
 
-    app.post("/api/login",passport.authenticate("local"),  function(req, res) {
+    router.post("/api/login",passport.authenticate("local"),  function(req, res) {
         res.send('/');
     });
 
-    app.get("/api/logout", function(req, res) {
+    router.get("/api/logout", function(req, res) {
         req.logout();
         res.send('/')
     });
 
-    app.post('/api/upload/userimage',function(req,res){
+    router.post('/api/upload/userimage',function(req,res){
         if(req.user){
             var form = new formidable.IncomingForm()
             form.parse(req,function(err,fields,files){
@@ -143,7 +147,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.post("/api/signup", function(req, res) {
+    router.post("/api/signup", function(req, res) {
         // db.User.findOne({
         //     where: {username: req.body.username}
         // }).then(function(user){
@@ -175,7 +179,7 @@ module.exports = function (app,io){
         // })            
     });
 
-    app.get("/api/validateUser/:name", function(req,res){
+    router.get("/api/validateUser/:name", function(req,res){
         db.User.findOne({
             where: {username: req.params.name}
         }).then(function(user){
@@ -185,7 +189,7 @@ module.exports = function (app,io){
         })
     })
     
-    app.get("/api/validateEmail/:email", function(req,res){
+    router.get("/api/validateEmail/:email", function(req,res){
         db.User.findOne({
             where: {email: req.params.email}
         }).then(function(user){
@@ -196,7 +200,7 @@ module.exports = function (app,io){
     })
 
     
-    app.get('/api/tags/games/all', (req,res)=>{
+    router.get('/api/tags/games/all', (req,res)=>{
         db.Tag.findAll({
             include:[{
                 model:db.Game,
@@ -209,7 +213,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.get('/api/user/favorites', (req,res)=>{
+    router.get('/api/user/favorites', (req,res)=>{
         if(req.user){
             db.User.findOne({
                 where: {id: req.user.id},
@@ -226,7 +230,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/games/all', (req,res)=>{
+    router.get('/api/games/all', (req,res)=>{
         db.Game.findAll({
         })
         .then((games)=>{
@@ -234,7 +238,7 @@ module.exports = function (app,io){
         })
     });
 
-    app.get('/api/game/:id/favorites', (req,res)=>{
+    router.get('/api/game/:id/favorites', (req,res)=>{
         db.Game.findOne({
             where: {id: req.params.id},
         }).then((game)=>{
@@ -248,7 +252,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.post('/api/delete/game/:id', function(req,res){
+    router.post('/api/delete/game/:id', function(req,res){
         db.Game.destroy({
             where: {id: req.params.id}
         }).then((deletedGames) => {
@@ -267,7 +271,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.get('/api/games/newest', function(req,res){
+    router.get('/api/games/newest', function(req,res){
         db.Game.findAll({
             limit: 8,
             order:[
@@ -282,7 +286,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.get('/api/games/best', function(req,res){
+    router.get('/api/games/best', function(req,res){
         db.Game.findAll({
             limit: 4,
             order:[
@@ -311,7 +315,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.post('/api/game/:id/post/', function(req,res){
+    router.post('/api/game/:id/post/', function(req,res){
         //Create a comment and associate it with gameId :id
         if(req.user){
             db.Post.create({
@@ -328,7 +332,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/post/:id/vote/',function(req,res){
+    router.get('/api/post/:id/vote/',function(req,res){
         //This route returns the number of upvotes and downvotes on a post
         db.sequelize.query("SELECT upDown,count(upDown) as counts FROM votes WHERE PostId = "+req.params.id+" group by upDown", { type: db.sequelize.QueryTypes.SELECT
         }).then((voteCounts) => {
@@ -365,7 +369,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.post('/api/post/:id/vote/',function(req,res){
+    router.post('/api/post/:id/vote/',function(req,res){
         //Post a vote to the database
         if(req.user){
             db.Vote.upsert({
@@ -381,7 +385,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/games/user/:id', function(req,res){
+    router.get('/api/games/user/:id', function(req,res){
         //Grabs all games made by a certain user
         db.Game.findAll({
             where: {
@@ -392,7 +396,7 @@ module.exports = function (app,io){
         })
     })
 
-    app.get('/api/games/random', function(req,res){
+    router.get('/api/games/random', function(req,res){
         db.Game.findAll({
             order: [ [ db.sequelize.fn('RAND') ] ],
             limit: 8
@@ -402,7 +406,7 @@ module.exports = function (app,io){
     })
 
 
-    app.post('/api/game/:id/vote', function(req,res){
+    router.post('/api/game/:id/vote', function(req,res){
         if(req.user){
             db.Vote.upsert({
                 upDown: req.body.vote,
@@ -418,7 +422,7 @@ module.exports = function (app,io){
     })
 
 
-    app.get('/api/game/:id', function(req,res){
+    router.get('/api/game/:id', function(req,res){
         //Grab game data with :id
         db.Game.findOne({
             where:{
@@ -452,7 +456,7 @@ module.exports = function (app,io){
         });
     })
 
-    app.get('/api/game/:id/addFavorite', function(req,res){
+    router.get('/api/game/:id/addFavorite', function(req,res){
         db.User.findOne({
             where: {id: req.user.id},
         }).then(function(user){
@@ -462,7 +466,7 @@ module.exports = function (app,io){
     })
 
 
-    app.get('/api/game/:id/post/', function(req,res){
+    router.get('/api/game/:id/post/', function(req,res){
         // Grab all posts from game :id
         db.Post.findAll({
             where:{
@@ -502,7 +506,7 @@ module.exports = function (app,io){
 
 
 
-    app.get('/api/messages/', function(req,res){
+    router.get('/api/messages/', function(req,res){
         //Create a channel
         const chatRoom = io.of('/'+req.user.id)
         chatRoom.on('connection',function(socket){
@@ -517,7 +521,7 @@ module.exports = function (app,io){
         res.send(Object.keys(io.nsps))
     })
 
-    app.get('/api/forumList', function(req,res) {
+    router.get('/api/forumList', function(req,res) {
         // get list of forums for community main page
         db.Forum.findAll({
             include: [{
@@ -533,7 +537,7 @@ module.exports = function (app,io){
         });
     })
 
-    app.get('/api/threadList/:id', function(req,res) {
+    router.get('/api/threadList/:id', function(req,res) {
         //get list of threads to populate forum page
         var forumId = req.params.id;
         db.Thread.findAll({
@@ -551,7 +555,7 @@ module.exports = function (app,io){
         });
     })
 
-    app.get('/api/postList/:id', function(req,res) {
+    router.get('/api/postList/:id', function(req,res) {
         //get list of posts to populate thread page
         var threadId = req.params.id;
         db.Post.findAll({
@@ -569,7 +573,7 @@ module.exports = function (app,io){
         });
     })
 
-    app.post('/api/community/newForumPost', function(req,res){
+    router.post('/api/community/newForumPost', function(req,res){
         //create new forum post in the database
         if(req.user){
             db.Post.create({
@@ -585,7 +589,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.put('/api/community/editForumPost', function(req,res){
+    router.put('/api/community/editForumPost', function(req,res){
         //update forum post in the database
         if(req.user){
             db.Post.update(
@@ -601,7 +605,7 @@ module.exports = function (app,io){
     })
 
     
-    app.post('/api/community/newForumThread', function(req,res){
+    router.post('/api/community/newForumThread', function(req,res){
         //create new forum thread in the database
         if(req.user){
             db.Thread.create({
@@ -616,7 +620,7 @@ module.exports = function (app,io){
             })
         }
     })
-    app.put('/api/editProfile', function(req,res){
+    router.put('/api/editProfile', function(req,res){
         if(req.user){
             var form = new formidable.IncomingForm();
             form.maxFileSize = Math.pow(1024, 3);
@@ -647,7 +651,7 @@ module.exports = function (app,io){
         }
     })
 
-    app.get('/api/YourPosts', function(req,res){
+    router.get('/api/YourPosts', function(req,res){
         // Grab all posts by userID
         var userID = req.user.id;
         db.Post.findAll({
@@ -664,7 +668,7 @@ module.exports = function (app,io){
             res.json(err);
         }); 
     })
-
+    return router
 }
 
 
