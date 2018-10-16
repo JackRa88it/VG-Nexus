@@ -5,9 +5,9 @@ const PORT = process.env.PORT || 3001;
 const routes = require("express").Router();
 const path = require('path')
 
-// var passport = require("./config/passport");
-// var db = require("./models");
-// var session = require("express-session");
+var passport = require("./config/passport");
+var db = require("./models");
+var session = require("express-session");
 require('dotenv').config()
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -22,9 +22,9 @@ app.use(bodyParser.json());
 // Serve up static assets (usually on heroku)
 
 
-// app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 const router = require("./routes/api-routes.js")(io)
@@ -43,9 +43,9 @@ router.use('/', function(req, res) {
 });
 
 
-// db.sequelize.sync().then(function(){
+db.sequelize.sync().then(function(){
     app.listen(PORT, function() {
         console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
       });
-// })
+})
 
