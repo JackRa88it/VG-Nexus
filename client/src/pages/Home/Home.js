@@ -114,13 +114,15 @@ class Home extends React.Component{
                             )})
                           }
                         </div>
-                        <div className='bestCardRating'>{(game.score*10).toFixed(3)} ({game.Votes.length} Votes)</div>
+                        <div className='bestCardRating'>{(game.rating*10).toFixed(3)} ({game.Votes.length} Votes)</div>
                       </div>
                       <div className='bestInfo'>
                           <div className='bestDescription'>{game.description}</div>
-                          <Link to={'/profile/' + game.User.id}>
-                          <div className='bestAuthor linkable'>{game.User.username}</div>
-                          </Link>
+                          <div className='bestAuthor linkable'>
+                                <Link to={'/profile/' + game.User.id}>
+                                    {game.User.username}
+                                </Link>
+                         </div>
                       </div>
                     </div>
                   )
@@ -143,7 +145,7 @@ class Home extends React.Component{
                               <img class='tagThumbnail' src={'/assets/gameThumbnails/' + game.id}></img>
                               <div className = 'tagGameTitle linkable'>{game.name}</div>
                             </Link>
-                              <div className = 'tagGameRating'>{game.rating.toFixed(2)}</div>
+                              <div className = 'tagGameRating'>{(game.rating*10).toFixed(2)}</div>
                             </div>
                           
                         )

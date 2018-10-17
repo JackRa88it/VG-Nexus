@@ -24,6 +24,7 @@ body {
   padding: 10px;
   color: #f6f6f7;
 }
+
 div.avatar > img{
     height: 100%;
     width: 100%;
@@ -118,11 +119,11 @@ u{
 
 .linkable {
   color: #EE135B;
-  text-decoration: none
+  text-decoration: none;
 }
 
-.linkable:hover {
-  color: #EE135B;
+.linkable:hover, .linkable:hover > a {
+  color: #EE135B !important;
   text-decoration: underline;
 }
 
