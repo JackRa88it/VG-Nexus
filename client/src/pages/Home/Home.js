@@ -79,7 +79,7 @@ class Home extends React.Component{
           <div className='homerow'>
             <div className='categoryHeader'>Featured</div>
             <div id='featured'>
-              <Link to="/all/games/1">
+              <Link to="/all/games/14">
                 <img src={'/assets/ABYSS_banner_1.png'}></img>
               </Link>
             </div>
