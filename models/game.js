@@ -17,8 +17,8 @@ module.exports = function(sequelize, DataTypes) {
         
       // },
       rating: {
-        type: DataTypes.INTEGER,
-        defaultValue: 10,
+        type: DataTypes.FLOAT(10,6),
+        defaultValue: 0,
       }
     });
 
