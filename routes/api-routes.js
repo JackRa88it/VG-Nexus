@@ -289,20 +289,6 @@ module.exports = function (app,io){
             ],
             include:[db.Vote,db.Tag, db.User]
         }).then((games) => {
-            games.forEach((game)=>{
-                game.upVoteCount = 0
-                if(game.dataValues.Votes.length){
-                    game.dataValues.Votes.forEach((vote) => {
-                        if(vote.dataValues.upDown){
-                            game.upVoteCount++
-                        }
-                    })
-                    game.dataValues.score = game.upVoteCount/game.Votes.length
-                }
-                else{
-                    game.dataValues.score = 1
-                }
-            })
             res.json(games)
         }).catch(function(err){
             console.log(err);
@@ -408,10 +394,43 @@ module.exports = function (app,io){
                 UserId: req.user.id,
                 GameId: req.params.id
             }).then((post) => {
-                res.status(200).send('success')
+            db.Game.findOne({
+                where:{
+                    id: req.params.id
+                },
+                include: [db.Vote]
+            }).then((game) => {
+                var upVoteCount = 0
+                var totalVotes = 0
+                game.Votes.forEach((vote)=>{
+                    totalVotes++
+                    if(vote.upDown){
+                        upVoteCount++
+                    }
+                })
+                if(totalVotes == 0){
+                    newRating = 0
+                }
+                else{
+                    var newRating = upVoteCount/totalVotes
+                }
+                db.Game.update({
+                    rating: newRating
+                },
+                {
+                    where: {
+                        id: req.params.id
+                    }
+                }).then(()=>{
+                    res.status(200).send('success')
+                }).catch((err) => {
+                    console.log(err)
+                    res.json(err)
+                })
             }).catch((err) => {
                 console.log(err)
                 res.json(err)
+            })
             })
         }
     })
