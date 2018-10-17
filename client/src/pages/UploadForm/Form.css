@@ -11,3 +11,10 @@ pre{
 .sorry-message > p{
     line-height: 3em;
 }
+i.fa-exclamation-circle{
+    font-size: 148px;
+    margin: 0px auto;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 70px);
+}

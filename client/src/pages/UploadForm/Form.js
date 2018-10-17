@@ -124,7 +124,12 @@ class Form extends Component{
             ) : (
                 <div className="text-center sorry-message">
                     <h3 className="mt-5">Sorry about that ...</h3> <p className="">Game uploading is only available for verified users. <br />
-                    <Link className="linkable" to="/login_signup">Login</Link> to get started.</p>
+                    <Link className="linkable" to="/login_signup">Login</Link> to get started. <br />
+                    </p>
+                    <div className="d-inline-flex w-100">
+                    <i class="fas fa-exclamation-circle mx-auto text-center"></i>   
+                    </div>
+                    
                </div>
               )
         )
