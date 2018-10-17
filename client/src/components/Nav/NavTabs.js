@@ -95,8 +95,8 @@ class NavTabs extends Component {
               </div>
             ) : (
                 <div className="nav-item dropdown dropdownMenu">
-                  <div className="nav-link special dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <input type="image" src={"/assets/userThumbnails/" + this.state.user.id} />
+                  <div className="nav-link special dropdown-toggle avatar" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <input type="image" className="rounded" src={"/assets/userThumbnails/" + this.state.user.id} />
                   </div>
                   <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     {/* your name should take you to your public profile */}
