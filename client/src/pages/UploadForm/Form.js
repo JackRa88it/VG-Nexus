@@ -122,8 +122,8 @@ class Form extends Component{
                 <input type="submit" />
                 </form>
             ) : (
-                <div className="text-center">
-                    <h3>Sorry about that ...</h3> <p>Game uploading is only available for verified users. <br />
+                <div className="text-center sorry-message">
+                    <h3 className="mt-5">Sorry about that ...</h3> <p className="">Game uploading is only available for verified users. <br />
                     <Link className="linkable" to="/login_signup">Login</Link> to get started.</p>
                </div>
               )

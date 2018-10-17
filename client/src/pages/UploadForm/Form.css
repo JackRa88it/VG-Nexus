@@ -7,8 +7,7 @@ pre{
 #uploadThumbnail{
     max-height: 160px;
 }
-/* #uploadTitle{
-    font-size: 24px;
-    font-weight: bold;
-} */
 
+.sorry-message > p{
+    line-height: 3em;
+}
