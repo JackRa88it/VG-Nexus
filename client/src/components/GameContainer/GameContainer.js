@@ -4,6 +4,7 @@ import './GameContainer.css'
 import { Link } from "react-router-dom";
 
 class GameContainer extends React.Component{
+    //Displays icons of all of the games passed to this component inside of a container
     render(){
         if (this.props.games.length) {
             return(
