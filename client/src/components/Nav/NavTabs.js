@@ -32,7 +32,7 @@ class NavTabs extends Component {
   }
   render() {
     return (
-      <nav className="p-0 mb-3 navbar navbar-expand-lg w-100">
+      <nav className="p-0 mb-3 navbar navbar-expand-lg">
         <ul className="nav nav-tabs ">
           <li className="nav-item">
             <Link to="/" >
@@ -45,9 +45,9 @@ class NavTabs extends Component {
             </Link>
           </li>
         </ul>
-        <ul className="nav nav-tabs navbar-collapse">
+        {/* <ul className={document.innerWidth<1000? "navbar-collapse nav nav-tabs": "navbar-expand nav nav-tabs"}> */}
         {/* TODO: FIX BELOW */}
-         
+        <ul className="navbar-collapse nav nav-tabs"> 
           <li className="nav-item">
           <Link
               to="/browse"
