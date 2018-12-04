@@ -2,16 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-// $(document).on("scroll", function() {
-//   if($(document).height() - $(document).scrollTop() - $(window).height() < 1){
-//     document.getElementsByClassName('.footer')[0].css('display','block')
-//   }
-//   else{
-//     document.getElementsByClassName('.footer')[0].css('display','block')
-//   }
-//   console.log('scroll')
-// })
-
 class Footer extends Component {
 
   render() {
@@ -22,7 +12,6 @@ class Footer extends Component {
               <Link to="/about">
                 How to use
               </Link>
-            
               <a className="px-4" href="https://github.com/JackRa88it/VG-Nexus/blob/master/LICENSE" target="_blank" rel="noopener noreferrer">Copyright &nbsp;&copy;&nbsp; 2018 </a>
               <a href="https://github.com/JackRa88it/VG-Nexus/blob/master/CODE_OF_CONDUCT.md" target="_blank" rel="noopener noreferrer">Code of Conduct</a>
         </div>

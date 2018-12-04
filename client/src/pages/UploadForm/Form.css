@@ -7,8 +7,14 @@ pre{
 #uploadThumbnail{
     max-height: 160px;
 }
-/* #uploadTitle{
-    font-size: 24px;
-    font-weight: bold;
-} */
 
+.sorry-message > p{
+    line-height: 3em;
+}
+i.fa-exclamation-circle{
+    font-size: 148px;
+    margin: 0px auto;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 70px);
+}
