@@ -31,6 +31,7 @@ class CommentList extends React.Component{
         })
     }
     voteHandler = (postId,bool) => {
+      //Upvotes or downvotes the chosen post
         API.postVote(postId,bool)
         .then((res)=>{
           this.getComments(this.props.gameId)

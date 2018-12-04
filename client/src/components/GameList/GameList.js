@@ -4,7 +4,7 @@ import './GameList.css'
 import { Link } from "react-router-dom";
 import API from '../../utils/API';
 var moment = require('moment')
-
+/* Generic react component to display a list of all games passed to it through this.props.games */
 class GameList extends React.Component{
     render(){
         return(
