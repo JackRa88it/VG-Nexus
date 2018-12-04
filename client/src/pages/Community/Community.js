@@ -75,14 +75,15 @@ class Community extends React.Component{
     }
   }
 
-    //navigation to user profile when clicking on username
-    // *WHY does this work on the website, but this function just console logs gimmegimmecreamcheese??
-    handleUsernameClick = event => {
-        if (event.target.getAttribute("class") === "username") {
-        //route to userpage
-        console.log('testing123gimmegimmesomecreamcheese')
-        }
-    }
+  //navigation to user profile when clicking on username
+  // *WHY does this work on the website, but this function just console logs gimmegimmecreamcheese??
+  // REVIEW probably redundant (usernames are <a> tags)
+  handleUsernameClick = event => {
+      if (event.target.getAttribute("class") === "username") {
+      //route to userpage
+      console.log('testing123gimmegimmesomecreamcheese')
+      }
+  }
 
   // navigates to community form for new thread
   newThreadButton = event => {
