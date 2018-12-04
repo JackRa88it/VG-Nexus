@@ -6,7 +6,6 @@ class ImageUpload extends React.Component {
     this.state = {
       file: {}
     }
-
     this.handleChange = this.handleChange.bind(this)
   }
 
