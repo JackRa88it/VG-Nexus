@@ -17,8 +17,6 @@ body {
   position:relative;
     background: #a5a3a3aa; 
     border-radius: 10px;
-    
-    /* scroll-behavior: smooth; */
 }
 .git{
   padding: 10px;

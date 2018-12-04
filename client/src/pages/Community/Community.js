@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import API from "../../utils/API";
 import Authenticator from "../../utils/Authenticator";
 import "./Community.css";

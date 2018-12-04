@@ -84,12 +84,14 @@ class Chatroom extends Component{
         this.connect(nextProps.gameId)
     }
     // componentDidUpdate = ()=>{
+    /* In Progress, will cause chat to scroll to bottom" */
     //     this.scrollToBottom()
     // }
     // scrollToBottom = () => {
     //     this.messagesEnd.current.scrollIntoView({ behavior:'smooth'})
     // }
     connect(gameId) {
+    /* Connects client to correct chatroom based on gameId */
         if (this.socket){
             this.socket.disconnect();
         }
@@ -97,15 +99,19 @@ class Chatroom extends Component{
         if(Authenticator.isAuthenticated){
             API.getUser(Authenticator.user.id)
             .then((res) => {
+                // Assign users their chatroom name and id
                     this.name = res.data.username;
                     this.id = res.data.id
                 });
         }
         this.socket.on('currentLogs',(messages) => {
-            //This signal is received when a client first connects to the chat
+            /*This signal is received when a client first connects to the chat
+            Outputs all recent messages */
             this.setState({messages: messages})
         })
         this.socket.on("messagePost", (msg, name, id, timestamp) => {
+            /*Occurs when the client receives a chat message from the server
+            Appends the new message to the chatbox */
             this.setState({ messages: [...this.state.messages, {name: name, id: id, msg: msg, timestamp: timestamp}] });
         });
 

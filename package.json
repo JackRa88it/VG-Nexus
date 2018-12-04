@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "vg-nexus",
   "version": "1.0.0",
-  "description": "",
+  "description": "Video Game Nexus is a place for people to play, upload, share, and discuss javascript-based web games",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",

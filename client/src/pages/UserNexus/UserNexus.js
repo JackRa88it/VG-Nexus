@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import Tabs from "../../components/UserNexus/Tabs"
 import Posts from "../../components/UserNexus/Posts"
-import { Input, TextArea, FormBtn } from "../../components/Form";
-import { Row, Col, Container } from "../../components/Grid"
 import GameList from '../../components/GameList';
 import API from "../../utils/API";
 import Authenticator from '../../utils/Authenticator';
@@ -105,8 +102,5 @@ class UserNexus extends React.Component {
 
 
 export default UserNexus;
-// export default UserNexusGames;
-// export default UserNexusPosts
-
 
 
