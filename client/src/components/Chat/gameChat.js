@@ -95,6 +95,7 @@ class Chatroom extends Component{
         if (this.socket){
             this.socket.disconnect();
         }
+        /* REVIEW to see if localhost:3001 is used on AWS */
         this.socket = io.connect("http://localhost:3001/game/" + gameId);
         if(Authenticator.isAuthenticated){
             API.getUser(Authenticator.user.id)

@@ -535,8 +535,9 @@ module.exports = function (app,io){
         res.send(Object.keys(io.nsps))
     })
 
+    // get list of forums for Community main page
+    // includes threads for displaying threadcount, most recent, etc.
     app.get('/api/forumList', function(req,res) {
-        // get list of forums for community main page
         db.Forum.findAll({
             include: [{
                 model: db.Thread

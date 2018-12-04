@@ -8,8 +8,8 @@ import PostTable from "../../components/Posts";
 import CommunityForm from "../../components/CommunityForm";
 
 class Community extends React.Component{
-  // state renders the forums, threads, or posts based on state.page
-  // it hangs on to the id's for forum, thread, and post for navigation and form entry
+  // Community renders the forums, threads, or posts based on state.page
+  // it hangs on to the id's for forum, thread, and post for backwards navigation and editing via forms
   state = {
     forums: [],
     page: 'forumList',
@@ -22,6 +22,7 @@ class Community extends React.Component{
     postText: ''
   };
 
+  // hits the database for an array of forums and their threads
   componentDidMount(){
     API.getForumList()
     .then((res) => {
@@ -34,6 +35,7 @@ class Community extends React.Component{
   }
 
   // navigation action when clicking on forum rows or thread rows
+  // sets state.page to render forum or thread
   handleRowClick = event => {
     if (event.target.getAttribute("class") === "forumTitle") {
       this.setState({
@@ -73,13 +75,15 @@ class Community extends React.Component{
     }
   }
 
-    //navigation to user profile when clicking on username
-    handleUsernameClick = event => {
-        if (event.target.getAttribute("class") === "username") {
-        //route to userpage
-        console.log('testing123gimmegimmesomecreamcheese')
-        }
-    }
+  //navigation to user profile when clicking on username
+  // *WHY does this work on the website, but this function just console logs gimmegimmecreamcheese??
+  // REVIEW probably redundant (usernames are <a> tags)
+  handleUsernameClick = event => {
+      if (event.target.getAttribute("class") === "username") {
+      //route to userpage
+      console.log('testing123gimmegimmesomecreamcheese')
+      }
+  }
 
   // navigates to community form for new thread
   newThreadButton = event => {
