@@ -10,6 +10,7 @@ var moment = require("moment");
 
 module.exports = function (app,io){
     io.on('connection',function(socket){
+        //Occurs when a user connects to any chatroom
         console.log('a user connected to /');        
         socket.on('disconnect', function(){
           console.log('user disconnected from /');
@@ -17,6 +18,7 @@ module.exports = function (app,io){
       })
       db.Game.findAll({})
         .then(function(games){
+            //Create a chatroom for each game when the server first starts up
             for (let i=0;i<games.length;i++){
                 newGame(games[i],io);
             }  
@@ -56,26 +58,21 @@ module.exports = function (app,io){
                                 var newThumbnailPath = path.join(__dirname, '../client/public/assets/gameThumbnails/' + game.id )
                                 fs.rename(thumbnailPath,newThumbnailPath, function(err) {
                                     //Rename thumbnail
-                                    // if(err) throw err;
                                     fs.rename(oldpath, newpath, function (err) {
-                                        console.log('renaming filepaths')
                                         if (err) console.log(err);
                                         
                                         //Create a directory if it doesn't already exist
                                         var dir = "./client/public/games/" + game.id
                                         if (!fs.existsSync(dir)){
-                                            console.log('path does not exist \n creating newpath')
                                             fs.mkdirSync(dir);
                                         }
                 
                                         //Unzip the file to target directory
                                         var target = path.join(__dirname,'../client/public/games/' + game.id)
                                         extract(newpath,{dir:target},function(err){
-                                            console.log('extracting to ', target)
                                             if(err) console.log(err);
                                             fs.unlink(newpath, (err) => {
                                                 if (err) console.log(err);
-                                                console.log('deleting' + newpath );
                                                 //Redirect the user in the frontend to their game
                                                 newGame(game, io);
                                                 if(res.headersSent){
@@ -378,6 +375,7 @@ module.exports = function (app,io){
     })
 
     app.get('/api/games/random', function(req,res){
+        //Grabs random games
         db.Game.findAll({
             order: [ [ db.sequelize.fn('RAND') ] ],
             limit: 8
@@ -388,6 +386,7 @@ module.exports = function (app,io){
 
 
     app.post('/api/game/:id/vote', function(req,res){
+        //Up or downvotes a game and also updates its rating
         if(req.user){
             db.Vote.upsert({
                 upDown: req.body.vote,
@@ -437,7 +436,7 @@ module.exports = function (app,io){
 
 
     app.get('/api/game/:id', function(req,res){
-        //Grab game data with :id
+        //Grab game data with :id and also calculates its score based on upvotes and downvotes
         db.Game.findOne({
             where:{
                 id: req.params.id
@@ -521,7 +520,8 @@ module.exports = function (app,io){
 
 
     app.get('/api/messages/', function(req,res){
-        //Create a channel
+        //Intended to be a direct messaging system
+        //Currently unused. 
         const chatRoom = io.of('/'+req.user.id)
         chatRoom.on('connection',function(socket){
             console.log('a user connected to channel ', req.user.id);
@@ -687,11 +687,17 @@ module.exports = function (app,io){
 
 
 function newGame(game,io) {
+    /*Creates a chatroom for a specific game. Run once for all games at startup and also run when a
+    new game is uploaded */
     const gameRoom = io.of('/game/' + game.id);
+    //chatLogs is an array containing the most recent 8 messages
     var chatLogs = []
+    //When a new user connects
     gameRoom.on('connection', function (socket) {
+        //Send them the chat logs
         socket.emit('currentLogs',chatLogs)
         console.log('a user connected to /game/' + game.id);
+        //When the server receives a message update the chatlogs and send back the new message to all users
         socket.on('messagePost', function (msg, name, id) {
             var timestamp = moment().format('hh:mm:ssa')
             chatLogs.push({msg: msg, name: name, id: id, timestamp: timestamp})

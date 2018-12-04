@@ -8,7 +8,6 @@ import ImageUpload from './ImageUpload';
 import { Link } from "react-router-dom";
 // importing {bracketed} exports from Authenticator and TagSelect not working
 
-// import axios from 'axios';
 
 
 class Form extends Component{
@@ -17,8 +16,8 @@ class Form extends Component{
         description: ''
     }
     postGame = (event) => {
+        /* Uploads the form and then redirects the user to the url of the just uploaded game if successful */
         event.preventDefault()
-        console.log('posting game!')
         const formData = new FormData(event.target)
         formData.append('tags',JSON.stringify(this.state.tags))
         axios.post("/upload",formData)
@@ -30,6 +29,7 @@ class Form extends Component{
     }
 
     handleDelete = (i,cb) => {
+        //Delete tags
         const tags = this.state.tags.filter((tag, index) => index !== i)
         this.setState({
         tags: tags,
@@ -38,6 +38,7 @@ class Form extends Component{
     }
 
     handleAddition = (tag,cb) => {
+        //Add tags
         const tags = [...this.state.tags, tag]
         this.setState(({ tags: tags }));
         cb(tags)
