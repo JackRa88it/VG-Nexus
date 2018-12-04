@@ -1,6 +1,5 @@
 import React from 'react'
 import API from '../../utils/API'
-import Authenticator from '../../utils/Authenticator';
 import GameContainer from '../../components/GameContainer/'
 import { Link } from "react-router-dom";
 

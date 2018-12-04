@@ -3,9 +3,9 @@ import GameList from "../../components/GameList"
 import API from "../../utils/API";
 
 class AllGames extends React.Component{
-    state = {
-        games: []
-    }
+    state = { games: [] }
+
+    /* explicit API call to set state.games to data returned from backend */
     getAllGames(){
         API.getAllGames()
         .then((res)=>{
@@ -22,7 +22,10 @@ class AllGames extends React.Component{
         return(
             <div>
                 <h3>ALL GAMES</h3>
-                <GameList games={this.state.games}/>
+                <GameList games={
+                    /*  passed an array of `games`
+                     as it's only prop */
+                    this.state.games } />
             </div>
         )
     }

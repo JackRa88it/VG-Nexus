@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Input, FormBtn } from "../../components/Form";
 import API from "../../utils/API";
-import {Container} from "../../components/Grid"
 
 class Signup extends Component{
     state = {
@@ -21,6 +20,7 @@ class Signup extends Component{
       };
 
     handleFormSubmit = event => {
+        // Only send form information to API if no input field is empty
         if (this.state.password && this.state.email && this.state.username) {
             API.signup({
                 email: this.state.email,
@@ -29,26 +29,34 @@ class Signup extends Component{
                 bio: '',
                 postBanner: ''
                 }).then( (res,err) => {
+                    // explicit response status check
                     if(!err && res.status==200){
-                    window.location.assign(res.data)
+                        window.location.assign(res.data)
                     }
                 })
             }
         
     };
+
+    // checking if email already exists 
     validateEmail = () => {
         API.validateEmail(this.state.email)
         .then((res,err)=>{
+            // 
             if (res.data) {
-                alert('that email is already taken')
+                alert("That email is already taken, make sure you don't already have an account"); 
             }
             if (!res.data){
                 this.handleFormSubmit()
             }
+            // log errors
+            if(err){
+                console.log(err);
+            }
         })
     }
 
-    //The order is a bit weird, but validate username is called on click and starts whole signup process
+    // validate username is called first, starting the signup process
     validateUsername = event => {
         event.preventDefault()
         API.validateUser(this.state.username)
