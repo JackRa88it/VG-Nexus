@@ -4,6 +4,17 @@ import './GameContainer.css'
 import { Link } from "react-router-dom";
 
 class GameContainer extends React.Component{
+    // disablePageMove = (e) =>{
+    //     if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    //         e.preventDefault();
+    //     }
+    // }
+    // componentDidMount(){
+    //     window.addEventListener("keydown",this.disablePageMove,false);
+    // }
+    // componentWillUnmount(){
+    //     window.removeEventListener("keydown",this.disablePageMove,false);
+    // }
     render(){
         if (this.props.games.length) {
             return(
